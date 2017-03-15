@@ -18,6 +18,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     QLMFrameViewController *frameVc = [[QLMFrameViewController alloc]init];
+    
+//    frameVc.selectedIndex = 4;
+    
     self.window.rootViewController = frameVc;
     [self.window makeKeyAndVisible];
     self.window.backgroundColor = [UIColor colorWithRed: 1 / 255.0 green: 150 / 255.0 blue: 1  alpha: 1];

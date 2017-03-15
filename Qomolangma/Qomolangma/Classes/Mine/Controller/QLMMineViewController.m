@@ -10,19 +10,38 @@
 
 @interface QLMMineViewController ()
 
+@property (nonatomic, strong) UITableView *tableView;
+
 @end
 
 @implementation QLMMineViewController
 
-- (void)viewDidLoad {
+
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor darkGrayColor];
+    
 
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (UITableView *)tableView
+{
+    if (!_tableView)
+    {
+        _tableView = [[UITableView alloc]init];
+        [self.view addSubview:_tableView];
+        
+        [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.offset(0);
+        }];
+    }
+    return _tableView;
+    
 }
 
 /*
