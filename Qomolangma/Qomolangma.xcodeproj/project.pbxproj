@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		31CCEA731E7979440077AE71 /* MineInformatiom.plist in Resources */ = {isa = PBXBuildFile; fileRef = 31CCEA721E7979440077AE71 /* MineInformatiom.plist */; };
+		942CC1531E79AEC6004D3814 /* NSArray+FCSArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 942CC1421E79AEC6004D3814 /* NSArray+FCSArray.m */; };
+		942CC1541E79AEC6004D3814 /* NSAttributedString+FCSAttributedString.m in Sources */ = {isa = PBXBuildFile; fileRef = 942CC1441E79AEC6004D3814 /* NSAttributedString+FCSAttributedString.m */; };
+		942CC1551E79AEC6004D3814 /* NSDictionary+FCSDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 942CC1461E79AEC6004D3814 /* NSDictionary+FCSDictionary.m */; };
+		942CC1561E79AEC6004D3814 /* NSObject+FCSObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 942CC1481E79AEC6004D3814 /* NSObject+FCSObject.m */; };
+		942CC1571E79AEC6004D3814 /* NSString+FCSString.m in Sources */ = {isa = PBXBuildFile; fileRef = 942CC14A1E79AEC6004D3814 /* NSString+FCSString.m */; };
+		942CC1581E79AEC6004D3814 /* UIButton+FCSButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 942CC14C1E79AEC6004D3814 /* UIButton+FCSButton.m */; };
+		942CC1591E79AEC6004D3814 /* UIColor+FCSColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 942CC14E1E79AEC6004D3814 /* UIColor+FCSColor.m */; };
+		942CC15A1E79AEC6004D3814 /* UILabel+FCSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 942CC1501E79AEC6004D3814 /* UILabel+FCSLabel.m */; };
+		942CC15B1E79AEC6004D3814 /* UIViewController+FCSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 942CC1521E79AEC6004D3814 /* UIViewController+FCSViewController.m */; };
 		948A5CE51E793258006A595C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 948A5CE41E793258006A595C /* main.m */; };
 		948A5CE81E793258006A595C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 948A5CE71E793258006A595C /* AppDelegate.m */; };
 		948A5CF01E793258006A595C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 948A5CEF1E793258006A595C /* Assets.xcassets */; };
@@ -54,6 +63,25 @@
 		3F9EEF78AF999A9FC3CBA96E /* Pods-Qomolangma.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qomolangma.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Qomolangma/Pods-Qomolangma.debug.xcconfig"; sourceTree = "<group>"; };
 		50593058F9A508996A32D3E4 /* libPods-Qomolangma.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Qomolangma.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		742B4AF91CA908E0FB52156F /* Pods-Qomolangma.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qomolangma.release.xcconfig"; path = "Pods/Target Support Files/Pods-Qomolangma/Pods-Qomolangma.release.xcconfig"; sourceTree = "<group>"; };
+		942CC1401E79AEC6004D3814 /* FCSCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCSCommon.h; sourceTree = "<group>"; };
+		942CC1411E79AEC6004D3814 /* NSArray+FCSArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+FCSArray.h"; sourceTree = "<group>"; };
+		942CC1421E79AEC6004D3814 /* NSArray+FCSArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+FCSArray.m"; sourceTree = "<group>"; };
+		942CC1431E79AEC6004D3814 /* NSAttributedString+FCSAttributedString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+FCSAttributedString.h"; sourceTree = "<group>"; };
+		942CC1441E79AEC6004D3814 /* NSAttributedString+FCSAttributedString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+FCSAttributedString.m"; sourceTree = "<group>"; };
+		942CC1451E79AEC6004D3814 /* NSDictionary+FCSDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+FCSDictionary.h"; sourceTree = "<group>"; };
+		942CC1461E79AEC6004D3814 /* NSDictionary+FCSDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+FCSDictionary.m"; sourceTree = "<group>"; };
+		942CC1471E79AEC6004D3814 /* NSObject+FCSObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+FCSObject.h"; sourceTree = "<group>"; };
+		942CC1481E79AEC6004D3814 /* NSObject+FCSObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+FCSObject.m"; sourceTree = "<group>"; };
+		942CC1491E79AEC6004D3814 /* NSString+FCSString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+FCSString.h"; sourceTree = "<group>"; };
+		942CC14A1E79AEC6004D3814 /* NSString+FCSString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+FCSString.m"; sourceTree = "<group>"; };
+		942CC14B1E79AEC6004D3814 /* UIButton+FCSButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+FCSButton.h"; sourceTree = "<group>"; };
+		942CC14C1E79AEC6004D3814 /* UIButton+FCSButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+FCSButton.m"; sourceTree = "<group>"; };
+		942CC14D1E79AEC6004D3814 /* UIColor+FCSColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+FCSColor.h"; sourceTree = "<group>"; };
+		942CC14E1E79AEC6004D3814 /* UIColor+FCSColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+FCSColor.m"; sourceTree = "<group>"; };
+		942CC14F1E79AEC6004D3814 /* UILabel+FCSLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+FCSLabel.h"; sourceTree = "<group>"; };
+		942CC1501E79AEC6004D3814 /* UILabel+FCSLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+FCSLabel.m"; sourceTree = "<group>"; };
+		942CC1511E79AEC6004D3814 /* UIViewController+FCSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+FCSViewController.h"; sourceTree = "<group>"; };
+		942CC1521E79AEC6004D3814 /* UIViewController+FCSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+FCSViewController.m"; sourceTree = "<group>"; };
 		948A5CE01E793258006A595C /* Qomolangma.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Qomolangma.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		948A5CE41E793258006A595C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		948A5CE61E793258006A595C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -135,6 +163,32 @@
 				742B4AF91CA908E0FB52156F /* Pods-Qomolangma.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		942CC13F1E79AEC6004D3814 /* FCSCommon */ = {
+			isa = PBXGroup;
+			children = (
+				942CC1401E79AEC6004D3814 /* FCSCommon.h */,
+				942CC1411E79AEC6004D3814 /* NSArray+FCSArray.h */,
+				942CC1421E79AEC6004D3814 /* NSArray+FCSArray.m */,
+				942CC1431E79AEC6004D3814 /* NSAttributedString+FCSAttributedString.h */,
+				942CC1441E79AEC6004D3814 /* NSAttributedString+FCSAttributedString.m */,
+				942CC1451E79AEC6004D3814 /* NSDictionary+FCSDictionary.h */,
+				942CC1461E79AEC6004D3814 /* NSDictionary+FCSDictionary.m */,
+				942CC1471E79AEC6004D3814 /* NSObject+FCSObject.h */,
+				942CC1481E79AEC6004D3814 /* NSObject+FCSObject.m */,
+				942CC1491E79AEC6004D3814 /* NSString+FCSString.h */,
+				942CC14A1E79AEC6004D3814 /* NSString+FCSString.m */,
+				942CC14B1E79AEC6004D3814 /* UIButton+FCSButton.h */,
+				942CC14C1E79AEC6004D3814 /* UIButton+FCSButton.m */,
+				942CC14D1E79AEC6004D3814 /* UIColor+FCSColor.h */,
+				942CC14E1E79AEC6004D3814 /* UIColor+FCSColor.m */,
+				942CC14F1E79AEC6004D3814 /* UILabel+FCSLabel.h */,
+				942CC1501E79AEC6004D3814 /* UILabel+FCSLabel.m */,
+				942CC1511E79AEC6004D3814 /* UIViewController+FCSViewController.h */,
+				942CC1521E79AEC6004D3814 /* UIViewController+FCSViewController.m */,
+			);
+			path = FCSCommon;
 			sourceTree = "<group>";
 		};
 		948A5CD71E793258006A595C = {
@@ -427,6 +481,7 @@
 		94EBD0DF1E7937D000F71272 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				942CC13F1E79AEC6004D3814 /* FCSCommon */,
 				94EBD1101E7938BA00F71272 /* NSString-Hash-master */,
 				94EBD0E01E7937D000F71272 /* ignore */,
 			);
@@ -642,8 +697,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				948A5CE81E793258006A595C /* AppDelegate.m in Sources */,
+				942CC1591E79AEC6004D3814 /* UIColor+FCSColor.m in Sources */,
+				942CC15B1E79AEC6004D3814 /* UIViewController+FCSViewController.m in Sources */,
+				942CC1531E79AEC6004D3814 /* NSArray+FCSArray.m in Sources */,
 				94EBD1131E7938BA00F71272 /* NSString+Hash.m in Sources */,
+				942CC1541E79AEC6004D3814 /* NSAttributedString+FCSAttributedString.m in Sources */,
 				B27D9B481E79677500AD3739 /* QLMPurchasedFlowLayout.m in Sources */,
+				942CC15A1E79AEC6004D3814 /* UILabel+FCSLabel.m in Sources */,
+				942CC1571E79AEC6004D3814 /* NSString+FCSString.m in Sources */,
+				942CC1561E79AEC6004D3814 /* NSObject+FCSObject.m in Sources */,
+				942CC1551E79AEC6004D3814 /* NSDictionary+FCSDictionary.m in Sources */,
 				94EBD0FF1E79382C00F71272 /* QLMHomeViewController.m in Sources */,
 				94EBD1231E79396000F71272 /* QLMFrameViewController.m in Sources */,
 				B27D9B451E7961FA00AD3739 /* QLMPurchasedLable.m in Sources */,
@@ -652,6 +715,7 @@
 				94EBD1081E79386600F71272 /* QLMMineViewController.m in Sources */,
 				948A5CE51E793258006A595C /* main.m in Sources */,
 				B27D9B421E7961CA00AD3739 /* QLMPurchasedModel.m in Sources */,
+				942CC1581E79AEC6004D3814 /* UIButton+FCSButton.m in Sources */,
 				94EBD1271E794E5D00F71272 /* QLMPurchasedViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
