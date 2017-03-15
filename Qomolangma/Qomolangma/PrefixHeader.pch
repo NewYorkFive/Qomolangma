@@ -1,0 +1,43 @@
+//
+//  PrefixHeader.pch
+//
+//  Created by NowOrNever on 10/02/2017.
+//  Copyright © 2017 NowOrNever. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif /* PrefixHeader_pch */
+
+
+#ifdef __OBJC__
+
+//放 公共的 宏
+#define kScreenWidth [UIScreen mainScreen].bounds.size.width
+#define kScreenHeight [UIScreen mainScreen].bounds.size.height
+#define kScreenBounds [UIScreen mainScreen].bounds
+#define kNavBarHeight 64
+
+
+
+//导入 公共的类
+#import "Masonry.h"
+#import "YYModel.h"
+
+
+
+//自定义NSLog
+/**
+ * 调试的宏   DEBUG - 系统提供的宏
+ */
+#ifdef DEBUG // 测试!
+#define NSLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __FUNCTION__, __LINE__, ##__VA_ARGS__)
+#else
+#define NSLog(...) // 打印信息也是非常耗性能!
+#endif
+
+#endif
