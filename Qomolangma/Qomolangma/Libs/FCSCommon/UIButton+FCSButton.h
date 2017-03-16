@@ -19,4 +19,8 @@
 /// @return UIButton
 + (instancetype)fcs_textButton:(NSString *)title fontSize:(CGFloat)fontSize normalColor:(UIColor *)normalColor selectedColor:(UIColor *)selectedColor;
 
++ (instancetype)fcs_buttonWithImageName:(NSString *)imageName;
++ (instancetype)fcs_buttonWithImageName:(NSString *)imageName highlightedImageName:(NSString *) highlightedImageName;
++ (instancetype)fcs_buttonWithImageName:(NSString *)imageName selectedImageName:(NSString *) selectedImageName;
++ (instancetype)fcs_buttonWithImageName:(NSString *)imageName selectedImageName:(NSString *)selectedImageName highlightedImageName:(NSString *)highlightedImageName;
 @end
