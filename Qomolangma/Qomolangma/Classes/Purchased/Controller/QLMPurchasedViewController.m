@@ -166,6 +166,49 @@
     
 }
 
+#pragma  mark - 滚动已购内容视图 移动Label
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    //计算小数索引
+    CGFloat floatIndex = scrollView.contentOffset.x / scrollView.frame.size.width;
+    //NSLog(@"%f",floatIndex);
+    
+    //计算整数索引
+    int intIndex = scrollView.contentOffset.x / scrollView.frame.size.width;
+    
+    //获取本分比
+    CGFloat precent = floatIndex - intIndex;
+    
+    //左边标签的百分比
+    CGFloat leftPrecent = 1 - precent;
+    
+    //右边标签的本分比
+    CGFloat rightPrecent = precent;
+    
+    //NSLog(@"左边: %f,右边: %f", leftPrecent, rightPrecent);
+    
+    //计算左边标签的索引
+    int leftIndex = intIndex;
+    
+    //计算右边标签的索引
+    int rightIndex = intIndex + 1;
+    
+    //根据索引获取标签
+    QLMPurchasedLable *leftPurchasedLabel = self.labArray[leftIndex];
+    
+    leftPurchasedLabel.scalePercent = leftPrecent;
+    
+    //判断右边的频道标签是否超出可用范围
+    if (rightIndex < self.labArray.count) {
+        
+        QLMPurchasedLable *rightPurchasedLabel = self.labArray[rightIndex];
+        
+        rightPurchasedLabel.scalePercent = rightPrecent;
+        
+    }
+    
+}
+
 #pragma  mark - 点击已购Label 滚动对应已购内容视图
 - (void)tapGesturePurchasedLableAction:(UITapGestureRecognizer *)gesture {
     
@@ -178,8 +221,19 @@
     //滚动已购内容视图
     [self.purCollentionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
     
-    
-    
+    //遍历频道数组,判断点击的频道和数组里的Label进行查找,找到了就放大,否则保持默认状态
+    for (QLMPurchasedLable *label in self.labArray) {
+        
+        if (purchasedLabel == label) {
+            
+            label.scalePercent = 1;
+   
+        } else {
+            
+            label.scalePercent = 0;
+
+        }
+    }
 }
 
 #pragma  mark - 懒加载
