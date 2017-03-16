@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface QLMLearnViewController : UIViewController
+@interface QLMLearnViewController : UICollectionViewController
 
+@property (nonatomic, assign) NSInteger currentPage;
 @end

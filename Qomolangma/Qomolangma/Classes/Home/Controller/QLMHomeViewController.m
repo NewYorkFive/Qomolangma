@@ -7,11 +7,18 @@
 //
 
 #import "QLMHomeViewController.h"
+#import "QLMNetworkTools.h"
+#import "QLMHeadView.h"
+#import "QLMEverydayBook.h"
+#import "QLMEverydayBookTableViewCell.h"
 
 @interface QLMHomeViewController ()
 
-//主页数据
+//主数据
 @property (nonatomic ,strong) NSDictionary *homeDataDic;
+
+//今今乐道
+@property (nonatomic ,strong) QLMEverydayBook *everydayBook;
 
 @end
 
@@ -29,34 +36,68 @@
     self.view.backgroundColor = [UIColor whiteColor];
     // Do any additional setup after loading the view.
     
-//    [self loadData];
+    [self loadData];
+    
+    //预估行高
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 70;
+//    self.tableView.rowHeight = 100;
+    
+    [self.tableView registerClass:[QLMEverydayBookTableViewCell class] forCellReuseIdentifier:@"QLMEverydayBookTableViewCell"];
     
 }
 
 #pragma 2 - 加载首页数据
 - (void)loadData {
     
-    //加载数据
-    NSURL *url = [NSURL URLWithString:@"http://iosapi.itcast.cn:8080/app/home/getHomeData"];
-    NSData *data = [NSData dataWithContentsOfURL:url];
-    
-    if (data == nil) {//网络有问题
-        //弹出错误信息    /////////这里需要用到弹出
-        NSLog(@"错误");
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"没有网络" preferredStyle:UIAlertControllerStyleAlert];
-        [self presentViewController:alert animated:YES completion:^{
-            //完成取消
-            [NSThread sleepForTimeInterval:1.0f];
-            [alert dismissViewControllerAnimated:YES completion:nil];
-        }];
+	NSString *URLStr = @"app/home/getHomeData";
+    [[QLMNetworkTools sharedTools] requestWithType:GET andUrlStr:URLStr andParams:nil andSuccess:^(id responseObject) {
+        NSDictionary *dic = responseObject;
+       
+        self.homeDataDic = [dic objectForKey:@"data"];
         
-    } else {
-        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-        NSDictionary *homeDataDic = [dic objectForKey:@"data"];
-        self.homeDataDic = homeDataDic;
-//        NSLog(@"homeDataDic:%@",homeDataDic);
-    }
+        NSDictionary *everydayBookDic = [[self.homeDataDic objectForKey:@"everyday_book"] firstObject];
+        
+        self.everydayBook = [QLMEverydayBook yy_modelWithJSON:everydayBookDic];
+//        NSLog(@"everydayBook:%@",self.everydayBook);
+        
+        [self.tableView reloadData];
+        
+    } andFailture:^(NSError *error) {
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"没有网络" preferredStyle:UIAlertControllerStyleAlert];
+        
+        [self presentViewController:alert animated:YES completion:^{
+        
+            //完成取消
+            [NSThread sleepForTimeInterval:.5f];
+            [alert dismissViewControllerAnimated:YES completion:nil];
+//            NSLog(@"error:%@",error);
+            
+        }];
+    }];
     
+}
+
+#pragma 3 - cell测试
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 1;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    QLMEverydayBookTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"QLMEverydayBookTableViewCell" forIndexPath:indexPath];
+    
+    
+    cell.everydayBook = self.everydayBook;
+    
+    //取消选中效果
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    
+    return cell;
 }
 
 - (void)didReceiveMemoryWarning {
