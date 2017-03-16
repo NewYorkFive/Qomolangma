@@ -136,12 +136,24 @@
         [self.labScrollView addSubview:purchasedLabel];
         
         //开启用户交互
+        purchasedLabel.userInteractionEnabled = YES;
         
+        //创建手势
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapGesturePurchasedLableAction:)];
+        
+        //添加手势
+        [purchasedLabel addGestureRecognizer:tapGesture];
+        
+        //设置tag
+        purchasedLabel.tag = i;
+        
+        //记录已购Label
+        [self.labArray addObject:purchasedLabel];
         
         
     }
     
-        //[_labArray mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:0 leadSpacing:0 tailSpacing:0];
+    //[_labArray mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:0 leadSpacing:0 tailSpacing:0];
     
     //设置scrollview的滚动范围
     self.labScrollView.contentSize = CGSizeMake(labelWidth * self.purchasedModelData.count, 0);
@@ -154,6 +166,21 @@
     
 }
 
+#pragma  mark - 点击已购Label 滚动对应已购内容视图
+- (void)tapGesturePurchasedLableAction:(UITapGestureRecognizer *)gesture {
+    
+    //获取已购Label
+    QLMPurchasedLable *purchasedLabel = (QLMPurchasedLable *)gesture.view;
+    
+    //创建滚动的indexPath
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:purchasedLabel.tag inSection:0];
+    
+    //滚动已购内容视图
+    [self.purCollentionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
+    
+    
+    
+}
 
 #pragma  mark - 懒加载
 - (UIScrollView *)labScrollView {
