@@ -10,6 +10,7 @@
 #import "QLMPurchasedModel.h"
 #import "QLMPurchasedLable.h"
 #import "QLMPurchasedFlowLayout.h"
+#import "UIColor+FCSColor.h"
 
 ///已购Lable 高度
 #define labSVHeight 44
@@ -101,7 +102,6 @@
     
 }
 
-
 #pragma  mark - 1.设置已购Label标签
 - (void)requestPurchaseData {
     
@@ -114,6 +114,10 @@
     //已购label的大小
     CGFloat labelWidth = kScreenWidth / 5;
     
+    UIView *labelView = [[UIView alloc] initWithFrame:self.labScrollView.bounds];
+    
+    [_labScrollView addSubview:labelView];
+    
     for (int i = 0; i < self.purchasedModelData.count; i++) {
         
         QLMPurchasedModel *model = self.purchasedModelData[i];
@@ -121,27 +125,49 @@
         //NSLog(@"%@",model);
         
         //创建label
-        QLMPurchasedLable *purchasedLabel = [[ QLMPurchasedLable alloc]initWithFrame:CGRectMake(i * labelWidth, 0, labelWidth, labSVHeight)];
+//        QLMPurchasedLable *purchasedLabel = [[ QLMPurchasedLable alloc]initWithFrame:CGRectMake(i * labelWidth, 0, labelWidth, labSVHeight)];
+        
+        QLMPurchasedLable *purchasedLabel = [[ QLMPurchasedLable alloc]initWithFrame:CGRectZero];
         
         //QLMPurchasedLable *purchasedLabel = [[ QLMPurchasedLable alloc]init];
         
         //获取显示内容
         purchasedLabel.text = model.tname;
+        //NSLog(@"%@",model.tname);
 
         //设置文字大小和居中显示
-        purchasedLabel.font = [UIFont systemFontOfSize:15];
+        purchasedLabel.font = [UIFont systemFontOfSize:13];
         purchasedLabel.textAlignment = NSTextAlignmentCenter;
+        purchasedLabel.textColor = [UIColor colorWithRed:140 / 255.0 green:124 / 255.0 blue:108 / 255.0 alpha:1];
+        [purchasedLabel sizeToFit];
         
         //添加
-        [self.labScrollView addSubview:purchasedLabel];
+//        [self.labScrollView addSubview:purchasedLabel];
+        [labelView addSubview:purchasedLabel];
         
         //开启用户交互
+        purchasedLabel.userInteractionEnabled = YES;
         
+        //创建手势
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapGesturePurchasedLableAction:)];
         
+        //添加手势
+        [purchasedLabel addGestureRecognizer:tapGesture];
+        
+        //设置tag
+        purchasedLabel.tag = i;
+        
+        //记录已购Label
+        [self.labArray addObject:purchasedLabel];
         
     }
     
-        //[_labArray mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:0 leadSpacing:0 tailSpacing:0];
+    [self.labArray mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:10 leadSpacing:0 tailSpacing:0];
+    [self.labArray mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.bottom.equalTo(labelView);
+    }];
+   
+
     
     //设置scrollview的滚动范围
     self.labScrollView.contentSize = CGSizeMake(labelWidth * self.purchasedModelData.count, 0);
@@ -154,6 +180,101 @@
     
 }
 
+#pragma  mark - 已购内容视图结束时调用
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    
+    //计算滚动页数的索引
+    int index = scrollView.contentOffset.x / scrollView.frame.size.width;
+    
+    //根据索引获取频道标签
+    QLMPurchasedLable *purchasedLabel = self.labArray[index];
+    
+    //遍历频道数组,判断点击的频道和数组里的Label进行查找,找到了就改变颜色,否则保持默认状态
+    for (QLMPurchasedLable *label in self.labArray) {
+        
+        if (purchasedLabel == label) {
+
+            label.textColor = [UIColor blackColor];
+           
+            
+        } else {
+            
+            label.textColor = [UIColor colorWithRed:140 / 255.0 green:124 / 255.0 blue:108 / 255.0 alpha:1];
+        }
+    }
+    
+}
+
+#pragma  mark - 滚动已购内容视图 移动Label
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    //计算小数索引
+    CGFloat floatIndex = scrollView.contentOffset.x / scrollView.frame.size.width;
+    //NSLog(@"%f",floatIndex);
+    
+    //计算整数索引
+    int intIndex = scrollView.contentOffset.x / scrollView.frame.size.width;
+    
+    //获取本分比
+    CGFloat precent = floatIndex - intIndex;
+    
+    //左边标签的百分比
+    CGFloat leftPrecent = 1 - precent;
+    
+    //右边标签的本分比
+    CGFloat rightPrecent = precent;
+    
+    //NSLog(@"左边: %f,右边: %f", leftPrecent, rightPrecent);
+    
+    //计算左边标签的索引
+    int leftIndex = intIndex;
+    
+    //计算右边标签的索引
+    int rightIndex = intIndex + 1;
+    
+    //根据索引获取标签
+    QLMPurchasedLable *leftPurchasedLabel = self.labArray[leftIndex];
+
+    leftPurchasedLabel.scalePercent = leftPrecent;
+    
+    //判断右边的频道标签是否超出可用范围
+    if (rightIndex < self.labArray.count) {
+        
+        QLMPurchasedLable *rightPurchasedLabel = self.labArray[rightIndex];
+        
+        rightPurchasedLabel.scalePercent = rightPrecent;
+        
+    }
+    
+}
+
+#pragma  mark - 点击已购Label 滚动对应已购内容视图
+- (void)tapGesturePurchasedLableAction:(UITapGestureRecognizer *)gesture {
+    
+    //获取已购Label
+    QLMPurchasedLable *purchasedLabel = (QLMPurchasedLable *)gesture.view;
+    
+    //创建滚动的indexPath
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:purchasedLabel.tag inSection:0];
+    
+    //滚动已购内容视图
+    [self.purCollentionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
+    
+    //遍历频道数组,判断点击的频道和数组里的Label进行查找,找到了就放大和改变颜色,否则保持默认状态
+    for (QLMPurchasedLable *label in self.labArray) {
+        
+        if (purchasedLabel == label) {
+            
+            label.textColor = [UIColor blackColor];
+            label.scalePercent = 1;
+   
+        } else {
+            label.textColor = [UIColor colorWithRed:140 / 255.0 green:124 / 255.0 blue:108 / 255.0 alpha:1];
+            label.scalePercent = 0;
+
+        }
+    }
+}
 
 #pragma  mark - 懒加载
 - (UIScrollView *)labScrollView {
