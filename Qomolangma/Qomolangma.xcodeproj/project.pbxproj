@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		31631F171E7A62D10004952C /* QLMMineInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 31631F161E7A62D10004952C /* QLMMineInfoCell.m */; };
 		31CCEA731E7979440077AE71 /* MineInformatiom.plist in Resources */ = {isa = PBXBuildFile; fileRef = 31CCEA721E7979440077AE71 /* MineInformatiom.plist */; };
+		31CCEA761E7A37BE0077AE71 /* QLMMineInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 31CCEA751E7A37BE0077AE71 /* QLMMineInfoModel.m */; };
 		942CC1531E79AEC6004D3814 /* NSArray+FCSArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 942CC1421E79AEC6004D3814 /* NSArray+FCSArray.m */; };
 		942CC1541E79AEC6004D3814 /* NSAttributedString+FCSAttributedString.m in Sources */ = {isa = PBXBuildFile; fileRef = 942CC1441E79AEC6004D3814 /* NSAttributedString+FCSAttributedString.m */; };
 		942CC1551E79AEC6004D3814 /* NSDictionary+FCSDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 942CC1461E79AEC6004D3814 /* NSDictionary+FCSDictionary.m */; };
@@ -33,8 +35,6 @@
 		94EBD0EC1E7937D000F71272 /* ignore in Resources */ = {isa = PBXBuildFile; fileRef = 94EBD0BF1E7937D000F71272 /* ignore */; };
 		94EBD0ED1E7937D000F71272 /* ignore in Resources */ = {isa = PBXBuildFile; fileRef = 94EBD0C11E7937D000F71272 /* ignore */; };
 		94EBD0EE1E7937D000F71272 /* ignore in Resources */ = {isa = PBXBuildFile; fileRef = 94EBD0C31E7937D000F71272 /* ignore */; };
-		94EBD0F01E7937D000F71272 /* ignore in Resources */ = {isa = PBXBuildFile; fileRef = 94EBD0C81E7937D000F71272 /* ignore */; };
-		94EBD0F21E7937D000F71272 /* ignore in Resources */ = {isa = PBXBuildFile; fileRef = 94EBD0CC1E7937D000F71272 /* ignore */; };
 		94EBD0F71E7937D000F71272 /* ignore in Resources */ = {isa = PBXBuildFile; fileRef = 94EBD0D81E7937D000F71272 /* ignore */; };
 		94EBD0F81E7937D000F71272 /* ignore in Resources */ = {isa = PBXBuildFile; fileRef = 94EBD0DA1E7937D000F71272 /* ignore */; };
 		94EBD0F91E7937D000F71272 /* ignore in Resources */ = {isa = PBXBuildFile; fileRef = 94EBD0DC1E7937D000F71272 /* ignore */; };
@@ -59,7 +59,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		31631F151E7A62D10004952C /* QLMMineInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLMMineInfoCell.h; sourceTree = "<group>"; };
+		31631F161E7A62D10004952C /* QLMMineInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLMMineInfoCell.m; sourceTree = "<group>"; };
 		31CCEA721E7979440077AE71 /* MineInformatiom.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MineInformatiom.plist; sourceTree = "<group>"; };
+		31CCEA741E7A37BE0077AE71 /* QLMMineInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLMMineInfoModel.h; sourceTree = "<group>"; };
+		31CCEA751E7A37BE0077AE71 /* QLMMineInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLMMineInfoModel.m; sourceTree = "<group>"; };
 		3F9EEF78AF999A9FC3CBA96E /* Pods-Qomolangma.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qomolangma.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Qomolangma/Pods-Qomolangma.debug.xcconfig"; sourceTree = "<group>"; };
 		50593058F9A508996A32D3E4 /* libPods-Qomolangma.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Qomolangma.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		742B4AF91CA908E0FB52156F /* Pods-Qomolangma.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qomolangma.release.xcconfig"; path = "Pods/Target Support Files/Pods-Qomolangma/Pods-Qomolangma.release.xcconfig"; sourceTree = "<group>"; };
@@ -101,8 +105,6 @@
 		94EBD0BF1E7937D000F71272 /* ignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ignore; sourceTree = "<group>"; };
 		94EBD0C11E7937D000F71272 /* ignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ignore; sourceTree = "<group>"; };
 		94EBD0C31E7937D000F71272 /* ignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ignore; sourceTree = "<group>"; };
-		94EBD0C81E7937D000F71272 /* ignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ignore; sourceTree = "<group>"; };
-		94EBD0CC1E7937D000F71272 /* ignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ignore; sourceTree = "<group>"; };
 		94EBD0D81E7937D000F71272 /* ignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ignore; sourceTree = "<group>"; };
 		94EBD0DA1E7937D000F71272 /* ignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ignore; sourceTree = "<group>"; };
 		94EBD0DC1E7937D000F71272 /* ignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ignore; sourceTree = "<group>"; };
@@ -405,7 +407,8 @@
 		94EBD0C71E7937D000F71272 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				94EBD0C81E7937D000F71272 /* ignore */,
+				31CCEA741E7A37BE0077AE71 /* QLMMineInfoModel.h */,
+				31CCEA751E7A37BE0077AE71 /* QLMMineInfoModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -421,7 +424,8 @@
 		94EBD0CB1E7937D000F71272 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				94EBD0CC1E7937D000F71272 /* ignore */,
+				31631F151E7A62D10004952C /* QLMMineInfoCell.h */,
+				31631F161E7A62D10004952C /* QLMMineInfoCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -631,10 +635,8 @@
 				94EBD0E81E7937D000F71272 /* ignore in Resources */,
 				94EBD0F91E7937D000F71272 /* ignore in Resources */,
 				94EBD0E71E7937D000F71272 /* ignore in Resources */,
-				94EBD0F01E7937D000F71272 /* ignore in Resources */,
 				94EBD0E61E7937D000F71272 /* ignore in Resources */,
 				94EBD0E91E7937D000F71272 /* ignore in Resources */,
-				94EBD0F21E7937D000F71272 /* ignore in Resources */,
 				948A5CF01E793258006A595C /* Assets.xcassets in Resources */,
 				94EBD0E41E7937D000F71272 /* ignore in Resources */,
 				94EBD0E31E7937D000F71272 /* ignore in Resources */,
@@ -699,6 +701,7 @@
 				948A5CE81E793258006A595C /* AppDelegate.m in Sources */,
 				942CC1591E79AEC6004D3814 /* UIColor+FCSColor.m in Sources */,
 				942CC15B1E79AEC6004D3814 /* UIViewController+FCSViewController.m in Sources */,
+				31CCEA761E7A37BE0077AE71 /* QLMMineInfoModel.m in Sources */,
 				942CC1531E79AEC6004D3814 /* NSArray+FCSArray.m in Sources */,
 				94EBD1131E7938BA00F71272 /* NSString+Hash.m in Sources */,
 				942CC1541E79AEC6004D3814 /* NSAttributedString+FCSAttributedString.m in Sources */,
@@ -716,6 +719,7 @@
 				948A5CE51E793258006A595C /* main.m in Sources */,
 				B27D9B421E7961CA00AD3739 /* QLMPurchasedModel.m in Sources */,
 				942CC1581E79AEC6004D3814 /* UIButton+FCSButton.m in Sources */,
+				31631F171E7A62D10004952C /* QLMMineInfoCell.m in Sources */,
 				94EBD1271E794E5D00F71272 /* QLMPurchasedViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -19,7 +19,7 @@
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     QLMFrameViewController *frameVc = [[QLMFrameViewController alloc]init];
     
-//    frameVc.selectedIndex = 4;
+    frameVc.selectedIndex = 4;
     
     self.window.rootViewController = frameVc;
     [self.window makeKeyAndVisible];
