@@ -21,6 +21,8 @@
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
 #define kScreenBounds [UIScreen mainScreen].bounds
 #define kNavBarHeight 64
+#define kTabBarHeight 49
+
 
 
 
@@ -28,6 +30,7 @@
 #import "Masonry.h"
 #import "YYModel.h"
 #import "FCSCommon.h"
+#import "QLMNetworkTools.h"
 
 
 
