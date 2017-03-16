@@ -23,7 +23,7 @@
     
     self.window.rootViewController = frameVc;
     [self.window makeKeyAndVisible];
-    self.window.backgroundColor = [UIColor colorWithRed: 1 / 255.0 green: 150 / 255.0 blue: 1  alpha: 1];
+    self.window.backgroundColor = [UIColor groupTableViewBackgroundColor];
     return YES;
 }
 

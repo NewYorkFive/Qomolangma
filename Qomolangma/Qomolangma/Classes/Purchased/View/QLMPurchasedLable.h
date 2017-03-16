@@ -10,4 +10,6 @@
 
 @interface QLMPurchasedLable : UILabel
 
+@property (nonatomic,assign) CGFloat scalePercent;
+
 @end
