@@ -16,6 +16,9 @@
     dispatch_once(&onceToken, ^{
         tools = [[QLMNetworkTools alloc] initWithBaseURL:[NSURL URLWithString:@"http://121.42.205.189:8080/"]];
         tools.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html", nil];
+        //    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+        //
+        //    manager.requestSerializer = [AFJSONRequestSerializer serializer];
     });
     return tools;
 }

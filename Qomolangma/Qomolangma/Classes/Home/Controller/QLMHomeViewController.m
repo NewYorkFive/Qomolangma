@@ -8,11 +8,17 @@
 
 #import "QLMHomeViewController.h"
 #import "QLMNetworkTools.h"
+#import "QLMHeadView.h"
+#import "QLMEverydayBook.h"
+#import "QLMEverydayBookTableViewCell.h"
 
 @interface QLMHomeViewController ()
 
-//主页数据
+//主数据
 @property (nonatomic ,strong) NSDictionary *homeDataDic;
+
+//今今乐道
+@property (nonatomic ,strong) QLMEverydayBook *everydayBook;
 
 @end
 
@@ -32,61 +38,67 @@
     
     [self loadData];
     
+    //预估行高
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 70;
+//    self.tableView.rowHeight = 100;
+    
+    [self.tableView registerClass:[QLMEverydayBookTableViewCell class] forCellReuseIdentifier:@"QLMEverydayBookTableViewCell"];
+    
 }
 
 #pragma 2 - 加载首页数据
 - (void)loadData {
     
-	NSString *URLStr = @"http://121.42.205.189:8080/app/home/getHomeData";
+	NSString *URLStr = @"app/home/getHomeData";
     [[QLMNetworkTools sharedTools] requestWithType:GET andUrlStr:URLStr andParams:nil andSuccess:^(id responseObject) {
-        NSDictionary *responseData = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
-        self.homeDataDic = [responseData objectForKey:@"data"];
-        NSLog(@"homeDataDic:%@",_homeDataDic);
+        NSDictionary *dic = responseObject;
+       
+        self.homeDataDic = [dic objectForKey:@"data"];
+        
+        NSDictionary *everydayBookDic = [[self.homeDataDic objectForKey:@"everyday_book"] firstObject];
+        
+        self.everydayBook = [QLMEverydayBook yy_modelWithJSON:everydayBookDic];
+//        NSLog(@"everydayBook:%@",self.everydayBook);
+        
+        [self.tableView reloadData];
+        
     } andFailture:^(NSError *error) {
+        
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"没有网络" preferredStyle:UIAlertControllerStyleAlert];
+        
         [self presentViewController:alert animated:YES completion:^{
+        
             //完成取消
             [NSThread sleepForTimeInterval:.5f];
             [alert dismissViewControllerAnimated:YES completion:nil];
-            NSLog(@"error:%@",error);
+//            NSLog(@"error:%@",error);
+            
         }];
     }];
-
-
-//    //加载数据
-//    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-//    
-//    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html", @"text/plain", nil];
-//    
-//    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-//    
-//    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-//    
-//    NSString *URLStr = @"http://121.42.205.189:8080/app/home/getHomeData";
-//    
-//    [manager GET:URLStr parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-//        
-////        NSString *html = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-////        NSLog(@"%@",html);
-////        NSLog(@"%@",responseObject);
-//        NSDictionary *responseData = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
-//        NSLog(@"data:%@",responseData);
-//        //        NSLog(@"%@", responseObject);
-//        self.homeDataDic = [responseData objectForKey:@"data"];
-//        NSLog(@"homeDataDic:%@",_homeDataDic);
-//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-////        NSLog(@"%@",error);
-//        UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"没有网络" preferredStyle:UIAlertControllerStyleAlert];
-//        [self presentViewController:alert animated:YES completion:^{
-//            //完成取消
-//            [NSThread sleepForTimeInterval:.5f];
-//            [alert dismissViewControllerAnimated:YES completion:nil];
-//        }];
-//    }];
     
 }
 
+#pragma 3 - cell测试
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 1;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    QLMEverydayBookTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"QLMEverydayBookTableViewCell" forIndexPath:indexPath];
+    
+    
+    cell.everydayBook = self.everydayBook;
+    
+    //取消选中效果
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    
+    return cell;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
