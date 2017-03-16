@@ -23,4 +23,30 @@
     
     return button;
 }
+
++ (instancetype)fcs_buttonWithImageName:(NSString *)imageName{
+    return [self fcs_buttonWithImageName:imageName selectedImageName:nil highlightedImageName:nil];
+}
+
++ (instancetype)fcs_buttonWithImageName:(NSString *)imageName highlightedImageName:(NSString *)highlightedImageName{
+    return [self fcs_buttonWithImageName:imageName selectedImageName:nil highlightedImageName:highlightedImageName];
+}
+
++ (instancetype)fcs_buttonWithImageName:(NSString *)imageName selectedImageName:(NSString *)selectedImageName{
+    return [self fcs_buttonWithImageName:imageName selectedImageName:selectedImageName highlightedImageName:nil];
+}
+
++ (instancetype)fcs_buttonWithImageName:(NSString *)imageName selectedImageName:(NSString *)selectedImageName highlightedImageName:(NSString *)highlightedImageName{
+    UIButton *button = [[self alloc]init];
+    [button setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+    if (selectedImageName) {
+        [button setImage:[UIImage imageNamed:selectedImageName] forState:UIControlStateSelected];
+    }
+    if (highlightedImageName) {
+        [button setImage:[UIImage imageNamed:highlightedImageName]forState:UIControlStateHighlighted];
+    }
+    return button;
+}
+
+
 @end
