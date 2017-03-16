@@ -14,7 +14,8 @@
     static QLMNetworkTools *tools;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        tools = [[QLMNetworkTools alloc] initWithBaseURL:[NSURL URLWithString:@"http://c.m.163.com/nc/article/list/"]];
+        tools = [[QLMNetworkTools alloc] initWithBaseURL:[NSURL URLWithString:@"http://121.42.205.189:8080/"]];
+        tools.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html", nil];
     });
     return tools;
 }
