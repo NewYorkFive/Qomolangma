@@ -27,7 +27,6 @@
     self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     self.detailTextLabel.font = [UIFont systemFontOfSize:12];
     self.textLabel.font = [UIFont systemFontOfSize:15];
-    
 }
 
 - (void)setMineInfoModel:(QLMMineInfoModel *)mineInfoModel
@@ -43,6 +42,10 @@
     if (mineInfoModel.isOrange)
     {
         self.detailTextLabel.textColor = [UIColor orangeColor];
+    }
+    else
+    {
+        self.detailTextLabel.textColor = [UIColor lightGrayColor];
     }
 }
 
