@@ -14,7 +14,7 @@
     static QLMNetworkTools *tools;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        tools = [[QLMNetworkTools alloc] initWithBaseURL:[NSURL URLWithString:@"http://c.m.163.com/nc/article/list/"]];
+        tools = [[QLMNetworkTools alloc] initWithBaseURL:[NSURL URLWithString:@"http://iosapi.itcast.cn:8080/"]];
     });
     return tools;
 }
