@@ -1,5 +1,5 @@
 //
-//  QLMMineHeaderView.h
+//  QLMMineLoginSelectController.h
 //  Qomolangma
 //
 //  Created by Aioria on 2017/3/16.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface QLMMineHeaderView : UIView
-
-@property (nonatomic, copy)void (^modalBlock)();
+@interface QLMMineLoginSelectController : UIViewController
 
 @end

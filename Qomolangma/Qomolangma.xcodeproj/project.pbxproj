@@ -11,6 +11,7 @@
 		31631F1D1E7A71AA0004952C /* QLMMineTopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 31631F1C1E7A71AA0004952C /* QLMMineTopCell.m */; };
 		31631F2C1E7A8C850004952C /* QLMMineHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 31631F2B1E7A8C850004952C /* QLMMineHeaderView.m */; };
 		31631F2F1E7A8CC70004952C /* QLMMineTableViewHeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 31631F2E1E7A8CC70004952C /* QLMMineTableViewHeaderFooterView.m */; };
+		31631F371E7ABE990004952C /* QLMMineLoginSelectController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31631F361E7ABE990004952C /* QLMMineLoginSelectController.m */; };
 		31CCEA731E7979440077AE71 /* MineInformatiom.plist in Resources */ = {isa = PBXBuildFile; fileRef = 31CCEA721E7979440077AE71 /* MineInformatiom.plist */; };
 		31CCEA761E7A37BE0077AE71 /* QLMMineInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 31CCEA751E7A37BE0077AE71 /* QLMMineInfoModel.m */; };
 		942CC1531E79AEC6004D3814 /* NSArray+FCSArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 942CC1421E79AEC6004D3814 /* NSArray+FCSArray.m */; };
@@ -72,6 +73,8 @@
 		31631F2B1E7A8C850004952C /* QLMMineHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLMMineHeaderView.m; sourceTree = "<group>"; };
 		31631F2D1E7A8CC70004952C /* QLMMineTableViewHeaderFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLMMineTableViewHeaderFooterView.h; sourceTree = "<group>"; };
 		31631F2E1E7A8CC70004952C /* QLMMineTableViewHeaderFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLMMineTableViewHeaderFooterView.m; sourceTree = "<group>"; };
+		31631F351E7ABE990004952C /* QLMMineLoginSelectController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLMMineLoginSelectController.h; sourceTree = "<group>"; };
+		31631F361E7ABE990004952C /* QLMMineLoginSelectController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLMMineLoginSelectController.m; sourceTree = "<group>"; };
 		31CCEA721E7979440077AE71 /* MineInformatiom.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MineInformatiom.plist; sourceTree = "<group>"; };
 		31CCEA741E7A37BE0077AE71 /* QLMMineInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLMMineInfoModel.h; sourceTree = "<group>"; };
 		31CCEA751E7A37BE0077AE71 /* QLMMineInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLMMineInfoModel.m; sourceTree = "<group>"; };
@@ -170,6 +173,23 @@
 				50593058F9A508996A32D3E4 /* libPods-Qomolangma.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		31631F301E7ABD8D0004952C /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				31631F341E7ABDD80004952C /* Login */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		31631F341E7ABDD80004952C /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				31631F351E7ABE990004952C /* QLMMineLoginSelectController.h */,
+				31631F361E7ABE990004952C /* QLMMineLoginSelectController.m */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		755932C18F0E01042E891276 /* Pods */ = {
@@ -420,6 +440,7 @@
 		94EBD0C41E7937D000F71272 /* Mine */ = {
 			isa = PBXGroup;
 			children = (
+				31631F301E7ABD8D0004952C /* Classes */,
 				94EBD0C51E7937D000F71272 /* Controller */,
 				94EBD0C71E7937D000F71272 /* Model */,
 				94EBD0C91E7937D000F71272 /* Others */,
@@ -755,6 +776,7 @@
 				94EBD0FF1E79382C00F71272 /* QLMHomeViewController.m in Sources */,
 				94EBD1231E79396000F71272 /* QLMFrameViewController.m in Sources */,
 				B27D9B451E7961FA00AD3739 /* QLMPurchasedLable.m in Sources */,
+				31631F371E7ABE990004952C /* QLMMineLoginSelectController.m in Sources */,
 				94EBD1021E79384F00F71272 /* QLMLearnViewController.m in Sources */,
 				94EBD1051E79385C00F71272 /* QLMListenViewController.m in Sources */,
 				94EBD1081E79386600F71272 /* QLMMineViewController.m in Sources */,
