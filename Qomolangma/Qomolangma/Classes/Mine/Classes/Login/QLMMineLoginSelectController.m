@@ -25,6 +25,9 @@
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
     self.navigationController.navigationBar.hidden = YES;
+    
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {

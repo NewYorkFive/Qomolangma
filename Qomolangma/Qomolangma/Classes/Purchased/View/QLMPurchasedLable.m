@@ -27,4 +27,14 @@
     
 }
 
++ (instancetype)qlm_labelWithColor:(UIColor *)color andFontSize:(double)fontSize andText:(NSString *)text{
+    QLMPurchasedLable *label = [[QLMPurchasedLable alloc]init];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.userInteractionEnabled = YES;
+    label.text = text;
+    label.textColor = color;
+    label.font = [UIFont systemFontOfSize:fontSize];
+    return label;
+}
+
 @end

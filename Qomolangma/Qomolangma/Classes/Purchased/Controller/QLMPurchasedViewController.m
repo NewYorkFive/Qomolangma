@@ -29,6 +29,10 @@
 //记录已购label
 @property (nonatomic,strong) NSMutableArray *labArray;
 
+@property (nonatomic, strong) UIView *labelView;
+
+@property (nonatomic, strong) NSArray<QLMPurchasedLable *> *purchasedLabelArray;
+
 @end
 
 @implementation QLMPurchasedViewController
@@ -39,12 +43,64 @@
   
     self.automaticallyAdjustsScrollViewInsets = NO;
     
+    
     //已购标签视图
     [self requestPurchaseData];
     
     //已购内容视图
     [self setupPurchasedCollectionView];
     
+    [self setupLabelView];
+}
+
+- (void)setupLabelView
+{
+    self.labelView = [[UIView alloc] initWithFrame:CGRectMake(0, kNavBarHeight, kScreenWidth, labSVHeight)];
+    
+    self.labelView.backgroundColor = [UIColor whiteColor];
+    
+    NSArray *titlesArray = @[@"全部", @"每天听本书", @"精选音频", @"电子书", @"订阅"];
+    
+    [self.view addSubview:self.labelView];
+    
+    NSMutableArray *purchasedLabelArray = [NSMutableArray array];
+    NSMutableArray *labelWidthArray = [NSMutableArray array];
+    
+    CGFloat totalWidth = 0.0;
+    
+    for (NSInteger i = 0 ; i < titlesArray.count; i++)
+    {
+        QLMPurchasedLable *label = [QLMPurchasedLable qlm_labelWithColor:[UIColor colorWithRed:140 / 255.0 green:124 / 255.0 blue:108 / 255.0 alpha:1] andFontSize:14 andText:titlesArray[i]];
+        
+        label.tag = i;
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
+        
+        [label addGestureRecognizer:tap];
+        
+        [label sizeToFit];
+        
+        totalWidth += label.bounds.size.width;
+        
+        [labelWidthArray addObject:@(label.bounds.size.width)];
+        
+        [self.labelView addSubview:label];
+        
+        [purchasedLabelArray addObject:label];
+    }
+    
+    self.purchasedLabelArray = purchasedLabelArray.copy;
+    
+    CGFloat margin = (kScreenWidth - totalWidth) / (self.purchasedLabelArray.count + 1);
+    
+    CGFloat x = margin;
+    
+    for (NSInteger i = 0 ; i < purchasedLabelArray.count ; i++ )
+    {
+        self.purchasedLabelArray[i].frame = CGRectMake(x, 0, [labelWidthArray[i] floatValue], self.labelView.bounds.size.height);
+        x += margin;
+        x += [labelWidthArray[i] floatValue];
+    }
 }
 
 #pragma  mark - 2.设置已购内容视图
@@ -87,8 +143,8 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
     
-    return  self.purchasedModelData.count;
-    
+//    return  self.purchasedModelData.count;
+    return self.purchasedLabelArray.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -127,7 +183,7 @@
         //创建label
 //        QLMPurchasedLable *purchasedLabel = [[ QLMPurchasedLable alloc]initWithFrame:CGRectMake(i * labelWidth, 0, labelWidth, labSVHeight)];
         
-        QLMPurchasedLable *purchasedLabel = [[ QLMPurchasedLable alloc]initWithFrame:CGRectZero];
+        QLMPurchasedLable *purchasedLabel = [[QLMPurchasedLable alloc]initWithFrame:CGRectZero];
         
         //QLMPurchasedLable *purchasedLabel = [[ QLMPurchasedLable alloc]init];
         
@@ -233,14 +289,19 @@
     int rightIndex = intIndex + 1;
     
     //根据索引获取标签
-    QLMPurchasedLable *leftPurchasedLabel = self.labArray[leftIndex];
+//    QLMPurchasedLable *leftPurchasedLabel = self.labArray[leftIndex];
 
+    QLMPurchasedLable *leftPurchasedLabel = self.purchasedLabelArray[leftIndex];
+
+    
     leftPurchasedLabel.scalePercent = leftPrecent;
+    
+    
     
     //判断右边的频道标签是否超出可用范围
     if (rightIndex < self.labArray.count) {
         
-        QLMPurchasedLable *rightPurchasedLabel = self.labArray[rightIndex];
+        QLMPurchasedLable *rightPurchasedLabel = self.purchasedLabelArray[rightIndex];
         
         rightPurchasedLabel.scalePercent = rightPrecent;
         
@@ -291,19 +352,33 @@
     return _labScrollView;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - 点击事件
+- (void)tapAction: (UITapGestureRecognizer *)sender
+{
+    //获取已购Label
+    QLMPurchasedLable *purchasedLabel = (QLMPurchasedLable *)sender.view;
+    
+    //创建滚动的indexPath
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:purchasedLabel.tag inSection:0];
+    
+    //滚动已购内容视图
+    [self.purCollentionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
+    
+    //遍历频道数组,判断点击的频道和数组里的Label进行查找,找到了就放大和改变颜色,否则保持默认状态
+    for (QLMPurchasedLable *label in self.labArray) {
+        
+        if (purchasedLabel == label) {
+            
+            label.textColor = [UIColor blackColor];
+            label.scalePercent = 1;
+            
+        } else {
+            label.textColor = [UIColor colorWithRed:140 / 255.0 green:124 / 255.0 blue:108 / 255.0 alpha:1];
+            label.scalePercent = 0;
+            
+        }
+    }
+    
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
