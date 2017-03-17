@@ -16,7 +16,7 @@
     
     //设置颜色渐变
     //self.textColor = [UIColor colorWithRed:scalePercent green:0 blue:0 alpha:1];
-    
+   
     //  计算缩放比,最小的缩放比就是1
     CGFloat currentScalePrecent = 1 + scalePercent * 0.1;
     
@@ -25,6 +25,16 @@
         self.transform = CGAffineTransformMakeScale(currentScalePrecent, currentScalePrecent);
     }];
     
+}
+
++ (instancetype)qlm_labelWithColor:(UIColor *)color andFontSize:(double)fontSize andText:(NSString *)text{
+    QLMPurchasedLable *label = [[QLMPurchasedLable alloc]init];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.userInteractionEnabled = YES;
+    label.text = text;
+    label.textColor = color;
+    label.font = [UIFont systemFontOfSize:fontSize];
+    return label;
 }
 
 @end

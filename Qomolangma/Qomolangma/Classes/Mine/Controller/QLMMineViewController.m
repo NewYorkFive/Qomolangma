@@ -12,6 +12,7 @@
 #import "QLMMineTopCell.h"
 #import "QLMMineTableViewHeaderFooterView.h"
 #import "QLMMineHeaderView.h"
+#import "QLMMineLoginSelectController.h"
 
 #define BACK_GROUND_IMAGE_VIEW_HEIGHT 245
 
@@ -94,6 +95,17 @@ static NSString * const headerFooterReuseID = @"headerFooterReuseID";
     self.tableView.delegate = self;
     
     QLMMineHeaderView *headerView = [[QLMMineHeaderView alloc] initWithFrame:CGRectMake(0, 0, 0, 200)];
+    
+    __weak typeof(self) weakSelf = self;
+    
+    [headerView setModalBlock:^{
+        QLMMineLoginSelectController *loginSelectController = [[QLMMineLoginSelectController alloc] init];
+        
+        UINavigationController *navC = [[UINavigationController alloc] initWithRootViewController:loginSelectController];
+        
+        [weakSelf presentViewController:navC animated:YES completion:nil];
+        
+    }];
     
     self.tableView.tableHeaderView = headerView;
     

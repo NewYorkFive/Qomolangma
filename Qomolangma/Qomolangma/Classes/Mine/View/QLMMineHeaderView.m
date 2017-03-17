@@ -76,7 +76,15 @@
 
 - (void)btnHeaderIconAction: (UIButton *)sender
 {
-    NSLog(@"111");
+//    QLMMineLoginSelectController *loginSelectController = [[QLMMineLoginSelectController alloc] init];
+//    
+//    UINavigationController *navC = [[UINavigationController alloc] initWithRootViewController:loginSelectController];
+    
+    if (self.modalBlock)
+    {
+        self.modalBlock();
+    }
+
 }
 
 
