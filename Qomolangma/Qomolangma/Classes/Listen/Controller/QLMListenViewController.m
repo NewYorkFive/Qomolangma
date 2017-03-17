@@ -109,6 +109,8 @@
 //    }];
     
     
+    
+    
     CGFloat timeBtnWidth = kScreenWidth * 0.2;
     
     UIView *timesButtonView = [[UIView alloc]initWithFrame:CGRectZero];
@@ -136,31 +138,16 @@
         make.top.bottom.equalTo(timesButtonView);
     }];
     
-    
-
-    
-    
-
-    
-    
-    
     CGFloat halfAnHourBtnHeight = kScreenWidth * 0.3;
-    
-//    UIButton *halfAnHourBtn = [UIButton fcs_buttonWithImageName:@"dailyAudio30_170x170_"];
-    UIButton *halfAnHourBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, halfAnHourBtnHeight, halfAnHourBtnHeight)];
-    halfAnHourBtn.center = CGPointMake(kScreenWidth * 0.5, kScreenHeight - kTabBarHeight * 2 - timeBtnWidth - halfAnHourBtn.bounds.size.height * 0.7);
+    UIButton *halfAnHourBtn = [UIButton fcs_buttonWithImageName:@"dailyAudio30_170x170_"];
     [self.view addSubview:halfAnHourBtn];
-    [halfAnHourBtn setBackgroundImage:[UIImage imageNamed:@"dailyAudio30_170x170_"] forState:UIControlStateNormal];
-   
     halfAnHourBtn.tag = baseTimeBtnTag + 30;
     [halfAnHourBtn addTarget:self action:@selector(timeBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-    
-//    [halfAnHourBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.height.width.mas_equalTo(halfAnHourBtnHeight);
-//        make.centerX.equalTo(self.view.mas_centerX);
-//        make.bottom.equalTo(timesButtonView.mas_top).offset(-20);
-//        make.height.width.mas_equalTo(halfAnHourBtnHeight);
-//    }];
+    [halfAnHourBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.view);
+        make.bottom.equalTo(timesButtonView.mas_top).offset(-0.2 * halfAnHourBtnHeight);
+        make.height.width.mas_equalTo(halfAnHourBtnHeight);
+    }];
     
 }
 
