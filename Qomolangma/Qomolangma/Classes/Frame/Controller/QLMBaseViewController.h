@@ -9,7 +9,5 @@
 #import <UIKit/UIKit.h>
 #import "QLMPlayingButton.h"
 @interface QLMBaseViewController : UIViewController
-
-@property (nonatomic, strong) QLMPlayingButton *button;
-
+@property (nonatomic, strong) QLMPlayingButton *playingBtn;
 @end

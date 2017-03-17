@@ -7,7 +7,7 @@
 //
 
 #import "QLMListenViewController.h"
-
+#import "QLMPlayListViewController.h"
 #define baseTimeBtnTag 1314
 
 @interface QLMListenViewController ()
@@ -16,7 +16,11 @@
  tabbar上的播放
  */
 @property (nonatomic, strong) UIView *listenView;
+@property (nonatomic, strong) UILabel *currentAudioLabel;
+
 @end
+
+
 
 @implementation QLMListenViewController
 
@@ -26,11 +30,26 @@
     [self setupUI];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    BOOL hiddenFlag = ![QLMPlayListViewController sharedPlayListViewController].playListModelArray.count;
+    
+    self.listenView.hidden = hiddenFlag;
+    if (!hiddenFlag) {
+        self.currentAudioLabel.text =[NSString stringWithFormat:@"上次播放:%@",[QLMPlayListViewController sharedPlayListViewController].playListModelArray[0].name];
+    }
+}
 
 #pragma mark 界面搭建
 - (void)setupUI{
+    //navigationItem
+    self.navigationItem.rightBarButtonItem = nil;
+    
+    
     
     //上面的界面
+    
     UILabel *body = [UILabel fcs_labelWithColor:[UIColor blackColor] andFontSize:25 andText:@"现在，你想听多长时间？"];
     [self.view addSubview:body];
     [body mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -46,9 +65,53 @@
     }];
     
     //下面的界面
+    CGFloat margin = 6.0;
     [self.view addSubview:self.listenView];
+    [self.listenView addSubview:self.playingBtn];
+    [self.listenView addSubview:self.currentAudioLabel];
+    UIButton *lastAudioRightArrow = [UIButton fcs_buttonWithImageName:@"new_main_subscribe_right_44x44_"];
+    [lastAudioRightArrow addTarget:self action:@selector(nextToPlayListViewControllerButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
-    CGFloat timeBtnWidth = kScreenWidth * 0.25;
+    [self.listenView addSubview:lastAudioRightArrow];
+    
+    self.playingBtn.center = CGPointMake(self.listenView.bounds.size.height * 0.5, self.listenView.bounds.size.height * 0.5);
+    [self.playingBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.listenView);
+        make.left.equalTo(self.listenView).offset(0);
+    }];
+    
+    [lastAudioRightArrow mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.listenView);
+        make.right.equalTo(self.listenView).offset(-margin);
+    }];
+    [self.listenView layoutIfNeeded];
+    
+    [self.currentAudioLabel sizeToFit];
+    [self.currentAudioLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.listenView).offset(1);
+//        make.top.bottom.equalTo(self.listenView);
+        make.width.lessThanOrEqualTo(@(kScreenWidth * 0.8));
+        make.left.equalTo(self.playingBtn.mas_right).offset(0);
+//        make.right.equalTo(lastAudioRightArrow).offset(-margin * 2);
+    }];
+    
+    
+    [self.view layoutIfNeeded];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapAction:)];
+    [self.listenView addGestureRecognizer:tap];
+    
+//    UIView *separeteLine = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, .7)];
+//    separeteLine.backgroundColor = [UIColor colorWithWhite:.5 alpha:.6];
+//    [self.view addSubview:separeteLine];
+//    [separeteLine mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.bottom.equalTo(self.listenView.mas_top).offset(0.1);
+//    }];
+    
+    
+    
+    
+    CGFloat timeBtnWidth = kScreenWidth * 0.2;
     
     UIView *timesButtonView = [[UIView alloc]initWithFrame:CGRectZero];
     [self.view addSubview:timesButtonView];
@@ -56,7 +119,7 @@
         make.width.mas_equalTo(kScreenWidth * 0.8);
         make.height.mas_equalTo(timeBtnWidth);
         make.centerX.equalTo(self.view.mas_centerX);
-        make.bottom.mas_equalTo(self.listenView.mas_top);
+        make.bottom.mas_equalTo(self.listenView.mas_top).offset(-margin * 2);
     }];
     
     NSArray<NSNumber *> *times = @[@15,@60,@120];
@@ -75,41 +138,15 @@
         make.top.bottom.equalTo(timesButtonView);
     }];
     
-    
-
-    
-    
-
-    
-    
-    
     CGFloat halfAnHourBtnHeight = kScreenWidth * 0.3;
-    
     UIButton *halfAnHourBtn = [UIButton fcs_buttonWithImageName:@"dailyAudio30_170x170_"];
-//    UIButton *halfAnHourBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.view addSubview:halfAnHourBtn];
-//    halfAnHourBtn.bounds = CGRectMake(0, 0, halfAnHourBtnHeight, halfAnHourBtnHeight);
-//    [halfAnHourBtn setBackgroundImage:[UIImage imageNamed:@"dailyAudio30_170x170_"] forState:UIControlStateNormal];
-   
-//    [halfAnHourBtn setBackgroundImage:[UIImage imageNamed:@"dailyAudio30_170x170_"] forState:UIControlStateNormal];
-//    halfAnHourBtn.imageView.contentMode = UIViewContentModeScaleAspectFill
-//    [halfAnHourBtn sizeToFit];
-//    halfAnHourBtn.layer.cornerRadius = halfAnHourBtn.bounds.size.width * 0.5;
-//    halfAnHourBtn.layer.masksToBounds = YES;
-//    halfAnHourBtn.layer.borderColor = [UIColor yellowColor].CGColor;
-//    halfAnHourBtn.layer.borderWidth = 1;
-//    halfAnHourBtn.clipsToBounds = YES;
-//    halfAnHourBtn.center = CGPointMake(kScreenWidth * 0.5, kScreenHeight - kTabBarHeight * 2 - timeBtnWidth - halfAnHourBtnHeight * 0.5);
-    
     halfAnHourBtn.tag = baseTimeBtnTag + 30;
     [halfAnHourBtn addTarget:self action:@selector(timeBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-
-    
     [halfAnHourBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.view);
+        make.bottom.equalTo(timesButtonView.mas_top).offset(-0.2 * halfAnHourBtnHeight);
         make.height.width.mas_equalTo(halfAnHourBtnHeight);
-        make.centerX.equalTo(self.view.mas_centerX);
-        make.bottom.equalTo(timesButtonView.mas_top);
-//        make.height.width.mas_equalTo(halfAnHourBtnHeight);
     }];
     
 }
@@ -129,6 +166,14 @@
     
 }
 
+- (void)tapAction:(UITapGestureRecognizer *)sender{
+    [self.navigationController pushViewController:[QLMPlayListViewController sharedPlayListViewController] animated:YES];
+}
+
+- (void)nextToPlayListViewControllerButtonClick:(UIButton *)sender{
+    [self.navigationController pushViewController:[QLMPlayListViewController sharedPlayListViewController] animated:YES];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -137,10 +182,18 @@
 - (UIView *)listenView{
     if (!_listenView) {
         _listenView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreenHeight - kTabBarHeight * 2, kScreenWidth, kTabBarHeight)];
+        _listenView.backgroundColor = [UIColor colorWithWhite:0.98 alpha:1];
 //        _listenView.hidden = YES;
-        _listenView.backgroundColor = [UIColor colorWithRed: 1 / 255.0 green: 150 / 255.0 blue: 1  alpha: 1];
+//        _listenView.backgroundColor = [UIColor colorWithRed: 1 / 255.0 green: 150 / 255.0 blue: 1  alpha: 1];
     }
     return _listenView;
+}
+
+- (UILabel *)currentAudioLabel{
+    if (!_currentAudioLabel) {
+        _currentAudioLabel = [UILabel fcs_labelWithColor:[UIColor colorWithWhite:.4 alpha:1] andFontSize:15 andText:@"The length of initial version must be enough"];
+    }
+    return _currentAudioLabel;
 }
 
 @end

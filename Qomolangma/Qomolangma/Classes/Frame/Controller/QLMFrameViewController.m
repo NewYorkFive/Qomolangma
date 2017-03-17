@@ -9,6 +9,7 @@
 #import "QLMFrameViewController.h"
 #import "QLMPlayingButton.h"
 #import "QLMPlayListViewController.h"
+#import "QLMNavigationController.h"
 @interface QLMFrameViewController ()
 
 @end
@@ -36,7 +37,7 @@
     vc.title = title;
     vc.tabBarItem.image = [[UIImage imageNamed:[NSString stringWithFormat:@"tabbar_index_%zd_30x30_",index]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     vc.tabBarItem.selectedImage = [[UIImage imageNamed:[NSString stringWithFormat:@"tabbar_index_select_%zd_30x30_",index]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:vc];
+    QLMNavigationController *navController = [[QLMNavigationController alloc]initWithRootViewController:vc];
     return navController;
 }
 

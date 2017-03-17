@@ -21,7 +21,7 @@
 
 - (void)setupUI
 {
-    self.backgroundColor = [UIColor clearColor];
+//    self.backgroundColor = [UIColor clearColor];
     
     UIView *bottomView = [[UIView alloc] init];
     bottomView.backgroundColor = [UIColor whiteColor];
@@ -30,7 +30,7 @@
     
     UIButton *btnHeaderIcon = [[UIButton alloc] init];
     
-    [btnHeaderIcon setBackgroundImage:[UIImage imageNamed:@"placeholderImage"] forState:UIControlStateNormal];
+    [btnHeaderIcon setBackgroundImage:[UIImage imageNamed:@"default_loading_head_60x60_"] forState:UIControlStateNormal];
     
     btnHeaderIcon.layer.cornerRadius = 35;
     btnHeaderIcon.layer.masksToBounds = YES;
@@ -76,9 +76,6 @@
 
 - (void)btnHeaderIconAction: (UIButton *)sender
 {
-//    QLMMineLoginSelectController *loginSelectController = [[QLMMineLoginSelectController alloc] init];
-//    
-//    UINavigationController *navC = [[UINavigationController alloc] initWithRootViewController:loginSelectController];
     
     if (self.modalBlock)
     {

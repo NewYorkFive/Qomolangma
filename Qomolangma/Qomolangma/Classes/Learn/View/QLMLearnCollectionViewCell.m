@@ -9,7 +9,7 @@
 #import "QLMLearnCollectionViewCell.h"
 #import "QLMPayedView.h"
 
-@interface  QLMLearnCollectionViewCell()
+@interface  QLMLearnCollectionViewCell()<QLMPayedViewDelegate>
 
 @end
 
@@ -37,7 +37,11 @@
     
     [self.contentView addSubview:payedView];
     
-    
+    payedView.detailDelegate = self;
+}
+
+- (void)payedView:(QLMPayedView *)payedView withDetailsTableViewController:(QLMLearnDetailsTableViewController *)detailsTableViewVc withIndexPath:(NSIndexPath *)indexPath {
+    [_learnCellDelegate learnCollectionViewCell:self withDetailsTableViewController:detailsTableViewVc WithIndexPath:indexPath];
 }
 
 @end

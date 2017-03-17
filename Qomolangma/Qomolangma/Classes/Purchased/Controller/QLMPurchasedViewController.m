@@ -2,15 +2,17 @@
 //  QLMPurchasedViewController.m
 //  Qomolangma
 //
-//  Created by NowOrNever on 15/03/2017.
-//  Copyright © 2017 Focus. All rights reserved.
+//  Created by 王惠平 on 2017/3/15.
+//  Copyright © 2017年 Focus. All rights reserved.
 //
+
 
 #import "QLMPurchasedViewController.h"
 #import "QLMPurchasedModel.h"
 #import "QLMPurchasedLable.h"
 #import "QLMPurchasedFlowLayout.h"
 #import "UIColor+FCSColor.h"
+#import "QLMPurchasedCollectionViewCell.h"
 
 ///已购Lable 高度
 #define labSVHeight 44
@@ -18,7 +20,7 @@
 @interface QLMPurchasedViewController () <UICollectionViewDelegate,UICollectionViewDataSource>
 
 //已购Label视图
-@property (nonatomic,strong) UIScrollView *labScrollView;
+@property (nonatomic, strong) UIView *labelView;
 
 //已购内容视图
 @property (nonatomic,strong) UICollectionView *purCollentionView;
@@ -28,8 +30,6 @@
 
 //记录已购label
 @property (nonatomic,strong) NSMutableArray *labArray;
-
-@property (nonatomic, strong) UIView *labelView;
 
 @property (nonatomic, strong) NSArray<QLMPurchasedLable *> *purchasedLabelArray;
 
@@ -56,7 +56,7 @@
 {
     self.labelView = [[UIView alloc] initWithFrame:CGRectMake(0, kNavBarHeight, kScreenWidth, labSVHeight)];
     
-    self.labelView.backgroundColor = [UIColor whiteColor];
+    self.labelView.backgroundColor = [UIColor colorWithRed:.9 green:.9 blue:.9 alpha:1];
     
     NSArray *titlesArray = @[@"全部", @"每天听本书", @"精选音频", @"电子书", @"订阅"];
     
@@ -69,7 +69,7 @@
     
     for (NSInteger i = 0 ; i < titlesArray.count; i++)
     {
-        QLMPurchasedLable *label = [QLMPurchasedLable qlm_labelWithColor:[UIColor colorWithRed:140 / 255.0 green:124 / 255.0 blue:108 / 255.0 alpha:1] andFontSize:12 andText:titlesArray[i]];
+        QLMPurchasedLable *label = [QLMPurchasedLable qlm_labelWithColor:[UIColor colorWithRed:140 / 255.0 green:124 / 255.0 blue:108 / 255.0 alpha:1] andFontSize:15 andText:titlesArray[i]];
         
         label.tag = i;
         
@@ -123,7 +123,7 @@
    self.purCollentionView.dataSource = self;
     
     //注册
-    [self.purCollentionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cellid"];
+    [self.purCollentionView registerClass:[QLMPurchasedCollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
     
     //添加视图
     [self.view addSubview:self.purCollentionView];
@@ -146,15 +146,42 @@
 #pragma  mark - 数据源方法
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
+        UIButton *button = [[UIButton alloc]init];
+        
+        [button setImage:[UIImage imageNamed:@"empty_placeholder"] forState: UIControlStateNormal];
+        
+        [self.view addSubview:button];
+        
+        [button mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self.view.mas_centerX);
+            make.top.equalTo(self.view).offset(100 + kNavBarHeight);;
+        }];
+        
+        UILabel *label = [[UILabel alloc]init];
+        
+        label.text = @"购买过得商品会自动添加到已购";
+        
+        [self.view addSubview:label];
+        
+        [label mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.centerX.equalTo(self.view.mas_centerX);
+            make.top.equalTo(button.mas_bottom).offset(20);
+        }];
+
+    
     return self.purchasedLabelArray.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cellid" forIndexPath:indexPath];
+    QLMPurchasedCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
     
     
     cell.backgroundColor = [UIColor colorWithRed:arc4random_uniform(256) / 255.0 green:arc4random_uniform(256) / 255.0 blue:arc4random_uniform(256) / 255.0 alpha:1];
+    
+    
+    
     
     return cell;
     
@@ -258,20 +285,10 @@
     
 }
 
-#pragma  mark - 懒加载
-- (UIScrollView *)labScrollView {
-    
-    if (!_labScrollView) {
-        
-        self.labScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, kNavBarHeight, self.view.bounds.size.width, labSVHeight)];
-        
-        self.labScrollView.backgroundColor = [UIColor colorWithRed:.9 green:.9 blue:.9 alpha:1];
-        
-        [self.view addSubview:self.labScrollView];
-    }
-    
-    return _labScrollView;
-}
 
+
+- (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds {
+    return YES;
+}
 
 @end
