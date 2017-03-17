@@ -53,11 +53,13 @@
     self.view.backgroundColor = [UIColor whiteColor];
     // Do any additional setup after loading the view.
     
+    [self loadData];
+
+    
     //预估行高
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 80;
     
-    [self loadData];
     
 //    self.tableView.rowHeight = 200;
     
@@ -183,15 +185,15 @@
 #pragma 3 - cell测试
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
-    return self.dataArray.count;
-//    return 1;
+//    return self.dataArray.count;
+    return 1;
     
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return self.dataArray[section].count;
-//    return 1;
+//    return self.dataArray[section].count;
+    return 1;
     
 }
 
