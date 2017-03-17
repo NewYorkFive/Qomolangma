@@ -41,13 +41,25 @@
 }
 
 - (void)playButtonClick{
+    QLMVoiceModel *tempModel = [[QLMVoiceModel alloc]init];
+    tempModel.name = @"Hello,Girls";
+    [self.playListModelArray addObject:tempModel];
+    
     self.playFlag = !self.playFlag;
+//    NSLog(@"buttonClick:%zd",self.playListModelArray.count);
     [[NSNotificationCenter defaultCenter] postNotificationName:@"changePlayBtnStatus" object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (NSMutableArray<QLMVoiceModel *> *)playListModelArray{
+    if (!_playListModelArray) {
+        _playListModelArray = [NSMutableArray array];
+    }
+    return _playListModelArray;
 }
 
 /*

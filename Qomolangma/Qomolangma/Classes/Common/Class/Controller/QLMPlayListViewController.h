@@ -7,11 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-//#import ""
+#import "QLMVoiceModel.h"
 @interface QLMPlayListViewController : UIViewController
 
 @property (nonatomic, assign) BOOL playFlag;
+@property (nonatomic, strong) NSMutableArray<QLMVoiceModel *> *playListModelArray;
+
 
 + (instancetype)sharedPlayListViewController;
+
+
 
 @end

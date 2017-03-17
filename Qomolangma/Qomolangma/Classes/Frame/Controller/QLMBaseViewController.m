@@ -9,7 +9,6 @@
 #import "QLMBaseViewController.h"
 #import "QLMPlayListViewController.h"
 @interface QLMBaseViewController ()
-@property (nonatomic, strong) QLMPlayingButton *playingBtn;
 @end
 
 @implementation QLMBaseViewController
