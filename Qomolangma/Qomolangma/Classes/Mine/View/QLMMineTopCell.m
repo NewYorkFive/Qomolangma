@@ -25,6 +25,8 @@
     
     self.backgroundColor = [UIColor whiteColor];
     
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     NSArray *infoTitlesArray = @[@"学习时间", @"阅读书籍", @"连续学习"];
     NSArray *detailTitlesArray = @[@"_", @"_", @"_"];
     
