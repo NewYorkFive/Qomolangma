@@ -19,11 +19,11 @@
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     QLMFrameViewController *frameVc = [[QLMFrameViewController alloc]init];
     
-//    frameVc.selectedIndex = 4;
+    frameVc.selectedIndex = 0;
     
     self.window.rootViewController = frameVc;
     [self.window makeKeyAndVisible];
-    self.window.backgroundColor = [UIColor colorWithWhite:.9 alpha:1];
+    self.window.backgroundColor = [UIColor groupTableViewBackgroundColor];
     return YES;
 }
 

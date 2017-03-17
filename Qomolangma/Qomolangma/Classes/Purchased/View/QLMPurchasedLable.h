@@ -12,4 +12,6 @@
 
 @property (nonatomic,assign) CGFloat scalePercent;
 
++ (instancetype)qlm_labelWithColor:(UIColor *)color andFontSize:(double)fontSize andText:(NSString *)text;
+
 @end
