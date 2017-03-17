@@ -24,6 +24,8 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //如果你不想让scrollView的内容自动调整，将这个属性设为NO
+    self.automaticallyAdjustsScrollViewInsets = NO;
     
     self.view.backgroundColor = [UIColor blueColor];
     [self.collectionView registerClass:[QLMLearnCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
@@ -101,7 +103,7 @@ static NSString * const reuseIdentifier = @"Cell";
 
 //点击按钮,实现滚动
 - (void)navBarView:(QLMNavBarView *)navBarView withPageNumber:(NSInteger)pageNumber {
-    CGRect rect = CGRectMake(pageNumber *self.view.bounds.size.width, 0, self.view.bounds.size.width, self.view.bounds.size.height);
+    CGRect rect = CGRectMake(pageNumber *self.view.bounds.size.width, 0, self.collectionView.bounds.size.width, self.collectionView.bounds.size.height);
     [self.collectionView scrollRectToVisible:rect animated:YES];
 }
 

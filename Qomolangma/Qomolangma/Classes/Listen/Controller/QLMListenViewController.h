@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface QLMListenViewController : UIViewController
+#import "QLMBaseViewController.h"
+@interface QLMListenViewController :QLMBaseViewController;
 
 @end

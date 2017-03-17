@@ -29,7 +29,8 @@
     [self registerClass:[QLMLearnTableViewCell class] forCellReuseIdentifier:@"learnTableCell"];
     
     //行高
-    self.rowHeight = 80;
+    self.rowHeight = 120;
+//    self.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
 - (NSInteger)numberOfRowsInSection:(NSInteger)section {
