@@ -19,8 +19,13 @@
 		942CC1591E79AEC6004D3814 /* UIColor+FCSColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 942CC14E1E79AEC6004D3814 /* UIColor+FCSColor.m */; };
 		942CC15A1E79AEC6004D3814 /* UILabel+FCSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 942CC1501E79AEC6004D3814 /* UILabel+FCSLabel.m */; };
 		942CC15B1E79AEC6004D3814 /* UIViewController+FCSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 942CC1521E79AEC6004D3814 /* UIViewController+FCSViewController.m */; };
+		942E775A1E7A9CCB003AF098 /* ignore in Resources */ = {isa = PBXBuildFile; fileRef = 942E77591E7A9CCB003AF098 /* ignore */; };
+		942E775D1E7A9CDF003AF098 /* QLMPlayListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 942E775C1E7A9CDF003AF098 /* QLMPlayListViewController.m */; };
 		943761D51E7A1F7D0088714E /* ignore in Resources */ = {isa = PBXBuildFile; fileRef = 943761D41E7A1F7D0088714E /* ignore */; };
 		943761D81E7A1FD00088714E /* QLMNetworkTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 943761D71E7A1FD00088714E /* QLMNetworkTools.m */; };
+		94691EC51E7B8859008B00B7 /* QLMBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94691EC41E7B8859008B00B7 /* QLMBaseViewController.m */; };
+		94691ECC1E7B935D008B00B7 /* QLMVoiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 94691EC81E7B935D008B00B7 /* QLMVoiceModel.m */; };
+		94691ECD1E7B935D008B00B7 /* QLMPlayingButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 94691ECB1E7B935D008B00B7 /* QLMPlayingButton.m */; };
 		948A5CE51E793258006A595C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 948A5CE41E793258006A595C /* main.m */; };
 		948A5CE81E793258006A595C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 948A5CE71E793258006A595C /* AppDelegate.m */; };
 		948A5CF01E793258006A595C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 948A5CEF1E793258006A595C /* Assets.xcassets */; };
@@ -88,9 +93,18 @@
 		942CC1501E79AEC6004D3814 /* UILabel+FCSLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+FCSLabel.m"; sourceTree = "<group>"; };
 		942CC1511E79AEC6004D3814 /* UIViewController+FCSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+FCSViewController.h"; sourceTree = "<group>"; };
 		942CC1521E79AEC6004D3814 /* UIViewController+FCSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+FCSViewController.m"; sourceTree = "<group>"; };
+		942E77591E7A9CCB003AF098 /* ignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ignore; sourceTree = "<group>"; };
+		942E775B1E7A9CDF003AF098 /* QLMPlayListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLMPlayListViewController.h; sourceTree = "<group>"; };
+		942E775C1E7A9CDF003AF098 /* QLMPlayListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLMPlayListViewController.m; sourceTree = "<group>"; };
 		943761D41E7A1F7D0088714E /* ignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ignore; sourceTree = "<group>"; };
 		943761D61E7A1FD00088714E /* QLMNetworkTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLMNetworkTools.h; sourceTree = "<group>"; };
 		943761D71E7A1FD00088714E /* QLMNetworkTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLMNetworkTools.m; sourceTree = "<group>"; };
+		94691EC31E7B8859008B00B7 /* QLMBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLMBaseViewController.h; sourceTree = "<group>"; };
+		94691EC41E7B8859008B00B7 /* QLMBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLMBaseViewController.m; sourceTree = "<group>"; };
+		94691EC71E7B935D008B00B7 /* QLMVoiceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLMVoiceModel.h; sourceTree = "<group>"; };
+		94691EC81E7B935D008B00B7 /* QLMVoiceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLMVoiceModel.m; sourceTree = "<group>"; };
+		94691ECA1E7B935D008B00B7 /* QLMPlayingButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLMPlayingButton.h; sourceTree = "<group>"; };
+		94691ECB1E7B935D008B00B7 /* QLMPlayingButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLMPlayingButton.m; sourceTree = "<group>"; };
 		948A5CE01E793258006A595C /* Qomolangma.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Qomolangma.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		948A5CE41E793258006A595C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		948A5CE61E793258006A595C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -198,9 +212,30 @@
 			path = FCSCommon;
 			sourceTree = "<group>";
 		};
+		942E77521E7A8497003AF098 /* Class */ = {
+			isa = PBXGroup;
+			children = (
+				94691EC61E7B935D008B00B7 /* Model */,
+				94691EC91E7B935D008B00B7 /* View */,
+				942E77581E7A9CCB003AF098 /* Controller */,
+			);
+			path = Class;
+			sourceTree = "<group>";
+		};
+		942E77581E7A9CCB003AF098 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				942E77591E7A9CCB003AF098 /* ignore */,
+				942E775B1E7A9CDF003AF098 /* QLMPlayListViewController.h */,
+				942E775C1E7A9CDF003AF098 /* QLMPlayListViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		943761D21E7A1F7D0088714E /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				942E77521E7A8497003AF098 /* Class */,
 				943761D31E7A1F7D0088714E /* Tools */,
 			);
 			path = Common;
@@ -214,6 +249,24 @@
 				943761D71E7A1FD00088714E /* QLMNetworkTools.m */,
 			);
 			path = Tools;
+			sourceTree = "<group>";
+		};
+		94691EC61E7B935D008B00B7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				94691EC71E7B935D008B00B7 /* QLMVoiceModel.h */,
+				94691EC81E7B935D008B00B7 /* QLMVoiceModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		94691EC91E7B935D008B00B7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				94691ECA1E7B935D008B00B7 /* QLMPlayingButton.h */,
+				94691ECB1E7B935D008B00B7 /* QLMPlayingButton.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		948A5CD71E793258006A595C = {
@@ -549,6 +602,8 @@
 			children = (
 				94EBD1211E79396000F71272 /* QLMFrameViewController.h */,
 				94EBD1221E79396000F71272 /* QLMFrameViewController.m */,
+				94691EC31E7B8859008B00B7 /* QLMBaseViewController.h */,
+				94691EC41E7B8859008B00B7 /* QLMBaseViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -641,6 +696,7 @@
 			files = (
 				94EBD11E1E79395600F71272 /* ignore in Resources */,
 				94EBD0FA1E7937D000F71272 /* ignore in Resources */,
+				942E775A1E7A9CCB003AF098 /* ignore in Resources */,
 				943761D51E7A1F7D0088714E /* ignore in Resources */,
 				94EBD1201E79395600F71272 /* ignore in Resources */,
 				94EBD0FC1E7937D000F71272 /* ignore in Resources */,
@@ -725,7 +781,9 @@
 			files = (
 				948A5CE81E793258006A595C /* AppDelegate.m in Sources */,
 				942CC1591E79AEC6004D3814 /* UIColor+FCSColor.m in Sources */,
+				94691EC51E7B8859008B00B7 /* QLMBaseViewController.m in Sources */,
 				942CC15B1E79AEC6004D3814 /* UIViewController+FCSViewController.m in Sources */,
+				942E775D1E7A9CDF003AF098 /* QLMPlayListViewController.m in Sources */,
 				31CCEA761E7A37BE0077AE71 /* QLMMineInfoModel.m in Sources */,
 				942CC1531E79AEC6004D3814 /* NSArray+FCSArray.m in Sources */,
 				94EBD1131E7938BA00F71272 /* NSString+Hash.m in Sources */,
@@ -736,6 +794,7 @@
 				942CC1571E79AEC6004D3814 /* NSString+FCSString.m in Sources */,
 				942CC1561E79AEC6004D3814 /* NSObject+FCSObject.m in Sources */,
 				942CC1551E79AEC6004D3814 /* NSDictionary+FCSDictionary.m in Sources */,
+				94691ECD1E7B935D008B00B7 /* QLMPlayingButton.m in Sources */,
 				94EBD0FF1E79382C00F71272 /* QLMHomeViewController.m in Sources */,
 				94EBD1231E79396000F71272 /* QLMFrameViewController.m in Sources */,
 				B27D9B451E7961FA00AD3739 /* QLMPurchasedLable.m in Sources */,
@@ -747,6 +806,7 @@
 				942CC1581E79AEC6004D3814 /* UIButton+FCSButton.m in Sources */,
 				31631F171E7A62D10004952C /* QLMMineInfoCell.m in Sources */,
 				94EBD1271E794E5D00F71272 /* QLMPurchasedViewController.m in Sources */,
+				94691ECC1E7B935D008B00B7 /* QLMVoiceModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
