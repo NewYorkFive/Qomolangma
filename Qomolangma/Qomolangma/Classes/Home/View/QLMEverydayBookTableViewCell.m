@@ -88,9 +88,9 @@
     UILabel *label1 = [[UILabel alloc] init];
     [self.contentView addSubview:label1];
     label1.text = @"今今乐道";
-    label1.font = [UIFont systemFontOfSize:14];
+    label1.font = [UIFont systemFontOfSize:16];
     [label1 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.offset(8);
+        make.left.top.offset(16);
     }];
     //小箭头
     
@@ -102,17 +102,18 @@
     label2.font = [UIFont systemFontOfSize:11];
     label2.textColor = [UIColor grayColor];
     [label2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(8);
+        make.top.offset(16);
         make.right.offset(-8);
     }];
     
     UILabel *line1 = [[UILabel alloc] init];
     [self.contentView addSubview:line1];
+    line1.alpha = .2;
     line1.backgroundColor = [UIColor grayColor];
     [line1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(label1.mas_bottom).offset(4);
-        make.left.offset(8);
-        make.right.offset(-8);
+        make.left.offset(16);
+        make.right.offset(-16);
         make.height.offset(1);
     }];
     
@@ -121,8 +122,8 @@
     [self.contentView addSubview:self.imageViewReader_header_url];
     [self.imageViewReader_header_url mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(line1.mas_bottom).offset(4);
-        make.left.offset(16);
-        make.height.width.offset(25);
+        make.left.equalTo(line1.mas_left).offset(8);
+        make.height.width.offset(30);
 //        make.bottom.equalTo(self.contentView.mas_bottom).offset(-8);
     }];
     self.imageViewReader_header_url.layer.cornerRadius = self.imageViewReader_header_url.bounds.size.width * .5;
@@ -152,18 +153,19 @@
     UILabel *line2 = [[UILabel alloc] init];
     line2.backgroundColor = [UIColor grayColor];
     [self.contentView addSubview:line2];
+    line2.alpha = .2;
     [line2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.imageViewReader_header_url.mas_bottom).offset(4);
         make.height.offset(1);
         make.left.equalTo(self.imageViewReader_header_url.mas_left);
-        make.right.offset(-16);
+        make.right.equalTo(line1.mas_right).offset(-8);
     }];
     
     //大图
     [self.contentView addSubview:self.image_url];
     [self.image_url mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.offset(100);
-        make.width.offset(80);
+        make.height.offset(140);
+        make.width.offset(100);
         make.top.equalTo(line2.mas_bottom).offset(4);
         make.left.equalTo(line2.mas_left);
     }];
@@ -172,18 +174,20 @@
     UILabel *line3 = [[UILabel alloc] init];
     [self.contentView addSubview:line3];
     line3.backgroundColor = [UIColor grayColor];
+    line3.alpha = .2;
     [line3 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_image_url.mas_bottom).offset(8);
-        make.left.offset(8);
-        make.right.offset(-8);
+        make.left.equalTo(line1.mas_left);
+        make.right.equalTo(line1.mas_right);
         make.height.offset(1);
-        make.bottom.offset(-8);
+        make.bottom.offset(-4);
     }];
 
     //左边的线
     UILabel *line4 = [[UILabel alloc] init];
     [self.contentView addSubview:line4];
     line4.backgroundColor = [UIColor grayColor];
+    line4.alpha = .2;
     [line4 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(line1.mas_left);
         make.top.equalTo(line1.mas_bottom);
@@ -195,6 +199,7 @@
     UILabel *line5 = [[UILabel alloc] init];
     [self.contentView addSubview:line5];
     line5.backgroundColor = [UIColor grayColor];
+    line5.alpha = .2;
     [line5 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(line1.mas_right);
         make.top.equalTo(line1.mas_bottom);
@@ -236,7 +241,7 @@
     
     [_buyButton sizeToFit];
     [self.buyButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(line5.mas_left).offset(-4);
+        make.right.equalTo(line5.mas_left).offset(-8);
         make.bottom.equalTo(line3.mas_top).offset(-8);
     }];
     

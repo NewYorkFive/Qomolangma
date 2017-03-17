@@ -5,11 +5,39 @@
       "scale" : "1x"
     },
     {
+      "resizing" : {
+        "mode" : "9-part",
+        "center" : {
+          "mode" : "stretch",
+          "width" : 1,
+          "height" : 1
+        },
+        "cap-insets" : {
+          "bottom" : 141,
+          "top" : 118,
+          "right" : 133,
+          "left" : 126
+        }
+      },
       "idiom" : "universal",
       "filename" : "dailyAudio30_170x170_@2x.png",
       "scale" : "2x"
     },
     {
+      "resizing" : {
+        "mode" : "9-part",
+        "center" : {
+          "mode" : "stretch",
+          "width" : 1,
+          "height" : 390
+        },
+        "cap-insets" : {
+          "bottom" : 0,
+          "top" : 0,
+          "right" : 0,
+          "left" : 390
+        }
+      },
       "idiom" : "universal",
       "filename" : "dailyAudio30_170x170_@3x.png",
       "scale" : "3x"
