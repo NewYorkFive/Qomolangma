@@ -12,22 +12,22 @@
 
 @interface QLMEverydayBookTableViewCell ()
 
-//人物小图片
+///人物小图片
 @property (nonatomic, strong) UIImageView *imageViewReader_header_url;
 
-//讲述人
+///讲述人
 @property (nonatomic, strong) UILabel *labelReader_name;
 
-//cell标题
+///cell标题
 @property (nonatomic, strong) UILabel *labelResource_content;
 
-//讲述人图片URL地址
+///讲述人图片URL地址
 @property (nonatomic, strong) UIImageView *image_url;
 
-//图片右边的文字介绍
+///图片右边的文字介绍
 @property (nonatomic, strong) UILabel *labelReader_introduce;
 
-//价格
+///价格
 @property (nonatomic, strong) UILabel *labelPrice;
 
 ////
@@ -44,6 +44,8 @@
     
     _everydayBook = everydayBook;
     
+    NSLog(@"bac");
+    
     //把数据放在控件上
     self.labelResource_content.text = everydayBook.resource_content;
     self.labelReader_introduce.text = everydayBook.reader_introduce;
@@ -51,9 +53,6 @@
     self.labelReader_name.text = everydayBook.reader_name;
     self.labelPrice.text = everydayBook.price;
     [self.imageViewReader_header_url sd_setImageWithURL:[NSURL URLWithString:everydayBook.reader_header_url]];
-    
-    self.imageViewReader_header_url.layer.cornerRadius = self.imageViewReader_header_url.bounds.size.width * .5;
-    self.imageViewReader_header_url.layer.masksToBounds = YES;
     
 }
 
@@ -88,21 +87,20 @@
     UILabel *label1 = [[UILabel alloc] init];
     [self.contentView addSubview:label1];
     label1.text = @"今今乐道";
-    label1.font = [UIFont systemFontOfSize:16];
+    label1.font = [UIFont systemFontOfSize:14];
     [label1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.offset(16);
     }];
     //小箭头
     
-    
     //顶部"查看听书日历"
     UILabel *label2 = [[UILabel alloc] init];
     [self.contentView addSubview:label2];
     label2.text = @"查看听书日历";
-    label2.font = [UIFont systemFontOfSize:11];
+    label2.font = [UIFont systemFontOfSize:12];
     label2.textColor = [UIColor grayColor];
     [label2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(16);
+        make.centerY.equalTo(label1.mas_centerY);
         make.right.offset(-8);
     }];
     
@@ -114,9 +112,10 @@
         make.top.equalTo(label1.mas_bottom).offset(4);
         make.left.offset(16);
         make.right.offset(-16);
-        make.height.offset(1);
+        make.height.mas_equalTo(1);
+//        make.bottom.lessThanOrEqualTo(@-4);
     }];
-    
+
     //    //将图片添加到cell  //小图片
     self.imageViewReader_header_url.backgroundColor = [UIColor grayColor];
     [self.contentView addSubview:self.imageViewReader_header_url];
@@ -124,27 +123,47 @@
         make.top.equalTo(line1.mas_bottom).offset(4);
         make.left.equalTo(line1.mas_left).offset(8);
         make.height.width.offset(30);
+        make.bottom.lessThanOrEqualTo(@-8);
 //        make.bottom.equalTo(self.contentView.mas_bottom).offset(-8);
     }];
+    
+    [self.imageViewReader_header_url layoutIfNeeded];
     self.imageViewReader_header_url.layer.cornerRadius = self.imageViewReader_header_url.bounds.size.width * .5;
     self.imageViewReader_header_url.layer.masksToBounds = YES;
+//
+//    [self.contentView layoutIfNeeded];
     
     //姓名
     [self.contentView addSubview:_labelReader_name];
-    self.labelReader_name.font = [UIFont systemFontOfSize:10];
+    self.labelReader_name.font = [UIFont systemFontOfSize:14];
+    self.labelReader_name.textColor = [UIColor grayColor];
     [self.labelReader_name  mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(_imageViewReader_header_url.mas_centerY);
         make.left.equalTo(_imageViewReader_header_url.mas_right).offset(8);
-        make.width.offset(35);
+        make.width.offset(45);
         make.height.offset(20);
+    }];
+    
+    //讲
+    UILabel *talk = [[UILabel alloc] init];
+    talk.text = @"讲";
+    talk.textColor = [UIColor grayColor];
+    [self.contentView addSubview:talk];
+    talk.font = [UIFont systemFontOfSize:14];
+    [talk mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.labelReader_name.mas_bottom);
+        make.left.equalTo(_labelReader_name.mas_right).offset(2);
+        make.height.offset(20);
+        make.width.offset(15);
     }];
     
     //标题
     [self.contentView addSubview:_labelResource_content];
-    self.labelResource_content.font = [UIFont systemFontOfSize:10];
+    self.labelResource_content.font = [UIFont systemFontOfSize:14];
+    self.labelResource_content.textColor = [UIColor grayColor];
     [self.labelResource_content mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(_imageViewReader_header_url.mas_centerY);
-        make.left.equalTo(_labelReader_name.mas_right).offset(8);
+        make.left.equalTo(talk.mas_right).offset(2);
         make.right.offset(-16);
         make.height.offset(20);
     }];
@@ -179,9 +198,12 @@
         make.top.equalTo(_image_url.mas_bottom).offset(8);
         make.left.equalTo(line1.mas_left);
         make.right.equalTo(line1.mas_right);
-        make.height.offset(1);
-        make.bottom.offset(-4);
+        make.height.mas_equalTo(1);
+//        make.bottom.equalTo(self.contentView).offset(-4);
+        make.bottom.lessThanOrEqualTo(@-4);
     }];
+    NSLog(@"%@",line3);
+    
 
     //左边的线
     UILabel *line4 = [[UILabel alloc] init];
