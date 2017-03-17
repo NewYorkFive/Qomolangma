@@ -30,7 +30,7 @@
     
     UIButton *btnHeaderIcon = [[UIButton alloc] init];
     
-    [btnHeaderIcon setBackgroundImage:[UIImage imageNamed:@"placeholderImage"] forState:UIControlStateNormal];
+    [btnHeaderIcon setBackgroundImage:[UIImage imageNamed:@"default_loading_head_60x60_"] forState:UIControlStateNormal];
     
     btnHeaderIcon.layer.cornerRadius = 35;
     btnHeaderIcon.layer.masksToBounds = YES;
