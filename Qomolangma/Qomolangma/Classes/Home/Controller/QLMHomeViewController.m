@@ -134,16 +134,16 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-//    测试了,没毛病
-    QLMEverydayBookTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"QLMEverydayBookTableViewCell" forIndexPath:indexPath];
-//    传递数据
-    cell.everydayBook = self.everydayBook;
+////    测试了,没毛病
+//    QLMEverydayBookTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"QLMEverydayBookTableViewCell" forIndexPath:indexPath];
+////    传递数据
+//    cell.everydayBook = self.everydayBook;
 
     
     
-//    QLMRankingDataTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"QLMRankingDataTableViewCell" forIndexPath:indexPath];
-//    //传递数据
-//    cell.rankingDataArray = self.rankingDataArray;
+    QLMRankingDataTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"QLMRankingDataTableViewCell" forIndexPath:indexPath];
+    //传递数据
+    cell.rankingDataArray = self.rankingDataArray;
 
     
     
