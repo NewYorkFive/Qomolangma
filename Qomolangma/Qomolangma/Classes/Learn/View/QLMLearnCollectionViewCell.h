@@ -7,7 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QLMLearnDetailsTableViewController.h"
+
+@class QLMLearnCollectionViewCell;
+@protocol QLMLearnCollectionViewCellDelegate <NSObject>
+
+- (void)learnCollectionViewCell:(QLMLearnCollectionViewCell *)learnCollectionViewCell withDetailsTableViewController:(QLMLearnDetailsTableViewController *)detailsTableViewVc WithIndexPath:(NSIndexPath *)indexPath;
+
+@end
 
 @interface QLMLearnCollectionViewCell : UICollectionViewCell
 
+@property (nonatomic, weak) id<QLMLearnCollectionViewCellDelegate>learnCellDelegate;
 @end
