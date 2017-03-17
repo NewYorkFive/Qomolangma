@@ -7,7 +7,8 @@
 //
 
 #import "QLMFrameViewController.h"
-
+#import "QLMPlayingButton.h"
+#import "QLMPlayListViewController.h"
 @interface QLMFrameViewController ()
 
 @end
@@ -38,5 +39,6 @@
     UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:vc];
     return navController;
 }
-         
+
+
 @end

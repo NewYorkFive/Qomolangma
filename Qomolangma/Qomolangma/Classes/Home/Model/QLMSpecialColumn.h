@@ -10,4 +10,19 @@
 
 @interface QLMSpecialColumn : NSObject
 
+///cell标题
+@property (nonatomic, strong) NSString *price_unit;
+
+///讲述人图片URL地址
+@property (nonatomic, strong) NSString *person_info;
+
+///
+@property (nonatomic, strong) NSString *image_url;
+
+@property (nonatomic, strong) NSString *name;
+
+@property (nonatomic, strong) NSString *last_title;
+
+@property (nonatomic, strong) NSString *content;
+
 @end

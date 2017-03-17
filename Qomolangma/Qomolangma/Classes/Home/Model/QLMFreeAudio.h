@@ -10,4 +10,12 @@
 
 @interface QLMFreeAudio : NSObject
 
+@property (nonatomic, strong) NSString *resource_content;
+
+@property (nonatomic, strong) NSString *image_url;
+
+@property (nonatomic, strong) NSString *resource_name;
+
+@property (nonatomic, strong) NSString *audio_file_url;
+
 @end
