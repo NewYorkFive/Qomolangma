@@ -44,8 +44,6 @@
     
     _everydayBook = everydayBook;
     
-    NSLog(@"bac");
-    
     //把数据放在控件上
     self.labelResource_content.text = everydayBook.resource_content;
     self.labelReader_introduce.text = everydayBook.reader_introduce;
