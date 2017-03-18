@@ -147,28 +147,28 @@
 #pragma  mark - 数据源方法
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
-        UIButton *button = [[UIButton alloc]init];
-        
-        [button setImage:[UIImage imageNamed:@"purchased_empty_placeholder"] forState: UIControlStateNormal];
-        
-        [self.view addSubview:button];
-        
-        [button mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(self.view.mas_centerX);
-            make.top.equalTo(self.view).offset(100 + kNavBarHeight);;
-        }];
-        
-        UILabel *label = [[UILabel alloc]init];
-        
-        label.text = @"购买过得商品会自动添加到已购";
-        
-        [self.view addSubview:label];
-        
-        [label mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.centerX.equalTo(self.view.mas_centerX);
-            make.top.equalTo(button.mas_bottom).offset(20);
-        }];
+//        UIButton *button = [[UIButton alloc]init];
+//        
+//        [button setImage:[UIImage imageNamed:@"purchased_empty_placeholder"] forState: UIControlStateNormal];
+//        
+//        [self.view addSubview:button];
+//        
+//        [button mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.centerX.equalTo(self.view.mas_centerX);
+//            make.top.equalTo(self.view).offset(100 + kNavBarHeight);;
+//        }];
+//        
+//        UILabel *label = [[UILabel alloc]init];
+//        
+//        label.text = @"购买过得商品会自动添加到已购";
+//        
+//        [self.view addSubview:label];
+//        
+//        [label mas_makeConstraints:^(MASConstraintMaker *make) {
+//            
+//            make.centerX.equalTo(self.view.mas_centerX);
+//            make.top.equalTo(button.mas_bottom).offset(20);
+//        }];
 
     
     return self.purchasedLabelArray.count;
@@ -179,7 +179,7 @@
     QLMPurchasedCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
     
     
-    cell.backgroundColor = [UIColor colorWithRed:arc4random_uniform(256) / 255.0 green:arc4random_uniform(256) / 255.0 blue:arc4random_uniform(256) / 255.0 alpha:1];
+    //cell.backgroundColor = [UIColor colorWithRed:arc4random_uniform(256) / 255.0 green:arc4random_uniform(256) / 255.0 blue:arc4random_uniform(256) / 255.0 alpha:1];
     
     
     
