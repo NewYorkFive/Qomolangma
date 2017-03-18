@@ -23,22 +23,54 @@
     return self;
 }
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
-    [self setupUI];
-}
 
-- (void)setupUI {
+- (void)setupUI
+{
     self.backgroundColor = [UIColor grayColor];
+    
+    
+    CGFloat margin = 15;
+    
+
+    UIButton *btnLast = nil;
+    
+    CGFloat height = 60;
+    
+    CGFloat width = (kScreenWidth - margin * 3) / 2;
+    
+    for (NSInteger i = 0; i < 4; i++) {
+        
+        UIButton *button = [[UIButton alloc] init];
+        
+        button.backgroundColor = [UIColor fcs_randomColor];
+        
+        [self addSubview:button];
+        
+        [button mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.height.offset(height);
+            
+            make.width.offset(width);
+            
+            float colTop = (15 + i / 2 * (margin + height));
+            
+            make.top.offset(colTop);
+            
+            
+            if (i % 2 == 0)
+            {
+                make.left.offset(margin);
+                
+            }else
+            {
+                make.left.equalTo(btnLast.mas_right).offset(margin);
+            }
+        }];
+        
+        btnLast = button;
+    }
+
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
+
 
 @end

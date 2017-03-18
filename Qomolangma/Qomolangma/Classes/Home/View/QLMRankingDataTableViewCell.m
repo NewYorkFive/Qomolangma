@@ -7,7 +7,7 @@
 //
 
 #import "QLMRankingDataTableViewCell.h"
-#import <Masonry.h>
+#import "QLMHomeRankingButton.h"
 
 @interface QLMRankingDataTableViewCell ()
 
@@ -72,15 +72,65 @@
     }];
 
     [self.contentView addSubview:self.view];
-    self.view.backgroundColor = [UIColor grayColor];
+    self.view.backgroundColor = [UIColor lightGrayColor];
     [self.view mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(16);
         make.right.offset(-16);
         make.top.equalTo(label1.mas_bottom).offset(16);
         make.height.offset(180);
-        make.bottom.equalTo(self.contentView.mas_bottom).offset(-8);
+//        make.bottom.equalTo(self.contentView.mas_bottom).offset(-8);
     }];
     
+    NSMutableArray<UIButton *> *buttonsArray = [NSMutableArray array];
+    
+    for (NSInteger i = 0; i < 3; i++)
+    {
+        QLMHomeRankingButton *button = [[QLMHomeRankingButton alloc] init];
+        
+        button.layer.cornerRadius = 8;
+        button.layer.masksToBounds = YES;
+        
+        button.backgroundColor = [UIColor fcs_randomColor];
+        
+        [button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self.contentView addSubview:button];
+        
+        [buttonsArray addObject:button];
+    }
+    
+    [buttonsArray mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:20 leadSpacing:15 tailSpacing:15];
+    
+    [buttonsArray mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(label1.mas_bottom).offset(10);
+        make.height.offset(150);
+    }];
+    
+    NSMutableArray *labsArray = [NSMutableArray array];
+    
+    for (NSInteger i = 0; i < 3; i++)
+    {
+        UILabel *lab = [UILabel fcs_labelWithColor:[UIColor grayColor] andFontSize:11 andText:@"1111111111111222222222222222222222222211111"];
+        lab.numberOfLines = 2;
+
+        
+        [self.contentView addSubview:lab];
+        
+        [labsArray addObject:lab];
+    }
+    
+    [labsArray mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:20 leadSpacing:15 tailSpacing:15];
+    
+    [labsArray mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(buttonsArray[0].mas_bottom).offset(5);
+        make.bottom.offset(-5);
+    }];
+    
+}
+
+- (void) buttonAction: (UIButton *)sender
+{
+    NSLog(@"1111");
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

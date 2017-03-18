@@ -173,10 +173,10 @@
         //用完一次清理一次数据
         [arrayM removeAllObjects];
         [arrayM2 removeAllObjects];
-        QLMHomeFootView *footView = [[QLMHomeFootView alloc] init];
+        QLMHomeFootView *footView = [[QLMHomeFootView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 180)];
         footView.recommendArray = self.recommendArray;
         self.tableView.tableFooterView = footView;
-        self.tableView.tableFooterView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 160);
+//        self.tableView.tableFooterView.frame = CGRectMake(0, 0, kScreenWidth, 160);
         
         
 #pragma 各个不同的cell

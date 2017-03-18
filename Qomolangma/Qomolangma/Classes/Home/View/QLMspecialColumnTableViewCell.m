@@ -8,7 +8,6 @@
 
 #import "QLMspecialColumnTableViewCell.h"
 #import <UIImageView+WebCache.h>
-#import <Masonry.h>
 
 @interface QLMspecialColumnTableViewCell ()
 

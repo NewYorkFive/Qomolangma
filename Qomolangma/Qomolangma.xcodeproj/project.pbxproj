@@ -39,6 +39,7 @@
 		31E04EE71E7D744D00AE98AB /* QLMMineInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 31E04EC61E7D744D00AE98AB /* QLMMineInfoCell.m */; };
 		31E04EE81E7D744D00AE98AB /* QLMMineTableViewHeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 31E04EC81E7D744D00AE98AB /* QLMMineTableViewHeaderFooterView.m */; };
 		31E04EE91E7D744D00AE98AB /* QLMMineTopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 31E04ECA1E7D744D00AE98AB /* QLMMineTopCell.m */; };
+		31E04EEC1E7D8B9800AE98AB /* QLMHomeRankingButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 31E04EEB1E7D8B9800AE98AB /* QLMHomeRankingButton.m */; };
 		438F31741E7D795C0067591C /* ignore in Resources */ = {isa = PBXBuildFile; fileRef = 438F313A1E7D795C0067591C /* ignore */; };
 		438F31751E7D795C0067591C /* QLMHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 438F313C1E7D795C0067591C /* QLMHomeViewController.m */; };
 		438F31761E7D795C0067591C /* ignore in Resources */ = {isa = PBXBuildFile; fileRef = 438F313E1E7D795C0067591C /* ignore */; };
@@ -203,6 +204,8 @@
 		31E04EC81E7D744D00AE98AB /* QLMMineTableViewHeaderFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLMMineTableViewHeaderFooterView.m; sourceTree = "<group>"; };
 		31E04EC91E7D744D00AE98AB /* QLMMineTopCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLMMineTopCell.h; sourceTree = "<group>"; };
 		31E04ECA1E7D744D00AE98AB /* QLMMineTopCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLMMineTopCell.m; sourceTree = "<group>"; };
+		31E04EEA1E7D8B9800AE98AB /* QLMHomeRankingButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLMHomeRankingButton.h; sourceTree = "<group>"; };
+		31E04EEB1E7D8B9800AE98AB /* QLMHomeRankingButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLMHomeRankingButton.m; sourceTree = "<group>"; };
 		3F9EEF78AF999A9FC3CBA96E /* Pods-Qomolangma.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qomolangma.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Qomolangma/Pods-Qomolangma.debug.xcconfig"; sourceTree = "<group>"; };
 		438F313A1E7D795C0067591C /* ignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ignore; sourceTree = "<group>"; };
 		438F313B1E7D795C0067591C /* QLMHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLMHomeViewController.h; sourceTree = "<group>"; };
@@ -624,18 +627,20 @@
 			children = (
 				438F315E1E7D795C0067591C /* Cycle */,
 				438F31671E7D795C0067591C /* ignore */,
+				438F31721E7D795C0067591C /* QLMspecialColumnTableViewCell.h */,
+				438F31731E7D795C0067591C /* QLMspecialColumnTableViewCell.m */,
 				438F31681E7D795C0067591C /* QLMEverydayBookTableViewCell.h */,
 				438F31691E7D795C0067591C /* QLMEverydayBookTableViewCell.m */,
 				438F316A1E7D795C0067591C /* QLMFreeAudioTableViewCell.h */,
 				438F316B1E7D795C0067591C /* QLMFreeAudioTableViewCell.m */,
-				438F316C1E7D795C0067591C /* QLMHomeFootView.h */,
-				438F316D1E7D795C0067591C /* QLMHomeFootView.m */,
 				438F316E1E7D795C0067591C /* QLMPlayBtn.h */,
 				438F316F1E7D795C0067591C /* QLMPlayBtn.m */,
 				438F31701E7D795C0067591C /* QLMRankingDataTableViewCell.h */,
 				438F31711E7D795C0067591C /* QLMRankingDataTableViewCell.m */,
-				438F31721E7D795C0067591C /* QLMspecialColumnTableViewCell.h */,
-				438F31731E7D795C0067591C /* QLMspecialColumnTableViewCell.m */,
+				438F316C1E7D795C0067591C /* QLMHomeFootView.h */,
+				438F316D1E7D795C0067591C /* QLMHomeFootView.m */,
+				31E04EEA1E7D8B9800AE98AB /* QLMHomeRankingButton.h */,
+				31E04EEB1E7D8B9800AE98AB /* QLMHomeRankingButton.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1258,6 +1263,7 @@
 				942CC15B1E79AEC6004D3814 /* UIViewController+FCSViewController.m in Sources */,
 				438F318D1E7D795C0067591C /* QLMHomeFootView.m in Sources */,
 				C453C9771E7D5DC000C62313 /* QLMLearnTableViewCell.m in Sources */,
+				31E04EEC1E7D8B9800AE98AB /* QLMHomeRankingButton.m in Sources */,
 				945D7FF51E7D33B100856835 /* QLMRectButton.m in Sources */,
 				31E04EDE1E7D744D00AE98AB /* QLMMineUserInfoController.m in Sources */,
 				438F31781E7D795C0067591C /* QLMEverydayBook.m in Sources */,

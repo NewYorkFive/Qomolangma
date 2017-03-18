@@ -13,7 +13,6 @@
 #import "QLMMineTableViewHeaderFooterView.h"
 #import "QLMMineHeaderView.h"
 #import "QLMMineLoginSelectController.h"
-//#import "QLMBaseViewController.h"
 #import "QLMMineUserInfoDetailController.h"
 
 #define BACK_GROUND_IMAGE_VIEW_HEIGHT 245
