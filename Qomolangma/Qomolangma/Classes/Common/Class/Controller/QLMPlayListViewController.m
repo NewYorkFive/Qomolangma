@@ -300,7 +300,7 @@
 
 - (void)playButtonClick:(UIButton *)sender{
     sender.selected = !sender.selected;
-    QLMVoiceModel *tempModel = [[QLMVoiceModel alloc]init];
+    QLMAudioModel *tempModel = [[QLMAudioModel alloc]init];
     tempModel.name = @"Hello,Girls";
     [self.playListModelArray addObject:tempModel];
     
@@ -321,7 +321,7 @@
 }
 
 
-- (NSMutableArray<QLMVoiceModel *> *)playListModelArray{
+- (NSMutableArray<QLMAudioModel *> *)playListModelArray{
     if (!_playListModelArray) {
         _playListModelArray = [NSMutableArray array];
     }
@@ -359,6 +359,7 @@
 - (UIView *)middleView{
     if (!_middleView) {
         _middleView = [[UIView alloc]init];
+        [UIColor purpleColor];
     }
     return _middleView;
 }
