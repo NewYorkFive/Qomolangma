@@ -19,6 +19,8 @@
 #import "QLMRecommend.h"
 #import "QLMSpecialColumn.h"
 #import "QLMspecialColumnTableViewCell.h"
+#import "QLMFreeAudio.h"
+#import "QLMFreeAudioTableViewCell.h"
 
 @interface QLMHomeViewController () <UITableViewDelegate ,UITableViewDataSource>
 
@@ -42,6 +44,9 @@
 
 //无线轮播图
 @property (nonatomic ,strong) NSArray<QLMCarousel *> *carouselArray;
+
+//天天涨姿势
+@property (nonatomic ,strong) NSArray<QLMFreeAudio *> *freeAudioArray;
 
 //行业达人
 @property (nonatomic ,strong) NSArray<NSArray <QLMSpecialColumn *> *> *specialColumnArray;
@@ -75,6 +80,7 @@
     self.navigationController.navigationBar.translucent = NO;
     self.tabBarController.tabBar.translucent = NO;
     
+    
 	NSString *URLStr = @"app/home/getHomeData";
     //更改一下超时请求时间
     [[QLMNetworkTools sharedTools].requestSerializer willChangeValueForKey:@"timeoutInterval"];
@@ -82,14 +88,21 @@
     [[QLMNetworkTools sharedTools].requestSerializer didChangeValueForKey:@"timeoutInterval"];
     [[QLMNetworkTools sharedTools] requestWithType:GET andUrlStr:URLStr andParams:nil andSuccess:^(id responseObject) {
         
+//        NSLog(@"%@",self.button);
         if (self.button != nil && self.label != nil) {
             [self.button removeFromSuperview];
             [self.label removeFromSuperview];
         }
+//        self.button = nil;
+//        self.label = nil;
         
         //初始化tableView.
-        self.tableView = [[UITableView alloc] init];
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+//        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+        self.automaticallyAdjustsScrollViewInsets = NO;
+        
         [self.view addSubview:self.tableView];
         [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.top.bottom.offset(0);
@@ -98,11 +111,15 @@
         _tableView.dataSource = self;
         _tableView.delegate = self;
         
+        
+        
         //预估行高
         self.tableView.rowHeight = UITableViewAutomaticDimension;
         self.tableView.estimatedRowHeight = 80;
         
         ///注册cell
+        //注册天天涨姿势
+        [self.tableView registerClass:[QLMFreeAudioTableViewCell class] forCellReuseIdentifier:@"QLMFreeAudioTableViewCell"];
         //注册行业达人
         [self.tableView registerClass:[QLMspecialColumnTableViewCell class] forCellReuseIdentifier:@"QLMspecialColumnTableViewCell"];
         //注册今今乐道cell
@@ -163,6 +180,24 @@
         
         
 #pragma 各个不同的cell
+        //天天涨姿势
+        //今今乐道
+        NSArray *freeAudioArray = [self.homeDataDic objectForKey:@"free_audio"];
+        for (int i = 0; i < freeAudioArray.count; i++) {
+            NSDictionary *dic = [freeAudioArray objectAtIndex:i];
+            QLMFreeAudio *freeAudio = [QLMFreeAudio yy_modelWithJSON:dic];
+            [arrayM addObject:freeAudio];
+        }
+        self.freeAudioArray = arrayM.copy;
+        [arrayM2 addObject:arrayM.copy];
+        //模型给完一次.赋值一次给dataArrayM
+        [dataArrayM addObject:arrayM2.copy];
+        //用完一次清理一次数据
+        [arrayM removeAllObjects];
+        [arrayM2 removeAllObjects];
+
+        
+        
         //行业达人
         NSArray *specialColumnArray = [self.homeDataDic objectForKey:@"special_column"];
         for (int i = 0; i < specialColumnArray.count; i++) {
@@ -301,17 +336,27 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (indexPath.section == 0) {
+        
+        //天天涨姿势
+        QLMFreeAudioTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"QLMFreeAudioTableViewCell" forIndexPath:indexPath];
+        //传递数据
+        cell.freeAudioArray = self.freeAudioArray;
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        return cell;
+        
+    }
 
-    if (indexPath.section == 0) { //行业达人
+    if (indexPath.section == 1) { //行业达人
         
         QLMspecialColumnTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"QLMspecialColumnTableViewCell" forIndexPath:indexPath];
-        
         if (indexPath.row == 0) {
     
             //行业达人
             UILabel *label = [[UILabel alloc] init];
             label.text = @"行业达人";
-            label.font = [UIFont systemFontOfSize:14];
+            label.font = [UIFont systemFontOfSize:16];
             [cell.contentView addSubview:label];
             [label mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.offset(8);
@@ -322,10 +367,31 @@
             cell.label.alpha = .2;
             [cell.contentView addSubview:cell.label];
             [cell.label mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.offset(8);
-                make.right.offset(-8);
+                make.left.offset(16);
+                make.right.offset(-16);
                 make.height.offset(1);
-                make.top.equalTo(label.mas_bottom).offset(4);
+                make.top.equalTo(label.mas_bottom).offset(16);
+            }];
+            
+            
+            //顶部"查看听书日历"
+            UILabel *label2 = [[UILabel alloc] init];
+            [cell.contentView addSubview:label2];
+            label2.text = @"换一换";
+            label2.font = [UIFont systemFontOfSize:12];
+            label2.textColor = [UIColor grayColor];
+            [label2 mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerY.equalTo(label.mas_centerY);
+                make.right.offset(-16);
+            }];
+            
+            //小箭头
+            UIImageView *imageView = [[UIImageView alloc] init];
+            imageView.image = [UIImage imageNamed:@"home_icon_exchange"];
+            [cell.contentView addSubview:imageView];
+            [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerY.equalTo(label.mas_centerY);
+                make.right.equalTo(label2.mas_left);
             }];
             
             //传递数据
@@ -350,7 +416,7 @@
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         return cell;
         
-    } else if (indexPath.section == 1) {   //今今乐道
+    } else if (indexPath.section == 2) {   //今今乐道
     
         //    测试了,没毛病
         QLMEverydayBookTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"QLMEverydayBookTableViewCell" forIndexPath:indexPath];
@@ -359,7 +425,7 @@
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         return cell;
         
-    } else if (indexPath.section == 2) {  //热门排行榜
+    } else if (indexPath.section == 3) {  //热门排行榜
     
         QLMRankingDataTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"QLMRankingDataTableViewCell" forIndexPath:indexPath];
         //传递数据
@@ -377,13 +443,15 @@
 
 }
 
-#pragma 4 - 组间距
+//#pragma 4 - 组间距
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    
+
+//    NSLog(@"section:%zd",section);
+//    NSIndexPath *indexPath = [[NSIndexPath alloc] initWithIndex:section];
     if (section == 0) {
         return 10;
     }
-    return 0;
+    return .1;
     
 }
 
@@ -392,6 +460,34 @@
     return 10;
     
 }
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    CGFloat sectionHeaderHeight = 40;
+    CGFloat sectionFooterHeight = 10;
+    CGFloat offsetY = scrollView.contentOffset.y;
+    if (offsetY >= 0 && offsetY <= sectionHeaderHeight)
+    {
+        scrollView.contentInset = UIEdgeInsetsMake(-offsetY, 0, -sectionFooterHeight, 0);
+    }else if (offsetY >= sectionHeaderHeight && offsetY <= scrollView.contentSize.height - scrollView.frame.size.height - sectionFooterHeight)
+    {
+        scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, -sectionFooterHeight, 0);
+    }else if (offsetY >= scrollView.contentSize.height - scrollView.frame.size.height - sectionFooterHeight && offsetY <= scrollView.contentSize.height - scrollView.frame.size.height)
+    {
+        scrollView.contentInset = UIEdgeInsetsMake(-offsetY, 0, -(scrollView.contentSize.height - scrollView.frame.size.height - sectionFooterHeight), 0);
+    }
+}
+
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+//{
+//    CGFloat sectionHeaderHeight = 40;
+//    if (scrollView.contentOffset.y<=sectionHeaderHeight&&scrollView.contentOffset.y>=0) {
+//        scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
+//    }
+//    else if (scrollView.contentOffset.y>=sectionHeaderHeight) {
+//        scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, 0, 0);
+//    }
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

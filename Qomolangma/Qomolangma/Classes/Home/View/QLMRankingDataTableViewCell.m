@@ -47,21 +47,28 @@
     UILabel *label1 = [[UILabel alloc] init];
     [self.contentView addSubview:label1];
     label1.text = @"热门排行榜";
-    label1.font = [UIFont systemFontOfSize:16];
+    label1.font = [UIFont systemFontOfSize:14];
     [label1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.offset(16);
     }];
     //小箭头
+    UIImageView *imageView = [[UIImageView alloc] init];
+    imageView.image = [UIImage imageNamed:@"common_icon_arrow"];
+    [self.contentView addSubview:imageView];
+    [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(label1.mas_centerY);
+        make.right.offset(-8);
+    }];
     
     //顶部"查看全部"
     UILabel *label2 = [[UILabel alloc] init];
     [self.contentView addSubview:label2];
     label2.text = @"查看全部";
-    label2.font = [UIFont systemFontOfSize:14];
+    label2.font = [UIFont systemFontOfSize:12];
     label2.textColor = [UIColor grayColor];
     [label2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(16);
-        make.right.offset(-16);
+        make.centerY.equalTo(imageView.mas_centerY);
+        make.right.equalTo(imageView.mas_left);
     }];
 
     [self.contentView addSubview:self.view];
