@@ -8,6 +8,7 @@
 
 #import "QLMHomeViewController.h"
 #import "QLMNetworkTools.h"
+#import <Masonry.h>
 #import "QLMheadView.h"
 #import "QLMCarousel.h"
 #import "QLMEverydayBook.h"
@@ -16,8 +17,22 @@
 #import "QLMRankingDataTableViewCell.h"
 #import "QLMHomeFootView.h"
 #import "QLMRecommend.h"
+#import "QLMSpecialColumn.h"
+#import "QLMspecialColumnTableViewCell.h"
 
-@interface QLMHomeViewController ()
+@interface QLMHomeViewController () <UITableViewDelegate ,UITableViewDataSource>
+
+//网络请求标记参数
+@property (nonatomic ,assign) BOOL needRefresh;
+
+//提示没网的button
+@property (nonatomic ,strong) UIButton *button;
+
+//提示没网的label
+@property (nonatomic ,strong) UILabel *label;
+
+//tableview
+@property (nonatomic ,strong) UITableView *tableView;
 
 //主数据
 @property (nonatomic ,strong) NSDictionary *homeDataDic;
@@ -27,6 +42,9 @@
 
 //无线轮播图
 @property (nonatomic ,strong) NSArray<QLMCarousel *> *carouselArray;
+
+//行业达人
+@property (nonatomic ,strong) NSArray<NSArray <QLMSpecialColumn *> *> *specialColumnArray;
 
 //今今乐道
 @property (nonatomic ,strong) NSArray<QLMEverydayBook *> *everydayBookArray;
@@ -41,41 +59,56 @@
 
 @implementation QLMHomeViewController
 
-#pragma 1 - 创建UITableView
-//- (instancetype)init {
-//    
-//    return [self initWithStyle:UITableViewStylePlain];
-//    
-//}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     // Do any additional setup after loading the view.
     
     [self loadData];
-
-    
-    //预估行高
-    self.tableView.rowHeight = UITableViewAutomaticDimension;
-    self.tableView.estimatedRowHeight = 80;
-    
-    
-//    self.tableView.rowHeight = 200;
-    
-    ///注册cell
-    //注册今今乐道cell
-    [self.tableView registerClass:[QLMEverydayBookTableViewCell class] forCellReuseIdentifier:@"QLMEverydayBookTableViewCell"];
-    //注册热门排行榜cell
-    [self.tableView registerClass:[QLMRankingDataTableViewCell class] forCellReuseIdentifier:@"QLMRankingDataTableViewCell"];
     
 }
 
 #pragma 2 - 加载首页数据
 - (void)loadData {
     
+    //不可穿透
+    self.navigationController.navigationBar.translucent = NO;
+    self.tabBarController.tabBar.translucent = NO;
+    
 	NSString *URLStr = @"app/home/getHomeData";
+    //更改一下超时请求时间
+    [[QLMNetworkTools sharedTools].requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    [QLMNetworkTools sharedTools].requestSerializer.timeoutInterval = 5.f;
+    [[QLMNetworkTools sharedTools].requestSerializer didChangeValueForKey:@"timeoutInterval"];
     [[QLMNetworkTools sharedTools] requestWithType:GET andUrlStr:URLStr andParams:nil andSuccess:^(id responseObject) {
+        
+        if (self.button != nil && self.label != nil) {
+            [self.button removeFromSuperview];
+            [self.label removeFromSuperview];
+        }
+        
+        //初始化tableView.
+        self.tableView = [[UITableView alloc] init];
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [self.view addSubview:self.tableView];
+        [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.top.bottom.offset(0);
+        }];
+        //设置代理
+        _tableView.dataSource = self;
+        _tableView.delegate = self;
+        
+        //预估行高
+        self.tableView.rowHeight = UITableViewAutomaticDimension;
+        self.tableView.estimatedRowHeight = 80;
+        
+        ///注册cell
+        //注册行业达人
+        [self.tableView registerClass:[QLMspecialColumnTableViewCell class] forCellReuseIdentifier:@"QLMspecialColumnTableViewCell"];
+        //注册今今乐道cell
+        [self.tableView registerClass:[QLMEverydayBookTableViewCell class] forCellReuseIdentifier:@"QLMEverydayBookTableViewCell"];
+        //注册热门排行榜cell
+        [self.tableView registerClass:[QLMRankingDataTableViewCell class] forCellReuseIdentifier:@"QLMRankingDataTableViewCell"];
         
         //拿到主数据
         NSDictionary *dic = responseObject;
@@ -129,7 +162,42 @@
         self.tableView.tableFooterView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 160);
         
         
+#pragma 各个不同的cell
         //行业达人
+        NSArray *specialColumnArray = [self.homeDataDic objectForKey:@"special_column"];
+        for (int i = 0; i < specialColumnArray.count; i++) {
+            NSDictionary *dic = [specialColumnArray objectAtIndex:i];
+            QLMSpecialColumn *specialColumn = [QLMSpecialColumn yy_modelWithJSON:dic];
+            [arrayM addObject:specialColumn];
+        }
+        NSArray *array = arrayM.copy;
+        //搞三个数组包装一下
+        NSMutableArray *arrayM3 = [NSMutableArray array];
+        NSMutableArray *arrayM4 = [NSMutableArray array];
+        
+        for (int i = 0; i < array.count; i++) {
+            if (i * 3 <= array.count) { //因为这里array已经是copy拷贝的,所以不用copy了
+                [arrayM2 addObject:array[i]];
+            } else if (i  <= array.count * 2 / 3) {
+                [arrayM3 addObject:array[i]];
+            } else {
+                [arrayM4 addObject:array[i]];
+            }
+        }
+        //移除一下
+        [arrayM removeAllObjects];
+        [arrayM addObject:arrayM2.copy];
+        [arrayM addObject:arrayM3.copy];
+        [arrayM addObject:arrayM4.copy];
+        self.specialColumnArray = arrayM.copy;
+        //模型给完一次.赋值一次给dataArrayM
+        [dataArrayM addObject:self.specialColumnArray.copy];
+        
+        //用完一次清理一次数据
+        [arrayM removeAllObjects];
+        [arrayM2 removeAllObjects];
+        [arrayM3 removeAllObjects];
+        [arrayM4 removeAllObjects];
         
         
         //今今乐道
@@ -167,12 +235,36 @@
         //刷新数据
         [self.tableView reloadData];
         
+        
+        
     } andFailture:^(NSError *error) {
         
+        //更改需要网络请求
+        self.needRefresh = YES;
+        //没有网络的按钮
+        
+        self.button = [[UIButton alloc] init];
+        [_button setImage:[UIImage imageNamed:@"empty_placeholder"] forState:UIControlStateNormal];
+        [self.view addSubview:_button];
+        [_button addTarget:self action:@selector(buttonAction) forControlEvents:UIControlEventTouchUpInside];
+        [_button mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self.view.mas_centerX);
+            make.top.offset(160);
+        }];
+        //添加一个label
+        self.label = [[UILabel alloc] init];
+        [self.view addSubview:_label];
+        _label.text = @"网络错误";
+        _label.font = [UIFont systemFontOfSize:16];
+        _label.textColor = [UIColor grayColor];
+        [_label mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(_button);
+            make.top.equalTo(_button.mas_bottom);
+        }];
+        
+        
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"没有网络" preferredStyle:UIAlertControllerStyleAlert];
-        
         [self presentViewController:alert animated:YES completion:^{
-        
             //完成取消
             [NSThread sleepForTimeInterval:.5f];
             [alert dismissViewControllerAnimated:YES completion:nil];
@@ -182,26 +274,83 @@
     
 }
 
+- (void)buttonAction {
+    
+    if (self.needRefresh == YES) {
+        [self loadData];
+    }
+    
+    //更改网络请求状态
+    self.needRefresh = NO;
+    
+}
+
 #pragma 3 - cell测试
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
-//    return self.dataArray.count;
-    return 1;
+    return self.dataArray.count;
+//    return 1;
     
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-//    return self.dataArray[section].count;
-    return 1;
+    return self.dataArray[section].count;
+//    return 1;
     
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
+    if (indexPath.section == 0) { //行业达人
+        
+        QLMspecialColumnTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"QLMspecialColumnTableViewCell" forIndexPath:indexPath];
+        
+        if (indexPath.row == 0) {
     
-    
-    if (indexPath.section == 0) {   //今今乐道
+            //行业达人
+            UILabel *label = [[UILabel alloc] init];
+            label.text = @"行业达人";
+            label.font = [UIFont systemFontOfSize:14];
+            [cell.contentView addSubview:label];
+            [label mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.offset(8);
+                make.top.offset(16);
+            }];
+            cell.label = [[UILabel alloc] init];
+            cell.label.backgroundColor = [UIColor grayColor];
+            cell.label.alpha = .2;
+            [cell.contentView addSubview:cell.label];
+            [cell.label mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.offset(8);
+                make.right.offset(-8);
+                make.height.offset(1);
+                make.top.equalTo(label.mas_bottom).offset(4);
+            }];
+            
+            //传递数据
+            cell.specialColumn = self.specialColumnArray[indexPath.row][arc4random_uniform((int)self.specialColumnArray[indexPath.row].count)];
+            [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+            return cell;
+            
+        }
+        
+        cell.label = [[UILabel alloc] init];
+        cell.label.backgroundColor = [UIColor grayColor];
+        cell.label.alpha = .2;
+        [cell.contentView addSubview:cell.label];
+        [cell.label mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.offset(0);
+            make.height.offset(1);
+            make.top.equalTo(cell.contentView.mas_top);
+        }];
+        
+        //传递数据
+        cell.specialColumn = self.specialColumnArray[indexPath.row][arc4random_uniform((int)self.specialColumnArray[indexPath.row].count)];
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        return cell;
+        
+    } else if (indexPath.section == 1) {   //今今乐道
     
         //    测试了,没毛病
         QLMEverydayBookTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"QLMEverydayBookTableViewCell" forIndexPath:indexPath];
@@ -210,7 +359,7 @@
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         return cell;
         
-    } else if (indexPath.section) {  //热门排行榜
+    } else if (indexPath.section == 2) {  //热门排行榜
     
         QLMRankingDataTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"QLMRankingDataTableViewCell" forIndexPath:indexPath];
         //传递数据
@@ -230,6 +379,15 @@
 
 #pragma 4 - 组间距
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    
+    if (section == 0) {
+        return 10;
+    }
+    return 0;
+    
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     
     return 10;
     
