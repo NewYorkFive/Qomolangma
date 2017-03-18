@@ -9,8 +9,9 @@
 #import "QLMMineLoginController.h"
 #import "UILabel+FCSLabel.h"
 #import <SVProgressHUD.h>
+#import <AVOSCloud/AVOSCloud.h>
 
-@interface QLMMineLoginController ()
+@interface QLMMineLoginController () <UITextFieldDelegate>
 
 @property (nonatomic, weak) UITextField *txtUserName;
 
@@ -19,6 +20,8 @@
 
 @end
 
+
+
 @implementation QLMMineLoginController
 
 - (void)viewDidLoad {
@@ -26,6 +29,18 @@
     
     [self setupUI];
 }
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.txtUserName becomeFirstResponder];
+    [AVAnalytics beginLogPageView:@"LoginView"];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [AVAnalytics endLogPageView:@"LoginView"];
+}
+
 
 - (void)setupUI
 {
@@ -42,6 +57,8 @@
     
     
     self.txtUserName = [self setTextFieldWithPlaceholder:@"请输入用户名"];
+    
+    self.txtUserName.tintColor = [UIColor blackColor];
     
     self.txtUserName.clearButtonMode = UITextFieldViewModeWhileEditing;
     
@@ -63,6 +80,8 @@
     self.txtPassword = [self setTextFieldWithPlaceholder:@"请输入密码"];
     
     self.txtPassword.secureTextEntry = YES;
+    
+    self.txtPassword.delegate = self;
     
     [self.view addSubview:self.txtPassword];
     
@@ -210,14 +229,27 @@
         });
         return;
     }
-    else if (self.txtPassword.text.length < 6)
-    {
-        [SVProgressHUD showErrorWithStatus:@"密码过于简单"];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [SVProgressHUD dismiss];
-        });
-        return;
-    }
+
+
+        [AVUser logInWithUsernameInBackground:self.txtUserName.text password:self.txtPassword.text block:^(AVUser *user, NSError *error) {
+            if (error) {
+                [SVProgressHUD showErrorWithStatus:@"账号或密码错误"];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [SVProgressHUD dismiss];
+                });
+                
+                self.txtUserName.text = @"";
+                self.txtPassword.text = @"";
+                
+            } else {
+                [[NSUserDefaults standardUserDefaults] setObject:self.txtUserName.text forKey:kUserName];
+                [[NSUserDefaults standardUserDefaults] setObject:self.txtPassword.text forKey:kPassWord];
+                [QLMMineInfo sharedMineInfo].isLogin = YES;
+                
+                [self.navigationController dismissViewControllerAnimated:NO completion:nil];
+            }
+        }];
+
 
 }
 
@@ -232,7 +264,7 @@
 {
     
     
-    if (range.location < 6)
+    if (range.location < 5)
     {
         textField.textColor = [UIColor redColor];
         textField.tintColor = [UIColor redColor];

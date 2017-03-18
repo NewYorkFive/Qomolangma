@@ -34,6 +34,7 @@
 #import "QLMNetworkTools.h"
 #import <SVProgressHUD.h>
 #import <SSKeychain.h>
+#import "QLMMineInfo.h"
 
 //自定义NSLog
 /**

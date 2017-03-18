@@ -19,6 +19,7 @@
 
 @end
 
+
 @implementation QLMMineRegisterController
 
 - (void)viewDidLoad {
@@ -55,8 +56,7 @@
     self.txtUserName = [self setTextFieldWithPlaceholder:@"请输入用户名"];
     
     self.txtUserName.clearButtonMode = UITextFieldViewModeWhileEditing;
-    
-    self.txtUserName.delegate = self;
+    self.txtUserName.tintColor = [UIColor blackColor];
     
     [self.view addSubview:self.txtUserName];
     
@@ -74,8 +74,6 @@
     
     
     self.txtPassword = [self setTextFieldWithPlaceholder:@"请输入密码"];
-    
-//    self.txtPassword.textColor = [UIColor redColor];
     
     self.txtPassword.delegate = self;
     self.txtPassword.secureTextEntry = YES;
@@ -297,37 +295,34 @@
     }
     
 
-    NSArray *userInfoArray = [SSKeychain accountsForService:kServiceName];
-
     
-    for (NSString *userName in userInfoArray)
-    {
-        NSLog(@"%@", userName);
-        
-        if ([self.txtUserName.text isEqualToString:userName])
-        {
-            [SVProgressHUD showErrorWithStatus:@"用户名已存在"];
+    AVUser *user = [AVUser user];
+    user.username = self.txtUserName.text;
+    user.password = self.txtPassword.text;
+    [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            [[NSUserDefaults standardUserDefaults] setObject:self.txtUserName.text forKey:kUserName];
+            [[NSUserDefaults standardUserDefaults] setObject:self.txtPassword.text forKey:kPassWord];
+            
+            [QLMMineInfo sharedMineInfo].isLogin = YES;
+            
+            [SVProgressHUD showSuccessWithStatus:@"注册成功"];
+            [self.navigationController dismissViewControllerAnimated:NO completion:nil];
+        } else {
+            
+            [SVProgressHUD showErrorWithStatus:@"用户名已注册"];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [SVProgressHUD dismiss];
             });
             
             self.txtUserName.text = @"";
-            
-            return;
+            self.txtPassword.text = @"";
+            self.txtPasswordVerify.text = @"";
         }
-    }
-   
-    NSError *error = nil;
-    
-    [SSKeychain setPassword:self.txtPassword.text  forService:kServiceName account:self.txtUserName.text error:&error];
+    }];
 
-//    if ([error code] == SSKeychainErrorBadArguments)
     
-    NSLog(@"%@", error);
-    
-    NSArray *userInfoArray1 = [SSKeychain accountsForService:kServiceName];
-    
-    NSLog(@"%@", userInfoArray1);
+
 }
 
 - (UIImageView *)setTitleView
@@ -361,9 +356,6 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    if (textField == self.txtPassword || textField == self.txtPasswordVerify)
-    {
-        
         if (self.txtUserName.text.length < 1)
         {
             [SVProgressHUD showErrorWithStatus:@"请输入用户名"];
@@ -388,41 +380,10 @@
             });
             return NO;
         }
-        
-    }
-
     return YES;
 }
 
-//- (void)textFieldDidEndEditing:(UITextField *)textField
-//{
-//    if (textField == self.txtUserName)
-//    {
-//        
-//        
-//        NSArray *userInfoArray = [SSKeychain allAccounts];
-//        
-//        NSLog(@"%@", userInfoArray);
-//        
-//        for (NSString *userName in userInfoArray)
-//        {
-//            NSLog(@"%@", userName);
-//            
-//            if ([self.txtUserName.text isEqualToString:userName])
-//            {
-//                [SVProgressHUD showErrorWithStatus:@"用户名已存在"];
-//                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//                    [SVProgressHUD dismiss];
-//                });
-//                
-//                self.txtUserName.text = @"";
-//                
-//                return;
-//            }
-//        }
-//    }
-//    
-//}
+
 
 
 
