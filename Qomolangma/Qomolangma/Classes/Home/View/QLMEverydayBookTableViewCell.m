@@ -81,11 +81,18 @@
     UILabel *label1 = [[UILabel alloc] init];
     [self.contentView addSubview:label1];
     label1.text = @"今今乐道";
-    label1.font = [UIFont systemFontOfSize:14];
+    label1.font = [UIFont systemFontOfSize:16];
     [label1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.offset(16);
     }];
     //小箭头
+    UIImageView *imageView = [[UIImageView alloc] init];
+    imageView.image = [UIImage imageNamed:@"common_icon_arrow"];
+    [self.contentView addSubview:imageView];
+    [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(label1.mas_centerY);
+        make.right.offset(-16);
+    }];
     
     //顶部"查看听书日历"
     UILabel *label2 = [[UILabel alloc] init];
@@ -95,7 +102,7 @@
     label2.textColor = [UIColor grayColor];
     [label2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(label1.mas_centerY);
-        make.right.offset(-8);
+        make.right.equalTo(imageView.mas_left);
     }];
     
     UILabel *line1 = [[UILabel alloc] init];
@@ -103,7 +110,7 @@
     line1.alpha = .2;
     line1.backgroundColor = [UIColor grayColor];
     [line1 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(label1.mas_bottom).offset(4);
+        make.top.equalTo(label1.mas_bottom).offset(16);
         make.left.offset(16);
         make.right.offset(-16);
         make.height.offset(1);
@@ -116,17 +123,18 @@
     [self.imageViewReader_header_url mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(line1.mas_bottom).offset(4);
         make.left.equalTo(line1.mas_left).offset(8);
-        make.height.width.offset(30);
+        make.height.width.offset(36);
 //        make.bottom.offset(-5);
 //        make.bottom.lessThanOrEqualTo(@-8);
 //        make.bottom.equalTo(self.contentView.mas_bottom).offset(-8);
     }];
 //
 //    [self.imageViewReader_header_url layoutIfNeeded];
-    self.imageViewReader_header_url.layer.cornerRadius = 15;
+    self.imageViewReader_header_url.layer.cornerRadius = 18;
     self.imageViewReader_header_url.layer.masksToBounds = YES;
-//
-//    [self.contentView layoutIfNeeded];
+    self.imageViewReader_header_url.layer.borderColor = (__bridge CGColorRef _Nullable)([UIColor whiteColor]);
+    self.imageViewReader_header_url.layer.borderWidth = 2;
+    
     
     //姓名
     [self.contentView addSubview:_labelReader_name];
@@ -184,12 +192,16 @@
 //    self.image_url.backgroundColor = [UIColor fcs_randomColor];
     
     [self.image_url mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.offset(140);
-        make.width.offset(100);
+        make.height.offset(120);
+        make.width.offset(90);
         make.top.equalTo(line2.mas_bottom).offset(4);
         make.left.equalTo(line2.mas_left);
 //        make.bottom.offset(-5);
     }];
+    self.image_url.layer.cornerRadius = 8;
+    self.image_url.layer.masksToBounds = YES;
+    self.image_url.layer.borderColor = (__bridge CGColorRef _Nullable)([UIColor whiteColor]);
+    self.image_url.layer.borderWidth = 2;
 
     //底部的线
     UILabel *line3 = [[UILabel alloc] init];
@@ -197,7 +209,7 @@
     line3.backgroundColor = [UIColor grayColor];
     line3.alpha = .2;
     [line3 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_image_url.mas_bottom).offset(8);
+        make.top.equalTo(_image_url.mas_bottom).offset(5);
         make.left.equalTo(line1.mas_left);
         make.right.equalTo(line1.mas_right);
         make.height.mas_equalTo(1);
@@ -251,7 +263,7 @@
     [self.labelPrice mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(_image_url.mas_right).offset(8);
         make.bottom.equalTo(_image_url.mas_bottom).offset(-4);
-        make.width.offset(60);
+        make.width.offset(40);
         make.height.offset(20);
     }];
     
@@ -259,7 +271,15 @@
     self.buyButton = [[UIButton alloc] init];
     [self.contentView addSubview:self.buyButton];
     [self.buyButton setTitle:@"购买" forState:UIControlStateNormal];
+    [self.buyButton setBackgroundImage:[UIImage imageNamed:@"home_btn_buy_72x32_"] forState:UIControlStateNormal];
+    [self.buyButton setBackgroundImage:[UIImage imageNamed:@"home_btn_buy_72x32_"] forState:UIControlStateHighlighted];
     [self.buyButton setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
+    
+    self.buyButton.layer.cornerRadius = 10;
+    self.buyButton.layer.masksToBounds = YES;
+//    self.buyButton.layer.borderColor = (__bridge CGColorRef _Nullable)([UIColor whiteColor]);
+//    self.buyButton.layer.borderWidth = 2;
+    
 //    [self.buyButton setTitle:@"购买" forState:UIControlEventTouchUpInside];
 //    [self.buyButton setTitleColor:[UIColor orangeColor] forState:UIControlEventTouchUpInside];
     
