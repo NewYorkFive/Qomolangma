@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "QLMFrameViewController.h"
 #import <AVOSCloud/AVOSCloud.h>
-
+#import <AVOSCloudCrashReporting/AVOSCloudCrashReporting.h>
 
 #define APP_ID @"XMU3tj5X1jMwyzE8FgAfE1nl-gzGzoHsz"
 #define APP_KEY @"k5FtL9i5r8iPdjU4jPcoA2K7"
@@ -22,11 +22,16 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-//    [AVOSCloudCrashReporting enable];
-//    [AVOSCloud setApplicationId:APP_ID clientKey:APP_KEY];
+    
+    [AVOSCloudCrashReporting enable];
+    [AVOSCloud setApplicationId:APP_ID clientKey:APP_KEY];
     
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     QLMFrameViewController *frameVc = [[QLMFrameViewController alloc]init];
+    
+    NSString *userName = [[NSUserDefaults standardUserDefaults] objectForKey:kUserName];
+    
+    [QLMMineInfo sharedMineInfo].isLogin = userName.length;
     
     frameVc.selectedIndex = 4;
     
@@ -34,6 +39,7 @@
     [self.window makeKeyAndVisible];
     self.window.backgroundColor = [UIColor groupTableViewBackgroundColor];
     return YES;
+    
 }
 
 
