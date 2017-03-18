@@ -76,6 +76,7 @@
         if (i == 0) {
             
             label.textColor = [UIColor blackColor];
+            
         }
         
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];

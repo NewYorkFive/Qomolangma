@@ -6,14 +6,16 @@
 //  Copyright © 2017年 Focus. All rights reserved.
 //
 
-#import "QLMPurchasedCollectionViewCell.h"
-#import "QLMPurchasedContentController.h"
 
-@implementation QLMPurchasedCollectionViewCell {
-    
-    QLMPurchasedContentController *_tableViewVC;
-    
-}
+#import "QLMPurchasedCollectionViewCell.h"
+#import "QLMPurchasedTwoViewController.h"
+
+
+/**
+ 在每个Cell上添加ViewController (vc里是ControllerView)
+ */
+@implementation QLMPurchasedCollectionViewCell
+
 
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
@@ -27,17 +29,16 @@
     [super awakeFromNib];
     [self setupUI];
     
-    
-    //_tableViewVC.tableView.backgroundColor = [UIColor colorWithRed:arc4random_uniform(256)/255.0 green:arc4random_uniform(256)/255.0 blue:arc4random_uniform(256)/255.0 alpha:1];
 }
 
 - (void)setupUI{
     
-    _tableViewVC = [[QLMPurchasedContentController alloc]init];
+    QLMPurchasedTwoViewController *vc = [[QLMPurchasedTwoViewController alloc]init];
     
-    _tableViewVC.tableView.frame = self.contentView.bounds;
     
-    [self.contentView addSubview:_tableViewVC.tableView];
+    
+    [self.contentView addSubview:vc.view];
+    
     
 }
 
