@@ -18,7 +18,7 @@
     // 图片文本
     NSTextAttachment *attachment = [[NSTextAttachment alloc] init];
     attachment.image = image;
-    attachment.bounds = CGRectMake(0, 0, imageWH, imageWH);
+//    attachment.bounds = CGRectMake(0, 0,                        , imageWH);
     NSAttributedString *imageText = [NSAttributedString attributedStringWithAttachment:attachment];
     
     // 换行文本
