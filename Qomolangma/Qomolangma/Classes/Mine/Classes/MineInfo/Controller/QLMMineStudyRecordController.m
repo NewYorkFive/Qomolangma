@@ -8,6 +8,7 @@
 
 #import "QLMMineStudyRecordController.h"
 #import "QLMMineStudyRecordHeaderView.h"
+
 @interface QLMMineStudyRecordController ()
 
 @end

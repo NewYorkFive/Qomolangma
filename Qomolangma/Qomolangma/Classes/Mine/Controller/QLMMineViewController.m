@@ -80,7 +80,8 @@ static NSString * const headerFooterReuseID = @"headerFooterReuseID";
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.navigationController.navigationBar.hidden = YES;
+
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
     
     
     
@@ -89,7 +90,8 @@ static NSString * const headerFooterReuseID = @"headerFooterReuseID";
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:YES];
-    self.navigationController.navigationBar.hidden = NO;
+
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 - (void)setupUI
