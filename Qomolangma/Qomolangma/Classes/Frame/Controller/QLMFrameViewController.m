@@ -37,6 +37,9 @@
     vc.tabBarItem.image = [[UIImage imageNamed:[NSString stringWithFormat:@"tabbar_index_%zd_30x30_",index]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     vc.tabBarItem.selectedImage = [[UIImage imageNamed:[NSString stringWithFormat:@"tabbar_index_select_%zd_30x30_",index]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:vc];
+    navController.navigationBar.tintColor = [UIColor fcs_colorWithHex:0x666666];
+//    navController.navigationBar.backgroundColor = [UIColor clearColor];
+//    navController.navigationBar.translucent = YES;
     return navController;
 }
 
