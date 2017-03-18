@@ -23,4 +23,7 @@
 + (instancetype)fcs_buttonWithImageName:(NSString *)imageName highlightedImageName:(NSString *) highlightedImageName;
 + (instancetype)fcs_buttonWithImageName:(NSString *)imageName selectedImageName:(NSString *) selectedImageName;
 + (instancetype)fcs_buttonWithImageName:(NSString *)imageName selectedImageName:(NSString *)selectedImageName highlightedImageName:(NSString *)highlightedImageName;
++ (instancetype)fcs_buttonWithImageName:(NSString *)imageName selectedImageName:(NSString *)selectedImageName highlightedImageName:(NSString *)highlightedImageName disableImageName:(NSString *)disableImageName;
+//+ (instancetype)fcs_buttonWithImageName:(NSString *)imageName selectedImageName:(NSString *)selectedImageName highlightedImageName:(NSString *)highlightedImageName disableImageName:(NSString *)disableImageName andTitle:(NSString *)title;
+
 @end

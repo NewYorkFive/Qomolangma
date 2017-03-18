@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface QLMPurchasedViewController : UIViewController
+#import "QLMBaseViewController.h"
+@interface QLMPurchasedViewController : QLMBaseViewController
 
 @end

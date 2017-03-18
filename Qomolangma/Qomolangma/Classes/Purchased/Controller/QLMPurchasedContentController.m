@@ -7,7 +7,6 @@
 //
 
 #import "QLMPurchasedContentController.h"
-#import "QLMPurchasedTableViewCell.h"
 #import "LDRefresh.h"
 
 @interface QLMPurchasedContentController ()
@@ -84,12 +83,12 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    QLMPurchasedTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellid" forIndexPath:indexPath];
-    
+//    QLMPurchasedTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellid" forIndexPath:indexPath];
+//    
    
 
     
-    return cell;
+    return 0;
 }
 
 
