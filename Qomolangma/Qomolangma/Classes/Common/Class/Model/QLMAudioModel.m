@@ -11,7 +11,7 @@
 @implementation QLMAudioModel
 + (instancetype)randomAudio{
     QLMAudioModel *model = [[QLMAudioModel alloc]init];
-    model.name = [NSString stringWithFormat:@"randomAudio%zd",arc4random_uniform(2000)];
+    model.title = [NSString stringWithFormat:@"randomAudio%zd",arc4random_uniform(2000)];
     return model;
 }
 @end

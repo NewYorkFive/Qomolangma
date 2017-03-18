@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface QLMAudioModel : NSObject
-@property (nonatomic, copy) NSString *name;
-
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *modelDescription;
+@property (nonatomic, copy) NSString *timeLength;
 + (instancetype)randomAudio;
 @end
