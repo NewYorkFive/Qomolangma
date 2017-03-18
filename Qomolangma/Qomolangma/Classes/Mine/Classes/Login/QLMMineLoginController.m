@@ -8,6 +8,7 @@
 
 #import "QLMMineLoginController.h"
 #import "UILabel+FCSLabel.h"
+#import <SVProgressHUD.h>
 
 @interface QLMMineLoginController ()
 
@@ -193,22 +194,72 @@
 
 - (void) btnLoginAction: (UIButton *)sender
 {
-    if ([self.txtUserName.text isEqualToString:@""])
+    if ([self.txtUserName.text isEqualToString:@""] || self.txtUserName.text.length == 0 || self.txtUserName.text == nil)
     {
-        
+        [SVProgressHUD showErrorWithStatus:@"请输入用户名"];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+        return;
+    }
+    else if ([self.txtPassword.text isEqualToString:@""] || self.txtPassword.text.length == 0 || self.txtPassword.text == nil)
+    {
+        [SVProgressHUD showErrorWithStatus:@"请输入密码"];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+        return;
+    }
+    else if (self.txtPassword.text.length < 6)
+    {
+        [SVProgressHUD showErrorWithStatus:@"密码过于简单"];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+        return;
+    }
+
+}
+
+- (UIImageView *)setTitleView
+{
+    UIImageView *titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"register_title_image_44x22_"]];
+    
+    return titleView;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    
+    
+    if (range.location < 6)
+    {
+        textField.textColor = [UIColor redColor];
+        textField.tintColor = [UIColor redColor];
         
     }
+    else
+    {
+        textField.textColor = [UIColor blackColor];
+        textField.tintColor = [UIColor blackColor];
+    }
     
-
+    return YES;
 }
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    if ([self.txtUserName.text isEqualToString:@""])
+    {
+        [SVProgressHUD showErrorWithStatus:@"请输入用户名"];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+        return NO;
+    }
+    
+    return YES;
 }
-*/
+
 
 @end

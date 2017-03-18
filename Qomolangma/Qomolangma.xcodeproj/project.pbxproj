@@ -17,6 +17,7 @@
 		316DC10C1E7C16C50076BD9C /* QLMMineStudyRecordHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 316DC10B1E7C16C50076BD9C /* QLMMineStudyRecordHeaderView.m */; };
 		316DC10F1E7C1ABF0076BD9C /* QLMNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 316DC10E1E7C1ABF0076BD9C /* QLMNavigationController.m */; };
 		316DC1121E7C21970076BD9C /* QLMPurchasedContentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 316DC1111E7C21970076BD9C /* QLMPurchasedContentController.m */; };
+		316DC1141E7CE2360076BD9C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 316DC1131E7CE2360076BD9C /* Security.framework */; };
 		31CCEA731E7979440077AE71 /* MineInformatiom.plist in Resources */ = {isa = PBXBuildFile; fileRef = 31CCEA721E7979440077AE71 /* MineInformatiom.plist */; };
 		31CCEA761E7A37BE0077AE71 /* QLMMineInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 31CCEA751E7A37BE0077AE71 /* QLMMineInfoModel.m */; };
 		435D27B51E7B96EB008A41FA /* QLMRankingDataTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 435D27B41E7B96EB008A41FA /* QLMRankingDataTableViewCell.m */; };
@@ -138,6 +139,7 @@
 		316DC10E1E7C1ABF0076BD9C /* QLMNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLMNavigationController.m; sourceTree = "<group>"; };
 		316DC1101E7C21970076BD9C /* QLMPurchasedContentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLMPurchasedContentController.h; sourceTree = "<group>"; };
 		316DC1111E7C21970076BD9C /* QLMPurchasedContentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLMPurchasedContentController.m; sourceTree = "<group>"; };
+		316DC1131E7CE2360076BD9C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		31CCEA721E7979440077AE71 /* MineInformatiom.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MineInformatiom.plist; sourceTree = "<group>"; };
 		31CCEA741E7A37BE0077AE71 /* QLMMineInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLMMineInfoModel.h; sourceTree = "<group>"; };
 		31CCEA751E7A37BE0077AE71 /* QLMMineInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLMMineInfoModel.m; sourceTree = "<group>"; };
@@ -316,6 +318,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				316DC1141E7CE2360076BD9C /* Security.framework in Frameworks */,
 				F1D6AD7847B84045BD787AAF /* libPods-Qomolangma.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -326,6 +329,7 @@
 		17F73B214B87C588CBF62567 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				316DC1131E7CE2360076BD9C /* Security.framework */,
 				50593058F9A508996A32D3E4 /* libPods-Qomolangma.a */,
 			);
 			name = Frameworks;
@@ -987,6 +991,7 @@
 				TargetAttributes = {
 					948A5CDF1E793258006A595C = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = LLJE6ZXZA9;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -1289,7 +1294,8 @@
 			baseConfigurationReference = 3F9EEF78AF999A9FC3CBA96E /* Pods-Qomolangma.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = LLJE6ZXZA9;
 				GCC_PREFIX_HEADER = Qomolangma/PrefixHeader.pch;
 				INFOPLIST_FILE = Qomolangma/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1304,7 +1310,8 @@
 			baseConfigurationReference = 742B4AF91CA908E0FB52156F /* Pods-Qomolangma.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = LLJE6ZXZA9;
 				GCC_PREFIX_HEADER = Qomolangma/PrefixHeader.pch;
 				INFOPLIST_FILE = Qomolangma/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

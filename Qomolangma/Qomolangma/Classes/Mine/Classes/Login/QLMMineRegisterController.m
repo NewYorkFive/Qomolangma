@@ -7,8 +7,9 @@
 //
 
 #import "QLMMineRegisterController.h"
+#import <AVOSCloud/AVOSCloud.h>
 
-@interface QLMMineRegisterController ()
+@interface QLMMineRegisterController () <UITextFieldDelegate>
 
 @property (nonatomic, weak) UITextField *txtUserName;
 
@@ -26,6 +27,20 @@
     [self setupUI];
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [AVAnalytics beginLogPageView:@"SignUpView"];
+    [self.txtUserName becomeFirstResponder];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [AVAnalytics endLogPageView:@"SignUpView"];
+}
+
+
 - (void)setupUI
 {
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
@@ -40,6 +55,8 @@
     self.txtUserName = [self setTextFieldWithPlaceholder:@"请输入用户名"];
     
     self.txtUserName.clearButtonMode = UITextFieldViewModeWhileEditing;
+    
+    self.txtUserName.delegate = self;
     
     [self.view addSubview:self.txtUserName];
     
@@ -58,6 +75,9 @@
     
     self.txtPassword = [self setTextFieldWithPlaceholder:@"请输入密码"];
     
+//    self.txtPassword.textColor = [UIColor redColor];
+    
+    self.txtPassword.delegate = self;
     self.txtPassword.secureTextEntry = YES;
     
     [self.view addSubview:self.txtPassword];
@@ -86,11 +106,13 @@
     self.txtPasswordVerify = [self setTextFieldWithPlaceholder:@"请再次输入密码"];
     
     self.txtPasswordVerify.secureTextEntry = YES;
+    self.txtPasswordVerify.delegate = self;
     
     [self.view addSubview:self.txtPasswordVerify];
     
     
     UIButton *btnShowPasswordVerify = [[UIButton alloc] init];
+    btnShowPasswordVerify.hidden = YES;
     
     [btnShowPasswordVerify setImage:[UIImage imageNamed:@"login_password_show_22x16_"] forState:UIControlStateNormal];
     [btnShowPasswordVerify setImage:[UIImage imageNamed:@"login_password_hidden_22x16_"] forState:UIControlStateSelected];
@@ -230,20 +252,82 @@
     if (sender.selected)
     {
         self.txtPassword.secureTextEntry = NO;
+        self.txtPasswordVerify.secureTextEntry = NO;
     }
     else
     {
         self.txtPassword.secureTextEntry = YES;
+        self.txtPasswordVerify.secureTextEntry = YES;
     }
 }
 
 - (void) btnRegisterAction: (UIButton *)sender
 {
-    if ([self.txtUserName.text isEqualToString:@""])
+    if ([self.txtUserName.text isEqualToString:@""] || self.txtUserName.text.length == 0 || self.txtUserName.text == nil)
     {
-        
-        
+        [SVProgressHUD showErrorWithStatus:@"请输入用户名"];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+        return;
     }
+    else if ([self.txtPassword.text isEqualToString:@""] || self.txtPassword.text.length == 0 || self.txtPassword.text == nil)
+    {
+        [SVProgressHUD showErrorWithStatus:@"请输入密码"];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+        return;
+    }
+    else if (self.txtPassword.text.length < 6)
+    {
+        [SVProgressHUD showErrorWithStatus:@"密码过于简单"];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+        return;
+    }
+    else if (![self.txtPassword.text isEqualToString:self.txtPasswordVerify.text])
+    {
+        [SVProgressHUD showErrorWithStatus:@"两次密码输入不一致"];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+        return;
+    }
+    
+
+    NSArray *userInfoArray = [SSKeychain accountsForService:kServiceName];
+
+    
+    for (NSString *userName in userInfoArray)
+    {
+        NSLog(@"%@", userName);
+        
+        if ([self.txtUserName.text isEqualToString:userName])
+        {
+            [SVProgressHUD showErrorWithStatus:@"用户名已存在"];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [SVProgressHUD dismiss];
+            });
+            
+            self.txtUserName.text = @"";
+            
+            return;
+        }
+    }
+   
+    NSError *error = nil;
+    
+    [SSKeychain setPassword:self.txtPassword.text  forService:kServiceName account:self.txtUserName.text error:&error];
+
+//    if ([error code] == SSKeychainErrorBadArguments)
+    
+    NSLog(@"%@", error);
+    
+    NSArray *userInfoArray1 = [SSKeychain accountsForService:kServiceName];
+    
+    NSLog(@"%@", userInfoArray1);
 }
 
 - (UIImageView *)setTitleView
@@ -253,16 +337,93 @@
     return titleView;
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
 
+    if (textField == self.txtPassword || textField == self.txtPasswordVerify)
+    {
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+        if (range.location < 5)
+        {
+            textField.textColor = [UIColor redColor];
+            textField.tintColor = [UIColor redColor];
+            
+        }
+        else
+        {
+            textField.textColor = [UIColor blackColor];
+            textField.tintColor = [UIColor blackColor];
+        }
+        
+    }
+    return YES;
 }
-*/
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    if (textField == self.txtPassword || textField == self.txtPasswordVerify)
+    {
+        
+        if (self.txtUserName.text.length < 1)
+        {
+            [SVProgressHUD showErrorWithStatus:@"请输入用户名"];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [SVProgressHUD dismiss];
+            });
+            return NO;
+        }
+        else if (textField == self.txtPasswordVerify && self.txtPassword.text.length == 0)
+        {
+            [SVProgressHUD showErrorWithStatus:@"请输入密码"];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [SVProgressHUD dismiss];
+            });
+            return NO;
+        }
+        else if (textField == self.txtPasswordVerify && self.txtPassword.text.length < 6)
+        {
+            [SVProgressHUD showErrorWithStatus:@"密码过于简单"];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [SVProgressHUD dismiss];
+            });
+            return NO;
+        }
+        
+    }
+
+    return YES;
+}
+
+//- (void)textFieldDidEndEditing:(UITextField *)textField
+//{
+//    if (textField == self.txtUserName)
+//    {
+//        
+//        
+//        NSArray *userInfoArray = [SSKeychain allAccounts];
+//        
+//        NSLog(@"%@", userInfoArray);
+//        
+//        for (NSString *userName in userInfoArray)
+//        {
+//            NSLog(@"%@", userName);
+//            
+//            if ([self.txtUserName.text isEqualToString:userName])
+//            {
+//                [SVProgressHUD showErrorWithStatus:@"用户名已存在"];
+//                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                    [SVProgressHUD dismiss];
+//                });
+//                
+//                self.txtUserName.text = @"";
+//                
+//                return;
+//            }
+//        }
+//    }
+//    
+//}
+
+
 
 @end
