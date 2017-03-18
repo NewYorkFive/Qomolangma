@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface QLMLearnViewController : UICollectionViewController
+#import "QLMBaseViewController.h"
+@interface QLMLearnViewController : QLMBaseViewController<UICollectionViewDelegate,UICollectionViewDataSource>
 
 @property (nonatomic, assign) NSInteger currentPage;
 @end

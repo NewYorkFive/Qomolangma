@@ -14,6 +14,7 @@
     label.text = text;
     label.textColor = color;
     label.font = [UIFont systemFontOfSize:fontSize];
+    [label sizeToFit];
     return label;
 }
 @end

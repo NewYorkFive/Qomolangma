@@ -8,6 +8,7 @@
 
 #import "QLMListenViewController.h"
 #import "QLMPlayListViewController.h"
+#import "QLMCircleButton.h"
 #define baseTimeBtnTag 1314
 
 @interface QLMListenViewController ()
@@ -37,7 +38,7 @@
     
     self.listenView.hidden = hiddenFlag;
     if (!hiddenFlag) {
-        self.currentAudioLabel.text =[NSString stringWithFormat:@"上次播放:%@",[QLMPlayListViewController sharedPlayListViewController].playListModelArray[0].name];
+        self.currentAudioLabel.text =[NSString stringWithFormat:@"上次播放:%@",[QLMPlayListViewController sharedPlayListViewController].playListModelArray[0].title];
     }
 }
 
@@ -125,7 +126,7 @@
     NSArray<NSNumber *> *times = @[@15,@60,@120];
     NSMutableArray<UIButton *> *timesBtnArray = [NSMutableArray array];
     for (int i = 0; i < times.count; i++) {
-        UIButton *btn = [UIButton fcs_buttonWithImageName:[NSString stringWithFormat:@"dailyAudio%zd_120x120_",[times[i] intValue]]];
+        UIButton *btn = [QLMCircleButton fcs_buttonWithImageName:[NSString stringWithFormat:@"dailyAudio%zd_120x120_",[times[i] intValue]]];
         [btn addTarget:self action:@selector(timeBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         btn.tag = baseTimeBtnTag + [times[i] intValue];
 //        btn.layer.cornerRadius = timeBtnWidth * 0.5;
@@ -139,7 +140,7 @@
     }];
     
     CGFloat halfAnHourBtnHeight = kScreenWidth * 0.3;
-    UIButton *halfAnHourBtn = [UIButton fcs_buttonWithImageName:@"dailyAudio30_170x170_"];
+    UIButton *halfAnHourBtn = [QLMCircleButton fcs_buttonWithImageName:@"dailyAudio30_170x170_"];
     [self.view addSubview:halfAnHourBtn];
     halfAnHourBtn.tag = baseTimeBtnTag + 30;
     [halfAnHourBtn addTarget:self action:@selector(timeBtnClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -152,9 +153,6 @@
 }
 
 
-
-
-
 /**
  点击时间按钮触发生播放列表
 
@@ -163,7 +161,7 @@
 - (void)timeBtnClick:(UIButton *)sender{
     long time = sender.tag - baseTimeBtnTag;
     NSLog(@"%zd",time);
-    
+    [self.navigationController pushViewController:[QLMPlayListViewController sharedPlayListViewController] animated:YES];
 }
 
 - (void)tapAction:(UITapGestureRecognizer *)sender{
@@ -183,8 +181,6 @@
     if (!_listenView) {
         _listenView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreenHeight - kTabBarHeight * 2, kScreenWidth, kTabBarHeight)];
         _listenView.backgroundColor = [UIColor colorWithWhite:0.98 alpha:1];
-//        _listenView.hidden = YES;
-//        _listenView.backgroundColor = [UIColor colorWithRed: 1 / 255.0 green: 150 / 255.0 blue: 1  alpha: 1];
     }
     return _listenView;
 }
