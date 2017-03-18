@@ -13,6 +13,7 @@
 #import "QLMMineTableViewHeaderFooterView.h"
 #import "QLMMineHeaderView.h"
 #import "QLMMineLoginSelectController.h"
+#import "QLMBaseViewController.h"
 
 #define BACK_GROUND_IMAGE_VIEW_HEIGHT 245
 
@@ -32,6 +33,8 @@
  */
 @property (nonatomic, strong) UIImageView *imgBackground;
 
+@property (nonatomic, strong) NSArray<NSArray *> *controllerNamesArray;
+
 @end
 
 static NSString * const reuseID = @"reuseID";
@@ -49,7 +52,6 @@ static NSString * const headerFooterReuseID = @"headerFooterReuseID";
     [self loadMinInfoData];
     
     [self setupUI];
-    
     
 }
 
@@ -70,14 +72,26 @@ static NSString * const headerFooterReuseID = @"headerFooterReuseID";
         
         [dataArray addObject:modelsArray.copy];
     }
-
+    
     self.dataArray = dataArray.copy;
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.hidden = YES;
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:YES];
+    self.navigationController.navigationBar.hidden = NO;
 }
 
 - (void)setupUI
 {
-    self.navigationController.navigationBar.hidden = YES;
-
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(backAction:)];
+    [self.navigationController.navigationBar setTintColor:[UIColor lightGrayColor]];
+    
     self.imgBackground = [[UIImageView alloc] init];
     
     self.imgBackground.image = [UIImage imageNamed:@"userinfo_top_bg"];
@@ -114,6 +128,23 @@ static NSString * const headerFooterReuseID = @"headerFooterReuseID";
     [self.tableView registerClass:[QLMMineTopCell class] forCellReuseIdentifier:topReuseID];
     
     [self.tableView registerClass:[QLMMineTableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:headerFooterReuseID];
+    
+    self.controllerNamesArray = @[
+                                  @[@"QLMMineStudyRecordController"],
+                                  @[@"QLMMineMedalController"],
+                                  @[@"QLMMineStudyGroupController"],
+                                  @[@"QLMMineInfoCenterController"],
+                                  @[@"QLMMineNoteController",
+                                    @"QLMMineMessageController",
+                                    @"QLMMineDownloadController",
+                                    @"QLMMinePraisedController"],
+                                  @[@"QLMMineBalanceController",
+                                    @"QLMMineConvertNumberController",
+                                    @"QLMMineShoppingNoteController",
+                                    @"QLMMineShoppingCarController"],
+                                  @[@"QLMMineUserInfoController",
+                                    @"QLMMineSettingController"]
+                                  ];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -222,6 +253,53 @@ static NSString * const headerFooterReuseID = @"headerFooterReuseID";
             make.height.offset(BACK_GROUND_IMAGE_VIEW_HEIGHT - (offsetY - 80) * .5);
         }];
     }
+}
+
+#pragma mark - didSelectRow
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    NSString *className = (NSString *)self.controllerNamesArray[indexPath.section][indexPath.row];
+    
+    NSString *title = [NSString string];
+    
+    if (indexPath.section > 0)
+    {
+        title = self.dataArray[indexPath.section - 1][indexPath.row].name;
+    }
+    else
+    {
+        title = @"学习记录";
+    }
+    
+    [self.navigationController pushViewController:[self creatViewControllerWithClassName:className andWithTitle:title] animated:YES];
+    
+    
+}
+
+
+- (QLMBaseViewController *)creatViewControllerWithClassName: (NSString *)className andWithTitle: (NSString *)title;
+{
+    Class cls = NSClassFromString(className);
+    
+    QLMBaseViewController *viewController = [[cls alloc] init];
+    
+    NSAssert([viewController isKindOfClass:[QLMBaseViewController class]], @"%@名字错了", className);
+    
+    viewController.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    
+    viewController.title = title;
+    
+    return viewController;
+}
+
+- (void)backAction: (UIBarButtonItem *)sender
+{
+    
+    
+    
 }
 
 @end

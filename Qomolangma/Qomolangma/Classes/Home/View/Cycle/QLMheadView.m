@@ -27,6 +27,18 @@ static NSString *cycleCellid = @"cycleCellid";
 
 @implementation QLMHeadView
 
+- (void)setCarouselArray:(NSArray<QLMCarousel *> *)carouselArray {
+    
+    _carouselArray = carouselArray;
+    NSMutableArray *arrayM = [[NSMutableArray alloc] init];
+    for (int i = 0; i < carouselArray.count; i++) {
+        NSString *str = [carouselArray objectAtIndex:i].image_url;
+        [arrayM addObject:str];
+    }
+    self.imageURLs = arrayM.copy;
+    
+}
+
 - (instancetype)initWithFrame:(CGRect)frame {
     if(self = [super initWithFrame:frame]){
         [self setupUI];
@@ -51,7 +63,7 @@ static NSString *cycleCellid = @"cycleCellid";
     collectionView.dataSource = self;
     
     // 注册单元格
-    [collectionView registerClass:[QLMCarouselCell class] forCellWithReuseIdentifier:cycleCellid];
+    [collectionView registerClass:[QLMHeadCell class] forCellWithReuseIdentifier:cycleCellid];
     
     // 设置分页
     collectionView.pagingEnabled = YES;
@@ -69,8 +81,9 @@ static NSString *cycleCellid = @"cycleCellid";
     // 创建pageControl
     UIPageControl *pageControl = [[UIPageControl alloc] init];
     pageControl.currentPage = 2;
-    pageControl.pageIndicatorTintColor = [UIColor blueColor];
-    pageControl.currentPageIndicatorTintColor = [UIColor yellowColor];
+    pageControl.pageIndicatorTintColor = [UIColor grayColor];
+    pageControl.alpha = .8;
+    pageControl.currentPageIndicatorTintColor = [UIColor whiteColor];
     pageControl.userInteractionEnabled = NO;
     [self addSubview:pageControl];
     
@@ -144,7 +157,7 @@ static NSString *cycleCellid = @"cycleCellid";
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    QLMCarouselCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cycleCellid forIndexPath:indexPath];
+    QLMHeadCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cycleCellid forIndexPath:indexPath];
     
     cell.imageURL = self.imageURLs[indexPath.item % self.imageURLs.count];
     
@@ -158,7 +171,10 @@ static NSString *cycleCellid = @"cycleCellid";
     // 计算页数
     NSInteger page = (offsetX + self.bounds.size.width * .5) / self.bounds.size.width ;
     
-    self.pageControl.currentPage = page % self.imageURLs.count;
+    if (self.imageURLs.count != 0) {
+        
+        self.pageControl.currentPage = page % self.imageURLs.count;
+    }
     
 }
 

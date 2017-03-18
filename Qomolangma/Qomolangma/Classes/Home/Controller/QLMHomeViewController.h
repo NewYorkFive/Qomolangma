@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QLMBaseViewController.h"
 
-@interface QLMHomeViewController : UITableViewController
+@interface QLMHomeViewController : QLMBaseViewController
 
 @end

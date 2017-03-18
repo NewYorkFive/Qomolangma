@@ -1,5 +1,5 @@
 //
-//  QLMCarouselView.h
+//  QLMCarouselCell.h
 //  Qomolangma
 //
 //  Created by 张晨晖 on 2017/3/16.
@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface QLMHeadView : UIView
+@interface QLMHeadCell : UICollectionViewCell
 
-@property (nonatomic, strong) NSArray *imageURLs;
+@property (nonatomic, strong) NSURL *imageURL;
 
 @end
