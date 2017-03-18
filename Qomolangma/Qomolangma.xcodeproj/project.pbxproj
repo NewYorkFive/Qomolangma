@@ -111,6 +111,7 @@
 		B28115FD1E7D2E0C00E0027D /* QLMPurchasedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B28115F91E7D2E0C00E0027D /* QLMPurchasedCell.m */; };
 		B28115FE1E7D2E0C00E0027D /* QLMPurchasedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B28115FA1E7D2E0C00E0027D /* QLMPurchasedCell.xib */; };
 		B28115FF1E7D2E0C00E0027D /* QLMPurchasedTwoFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = B28115FC1E7D2E0C00E0027D /* QLMPurchasedTwoFlowLayout.m */; };
+		B28116021E7D591B00E0027D /* QLMJumpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B28116011E7D591B00E0027D /* QLMJumpViewController.m */; };
 		C4DC727F1E7BA9D900FCE208 /* QLMLearnDetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DC727E1E7BA9D900FCE208 /* QLMLearnDetailsTableViewController.m */; };
 		C4F06E191E7AC59C00C03CAD /* QLMLearnCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C4F06E101E7AC59C00C03CAD /* QLMLearnCollectionViewCell.m */; };
 		C4F06E1A1E7AC59C00C03CAD /* QLMLearnTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C4F06E121E7AC59C00C03CAD /* QLMLearnTableViewCell.m */; };
@@ -306,6 +307,8 @@
 		B28115FA1E7D2E0C00E0027D /* QLMPurchasedCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QLMPurchasedCell.xib; sourceTree = "<group>"; };
 		B28115FB1E7D2E0C00E0027D /* QLMPurchasedTwoFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLMPurchasedTwoFlowLayout.h; sourceTree = "<group>"; };
 		B28115FC1E7D2E0C00E0027D /* QLMPurchasedTwoFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLMPurchasedTwoFlowLayout.m; sourceTree = "<group>"; };
+		B28116001E7D591B00E0027D /* QLMJumpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLMJumpViewController.h; sourceTree = "<group>"; };
+		B28116011E7D591B00E0027D /* QLMJumpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLMJumpViewController.m; sourceTree = "<group>"; };
 		C4DC727D1E7BA9D900FCE208 /* QLMLearnDetailsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLMLearnDetailsTableViewController.h; sourceTree = "<group>"; };
 		C4DC727E1E7BA9D900FCE208 /* QLMLearnDetailsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLMLearnDetailsTableViewController.m; sourceTree = "<group>"; };
 		C4F06E0F1E7AC59C00C03CAD /* QLMLearnCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLMLearnCollectionViewCell.h; sourceTree = "<group>"; };
@@ -823,9 +826,11 @@
 				316DC1111E7C21970076BD9C /* QLMPurchasedContentController.m */,
 				B28115F51E7D2DB600E0027D /* QLMPurchasedTwoViewController.h */,
 				B28115F61E7D2DB600E0027D /* QLMPurchasedTwoViewController.m */,
-				94EBD0D81E7937D000F71272 /* ignore */,
 				94EBD1251E794E5D00F71272 /* QLMPurchasedViewController.h */,
 				94EBD1261E794E5D00F71272 /* QLMPurchasedViewController.m */,
+				B28116001E7D591B00E0027D /* QLMJumpViewController.h */,
+				B28116011E7D591B00E0027D /* QLMJumpViewController.m */,
+				94EBD0D81E7937D000F71272 /* ignore */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -833,9 +838,9 @@
 		94EBD0D91E7937D000F71272 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				94EBD0DA1E7937D000F71272 /* ignore */,
 				B27D9B401E7961CA00AD3739 /* QLMPurchasedModel.h */,
 				B27D9B411E7961CA00AD3739 /* QLMPurchasedModel.m */,
+				94EBD0DA1E7937D000F71272 /* ignore */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -857,13 +862,13 @@
 				B28115FA1E7D2E0C00E0027D /* QLMPurchasedCell.xib */,
 				B28115FB1E7D2E0C00E0027D /* QLMPurchasedTwoFlowLayout.h */,
 				B28115FC1E7D2E0C00E0027D /* QLMPurchasedTwoFlowLayout.m */,
-				94EBD0DE1E7937D000F71272 /* ignore */,
 				B27D9B431E7961FA00AD3739 /* QLMPurchasedLable.h */,
 				B27D9B441E7961FA00AD3739 /* QLMPurchasedLable.m */,
 				B27D9B461E79677500AD3739 /* QLMPurchasedFlowLayout.h */,
 				B27D9B471E79677500AD3739 /* QLMPurchasedFlowLayout.m */,
 				B279D7901E7B7F2E00504CFB /* QLMPurchasedCollectionViewCell.h */,
 				B279D7911E7B7F2F00504CFB /* QLMPurchasedCollectionViewCell.m */,
+				94EBD0DE1E7937D000F71272 /* ignore */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1126,6 +1131,7 @@
 				942CC1591E79AEC6004D3814 /* UIColor+FCSColor.m in Sources */,
 				C4F06E191E7AC59C00C03CAD /* QLMLearnCollectionViewCell.m in Sources */,
 				435D282B1E7C2678008A41FA /* QLMMineConvertNumberController.m in Sources */,
+				B28116021E7D591B00E0027D /* QLMJumpViewController.m in Sources */,
 				316DC10C1E7C16C50076BD9C /* QLMMineStudyRecordHeaderView.m in Sources */,
 				942CC15B1E79AEC6004D3814 /* UIViewController+FCSViewController.m in Sources */,
 				31CCEA761E7A37BE0077AE71 /* QLMMineInfoModel.m in Sources */,

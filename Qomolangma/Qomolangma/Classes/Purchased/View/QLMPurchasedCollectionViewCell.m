@@ -10,7 +10,12 @@
 #import "QLMPurchasedCollectionViewCell.h"
 #import "QLMPurchasedTwoViewController.h"
 
+@interface QLMPurchasedCollectionViewCell ()
 
+//解决点击item 图片消失问题 增加强引用
+@property (nonatomic,strong)QLMPurchasedTwoViewController *viewController;
+
+@end
 /**
  在每个Cell上添加ViewController (vc里是ControllerView)
  */
@@ -33,11 +38,10 @@
 
 - (void)setupUI{
     
-    QLMPurchasedTwoViewController *vc = [[QLMPurchasedTwoViewController alloc]init];
+    //创建vc
+    self.viewController = [[QLMPurchasedTwoViewController alloc]init];
     
-    
-    
-    [self.contentView addSubview:vc.view];
+    [self.contentView addSubview:self.viewController.view];
     
     
 }
