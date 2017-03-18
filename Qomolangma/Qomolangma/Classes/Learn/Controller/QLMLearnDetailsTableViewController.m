@@ -103,9 +103,8 @@
 - (void)learnBottomButtonView:(QLMLearnBottomButtonView *)learnBottomButtonView withTestReadTableViewController:(QLMTestReadTableViewController *)testReadTableViewController {
     UIBarButtonItem *backItem=[[UIBarButtonItem alloc]init];
     backItem.title=@"读古希腊神话学营销";
-//    backItem.tintColor=[UIColor colorWithRed:129 green:129 blue:129 alpha:1.0];
+
     self.navigationItem.backBarButtonItem = backItem;
-//    testReadTableViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:testReadTableViewController animated:YES];
 }
 - (void)learnBottomButtonView:(QLMLearnBottomButtonView *)learnBottomButtonView withPresntViewController:(QLMLearnModelViewController *)presntViewController {
@@ -117,8 +116,6 @@
     if (!_tableView)
     {
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-        
-//        _tableView.separatorColor = [UIColor colorWithWhite:.9 alpha:1];
         
         _tableView.backgroundColor = [UIColor clearColor];
         
@@ -222,8 +219,6 @@
             make.left.equalTo(cell.contentView).offset(10);
             make.right.equalTo(cell.contentView).offset(-10);
             make.bottom.equalTo(cell.contentView).offset(-10);
-//            make.bottom.lessThanOrEqualTo(@(-4));
-//            make.height.greaterThanOrEqualTo(@80);
         }];
     } else if (indexPath.row == 3) {
         //添加控件
