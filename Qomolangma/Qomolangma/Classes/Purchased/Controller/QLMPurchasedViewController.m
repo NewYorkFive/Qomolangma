@@ -149,7 +149,7 @@
     
         UIButton *button = [[UIButton alloc]init];
         
-        [button setImage:[UIImage imageNamed:@"empty_placeholder"] forState: UIControlStateNormal];
+        [button setImage:[UIImage imageNamed:@"purchased_empty_placeholder"] forState: UIControlStateNormal];
         
         [self.view addSubview:button];
         
