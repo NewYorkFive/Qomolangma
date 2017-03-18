@@ -41,27 +41,27 @@
     [self.contentView addSubview:self.modelTimeLengthLabel];
     [self.contentView addSubview:self.modelProgressLabel];
     
-    CGFloat margin = 8.0;
+    CGFloat margin = 10.0;
     
     [self.contentView layoutIfNeeded];
     
     [self.modelIconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.height.mas_equalTo(60);
         make.centerY.equalTo(self.contentView);
-        make.left.equalTo(self.contentView).offset(10);
+        make.left.equalTo(self.contentView).offset(margin * 1.5);
     }];
     
     
     [self.modelTitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.modelIconImageView.mas_right).offset(margin);
 //        make.centerY.mas_equalTo(self.modelDownloadImageView.bounds.size.height * 0.3);
-        make.top.equalTo(self.modelIconImageView).offset(8);
+        make.top.equalTo(self.modelIconImageView).offset(6);
         make.right.equalTo(self.contentView).offset(-margin);
     }];
     
     [self.modelDownloadImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.width.mas_equalTo(15);
-        make.bottom.equalTo(self.modelIconImageView).offset(-5);
+        make.bottom.equalTo(self.modelIconImageView).offset(-6);
         make.left.equalTo(self.modelIconImageView.mas_right).offset(margin);
     }];
     
@@ -100,7 +100,7 @@
 
 - (UILabel *)modelTitle{
     if (!_modelTitle) {
-        _modelTitle = [UILabel fcs_labelWithColor:[UIColor colorWithWhite:.2 alpha:1] andFontSize:20 andText:@"ModelTitle:This is a test,please ignore"];
+        _modelTitle = [UILabel fcs_labelWithColor:[UIColor colorWithWhite:.4 alpha:1] andFontSize:20 andText:@"ModelTitle:This is a test,please ignore"];
     }
     return _modelTitle;
 }
@@ -128,7 +128,7 @@
 
 - (UILabel *)modelProgressLabel{
     if (!_modelProgressLabel) {
-        _modelProgressLabel = [UILabel fcs_labelWithColor: [UIColor orangeColor] andFontSize:14 andText:@"已播48%%"];
+        _modelProgressLabel = [UILabel fcs_labelWithColor: [UIColor orangeColor] andFontSize:14 andText:@"已播48%"];
     }
     return _modelProgressLabel;
 }
