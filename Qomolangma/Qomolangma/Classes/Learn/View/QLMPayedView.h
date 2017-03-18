@@ -7,7 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QLMLearnDetailsTableViewController.h"
+@class QLMPayedView;
+@protocol QLMPayedViewDelegate <NSObject>
+
+- (void)payedView:(QLMPayedView *)payedView withDetailsTableViewController:(QLMLearnDetailsTableViewController *)learnDetails withIndexPath:(NSIndexPath *)indexPath;
+
+@end
 
 @interface QLMPayedView : UITableView
 
+@property (nonatomic, weak) id <QLMPayedViewDelegate>detailDelegate;
 @end

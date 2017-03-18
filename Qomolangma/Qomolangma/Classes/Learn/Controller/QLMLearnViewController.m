@@ -12,7 +12,8 @@
 #import "QLMLearnViewFlowLayout.h"
 
 
-@interface QLMLearnViewController ()<QLMNavBarViewDelegate>
+
+@interface QLMLearnViewController ()<QLMNavBarViewDelegate,QLMLearnCollectionViewCellDelegate>
 
 @property (nonatomic, strong)QLMNavBarView *learnBarView;
 
@@ -27,6 +28,7 @@ static NSString * const reuseIdentifier = @"Cell";
     //如果你不想让scrollView的内容自动调整，将这个属性设为NO
     self.automaticallyAdjustsScrollViewInsets = NO;
     
+    
     self.view.backgroundColor = [UIColor blueColor];
     [self.collectionView registerClass:[QLMLearnCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
     [self setupUI];
@@ -37,7 +39,7 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 - (void)setupUI {
     
-    // MARK:设置导航栏
+    // 设置导航栏
     self.navigationController.navigationBar.alpha = 0;
     self.navigationController.navigationBar.backgroundColor = [UIColor whiteColor];
     //View
@@ -45,12 +47,13 @@ static NSString * const reuseIdentifier = @"Cell";
     self.navigationItem.titleView = learnBarView;
     self.learnBarView = learnBarView;
     learnBarView.navBarDelegate = self;
-    // 分页
+    
+
     self.collectionView.pagingEnabled = YES;
-    // 取消滚动条
+   
     self.collectionView.showsVerticalScrollIndicator = NO;
     self.collectionView.showsHorizontalScrollIndicator = NO;
-    //弹簧效果
+  
     self.collectionView.bounces = NO;
 }
 
@@ -73,10 +76,15 @@ static NSString * const reuseIdentifier = @"Cell";
     }
     
     QLMLearnCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    cell.learnCellDelegate = self;
     
     return cell;
 }
 
+//push
+- (void)learnCollectionViewCell:(QLMLearnCollectionViewCell *)learnCollectionViewCell withDetailsTableViewController:(QLMLearnDetailsTableViewController *)detailsTableViewVc WithIndexPath:(NSIndexPath *)indexPath {
+    [self.navigationController pushViewController:detailsTableViewVc animated:NO];
+}
 
 //减速完成,实现与navBar的联动
 - (void)scrollViewDidScroll:(UICollectionView *)scrollView {

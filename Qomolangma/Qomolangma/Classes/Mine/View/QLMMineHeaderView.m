@@ -21,7 +21,7 @@
 
 - (void)setupUI
 {
-    self.backgroundColor = [UIColor clearColor];
+//    self.backgroundColor = [UIColor clearColor];
     
     UIView *bottomView = [[UIView alloc] init];
     bottomView.backgroundColor = [UIColor whiteColor];
@@ -76,9 +76,6 @@
 
 - (void)btnHeaderIconAction: (UIButton *)sender
 {
-//    QLMMineLoginSelectController *loginSelectController = [[QLMMineLoginSelectController alloc] init];
-//    
-//    UINavigationController *navC = [[UINavigationController alloc] initWithRootViewController:loginSelectController];
     
     if (self.modalBlock)
     {

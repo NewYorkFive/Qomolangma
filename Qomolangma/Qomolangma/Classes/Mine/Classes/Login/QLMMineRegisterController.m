@@ -208,7 +208,7 @@
 {
     UIView *lineView = [[UIView alloc] init];
     
-    lineView.backgroundColor = [UIColor colorWithWhite:.8 alpha:.6];
+    lineView.backgroundColor = [UIColor colorWithWhite:.8 alpha:.8];
     
     return lineView;
 }

@@ -9,6 +9,7 @@
 #import "QLMFrameViewController.h"
 #import "QLMPlayingButton.h"
 #import "QLMPlayListViewController.h"
+#import "QLMNavigationController.h"
 @interface QLMFrameViewController ()
 
 @end
@@ -40,6 +41,7 @@
     navController.navigationBar.tintColor = [UIColor fcs_colorWithHex:0x666666];
 //    navController.navigationBar.backgroundColor = [UIColor clearColor];
 //    navController.navigationBar.translucent = YES;
+
     return navController;
 }
 

@@ -2,12 +2,12 @@
 //  QLMPurchasedViewController.h
 //  Qomolangma
 //
-//  Created by NowOrNever on 15/03/2017.
-//  Copyright © 2017 Focus. All rights reserved.
+//  Created by 王惠平 on 2017/3/15.
+//  Copyright © 2017年 Focus. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-
-@interface QLMPurchasedViewController : UIViewController
+#import "QLMBaseViewController.h"
+@interface QLMPurchasedViewController : QLMBaseViewController
 
 @end

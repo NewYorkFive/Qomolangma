@@ -27,7 +27,7 @@
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
-    if (self = [super initWithStyle:style reuseIdentifier:@"QLMRankingDataTableViewCell"]) {
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [self setupUI];
     }
     return self;
@@ -47,9 +47,9 @@
     UILabel *label1 = [[UILabel alloc] init];
     [self.contentView addSubview:label1];
     label1.text = @"热门排行榜";
-    label1.font = [UIFont systemFontOfSize:14];
+    label1.font = [UIFont systemFontOfSize:16];
     [label1 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.offset(8);
+        make.left.top.offset(16);
     }];
     //小箭头
     
@@ -57,19 +57,19 @@
     UILabel *label2 = [[UILabel alloc] init];
     [self.contentView addSubview:label2];
     label2.text = @"查看全部";
-    label2.font = [UIFont systemFontOfSize:11];
+    label2.font = [UIFont systemFontOfSize:14];
     label2.textColor = [UIColor grayColor];
     [label2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(8);
-        make.right.offset(-8);
+        make.top.offset(16);
+        make.right.offset(-16);
     }];
 
     [self.contentView addSubview:self.view];
     self.view.backgroundColor = [UIColor grayColor];
     [self.view mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(8);
-        make.right.offset(-8);
-        make.top.equalTo(label1.mas_bottom).offset(4);
+        make.left.offset(16);
+        make.right.offset(-16);
+        make.top.equalTo(label1.mas_bottom).offset(16);
         make.height.offset(180);
         make.bottom.equalTo(self.contentView.mas_bottom).offset(-8);
     }];

@@ -79,7 +79,6 @@
 
 
 
-
 - (QLMPlayingButton *)playingBtn{
     if (!_playingBtn) {
         _playingBtn = [QLMPlayingButton playingButton];
