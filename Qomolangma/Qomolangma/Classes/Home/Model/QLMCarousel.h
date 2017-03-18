@@ -8,10 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+//无线轮播图
 @interface QLMCarousel : NSObject
 
-@property (nonatomic, strong) NSString *image_url;
+//图片地址
+@property (nonatomic ,strong) NSString *image_url;
 
-@property (nonatomic, strong) NSString *content_url;
+//点击跳转地址
+@property (nonatomic ,strong) NSString *content_url;
 
 @end
