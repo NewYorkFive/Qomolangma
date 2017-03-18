@@ -17,9 +17,20 @@ static NSString *cellID = @"QLMPlayListDetailTableViewControllerTableViewCell";
 
 @implementation QLMPlayListDetailTableViewController
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.clipsToBounds = NO;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.navigationItem.title = @"PlayList";
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"下载全部" style:UIBarButtonItemStylePlain target:self action:@selector(downloadAllClick:)];
     [self.tableView registerClass:[QLMPlayListDetailTableViewControllerTableViewCell class] forCellReuseIdentifier:cellID];
+    self.tableView.rowHeight = 80;
+    self.tableView.showsVerticalScrollIndicator = NO;
+    self.tableView.showsHorizontalScrollIndicator = NO;
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -27,6 +38,9 @@ static NSString *cellID = @"QLMPlayListDetailTableViewControllerTableViewCell";
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+- (void)downloadAllClick:(UIButton *)sender{
+    NSLog(@"Click download all");
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

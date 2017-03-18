@@ -38,7 +38,7 @@
     
     self.listenView.hidden = hiddenFlag;
     if (!hiddenFlag) {
-        self.currentAudioLabel.text =[NSString stringWithFormat:@"上次播放:%@",[QLMPlayListViewController sharedPlayListViewController].playListModelArray[0].name];
+        self.currentAudioLabel.text =[NSString stringWithFormat:@"上次播放:%@",[QLMPlayListViewController sharedPlayListViewController].playListModelArray[0].title];
     }
 }
 

@@ -9,6 +9,7 @@
 #import "QLMPlayListViewController.h"
 #import "QLMRectButton.h"
 #import "QLMCircleButton.h"
+#import "QLMPlayListDetailTableViewController.h"
 
 @interface QLMPlayListViewController ()
 @property (nonatomic, assign) BOOL flag;
@@ -39,9 +40,12 @@
     return instance;
 }
 
+
+
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self setupNavBar];
+    self.title = self.navTitleLabel.text;
 }
 - (void)setupNavBar{
     //背景
@@ -292,7 +296,7 @@
 
 
 - (void)playlistButtonClick{
-    NSLog(@"Click playlist");
+    [self.navigationController pushViewController:[[QLMPlayListDetailTableViewController alloc]init] animated:YES];
 }
 
 
@@ -301,7 +305,7 @@
 - (void)playButtonClick:(UIButton *)sender{
     sender.selected = !sender.selected;
     QLMAudioModel *tempModel = [[QLMAudioModel alloc]init];
-    tempModel.name = @"Hello,Girls";
+    tempModel.title = @"Hello,Girls";
     [self.playListModelArray addObject:tempModel];
     
     self.playFlag = !self.playFlag;
