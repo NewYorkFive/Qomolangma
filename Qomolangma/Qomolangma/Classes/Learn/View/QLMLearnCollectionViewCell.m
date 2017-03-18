@@ -31,7 +31,7 @@
 
 //自定义cell
 - (void)setupUI {
-    self.backgroundColor = [UIColor purpleColor];
+//    self.backgroundColor = [UIColor purpleColor];
     //添加两个tableView
     QLMPayedView *payedView = [[QLMPayedView alloc] initWithFrame:CGRectMake(0, 64, self.bounds.size.width, self.bounds.size.height) style:UITableViewStyleGrouped];
     

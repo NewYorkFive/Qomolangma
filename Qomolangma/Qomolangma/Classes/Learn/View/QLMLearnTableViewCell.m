@@ -23,7 +23,7 @@
     //添加控件
     //image
     UIImageView *learnBookImageView = [[UIImageView alloc] init];
-    learnBookImageView.image = [UIImage imageNamed:@"placeholderImage"];
+    learnBookImageView.image = [UIImage imageNamed:@"audio_subscribe_icon"];
     //title
     UILabel *learnBookTitleLabel = [[UILabel alloc] init];
     learnBookTitleLabel.text = @"读古希腊神话学营销";

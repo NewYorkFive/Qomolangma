@@ -25,6 +25,8 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
     //如果你不想让scrollView的内容自动调整，将这个属性设为NO
     self.automaticallyAdjustsScrollViewInsets = NO;
     
@@ -38,7 +40,7 @@ static NSString * const reuseIdentifier = @"Cell";
     return [super initWithCollectionViewLayout:flowLayout];
 }
 - (void)setupUI {
-    
+    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     // 设置导航栏
     self.navigationController.navigationBar.alpha = 0;
     self.navigationController.navigationBar.backgroundColor = [UIColor whiteColor];
@@ -83,7 +85,12 @@ static NSString * const reuseIdentifier = @"Cell";
 
 //push
 - (void)learnCollectionViewCell:(QLMLearnCollectionViewCell *)learnCollectionViewCell withDetailsTableViewController:(QLMLearnDetailsTableViewController *)detailsTableViewVc WithIndexPath:(NSIndexPath *)indexPath {
+//    self.hidesBottomBarWhenPushed=YES; 
     [self.navigationController pushViewController:detailsTableViewVc animated:NO];
+    detailsTableViewVc.navigationController.title = [NSString stringWithFormat:@"读古希腊神话学营销"];
+
+    detailsTableViewVc.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:nil action:nil]];
+//    self.hidesBottomBarWhenPushed=NO;
 }
 
 //减速完成,实现与navBar的联动
