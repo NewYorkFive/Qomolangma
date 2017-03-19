@@ -10,7 +10,7 @@
 #import "QLMPayedView.h"
 
 @interface  QLMLearnCollectionViewCell()<QLMPayedViewDelegate>
-
+@property (nonatomic, strong) QLMPayedView *payedView;
 @end
 
 @implementation QLMLearnCollectionViewCell
@@ -31,13 +31,17 @@
 
 //自定义cell
 - (void)setupUI {
-//    self.backgroundColor = [UIColor purpleColor];
     //添加两个tableView
     QLMPayedView *payedView = [[QLMPayedView alloc] initWithFrame:CGRectMake(0, 64, self.bounds.size.width, self.bounds.size.height) style:UITableViewStyleGrouped];
-    
+    self.payedView = payedView;
     [self.contentView addSubview:payedView];
     
     payedView.detailDelegate = self;
+}
+
+- (void)setBlock:(void (^)(QLMLearnDetailsTableViewController *))block{
+    _block = block;
+    self.payedView.block = block;
 }
 
 - (void)payedView:(QLMPayedView *)payedView withDetailsTableViewController:(QLMLearnDetailsTableViewController *)detailsTableViewVc withIndexPath:(NSIndexPath *)indexPath {

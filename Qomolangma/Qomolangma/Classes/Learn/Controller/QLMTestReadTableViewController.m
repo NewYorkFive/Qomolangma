@@ -33,7 +33,7 @@ static NSString *testCell = @"testCell";
     
     [self.tableView registerClass:[QLMTestReadTableViewCell class] forCellReuseIdentifier:testCell];
     [self setupUI];
-    }
+}
 
 - (void)setupUI {
     //去掉多余的分割线
@@ -57,11 +57,12 @@ static NSString *testCell = @"testCell";
     return 1;
 }
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+   
     QLMTestReadTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:testCell forIndexPath:indexPath];
+    cell.model = self.model;
     
-        return cell;
+    return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {

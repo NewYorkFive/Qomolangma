@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "QLMLearnDetailsTableViewController.h"
+#import "QLMLearnFirstCellModel.h"
 @class QLMPayedView;
 @protocol QLMPayedViewDelegate <NSObject>
 
@@ -17,5 +18,11 @@
 
 @interface QLMPayedView : UITableView
 
+//@property (nonatomic,copy) void(^block)(QLMLearnDetailsTableViewController *vc,QLMLearnFirstCellModel *model);
+@property (nonatomic,copy) void(^block)(QLMLearnDetailsTableViewController *vc);
+
 @property (nonatomic, weak) id <QLMPayedViewDelegate>detailDelegate;
+///
+//@property (nonatomic, copy) QLMLearnFirstCellModel *model;
+
 @end

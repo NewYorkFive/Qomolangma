@@ -18,10 +18,10 @@
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        //1.告诉系统我们要自定义转场
+        //自定义转场
         self.modalPresentationStyle = UIModalPresentationCustom;
         
-        //2.设置转场的代理
+        //设置转场的代理
         self.transitioningDelegate = self;
     }
     

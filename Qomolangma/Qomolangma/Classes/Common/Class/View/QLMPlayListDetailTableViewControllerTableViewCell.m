@@ -54,7 +54,7 @@
     
     [self.modelTitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.modelIconImageView.mas_right).offset(margin);
-//        make.centerY.mas_equalTo(self.modelDownloadImageView.bounds.size.height * 0.3);
+        //        make.centerY.mas_equalTo(self.modelDownloadImageView.bounds.size.height * 0.3);
         make.top.equalTo(self.modelIconImageView).offset(6);
         make.right.equalTo(self.contentView).offset(-margin);
     }];
@@ -75,6 +75,7 @@
     [self.modelDescriptionLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.modelTimeLengthLabel.mas_right).offset(margin);
         make.centerY.equalTo(self.modelDownloadImageView);
+        make.width.lessThanOrEqualTo(@(self.contentView.bounds.size.width * 0.4));
     }];
     
     [self.modelProgressLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -121,25 +122,36 @@
 
 - (UILabel *)modelTimeLengthLabel{
     if (!_modelTimeLengthLabel) {
-        _modelTimeLengthLabel = [UILabel fcs_labelWithColor:[UIColor colorWithWhite:.5 alpha:1] andFontSize:14 andText:@"5:02"];
+        _modelTimeLengthLabel = [UILabel fcs_labelWithColor:[UIColor colorWithWhite:.5 alpha:1] andFontSize:14 andText:[NSString stringWithFormat:@"%zd:%zd",arc4random_uniform(10),arc4random_uniform(60)]];
     }
     return _modelTimeLengthLabel;
 }
 
 - (UILabel *)modelProgressLabel{
     if (!_modelProgressLabel) {
-        _modelProgressLabel = [UILabel fcs_labelWithColor: [UIColor orangeColor] andFontSize:14 andText:@"已播48%"];
+        _modelProgressLabel = [UILabel fcs_labelWithColor: [UIColor orangeColor] andFontSize:14 andText:[NSString stringWithFormat:@"已播%zd%%",arc4random_uniform(100)]];
     }
     return _modelProgressLabel;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
 
+//@property (nonatomic, strong) UIImageView *modelIconImageView;
+//@property (nonatomic, strong) UILabel *modelTitle;
+//@property (nonatomic, strong) UIImageView *modelDownloadImageView;
+//@property (nonatomic, strong) UILabel *modelTimeLengthLabel;
+//@property (nonatomic, strong) UILabel *modelDescriptionLabel;
+//@property (nonatomic, strong) UILabel *modelProgressLabel;
 
+- (void)setModel:(QLMAudioModel *)model{
+    _model = model;
+    self.modelTitle.text = model.resource_name;
+    self.modelDescriptionLabel.text = model.resource_content;
+}
 
 
 

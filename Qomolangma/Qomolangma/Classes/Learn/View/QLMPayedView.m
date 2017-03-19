@@ -10,10 +10,26 @@
 #import "QLMLearnTableViewCell.h"
 
 @interface QLMPayedView ()<UITableViewDataSource,UITableViewDelegate>
-
+@property (nonatomic,strong) NSArray<QLMLearnFirstCellModel *> *firstCellModelArray;
 @end
 
 @implementation QLMPayedView
+
+
+- (void)loadData{
+    [[QLMNetworkTools sharedTools] requestWithType:GET andUrlStr:@"app/resource/getSubscribeList" andParams:nil andSuccess:^(id responseObject) {
+        NSArray *array = ((NSDictionary *)responseObject)[@"data"];
+        NSMutableArray<QLMLearnFirstCellModel *> *mArr = [NSMutableArray array];
+        for (int i = 0; i < array.count; i++) {
+            [mArr addObject:[QLMLearnFirstCellModel yy_modelWithDictionary:array[i]]];
+        }
+        self.firstCellModelArray = mArr.copy;
+        [self reloadData];
+    } andFailture:^(NSError *error) {
+        NSLog(@"Error:%@",error);
+    }];
+}
+
 
 - (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style {
     self = [super initWithFrame:frame style:style];
@@ -29,21 +45,25 @@
     self.delegate = self;
     [self registerClass:[QLMLearnTableViewCell class] forCellReuseIdentifier:@"learnTableCell"];
     
+    [self loadData];
     //行高
     self.rowHeight = 120;
-//    self.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
+
 
 - (NSInteger)numberOfRowsInSection:(NSInteger)section {
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return self.firstCellModelArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
     QLMLearnTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"learnTableCell" forIndexPath:indexPath];
+    cell.model = self.firstCellModelArray[indexPath.row];
+//    self.model = cell.model;
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -56,10 +76,14 @@
 
 //点击cell响应
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"我被点击了---%zd",indexPath);
+
     //让controller push控制器
     QLMLearnDetailsTableViewController *detailsTableViewVc = [[QLMLearnDetailsTableViewController alloc] init];
+    detailsTableViewVc.model = self.firstCellModelArray[indexPath.row];
+//    NSLog(@"%@",self.firstCellModelArray[indexPath.row]);
+    self.block(detailsTableViewVc);
     
-    [_detailDelegate payedView:self withDetailsTableViewController:detailsTableViewVc withIndexPath:indexPath];
+//    [_detailDelegate payedView:self withDetailsTableViewController:detailsTableViewVc withIndexPath:indexPath];
+    
 }
 @end

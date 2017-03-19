@@ -22,10 +22,16 @@
 #define kScreenBounds [UIScreen mainScreen].bounds
 #define kNavBarHeight 64
 #define kTabBarHeight 49
-#define kUserName @"userName"
-#define kPassWord @"passWord"
-#define kServiceName @"QomulangmaServiceName"
+#define kUserName @"mineUserInfoUserName"
+#define kPassWord @"mineUserInfoPassWord"
+#define kNicName @"mineUserInfoNickName"
+#define kGender @"mineUserInfoGender"
+#define kBornYear @"mineUserInfoBornYear"
+#define kEducation @"mineUserInfoEducation"
+#define kIndustry @"mineUserInfoIndustry"
+#define kCareer @"mineUserInfoCareer"
 
+#define kServiceName @"QomulangmaServiceName"
 
 //导入 公共的类
 #import "Masonry.h"
@@ -35,6 +41,7 @@
 #import <SVProgressHUD.h>
 #import <SSKeychain.h>
 #import "QLMMineInfo.h"
+
 
 //自定义NSLog
 /**

@@ -10,16 +10,18 @@
 
 @implementation QLMMineInfo
 
-static id instance;
+static QLMMineInfo *instance;
 
 + (void)initialize
 {
     instance = [[self alloc] init];
+    instance.infoDict = [NSMutableDictionary dictionary];
 }
 
 // 饿汉式单例
 + (instancetype)sharedMineInfo
 {
+    
     return instance;
 }
 

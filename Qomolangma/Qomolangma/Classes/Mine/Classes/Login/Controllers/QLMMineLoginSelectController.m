@@ -47,7 +47,7 @@
     
     UIButton *btnDismiss = [[UIButton alloc] init];
     
-    [btnDismiss setBackgroundImage:[UIImage imageNamed:@"close_login"] forState:UIControlStateNormal];
+    [btnDismiss setBackgroundImage:[UIImage imageNamed:@"app_launch_image_bottom_375x90_"] forState:UIControlStateNormal];
 
     [btnDismiss addTarget:self action:@selector(btnDismissAction:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -107,6 +107,8 @@
         make.height.equalTo(btnWeChart);
     }];
     
+    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panAction: )];
+    [self.view addGestureRecognizer:pan];
 }
 
 - (UIButton *)setButtonWithTitle: (NSString *)title;
@@ -148,14 +150,49 @@
 {
     
 }
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+
+- (void)panAction: (UIPanGestureRecognizer *)sender
+{
+    CGFloat offsetX = [sender translationInView:sender.view].x;
+    
+    CGFloat angle = offsetX / [UIScreen mainScreen].bounds.size.width * M_PI_4;
+    
+    self.view.layer.position = CGPointMake([UIScreen mainScreen].bounds.size.width * .5, [UIScreen mainScreen].bounds.size.height * 1.5);
+    self.view.layer.anchorPoint = CGPointMake(.5, 1.5);
+    
+    
+    switch (sender.state) {
+        case UIGestureRecognizerStateBegan:
+            
+            break;
+        case UIGestureRecognizerStateChanged:
+            self.view.transform = CGAffineTransformRotate(CGAffineTransformIdentity, angle);
+            break;
+            
+        case UIGestureRecognizerStateFailed:
+        case UIGestureRecognizerStateCancelled:
+        case UIGestureRecognizerStateEnded:
+            
+            if (fabs(angle) > 0.37)
+            {
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }
+            else
+            {
+                [UIView animateWithDuration:.2 animations:^{
+                    self.view.transform = CGAffineTransformIdentity;
+                } completion:^(BOOL finished) {
+                    self.view.layer.anchorPoint = CGPointMake(.5, .5);
+                    self.view.layer.position = CGPointMake(self.view.bounds.size.width * .5, self.view.bounds.size.height * .5);
+                }];
+            }
+            break;
+        default:
+            break;
+    }
+    
 }
-*/
+
 
 @end

@@ -242,12 +242,15 @@
                 self.txtPassword.text = @"";
                 
             } else {
+                
+                [QLMMineInfo sharedMineInfo].isLogin = YES;
+                
                 [[NSUserDefaults standardUserDefaults] setObject:self.txtUserName.text forKey:kUserName];
                 [[NSUserDefaults standardUserDefaults] setObject:self.txtPassword.text forKey:kPassWord];
-                [QLMMineInfo sharedMineInfo].isLogin = YES;
                 
                 [self.navigationController dismissViewControllerAnimated:NO completion:nil];
             }
+            
         }];
 
 

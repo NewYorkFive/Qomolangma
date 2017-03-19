@@ -6,9 +6,9 @@
 //  Copyright © 2017年 Focus. All rights reserved.
 //
 
-#import "QLMPurchasedLable.h"
+#import "QLMPurchasedLabel.h"
 
-@implementation QLMPurchasedLable
+@implementation QLMPurchasedLabel
 
 - (void)setScalePercent:(CGFloat)scalePercent {
     
@@ -28,12 +28,19 @@
 }
 
 + (instancetype)qlm_labelWithColor:(UIColor *)color andFontSize:(double)fontSize andText:(NSString *)text{
-    QLMPurchasedLable *label = [[QLMPurchasedLable alloc]init];
+   
+    QLMPurchasedLabel *label = [[QLMPurchasedLabel alloc]init];
+    
     label.textAlignment = NSTextAlignmentCenter;
+    
     label.userInteractionEnabled = YES;
+    
     label.text = text;
+    
     label.textColor = color;
+   
     label.font = [UIFont systemFontOfSize:fontSize];
+    
     return label;
 }
 
