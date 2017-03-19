@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "QLMBaseViewController.h"
+#import "QLMLearnFirstCellModel.h"
 @interface QLMLearnViewController : QLMBaseViewController<UICollectionViewDelegate,UICollectionViewDataSource>
 
 @property (nonatomic, assign) NSInteger currentPage;
+
 @end
