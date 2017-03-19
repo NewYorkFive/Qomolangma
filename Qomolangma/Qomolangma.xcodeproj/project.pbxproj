@@ -144,6 +144,8 @@
 		B286A0081E7E6B0200EAB7CE /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = B2869FF31E7E6B0200EAB7CE /* UIScrollView+MJRefresh.m */; };
 		B286A0091E7E6B0200EAB7CE /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = B2869FF51E7E6B0200EAB7CE /* UIView+MJExtension.m */; };
 		B286A00C1E7E6B3200EAB7CE /* QLMPurchasedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B286A00B1E7E6B3200EAB7CE /* QLMPurchasedLabel.m */; };
+		B286A0261E7EA3C300EAB7CE /* STAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B286A0231E7EA3C300EAB7CE /* STAlertView.m */; };
+		B286A0271E7EA3C300EAB7CE /* STModal.m in Sources */ = {isa = PBXBuildFile; fileRef = B286A0251E7EA3C300EAB7CE /* STModal.m */; };
 		C41114DE1E7E5B6F009E62A9 /* ignore in Resources */ = {isa = PBXBuildFile; fileRef = C41114B91E7E5B6F009E62A9 /* ignore */; };
 		C41114DF1E7E5B6F009E62A9 /* QLMLearnDetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C41114BB1E7E5B6F009E62A9 /* QLMLearnDetailsTableViewController.m */; };
 		C41114E01E7E5B6F009E62A9 /* QLMLearnModelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C41114BD1E7E5B6F009E62A9 /* QLMLearnModelViewController.m */; };
@@ -421,6 +423,11 @@
 		B2869FF51E7E6B0200EAB7CE /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
 		B286A00A1E7E6B3200EAB7CE /* QLMPurchasedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLMPurchasedLabel.h; sourceTree = "<group>"; };
 		B286A00B1E7E6B3200EAB7CE /* QLMPurchasedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLMPurchasedLabel.m; sourceTree = "<group>"; };
+		B286A0221E7EA3C300EAB7CE /* STAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STAlertView.h; sourceTree = "<group>"; };
+		B286A0231E7EA3C300EAB7CE /* STAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STAlertView.m; sourceTree = "<group>"; };
+		B286A0241E7EA3C300EAB7CE /* STModal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STModal.h; sourceTree = "<group>"; };
+		B286A0251E7EA3C300EAB7CE /* STModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STModal.m; sourceTree = "<group>"; };
+		B286A0281E7EA44700EAB7CE /* STModalUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STModalUtil.h; sourceTree = "<group>"; };
 		C41114B91E7E5B6F009E62A9 /* ignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ignore; sourceTree = "<group>"; };
 		C41114BA1E7E5B6F009E62A9 /* QLMLearnDetailsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLMLearnDetailsTableViewController.h; sourceTree = "<group>"; };
 		C41114BB1E7E5B6F009E62A9 /* QLMLearnDetailsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLMLearnDetailsTableViewController.m; sourceTree = "<group>"; };
@@ -1085,6 +1092,7 @@
 		B279D7981E7BC0D000504CFB /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				B286A0211E7EA3C300EAB7CE /* STFrontModel */,
 				B2869FC71E7E6B0200EAB7CE /* MJRefresh */,
 				B279D7991E7BC0ED00504CFB /* LDRefresh */,
 			);
@@ -1200,6 +1208,18 @@
 				B2869FE91E7E6B0200EAB7CE /* MJRefreshStateHeader.m */,
 			);
 			path = Header;
+			sourceTree = "<group>";
+		};
+		B286A0211E7EA3C300EAB7CE /* STFrontModel */ = {
+			isa = PBXGroup;
+			children = (
+				B286A0281E7EA44700EAB7CE /* STModalUtil.h */,
+				B286A0221E7EA3C300EAB7CE /* STAlertView.h */,
+				B286A0231E7EA3C300EAB7CE /* STAlertView.m */,
+				B286A0241E7EA3C300EAB7CE /* STModal.h */,
+				B286A0251E7EA3C300EAB7CE /* STModal.m */,
+			);
+			path = STFrontModel;
 			sourceTree = "<group>";
 		};
 		C41114B71E7E5B6F009E62A9 /* Learn */ = {
@@ -1503,6 +1523,7 @@
 				B28115FD1E7D2E0C00E0027D /* QLMPurchasedCell.m in Sources */,
 				31E04EDB1E7D744D00AE98AB /* QLMMineShoppingNoteController.m in Sources */,
 				31E04EE91E7D744D00AE98AB /* QLMMineTopCell.m in Sources */,
+				B286A0261E7EA3C300EAB7CE /* STAlertView.m in Sources */,
 				31E04ED71E7D744D00AE98AB /* QLMMineNoteController.m in Sources */,
 				B2869FFA1E7E6B0200EAB7CE /* MJRefreshHeader.m in Sources */,
 				B281160E1E7D6D2500E0027D /* QLMPurchasedViewController.m in Sources */,
@@ -1533,6 +1554,7 @@
 				C41114E91E7E5B6F009E62A9 /* QLMLearnCollectionViewCell.m in Sources */,
 				B286A0031E7E6B0200EAB7CE /* MJRefreshStateHeader.m in Sources */,
 				438F317A1E7D795C0067591C /* QLMGoldSentence.m in Sources */,
+				B286A0271E7EA3C300EAB7CE /* STModal.m in Sources */,
 				31E04ECD1E7D744D00AE98AB /* QLMMineRegisterController.m in Sources */,
 				31E04ED91E7D744D00AE98AB /* QLMMineSettingController.m in Sources */,
 				B286A0051E7E6B0200EAB7CE /* MJRefreshConst.m in Sources */,

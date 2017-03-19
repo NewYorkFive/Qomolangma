@@ -39,14 +39,31 @@
 - (void)loadData{
     [[QLMNetworkTools sharedTools] requestWithType:GET andUrlStr:@"app/resource/getSubscribeList" andParams:nil andSuccess:^(id responseObject) {
         NSArray *array = ((NSDictionary *)responseObject)[@"data"];
+        NSLog(@"%@",[array[0] class]);
         NSMutableArray *mArr = [NSMutableArray array];
         for (int i = 0; i < array.count; i++) {
-            [mArr addObject:[QLMPurchasedModel yy_modelWithDictionary:array[i]]];
+           
+            QLMPurchasedModel * model = [[QLMPurchasedModel alloc]init];
+            
+            [model setValuesForKeysWithDictionary:array[i]];
+           
+            [mArr addObject:model];
+
+            //            [mArr addObject:[QLMPurchasedModel yy_modelWithDictionary:array[i]]];
         }
+        
+        //NSLog(@"-------*****************************-------");
+        //NSLog(@"%@",mArr);
+        
         self.purchasedModelArray = mArr.copy;
+        
         [self.collectionDay reloadData];
+        //NSLog(@"%@",self.purchasedModelArray);
+    
     } andFailture:^(NSError *error) {
+        
         NSLog(@"Error:%@",error);
+        
     }];
 }
 
@@ -74,7 +91,7 @@
         [self.collectionDay.mj_header beginRefreshing];
         
         //网络请求
-        [self loadData];
+//        [self loadData];
         [self.collectionDay.mj_header endRefreshing];
         
     }];
@@ -138,7 +155,12 @@
 //点击item方法
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-     QLMJumpViewController *vc = [[QLMJumpViewController alloc]init];
+    
+    NSLog(@"%@",self.purchasedModelArray[indexPath.row]);
+    
+    //NSIndexPath *firstIndexPath = [[self.collectionDay indexPathsForVisibleItems] firstObject];
+    
+    QLMJumpViewController *vc = [[QLMJumpViewController alloc]init];
     
     UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
     nc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;

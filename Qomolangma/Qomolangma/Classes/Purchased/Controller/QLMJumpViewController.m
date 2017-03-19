@@ -7,6 +7,7 @@
 //
 
 #import "QLMJumpViewController.h"
+#import "STAlertView.h"
 
 @interface QLMJumpViewController ()
 
@@ -33,12 +34,15 @@
     [self.view addSubview:imageView];
     
     //创建手势
-    UITapGestureRecognizer *gre = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(swipeClick:)];
+    //UISwipeGestureRecognizer *gr = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeClick:)];
     
-    gre.numberOfTapsRequired = 1;
+    UITapGestureRecognizer *gr = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(swipeClick:)];
+  
+    [self.view addGestureRecognizer:gr];
+
     
-    [self.view addGestureRecognizer:gre];
-    
+//    gr.numberOfTapsRequired = 1;
+//    
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(click)];
     
 }
@@ -71,11 +75,29 @@
 //        
 //        _index = 6;
 //    }
-//
+    
     _index++;
     
+    if (_index == 4) {
+        
+        NSString *title = @"通知";
+        NSString *message = @"您的手机已经欠费，速交！";
+        ////    [STAlertView showTitle:nil message:message];
+        ////    [STAlertView showTitle:title message:message hideDelay:2];
+        ////    [STAlertView showTitle:title message:nil];
+        [STAlertView showTitle:title
+                         image:nil
+                       message:message
+                  buttonTitles:@[@"这就去",@"就不交"]
+                       handler:^(NSInteger index) {
+                           
+                           [self click];
+                       }];
+    
+    }
+    
     //2.根据角标设置图片
-    NSString *imageName = [NSString stringWithFormat:@"%zd",_index];
+    NSString *imageName = [NSString stringWithFormat:@"%zd",_index+1];
     self.imageView.image = [UIImage imageNamed:imageName];
     
     
@@ -85,11 +107,11 @@
     
     //3.2设置属性
     //动画的样式 左右翻转
-    //    transition.type = @"oglFlip";
-    transition.type = @"cube";
+//        transition.type = @"oglFlip";
+    transition.type = @"pageCurl";
     
     //动画持续时间
-    transition.duration = 2;
+    transition.duration = 1;
     
     //动画的方向
 //    transition.subtype = subTypeStr;
@@ -103,6 +125,8 @@
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
