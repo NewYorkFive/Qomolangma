@@ -35,11 +35,11 @@
 
 - (void)setupUI {
     //Button
-    UIButton *leftButton = [UIButton fcs_textButton:@"已定" fontSize:16 normalColor:[UIColor blackColor] selectedColor:[UIColor redColor]];
+    UIButton *leftButton = [UIButton fcs_textButton:@"已定" fontSize:16 normalColor:[UIColor blackColor] selectedColor:[UIColor orangeColor]];
     leftButton.selected = YES;
     _selectedBtn = leftButton;
     
-    UIButton *rightButton = [UIButton fcs_textButton:@"推荐" fontSize:16 normalColor:[UIColor blackColor] selectedColor:[UIColor redColor]];
+    UIButton *rightButton = [UIButton fcs_textButton:@"推荐" fontSize:16 normalColor:[UIColor blackColor] selectedColor:[UIColor orangeColor]];
     
     self.btsArray = @[leftButton,rightButton];
     [leftButton addTarget:self action:@selector(click:) forControlEvents:UIControlEventTouchUpInside];
@@ -56,12 +56,12 @@
 
     //下划线
     UIView *redLine = [UIView new];
-    redLine.backgroundColor = [UIColor redColor];
+    redLine.backgroundColor = [UIColor orangeColor];
     [self addSubview:redLine];
     
     [redLine mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(4);
-        make.width.equalTo(_selectedBtn);
+        make.height.mas_equalTo(2);
+        make.width.mas_equalTo(40);
         make.bottom.equalTo(self);
         make.centerX.equalTo(_selectedBtn);
     }];
@@ -80,10 +80,10 @@
     //3.替换一下标记的按钮
     _selectedBtn = sender;
     
-    //MARK:小黄条
+    
     NSInteger index = [_btsArray indexOfObject:sender];
     CGFloat offsetX = index * sender.bounds.size.width;
-
+    
     [_redLine mas_updateConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(_btsArray[0]).offset(offsetX);
     }];
@@ -100,12 +100,11 @@
     }
 }
 
-//手动滚动ScrolView 修改小黄条
+//滚动ScrolView
 - (void)setOffsetX:(CGFloat)offsetX {
     
     _offsetX = offsetX;
     
-    //MARK:1.更新小黄条的约束
     [_redLine mas_updateConstraints:^(MASConstraintMaker *make) {
         
         make.centerX.equalTo(_btsArray[0]).offset(offsetX*self.selectedBtn.bounds.size.width/[UIScreen mainScreen].bounds.size.width );

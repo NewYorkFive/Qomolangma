@@ -16,6 +16,7 @@
 @end
 
 @interface QLMPayedView : UITableView
+@property (nonatomic,copy) void(^block)(UIViewController *vc);
 
 @property (nonatomic, weak) id <QLMPayedViewDelegate>detailDelegate;
 @end
