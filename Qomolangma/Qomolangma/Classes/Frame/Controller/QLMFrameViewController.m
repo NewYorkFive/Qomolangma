@@ -42,11 +42,11 @@
 #warning 别改我代码!!!!!
     QLMNavigationController *navController = [[QLMNavigationController alloc]initWithRootViewController:vc];
     navController.navigationBar.tintColor = [UIColor fcs_colorWithHex:0x666666];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         UIViewController *vc = [((UINavigationController *)[self.childViewControllers firstObject]).childViewControllers firstObject];
 //        vc.view.backgroundColor = vc.view.backgroundColor;
+//        [vc presentViewController:[[QLMLoginViewController alloc]init] animated:YES completion:nil];
         [vc presentViewController:[[QLMLoginViewController alloc]init] animated:YES completion:nil];
-//        [self presentViewController:[[QLMLoginViewController alloc]init] animated:YES completion:nil];
     });
 //    navController.navigationBar.backgroundColor = [UIColor clearColor];
 //    navController.navigationBar.translucent = YES;
