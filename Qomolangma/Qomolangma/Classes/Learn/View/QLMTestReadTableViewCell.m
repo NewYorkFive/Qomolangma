@@ -8,6 +8,14 @@
 
 #import "QLMTestReadTableViewCell.h"
 
+@interface QLMTestReadTableViewCell ()
+
+@property (nonatomic, strong) UILabel *titleLabel;
+@property (nonatomic, strong) UILabel *priceTimesLabel;
+@property (nonatomic, strong) UILabel *readCountLabel;
+@property (nonatomic, strong) UIButton *priceBtn;
+@end
+
 @implementation QLMTestReadTableViewCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -22,19 +30,23 @@
     
     //添加控件
     UILabel *titleLabel = [UILabel fcs_labelWithColor:[UIColor blackColor] andFontSize:16 andText:@"3.01 读古希腊神话学营销 | 客户的心思猜不透? 反其道而行之才是制胜法宝!"];
+    self.titleLabel = titleLabel;
     titleLabel.numberOfLines = 0;
     UILabel *timeLabel = [UILabel fcs_labelWithColor:[UIColor lightGrayColor] andFontSize:10 andText:@"03月15日"];
     UILabel *readCountLabel = [UILabel fcs_labelWithColor:[UIColor lightGrayColor] andFontSize:10 andText:@"1人读过"];
+    self.readCountLabel = readCountLabel;
     UILabel *priceTimesLabel = [UILabel fcs_labelWithColor:[UIColor grayColor] andFontSize:14 andText:@"0"];
+    self.priceTimesLabel = priceTimesLabel;
     UILabel *tipLabel = [UILabel fcs_labelWithColor:[UIColor grayColor] andFontSize:12 andText:@"别人还在养跟快的马的时候,福特已经开始造车了"];
     UILabel *readMoreLabel = [UILabel fcs_labelWithColor:[UIColor lightGrayColor] andFontSize:12 andText:@"阅读全文"];
     UIButton *priceBtn = [UIButton new];
+    [priceBtn addTarget:self action:@selector(clickBtn:) forControlEvents:UIControlEventTouchUpInside];
     [priceBtn setImage:[UIImage imageNamed:@"icon_007"] forState:UIControlStateNormal];
     UIButton *testReadBtn = [UIButton new];
     [testReadBtn setImage:[UIImage imageNamed:@"test_read"] forState:UIControlStateNormal];
     UIImageView *pointImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"2004"]];
     UIImageView *bigImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"userinfo_top_bg"]];
-    
+    self.model = self.model;
     [self.contentView addSubview:titleLabel];
     [self.contentView addSubview:readCountLabel];
     [self.contentView addSubview:timeLabel];
@@ -84,7 +96,6 @@
         make.top.equalTo(priceBtn.mas_bottom).offset(10);
         make.right.equalTo(self.contentView).offset(-10);
         make.height.offset(200);
-//        make.bottom.equalTo(self.contentView).offset(-10);
     }];
     [tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(bigImgView);
@@ -96,5 +107,17 @@
         make.top.equalTo(bigImgView.mas_bottom).offset(40);
     }];
 
+}
+- (void)clickBtn:(UIButton *)sender {
+//    self.tag = 1;
+    self.priceTimesLabel.text = [NSString stringWithFormat:@"%zd",1];
+    
+}
+
+- (void)setModel:(QLMLearnFirstCellModel *)model {
+    _model = model;
+    
+    self.titleLabel.text = [NSString stringWithFormat:@"3.01 %@ | %@ | %@",model.name,model.author,model.person_info];
+    self.readCountLabel.text = [NSString stringWithFormat:@"%zd人已读",model.subscribe_count];
 }
 @end

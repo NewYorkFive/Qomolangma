@@ -13,7 +13,4 @@
 
 @property (nonatomic ,strong) QLMSpecialColumn *specialColumn;
 
-///最顶上的参考线
-@property (nonatomic, strong) UILabel *label;
-
 @end
