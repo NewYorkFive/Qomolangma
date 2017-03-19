@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface QLMPurchasedLable : UILabel
+@interface QLMPurchasedLabel : UILabel
 
 @property (nonatomic,assign) CGFloat scalePercent;
 

@@ -25,7 +25,6 @@
     
     //设置滚动方向
     self.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    
 
 }
 
