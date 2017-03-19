@@ -14,6 +14,4 @@
 
 @property (nonatomic, copy) NSString *nickName;
 
-@property (nonatomic, copy) NSString *headerIconName;
-
 @end

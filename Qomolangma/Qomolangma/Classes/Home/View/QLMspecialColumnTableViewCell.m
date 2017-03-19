@@ -11,6 +11,9 @@
 
 @interface QLMspecialColumnTableViewCell ()
 
+///最底部的线
+@property (nonatomic, strong) UILabel *label;
+
 ///订阅多久多少钱的多久
 @property (nonatomic, strong) UILabel *labelPrice_unit;
 
@@ -38,20 +41,37 @@
 ///底部的文字
 @property (nonatomic, strong) UILabel *labelContent;
 
+///"/"分隔符
+@property (nonatomic, strong) UILabel *labelLine;
+
+///"¥"符号
+@property (nonatomic, strong) UILabel *labelRMB;
 
 @end
 
 @implementation QLMspecialColumnTableViewCell
 
+
+
 - (void)setSpecialColumn:(QLMSpecialColumn *)specialColumn {
     
     _specialColumn = specialColumn;
+    
+    self.label.backgroundColor = [UIColor grayColor];
+    self.label.alpha = .4;
+
+    [self.label mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.offset(0);
+        make.right.offset(0);
+        make.height.offset(1);
+        make.bottom.offset(0);
+    }];
     
     [self.image_url mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView.mas_left).offset(16);
         make.height.offset(120);
         make.width.offset(90);
-        make.top.equalTo(_label.mas_bottom).offset(16);
+        make.top.equalTo(self.contentView.mas_top).offset(16);
         //        make.bottom.offset(-8);
         // MARK:问题点
         make.bottom.lessThanOrEqualTo(@-8);
@@ -84,30 +104,52 @@
     self.labelPrice_unit.alpha = .6;
     [self.labelPrice_unit mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.offset(-16);
-        make.top.equalTo(self.label.mas_bottom).offset(16);
+        make.top.equalTo(self.contentView.mas_top).offset(16);
         make.height.width.offset(14);
     }];
     
-    UILabel * label = [[UILabel alloc] init];
-    label.text = @"/";
-    label.font = [UIFont systemFontOfSize:14];
-    label.textColor = [UIColor orangeColor];
-    label.alpha = .6;
-    [self.contentView addSubview:label];
-    [label mas_makeConstraints:^(MASConstraintMaker *make) {
+//    UILabel * label = [[UILabel alloc] init];
+//    label.text = @"/";
+//    label.font = [UIFont systemFontOfSize:14];
+//    label.textColor = [UIColor orangeColor];
+//    label.alpha = .6;
+//    [self.contentView addSubview:label];
+//    [label mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.right.equalTo(self.labelPrice_unit.mas_left);
+//        make.centerY.equalTo(self.labelPrice_unit.mas_centerY);
+//        make.height.offset(10);
+//    }];
+
+    self.labelLine.text = @"/";
+    self.labelLine.font = [UIFont systemFontOfSize:14];
+    self.labelLine.textColor = [UIColor orangeColor];
+    self.labelLine.alpha = .6;
+    [self.labelLine mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.labelPrice_unit.mas_left);
         make.centerY.equalTo(self.labelPrice_unit.mas_centerY);
         make.height.offset(10);
     }];
     
+    
     self.labelPrice.font = [UIFont systemFontOfSize:12];
     self.labelPrice.textColor = [UIColor orangeColor];
     self.labelPrice.alpha = .6;
     [self.labelPrice mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(label.mas_left);
-        make.centerY.equalTo(label.mas_centerY);
+        make.right.equalTo(self.labelLine.mas_left);
+        make.centerY.equalTo(self.labelLine.mas_centerY);
         make.height.offset(14);
     }];
+    
+    //钱币符号
+    self.labelRMB.text = @"¥";
+    self.labelRMB.font = [UIFont systemFontOfSize:12];
+    self.labelRMB.textColor = [UIColor orangeColor];
+    self.labelPrice.alpha = .6;
+    [self.labelRMB mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.labelPrice.mas_centerY);
+        make.right.equalTo(self.labelPrice.mas_left);
+    }];
+    
     
     self.labelContent.font = [UIFont systemFontOfSize:12];
     self.labelContent.alpha = .8;
@@ -128,6 +170,7 @@
     self.labelUpdate_time.text = _specialColumn.update_time;
     self.labelPerson_info.text = _specialColumn.person_info;
     self.labelAuthor.text = _specialColumn.author;
+
     
 }
 
@@ -157,6 +200,15 @@
  
     self.labelContent = [[UILabel alloc] init];
     [self.contentView addSubview:self.labelContent];
+    
+    self.label = [[UILabel alloc] init];
+    [self.contentView addSubview:self.label];
+    
+    self.labelLine = [[UILabel alloc] init];
+    [self.contentView addSubview:self.labelLine];
+    
+    self.labelRMB = [[UILabel alloc] init];
+    [self.contentView addSubview:self.labelRMB];
     
 }
 

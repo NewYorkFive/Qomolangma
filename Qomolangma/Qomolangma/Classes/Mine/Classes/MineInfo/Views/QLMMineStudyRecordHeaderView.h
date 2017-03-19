@@ -10,4 +10,6 @@
 
 @interface QLMMineStudyRecordHeaderView : UIView
 
+@property (nonatomic, copy) NSString *nickName;
+
 @end

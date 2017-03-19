@@ -117,16 +117,5 @@
     }
 }
 
-- (void)setHeaderIconName:(NSString *)headerIconName
-{
-    _headerIconName = headerIconName;
-    
-    if ([QLMMineInfo sharedMineInfo].isLogin)
-    {
-        [self.btnNickName setTitle:self.nickName forState:UIControlStateNormal];
-        
-    }
-    
-}
 
 @end

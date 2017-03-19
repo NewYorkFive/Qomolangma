@@ -59,7 +59,7 @@ static NSString * const headerFooterReuseID = @"headerFooterReuseID";
     [super viewDidLoad];
     
 #warning isLoginChange
-//    [QLMMineInfo sharedMineInfo].isLogin = NO;
+    [QLMMineInfo sharedMineInfo].isLogin = YES;
 
     [self loadMinInfoData];
     
@@ -92,15 +92,13 @@ static NSString * const headerFooterReuseID = @"headerFooterReuseID";
 
     self.navigationController.navigationBar.hidden = YES;
     
-//    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
     
     if ([QLMMineInfo sharedMineInfo].isLogin)
     {
         NSString *nickName = [[NSUserDefaults standardUserDefaults] valueForKey:kNicName];
         
         self.headerView.nickName = nickName;
-        
-        self.headerView.headerIconName = @"headIcon";
     }
 }
 
@@ -108,7 +106,7 @@ static NSString * const headerFooterReuseID = @"headerFooterReuseID";
 {
     [super viewWillDisappear:YES];
 
-//    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
     
     self.navigationController.navigationBar.hidden = NO;
 
@@ -316,9 +314,36 @@ static NSString * const headerFooterReuseID = @"headerFooterReuseID";
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    NSIndexPath *indexPath1 = [NSIndexPath indexPathForRow:2 inSection:4];
+    NSIndexPath *indexPath2 = [NSIndexPath indexPathForRow:1 inSection:6];
+    
+    
+    if (![QLMMineInfo sharedMineInfo].isLogin)
+    {
+        if (!(indexPath == indexPath1 || indexPath == indexPath2))
+        {
+            QLMMineLoginSelectController *loginSelectController = [[QLMMineLoginSelectController alloc] init];
+            
+            UINavigationController *navC = [[UINavigationController alloc] initWithRootViewController:loginSelectController];
+            
+            self.animator = [[QLMMineAnimator alloc] init];
+            
+            navC.transitioningDelegate = self.animator;
+            
+            navC.modalPresentationStyle = UIModalPresentationCustom;
+            
+            [self presentViewController:navC animated:YES completion:nil];
+        }
+        
+        
+    }
+    
+    
+    
     NSString *className = (NSString *)self.controllerNamesArray[indexPath.section][indexPath.row];
     
     NSString *title = [NSString string];
+    
     
     if (indexPath.section > 0)
     {
@@ -329,8 +354,10 @@ static NSString * const headerFooterReuseID = @"headerFooterReuseID";
         title = @"学习记录";
     }
     
-    [self.navigationController pushViewController:[self creatViewControllerWithClassName:className andWithTitle:title] animated:YES];
-
+    UIViewController *vC = [self creatViewControllerWithClassName:className andWithTitle:title];
+    
+    
+    [self.navigationController pushViewController:vC animated:YES];
 }
 
 - (UIViewController *)creatViewControllerWithClassName: (NSString *)className andWithTitle: (NSString *)title;

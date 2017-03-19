@@ -57,7 +57,7 @@
     //天天涨姿势
     UILabel *label = [[UILabel alloc] init];
     label.text = @"天天涨姿势";
-    label.font = [UIFont systemFontOfSize:16];
+    label.font = [UIFont systemFontOfSize:15];
     [self.contentView addSubview:label];
     [label mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.offset(16);
@@ -74,15 +74,18 @@
     }];
     
     //顶部"查看听书日历"
-    UILabel *label2 = [[UILabel alloc] init];
-    [self.contentView addSubview:label2];
-    label2.text = @"查看全部";
-    label2.font = [UIFont systemFontOfSize:12];
-    label2.textColor = [UIColor grayColor];
-    [label2 mas_makeConstraints:^(MASConstraintMaker *make) {
+    UIButton *button = [[UIButton alloc] init];
+    [self.contentView addSubview:button];
+    [button setTitle:@"查看全部" forState:UIControlStateNormal];
+    button.titleLabel.font = [UIFont systemFontOfSize:12];
+    [button setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    [button setAlpha:.6];
+    [button mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(label.mas_centerY);
         make.right.equalTo(imageView.mas_left);
     }];
+    [button addTarget:_delegate action:@selector(pushAll) forControlEvents:UIControlEventTouchUpInside];
+    
     
     //中间的线
     UILabel *line1 = [[UILabel alloc] init];
@@ -206,7 +209,6 @@
 //button状态点击改变
 - (void)buttonStateClick:(UIButton *)button {
     
-    NSLog(@"点击了");
     //清除上一个高亮
     self.highlightedButton.selected = NO;
     //给本次点击的赋成高亮

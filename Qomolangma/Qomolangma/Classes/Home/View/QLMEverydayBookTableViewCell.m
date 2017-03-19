@@ -216,8 +216,6 @@
 //        make.bottom.equalTo(self.contentView).offset(-4);
         make.bottom.lessThanOrEqualTo(@-4);
     }];
-//    NSLog(@"%@",line3);
-    
 
     //左边的线
     UILabel *line4 = [[UILabel alloc] init];
@@ -260,11 +258,23 @@
     [self.contentView addSubview:self.labelPrice];
     self.labelPrice.textColor = [UIColor orangeColor];
     self.labelPrice.font = [UIFont systemFontOfSize:12];
+    self.labelPrice.alpha = .8;
     [self.labelPrice mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(_image_url.mas_right).offset(8);
         make.bottom.equalTo(_image_url.mas_bottom).offset(-4);
-        make.width.offset(40);
+//        make.width.offset(40);
         make.height.offset(20);
+    }];
+    
+    UILabel *labelRMB = [[UILabel alloc] init];
+    labelRMB.text = @"¥";
+    labelRMB.font = [UIFont systemFontOfSize:12];
+    labelRMB.textColor = [UIColor orangeColor];
+    labelRMB.alpha = .8;
+    [self.contentView addSubview:labelRMB];
+    [labelRMB mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.labelPrice.mas_centerY);
+        make.left.equalTo(self.labelPrice.mas_right);
     }];
     
     //购买按钮

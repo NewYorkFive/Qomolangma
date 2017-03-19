@@ -21,48 +21,43 @@
 #import "QLMspecialColumnTableViewCell.h"
 #import "QLMFreeAudio.h"
 #import "QLMFreeAudioTableViewCell.h"
+#import "QLMspecialColumnView.h"
+#import "QLMDayDayUpZiShiTableViewController.h"
 
-@interface QLMHomeViewController () <UITableViewDelegate ,UITableViewDataSource>
+@interface QLMHomeViewController () <UITableViewDelegate ,UITableViewDataSource,QLMspecialColumnViewDelegate ,QLMFreeAudioTableViewCellDelegate>
 
 //网络请求标记参数
 @property (nonatomic ,assign) BOOL needRefresh;
-
 //提示没网的button
 @property (nonatomic ,strong) UIButton *button;
-
 //提示没网的label
 @property (nonatomic ,strong) UILabel *label;
-
 //tableview
 @property (nonatomic ,strong) UITableView *tableView;
-
 //主数据
 @property (nonatomic ,strong) NSDictionary *homeDataDic;
-
 //专门存储每个data对应的模型
 @property (nonatomic ,strong) NSArray<NSArray *> *dataArray;
-
 //无线轮播图
 @property (nonatomic ,strong) NSArray<QLMCarousel *> *carouselArray;
-
 //天天涨姿势
 @property (nonatomic ,strong) NSArray<QLMFreeAudio *> *freeAudioArray;
-
 //行业达人
 @property (nonatomic ,strong) NSArray<NSArray <QLMSpecialColumn *> *> *specialColumnArray;
-
 //今今乐道
 @property (nonatomic ,strong) NSArray<QLMEverydayBook *> *everydayBookArray;
-
 //热门排行榜
 @property (nonatomic, strong) NSArray<QLMRankingData *> *rankingDataArray;
-
 //底部视图
 @property (nonatomic ,strong) NSArray<QLMRecommend *> *recommendArray;
 
 @end
 
 @implementation QLMHomeViewController
+
+static int refreash1;
+static int refreash2;
+static int refreash3;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -80,6 +75,9 @@
     self.navigationController.navigationBar.translucent = NO;
     self.tabBarController.tabBar.translucent = NO;
     
+    refreash1 = 0;
+    refreash2 = 0;
+    refreash3 = 0;
     
 	NSString *URLStr = @"app/home/getHomeData";
     //更改一下超时请求时间
@@ -88,7 +86,6 @@
     [[QLMNetworkTools sharedTools].requestSerializer didChangeValueForKey:@"timeoutInterval"];
     [[QLMNetworkTools sharedTools] requestWithType:GET andUrlStr:URLStr andParams:nil andSuccess:^(id responseObject) {
         
-//        NSLog(@"%@",self.button);
         if (self.button != nil && self.label != nil) {
             [self.button removeFromSuperview];
             [self.label removeFromSuperview];
@@ -98,6 +95,8 @@
         
         //初始化tableView.
         self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+//        self.tableView.backgroundColor = [UIColor colorWithRed:240.0 / 255.0 green:239.0 / 255.0 blue:244.0 / 255.0 alpha:1];
+        self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
 //        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         
         self.edgesForExtendedLayout = UIRectEdgeNone;
@@ -110,8 +109,6 @@
         //设置代理
         _tableView.dataSource = self;
         _tableView.delegate = self;
-        
-        
         
         //预估行高
         self.tableView.rowHeight = UITableViewAutomaticDimension;
@@ -173,11 +170,10 @@
         //用完一次清理一次数据
         [arrayM removeAllObjects];
         [arrayM2 removeAllObjects];
-        QLMHomeFootView *footView = [[QLMHomeFootView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 180)];
+        QLMHomeFootView *footView = [[QLMHomeFootView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 240)];
         footView.recommendArray = self.recommendArray;
         self.tableView.tableFooterView = footView;
 //        self.tableView.tableFooterView.frame = CGRectMake(0, 0, kScreenWidth, 160);
-        
         
 #pragma 各个不同的cell
         //天天涨姿势
@@ -196,8 +192,6 @@
         [arrayM removeAllObjects];
         [arrayM2 removeAllObjects];
 
-        
-        
         //行业达人
         NSArray *specialColumnArray = [self.homeDataDic objectForKey:@"special_column"];
         for (int i = 0; i < specialColumnArray.count; i++) {
@@ -234,7 +228,6 @@
         [arrayM3 removeAllObjects];
         [arrayM4 removeAllObjects];
         
-        
         //今今乐道
         NSArray *everydayBookArray = [self.homeDataDic objectForKey:@"everyday_book"];
         for (int i = 0; i < everydayBookArray.count; i++) {
@@ -258,6 +251,7 @@
             [arrayM addObject:rankingData];
         }
         self.rankingDataArray = arrayM.copy;
+        
         [arrayM2 addObject:arrayM.copy];
         //模型给完一次.赋值一次给dataArrayM
         [dataArrayM addObject:arrayM2.copy];
@@ -270,32 +264,31 @@
         //刷新数据
         [self.tableView reloadData];
         
-        
-        
     } andFailture:^(NSError *error) {
         
         //更改需要网络请求
         self.needRefresh = YES;
         //没有网络的按钮
-        
-        self.button = [[UIButton alloc] init];
-        [_button setImage:[UIImage imageNamed:@"empty_placeholder"] forState:UIControlStateNormal];
-        [self.view addSubview:_button];
-        [_button addTarget:self action:@selector(buttonAction) forControlEvents:UIControlEventTouchUpInside];
-        [_button mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(self.view.mas_centerX);
-            make.top.offset(160);
-        }];
-        //添加一个label
-        self.label = [[UILabel alloc] init];
-        [self.view addSubview:_label];
-        _label.text = @"网络错误";
-        _label.font = [UIFont systemFontOfSize:16];
-        _label.textColor = [UIColor grayColor];
-        [_label mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(_button);
-            make.top.equalTo(_button.mas_bottom);
-        }];
+        if (self.button == nil && self.label == nil) {
+            self.button = [[UIButton alloc] init];
+            [_button setImage:[UIImage imageNamed:@"empty_placeholder"] forState:UIControlStateNormal];
+            [self.view addSubview:_button];
+            [_button addTarget:self action:@selector(buttonAction) forControlEvents:UIControlEventTouchUpInside];
+            [_button mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerX.equalTo(self.view.mas_centerX);
+                make.top.offset(160);
+            }];
+            //添加一个label
+            self.label = [[UILabel alloc] init];
+            [self.view addSubview:_label];
+            _label.text = @"网络错误";
+            _label.font = [UIFont systemFontOfSize:16];
+            _label.textColor = [UIColor grayColor];
+            [_label mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerX.equalTo(_button);
+                make.top.equalTo(_button.mas_bottom);
+            }];
+        }
         
         
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"没有网络" preferredStyle:UIAlertControllerStyleAlert];
@@ -341,6 +334,7 @@
         
         //天天涨姿势
         QLMFreeAudioTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"QLMFreeAudioTableViewCell" forIndexPath:indexPath];
+        cell.delegate = self;
         //传递数据
         cell.freeAudioArray = self.freeAudioArray;
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
@@ -353,66 +347,18 @@
         QLMspecialColumnTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"QLMspecialColumnTableViewCell" forIndexPath:indexPath];
         if (indexPath.row == 0) {
     
-            //行业达人
-            UILabel *label = [[UILabel alloc] init];
-            label.text = @"行业达人";
-            label.font = [UIFont systemFontOfSize:16];
-            [cell.contentView addSubview:label];
-            [label mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.offset(8);
-                make.top.offset(16);
-            }];
-            cell.label = [[UILabel alloc] init];
-            cell.label.backgroundColor = [UIColor grayColor];
-            cell.label.alpha = .2;
-            [cell.contentView addSubview:cell.label];
-            [cell.label mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.offset(16);
-                make.right.offset(-16);
-                make.height.offset(1);
-                make.top.equalTo(label.mas_bottom).offset(16);
-            }];
+            cell.specialColumn = self.specialColumnArray[indexPath.row][refreash1];
             
+        } else if (indexPath.row == 1) {
             
-            //顶部"查看听书日历"
-            UILabel *label2 = [[UILabel alloc] init];
-            [cell.contentView addSubview:label2];
-            label2.text = @"换一换";
-            label2.font = [UIFont systemFontOfSize:12];
-            label2.textColor = [UIColor grayColor];
-            [label2 mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.centerY.equalTo(label.mas_centerY);
-                make.right.offset(-16);
-            }];
+            cell.specialColumn = self.specialColumnArray[indexPath.row][refreash2];
             
-            //小箭头
-            UIImageView *imageView = [[UIImageView alloc] init];
-            imageView.image = [UIImage imageNamed:@"home_icon_exchange"];
-            [cell.contentView addSubview:imageView];
-            [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.centerY.equalTo(label.mas_centerY);
-                make.right.equalTo(label2.mas_left);
-            }];
-            
-            //传递数据
-            cell.specialColumn = self.specialColumnArray[indexPath.row][arc4random_uniform((int)self.specialColumnArray[indexPath.row].count)];
-            [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-            return cell;
-            
+        } else if (indexPath.row == 2) {
+        
+            cell.specialColumn = self.specialColumnArray[indexPath.row][refreash3];
+        
         }
         
-        cell.label = [[UILabel alloc] init];
-        cell.label.backgroundColor = [UIColor grayColor];
-        cell.label.alpha = .2;
-        [cell.contentView addSubview:cell.label];
-        [cell.label mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.offset(0);
-            make.height.offset(1);
-            make.top.equalTo(cell.contentView.mas_top);
-        }];
-        
-        //传递数据
-        cell.specialColumn = self.specialColumnArray[indexPath.row][arc4random_uniform((int)self.specialColumnArray[indexPath.row].count)];
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         return cell;
         
@@ -446,18 +392,25 @@
 //#pragma 4 - 组间距
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
 
-//    NSLog(@"section:%zd",section);
-//    NSIndexPath *indexPath = [[NSIndexPath alloc] initWithIndex:section];
-    if (section == 0) {
-        return 10;
+    if (section == 1) {
+        return 50;
     }
-    return .1;
+    
+    return 10;
     
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     
-    return 10;
+    if (section == 0) {
+        return 10;
+    }
+    
+    if (section == self.dataArray.count - 1) {
+        return 10;
+    }
+    
+    return .1;
     
 }
 
@@ -476,18 +429,64 @@
     {
         scrollView.contentInset = UIEdgeInsetsMake(-offsetY, 0, -(scrollView.contentSize.height - scrollView.frame.size.height - sectionFooterHeight), 0);
     }
+    
 }
 
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-//{
-//    CGFloat sectionHeaderHeight = 40;
-//    if (scrollView.contentOffset.y<=sectionHeaderHeight&&scrollView.contentOffset.y>=0) {
-//        scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
-//    }
-//    else if (scrollView.contentOffset.y>=sectionHeaderHeight) {
-//        scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, 0, 0);
-//    }
-//}
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
+    if (section == 1) {
+        QLMspecialColumnView *view = [[QLMspecialColumnView alloc] init];
+        view.delegate = self;
+        return view;
+        
+    }
+    return nil;
+    
+}
+
+- (void)specialColumnViewReloadData {
+    
+    if (refreash1 == self.specialColumnArray[0].count - 1) {
+        refreash1 = 0;
+    }
+    if (refreash2 == self.specialColumnArray[1].count - 1) {
+        refreash2 = 0;
+    }
+    if (refreash3 == self.specialColumnArray[2].count - 1) {
+        refreash3 = 0;
+    }
+    refreash1++;
+    refreash2++;
+    refreash3++;
+    NSMutableArray *arrayM = [NSMutableArray array];
+    for (int i = 0; i < self.specialColumnArray.count; i++) {
+        
+        [arrayM addObject:[NSIndexPath indexPathForRow:i inSection:1]];
+        
+    }
+    /*
+        UITableViewRowAnimationFade,
+        UITableViewRowAnimationRight,           // slide in from right (or out to right)
+        UITableViewRowAnimationLeft,
+        UITableViewRowAnimationTop,
+        UITableViewRowAnimationBottom,
+        UITableViewRowAnimationNone,            // available in iOS 3.0
+        UITableViewRowAnimationMiddle,          // available in iOS 3.2.  attempts to keep cell centered in the space it will/did occupy
+        UITableViewRowAnimationAutomatic = 100  // available in iOS 5.0.  chooses an appropriate animation style for you
+    */
+    [self.tableView reloadRowsAtIndexPaths:arrayM.copy withRowAnimation:UITableViewRowAnimationAutomatic];
+    [arrayM removeAllObjects];
+     
+}
+
+- (void)pushAll {
+    
+    QLMDayDayUpZiShiTableViewController *tc2 = [[QLMDayDayUpZiShiTableViewController alloc] init];
+    tc2.navigationItem.title = @"天天涨姿势";
+//    tc2.freeAudioArray = self.freeAudioArray;
+    [self.navigationController pushViewController:tc2 animated:YES];
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
