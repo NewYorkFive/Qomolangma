@@ -715,10 +715,10 @@
 		43AC98AB1E7EB1AD00F74DDB /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				43AC98AC1E7EB1AD00F74DDB /* QLMDayDayUpZiShiTableViewController.h */,
-				43AC98AD1E7EB1AD00F74DDB /* QLMDayDayUpZiShiTableViewController.m */,
 				43AC98AE1E7EB1AD00F74DDB /* QLMHomeViewController.h */,
 				43AC98AF1E7EB1AD00F74DDB /* QLMHomeViewController.m */,
+				43AC98AC1E7EB1AD00F74DDB /* QLMDayDayUpZiShiTableViewController.h */,
+				43AC98AD1E7EB1AD00F74DDB /* QLMDayDayUpZiShiTableViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";

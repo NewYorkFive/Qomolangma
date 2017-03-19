@@ -74,16 +74,18 @@
     }];
     
     //顶部"查看听书日历"
-    UIButton *label2 = [[UIButton alloc] init];
-    [self.contentView addSubview:label2];
-    [label2 setTitle:@"查看全部" forState:UIControlStateNormal];
-    label2.titleLabel.font = [UIFont systemFontOfSize:12];
-    [label2 setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    [label2 setAlpha:.6];
-    [label2 mas_makeConstraints:^(MASConstraintMaker *make) {
+    UIButton *button = [[UIButton alloc] init];
+    [self.contentView addSubview:button];
+    [button setTitle:@"查看全部" forState:UIControlStateNormal];
+    button.titleLabel.font = [UIFont systemFontOfSize:12];
+    [button setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    [button setAlpha:.6];
+    [button mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(label.mas_centerY);
         make.right.equalTo(imageView.mas_left);
     }];
+    [button addTarget:_delegate action:@selector(pushAll) forControlEvents:UIControlEventTouchUpInside];
+    
     
     //中间的线
     UILabel *line1 = [[UILabel alloc] init];
@@ -207,7 +209,6 @@
 //button状态点击改变
 - (void)buttonStateClick:(UIButton *)button {
     
-    NSLog(@"点击了");
     //清除上一个高亮
     self.highlightedButton.selected = NO;
     //给本次点击的赋成高亮
