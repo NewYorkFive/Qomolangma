@@ -1,18 +1,22 @@
 //
-//  QLMDayDayUpZiShiTableViewController.m
+//  QLMSearchSecondPageTableViewController.m
 //  Qomolangma
 //
-//  Created by 张晨晖 on 2017/3/19.
-//  Copyright © 2017年 Focus. All rights reserved.
+//  Created by NowOrNever on 19/03/2017.
+//  Copyright © 2017 Focus. All rights reserved.
 //
 
-#import "QLMDayDayUpZiShiTableViewController.h"
+#import "QLMSearchSecondPageTableViewController.h"
 
-@interface QLMDayDayUpZiShiTableViewController ()
+@interface QLMSearchSecondPageTableViewController ()
 
 @end
 
-@implementation QLMDayDayUpZiShiTableViewController
+@implementation QLMSearchSecondPageTableViewController
+
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController{
+    
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -29,7 +33,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
+//#pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 //#warning Incomplete implementation, return the number of sections

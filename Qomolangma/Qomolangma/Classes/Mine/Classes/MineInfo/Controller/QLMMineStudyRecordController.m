@@ -36,7 +36,7 @@
     QLMMineStudyRecordHeaderView *headerView = [[QLMMineStudyRecordHeaderView alloc] initWithFrame:CGRectMake(0, 0, 0, 170)];
     
     headerView.backgroundColor = [UIColor whiteColor];
-    
+        
     headerView.alpha = .6;
     
     tableView.tableHeaderView = headerView;

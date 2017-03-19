@@ -28,37 +28,26 @@
 
 //网络请求标记参数
 @property (nonatomic ,assign) BOOL needRefresh;
-
 //提示没网的button
 @property (nonatomic ,strong) UIButton *button;
-
 //提示没网的label
 @property (nonatomic ,strong) UILabel *label;
-
 //tableview
 @property (nonatomic ,strong) UITableView *tableView;
-
 //主数据
 @property (nonatomic ,strong) NSDictionary *homeDataDic;
-
 //专门存储每个data对应的模型
 @property (nonatomic ,strong) NSArray<NSArray *> *dataArray;
-
 //无线轮播图
 @property (nonatomic ,strong) NSArray<QLMCarousel *> *carouselArray;
-
 //天天涨姿势
 @property (nonatomic ,strong) NSArray<QLMFreeAudio *> *freeAudioArray;
-
 //行业达人
 @property (nonatomic ,strong) NSArray<NSArray <QLMSpecialColumn *> *> *specialColumnArray;
-
 //今今乐道
 @property (nonatomic ,strong) NSArray<QLMEverydayBook *> *everydayBookArray;
-
 //热门排行榜
 @property (nonatomic, strong) NSArray<QLMRankingData *> *rankingDataArray;
-
 //底部视图
 @property (nonatomic ,strong) NSArray<QLMRecommend *> *recommendArray;
 
@@ -67,9 +56,7 @@
 @implementation QLMHomeViewController
 
 static int refreash1;
-
 static int refreash2;
-
 static int refreash3;
 
 - (void)viewDidLoad {

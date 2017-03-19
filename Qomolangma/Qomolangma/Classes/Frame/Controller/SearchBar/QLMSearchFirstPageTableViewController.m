@@ -1,27 +1,46 @@
 //
-//  QLMDayDayUpZiShiTableViewController.m
+//  QLMSearchFirstPageTableViewController.m
 //  Qomolangma
 //
-//  Created by 张晨晖 on 2017/3/19.
-//  Copyright © 2017年 Focus. All rights reserved.
+//  Created by NowOrNever on 19/03/2017.
+//  Copyright © 2017 Focus. All rights reserved.
 //
 
-#import "QLMDayDayUpZiShiTableViewController.h"
-
-@interface QLMDayDayUpZiShiTableViewController ()
-
+#import "QLMSearchFirstPageTableViewController.h"
+#import "QLMSearchSecondPageTableViewController.h"
+@interface QLMSearchFirstPageTableViewController ()<UISearchResultsUpdating>
+@property (nonatomic, strong) UISearchController *searchController;
 @end
 
-@implementation QLMDayDayUpZiShiTableViewController
+@implementation QLMSearchFirstPageTableViewController
+
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController{
+    
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self setupUI];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)setupUI{
+    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    
+    QLMSearchSecondPageTableViewController *vc = [[QLMSearchSecondPageTableViewController alloc]init];
+    self.searchController = [[UISearchController alloc] initWithSearchResultsController:vc];
+    // Use the current view controller to update the search results.
+    self.searchController.searchResultsUpdater = self;
+    // Install the search bar as the table header.
+    self.navigationItem.titleView = self.searchController.searchBar;
+    // It is usually good to set the presentation context.
+    vc.navigationItem.titleView = self.searchController.searchBar;
+    
+    self.definesPresentationContext = YES;
 }
 
 - (void)didReceiveMemoryWarning {

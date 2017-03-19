@@ -8,6 +8,12 @@
 
 #import "QLMMineStudyRecordHeaderView.h"
 
+@interface QLMMineStudyRecordHeaderView ()
+
+@property (nonatomic, weak)UIButton *btnNickName;
+
+@end
+
 @implementation QLMMineStudyRecordHeaderView
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -25,7 +31,7 @@
     
     UIButton *btnHeaderIcon = [[UIButton alloc] init];
     
-    [btnHeaderIcon setBackgroundImage:[UIImage imageNamed:@"default_loading_head_60x60_"] forState:UIControlStateNormal];
+    [btnHeaderIcon setBackgroundImage:[UIImage imageNamed:@"headIcon"] forState:UIControlStateNormal];
     
     btnHeaderIcon.layer.cornerRadius = 35;
     btnHeaderIcon.layer.masksToBounds = YES;
@@ -39,7 +45,9 @@
     
     UIButton *btnNickName = [[UIButton alloc] init];
     
-    [btnNickName setTitle:@"未登陆" forState:UIControlStateNormal];
+    NSString *nickName = [[NSUserDefaults standardUserDefaults] valueForKey:kNicName];
+    
+    [btnNickName setTitle:nickName forState:UIControlStateNormal];
     
     [btnNickName setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
@@ -50,7 +58,8 @@
     [btnNickName sizeToFit];
     
     [self addSubview:btnNickName];
-
+    
+    self.btnNickName = btnNickName;
     
     [btnHeaderIcon mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.offset(20);
@@ -65,7 +74,7 @@
     
     
     NSArray *infoTitlesArray = @[@"学习时间", @"阅读书籍", @"连续学习"];
-    NSArray *detailTitlesArray = @[@"_", @"_", @"_"];
+    NSArray *detailTitlesArray = @[@"0", @"0", @"0"];
     
     NSMutableArray *infoViewsArray = [NSMutableArray array];
     
@@ -110,6 +119,7 @@
     }];
     
     return infoView;
+    
 }
 
 
