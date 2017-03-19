@@ -33,7 +33,7 @@
     
     [QLMMineInfo sharedMineInfo].isLogin = userName.length;
     
-    frameVc.selectedIndex = 4;
+//    frameVc.selectedIndex = 4;
     
     self.window.rootViewController = frameVc;
     [self.window makeKeyAndVisible];

@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QLMRankingData.h"
 
 @interface QLMHomeRankingButton : UIButton
+
+@property (nonatomic ,strong) QLMRankingData *rankingData;
 
 @end

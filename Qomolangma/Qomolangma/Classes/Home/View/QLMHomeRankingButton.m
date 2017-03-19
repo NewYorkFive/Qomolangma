@@ -7,8 +7,35 @@
 //
 
 #import "QLMHomeRankingButton.h"
+//#import <UIImageView+WebCache.h>
+#import <UIButton+WebCache.h>
 
 @implementation QLMHomeRankingButton
+
+- (void)setRankingData:(QLMRankingData *)rankingData {
+    
+    _rankingData = rankingData;
+    //数据放到图形上
+    [self sd_setImageWithURL:[NSURL URLWithString:rankingData.image_url] forState:UIControlStateNormal];
+    
+}
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    if(self = [super initWithFrame:frame]){
+        [self setupUI];
+    }
+    return self;
+}
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    // Initialization code
+    [self setupUI];
+}
+
+- (void)setupUI {
+    
+}
 
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
 
