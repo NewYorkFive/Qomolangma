@@ -12,10 +12,27 @@
 
 @property (nonatomic, assign) BOOL isLogin;
 
-@property (nonatomic, copy)NSString *nickName;
+//@property (nonatomic, copy) NSString *mineUserInfoUserName;
+//
+//@property (nonatomic, copy) NSString *headerIconName;
+//
+//@property (nonatomic, copy) NSString *mineUserInfoPassWord;
+//
+//@property (nonatomic, copy) NSString *mineUserInfoGender;
+//
+//@property (nonatomic, copy) NSString *mineUserInfoBornYear;
+//
+//@property (nonatomic, copy) NSString *mineUserInfoEducation;
+//
+//@property (nonatomic, copy) NSString *mineUserInfoIndustry;
+//
+//@property (nonatomic, copy) NSString *mineUserInfoCareer;
 
-@property (nonatomic, copy)NSString *headerIconName;
+@property (nonatomic, strong) NSMutableDictionary *infoDict;
 
 + (instancetype)sharedMineInfo;
 
 @end
+
+
+

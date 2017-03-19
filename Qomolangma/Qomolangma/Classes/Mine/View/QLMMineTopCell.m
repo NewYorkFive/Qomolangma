@@ -8,6 +8,12 @@
 
 #import "QLMMineTopCell.h"
 
+@interface QLMMineTopCell ()
+
+@property (nonatomic, strong) NSMutableArray<UILabel *> *labsArray;
+
+@end
+
 @implementation QLMMineTopCell
 
 - (instancetype) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -21,6 +27,8 @@
 
 - (void)setupUI
 {
+    self.labsArray = [NSMutableArray array];
+    
     self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     self.backgroundColor = [UIColor whiteColor];
@@ -58,6 +66,8 @@
     
     [infoView addSubview:labDetail];
     
+    [self.labsArray addObject:labDetail];
+    
     UILabel *labInfo = [UILabel fcs_labelWithColor:[UIColor lightGrayColor] andFontSize:12 andText:infoTitle];
     
     [infoView addSubview:labInfo];
@@ -73,6 +83,20 @@
     }];
     
     return infoView;
+}
+
+- (void)setDetailTitlesArray:(NSArray *)detailTitlesArray
+{
+    _detailTitlesArray = detailTitlesArray;
+    
+    if ([QLMMineInfo sharedMineInfo].isLogin)
+    {
+        for (NSInteger i = 0; i < detailTitlesArray.count ; i++)
+        {
+            self.labsArray[i].text = detailTitlesArray[i];
+        }
+
+    }
 }
 
 @end

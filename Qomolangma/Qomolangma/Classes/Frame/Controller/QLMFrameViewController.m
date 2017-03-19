@@ -38,7 +38,9 @@
     vc.title = title;
     vc.tabBarItem.image = [[UIImage imageNamed:[NSString stringWithFormat:@"tabbar_index_%zd_30x30_",index]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     vc.tabBarItem.selectedImage = [[UIImage imageNamed:[NSString stringWithFormat:@"tabbar_index_select_%zd_30x30_",index]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:vc];
+    
+#warning 别改我代码!!!!!
+    QLMNavigationController *navController = [[QLMNavigationController alloc]initWithRootViewController:vc];
     navController.navigationBar.tintColor = [UIColor fcs_colorWithHex:0x666666];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         UIViewController *vc = [((UINavigationController *)[self.childViewControllers firstObject]).childViewControllers firstObject];
