@@ -1,5 +1,5 @@
 //
-//  QLMPlayListDetailTableViewController.h
+//  QLMLoginViewController.h
 //  Qomolangma
 //
 //  Created by NowOrNever on 18/03/2017.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface QLMPlayListDetailTableViewController : UIViewController
+@interface QLMLoginViewController : UIViewController
 
 @end
