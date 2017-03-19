@@ -1,5 +1,5 @@
 //
-//  QLMJumpViewController.m
+//  QLMJ/Users/wanghuiping/Downloads/毛玻璃效果/毛玻璃效果/对图片处理的扩展类/UIImage+ImageEffects.humpViewController.m
 //  Qomolangma
 //
 //  Created by 王惠平 on 2017/3/18.
@@ -8,12 +8,15 @@
 
 #import "QLMJumpViewController.h"
 #import "STAlertView.h"
+#import "UIImage+ImageEffects.h"
 
 @interface QLMJumpViewController ()
 
 @property (nonatomic,assign) NSInteger index;
 
 @property (nonatomic,strong) UIImageView *imageView;
+
+@property (nonatomic,strong) UIImageView *backImageView;
 
 @end
 
@@ -45,6 +48,8 @@
 //    
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(click)];
     
+    self.navigationController.navigationBar.tintColor = [UIColor grayColor];
+
 }
 
 - (void)swipeClick:(UISwipeGestureRecognizer *)sender {
@@ -78,7 +83,20 @@
     
     _index++;
     
-    if (_index == 4) {
+    if (_index == 3) {
+        
+        //增加毛玻璃效果
+        self.backImageView = [[UIImageView alloc]initWithFrame:[UIScreen mainScreen].bounds];
+        
+        UIImage *image = [UIImage imageNamed:@"f9391e488f66457aa227ac634c9b246e_th.jpg"];
+        
+        UIImage *lastImage = [image applyDarkEffect];
+        
+        self.backImageView.image = lastImage;
+        self.backImageView.userInteractionEnabled = YES;
+        
+        [self.view addSubview:self.backImageView];
+        
         
         NSString *title = @"通知";
         NSString *message = @"您的手机已经欠费，速交！";
