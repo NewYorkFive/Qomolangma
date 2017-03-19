@@ -74,11 +74,12 @@
     }];
     
     //顶部"查看听书日历"
-    UILabel *label2 = [[UILabel alloc] init];
+    UIButton *label2 = [[UIButton alloc] init];
     [self.contentView addSubview:label2];
-    label2.text = @"查看全部";
-    label2.font = [UIFont systemFontOfSize:12];
-    label2.textColor = [UIColor grayColor];
+    [label2 setTitle:@"查看全部" forState:UIControlStateNormal];
+    label2.titleLabel.font = [UIFont systemFontOfSize:12];
+    [label2 setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    [label2 setAlpha:.6];
     [label2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(label.mas_centerY);
         make.right.equalTo(imageView.mas_left);
