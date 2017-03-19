@@ -23,7 +23,7 @@
 }
 
 - (void)setupUI
-{
+{    
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     
     [self.view addSubview:tableView];
