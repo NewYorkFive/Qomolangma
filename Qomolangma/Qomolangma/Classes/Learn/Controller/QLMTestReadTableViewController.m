@@ -33,7 +33,7 @@ static NSString *testCell = @"testCell";
     
     [self.tableView registerClass:[QLMTestReadTableViewCell class] forCellReuseIdentifier:testCell];
     [self setupUI];
-    }
+}
 
 - (void)setupUI {
     //去掉多余的分割线

@@ -10,14 +10,16 @@
 #import "QLMLearnCollectionViewCell.h"
 #import "QLMNavBarView.h"
 #import "QLMLearnViewFlowLayout.h"
-
-
-
+#import "QLMLearnFirstCellModel.h"
+#define BARVIEWWIDTH 160
+#define BARVIEWHEIGHT 36
 @interface QLMLearnViewController ()<QLMNavBarViewDelegate,QLMLearnCollectionViewCellDelegate>
 
 @property (nonatomic, strong)UICollectionView *collectionView;
 
 @property (nonatomic, strong)QLMNavBarView *learnBarView;
+
+@property (nonatomic, strong) NSArray<QLMLearnFirstCellModel *> *firstCellModelArray;
 
 @end
 
@@ -33,32 +35,27 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self loadData];
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
 
-//    self.collectionView.backgroundColor = [UIColor blueColor];
-//    [self.view addSubview:self.collectionView];
-
-    
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     
     //如果你不想让scrollView的内容自动调整，将这个属性设为NO
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    
     self.view.backgroundColor = [UIColor blueColor];
     [self.collectionView registerClass:[QLMLearnCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
     [self setupUI];
 }
-//- (instancetype)init {
-//}
+
 - (void)setupUI {
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     // 设置导航栏
     self.navigationController.navigationBar.alpha = 0;
     self.navigationController.navigationBar.backgroundColor = [UIColor whiteColor];
     //View
-    QLMNavBarView *learnBarView = [[QLMNavBarView alloc] initWithFrame:CGRectMake(0, 0, 100, 36)];
+    QLMNavBarView *learnBarView = [[QLMNavBarView alloc] initWithFrame:CGRectMake(0, 0, BARVIEWWIDTH, BARVIEWHEIGHT)];
     self.navigationItem.titleView = learnBarView;
     self.learnBarView = learnBarView;
     learnBarView.navBarDelegate = self;
@@ -84,15 +81,28 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0) {
-        NSLog(@"已定页面的tableView");
-    } else {
-        NSLog(@"推荐页面的tableView");
-    }
+//    UICollectionViewCell *cell;
+//    if (indexPath.row == 0) {
+//        NSLog(@"已定页面的tableView");
+//        cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"NULLCell" forIndexPath:indexPath];
+//        UIImageView *placeholderImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"QLMLearnCollectionViewCell *cell"]];
+//        [cell.contentView addSubview:placeholderImg];
+//        [placeholderImg mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.top.left.right.bottom.equalTo(cell.contentView).offset(0);
+//        }];
+//    } else {
+//        NSLog(@"推荐页面的tableView");
+//        cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+//        
+////        cell.learnCellDelegate = self;
+//    }
     
     QLMLearnCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    cell.learnCellDelegate = self;
     
+//    cell.learnCellDelegate = self;
+    cell.block = ^(UIViewController *vc){
+        [self.navigationController pushViewController:vc animated:YES];
+    };
     return cell;
 }
 
@@ -142,8 +152,19 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 
-
-
+- (void)loadData{
+    [[QLMNetworkTools sharedTools] requestWithType:GET andUrlStr:@"app/resource/getSubscribeList" andParams:nil andSuccess:^(id responseObject) {
+        NSArray *array = ((NSDictionary *)responseObject)[@"data"];
+        NSMutableArray<QLMLearnFirstCellModel *> *mArr = [NSMutableArray array];
+        for (int i = 0; i < array.count; i++) {
+            [mArr addObject:[QLMLearnFirstCellModel yy_modelWithDictionary:array[i]]];
+        }
+        self.firstCellModelArray = mArr.copy;
+        [self.collectionView reloadData];
+    } andFailture:^(NSError *error) {
+        NSLog(@"Error:%@",error);
+    }];
+}
 
 
 

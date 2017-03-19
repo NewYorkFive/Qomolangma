@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "QLMPurchasedModel.h"
 @interface QLMPurchasedCell : UICollectionViewCell
+
+@property (nonatomic, strong) QLMPurchasedModel *model;
 
 @property (weak, nonatomic) IBOutlet UILabel *botlabel;
 
