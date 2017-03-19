@@ -30,6 +30,6 @@
 
 
 ///获取已购Label模型数据
-+ (NSArray *)getPurchasedModelData;
+//+ (NSArray *)getPurchasedModelData;
 
 @end
