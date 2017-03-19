@@ -87,6 +87,9 @@
 		942401341E7E96B000D1DBD2 /* DLCycleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 942401221E7E96B000D1DBD2 /* DLCycleView.m */; };
 		942401351E7E96B000D1DBD2 /* ignore in Resources */ = {isa = PBXBuildFile; fileRef = 942401231E7E96B000D1DBD2 /* ignore */; };
 		942401361E7E96B000D1DBD2 /* ignore in Resources */ = {isa = PBXBuildFile; fileRef = 942401251E7E96B000D1DBD2 /* ignore */; };
+		9424018B1E7EBAC400D1DBD2 /* ignore in Resources */ = {isa = PBXBuildFile; fileRef = 942401861E7EBAC400D1DBD2 /* ignore */; };
+		9424018C1E7EBAC400D1DBD2 /* QLMSearchFirstPageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 942401881E7EBAC400D1DBD2 /* QLMSearchFirstPageTableViewController.m */; };
+		9424018D1E7EBAC400D1DBD2 /* QLMSearchSecondPageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9424018A1E7EBAC400D1DBD2 /* QLMSearchSecondPageTableViewController.m */; };
 		942CC1531E79AEC6004D3814 /* NSArray+FCSArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 942CC1421E79AEC6004D3814 /* NSArray+FCSArray.m */; };
 		942CC1541E79AEC6004D3814 /* NSAttributedString+FCSAttributedString.m in Sources */ = {isa = PBXBuildFile; fileRef = 942CC1441E79AEC6004D3814 /* NSAttributedString+FCSAttributedString.m */; };
 		942CC1551E79AEC6004D3814 /* NSDictionary+FCSDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 942CC1461E79AEC6004D3814 /* NSDictionary+FCSDictionary.m */; };
@@ -344,6 +347,11 @@
 		942401221E7E96B000D1DBD2 /* DLCycleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLCycleView.m; sourceTree = "<group>"; };
 		942401231E7E96B000D1DBD2 /* ignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ignore; sourceTree = "<group>"; };
 		942401251E7E96B000D1DBD2 /* ignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ignore; sourceTree = "<group>"; };
+		942401861E7EBAC400D1DBD2 /* ignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ignore; sourceTree = "<group>"; };
+		942401871E7EBAC400D1DBD2 /* QLMSearchFirstPageTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLMSearchFirstPageTableViewController.h; sourceTree = "<group>"; };
+		942401881E7EBAC400D1DBD2 /* QLMSearchFirstPageTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLMSearchFirstPageTableViewController.m; sourceTree = "<group>"; };
+		942401891E7EBAC400D1DBD2 /* QLMSearchSecondPageTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLMSearchSecondPageTableViewController.h; sourceTree = "<group>"; };
+		9424018A1E7EBAC400D1DBD2 /* QLMSearchSecondPageTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLMSearchSecondPageTableViewController.m; sourceTree = "<group>"; };
 		942CC1401E79AEC6004D3814 /* FCSCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCSCommon.h; sourceTree = "<group>"; };
 		942CC1411E79AEC6004D3814 /* NSArray+FCSArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+FCSArray.h"; sourceTree = "<group>"; };
 		942CC1421E79AEC6004D3814 /* NSArray+FCSArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+FCSArray.m"; sourceTree = "<group>"; };
@@ -909,6 +917,18 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		942401851E7EBAC400D1DBD2 /* SearchBar */ = {
+			isa = PBXGroup;
+			children = (
+				942401861E7EBAC400D1DBD2 /* ignore */,
+				942401871E7EBAC400D1DBD2 /* QLMSearchFirstPageTableViewController.h */,
+				942401881E7EBAC400D1DBD2 /* QLMSearchFirstPageTableViewController.m */,
+				942401891E7EBAC400D1DBD2 /* QLMSearchSecondPageTableViewController.h */,
+				9424018A1E7EBAC400D1DBD2 /* QLMSearchSecondPageTableViewController.m */,
+			);
+			path = SearchBar;
+			sourceTree = "<group>";
+		};
 		942CC13F1E79AEC6004D3814 /* FCSCommon */ = {
 			isa = PBXGroup;
 			children = (
@@ -1219,6 +1239,7 @@
 		94EBD1151E79395600F71272 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				942401851E7EBAC400D1DBD2 /* SearchBar */,
 				94691EDD1E7B9515008B00B7 /* QLMBaseViewController.h */,
 				94691EDE1E7B9515008B00B7 /* QLMBaseViewController.m */,
 				94EBD1211E79396000F71272 /* QLMFrameViewController.h */,
@@ -1533,6 +1554,7 @@
 				94EBD0FC1E7937D000F71272 /* ignore in Resources */,
 				B279D7A61E7BC0ED00504CFB /* tableview_pull_refresh@3x.png in Resources */,
 				942401261E7E96B000D1DBD2 /* ignore in Resources */,
+				9424018B1E7EBAC400D1DBD2 /* ignore in Resources */,
 				94EBD0F81E7937D000F71272 /* ignore in Resources */,
 				942401361E7E96B000D1DBD2 /* ignore in Resources */,
 				C41114E71E7E5B6F009E62A9 /* ignore in Resources */,
@@ -1622,6 +1644,7 @@
 				942401301E7E96B000D1DBD2 /* UIViewController+DLViewController.m in Sources */,
 				43AC98F11E7EB1AD00F74DDB /* QLMRankingData.m in Sources */,
 				B279D7A41E7BC0ED00504CFB /* LDRefreshHeaderView.m in Sources */,
+				9424018C1E7EBAC400D1DBD2 /* QLMSearchFirstPageTableViewController.m in Sources */,
 				B286A0001E7E6B0200EAB7CE /* MJRefreshBackStateFooter.m in Sources */,
 				43AC98F81E7EB1AE00F74DDB /* UIColor+HMAddition.m in Sources */,
 				942401281E7E96B000D1DBD2 /* NSArray+DLArray.m in Sources */,
@@ -1634,6 +1657,7 @@
 				942CC1591E79AEC6004D3814 /* UIColor+FCSColor.m in Sources */,
 				942CC15B1E79AEC6004D3814 /* UIViewController+FCSViewController.m in Sources */,
 				C41114DF1E7E5B6F009E62A9 /* QLMLearnDetailsTableViewController.m in Sources */,
+				9424018D1E7EBAC400D1DBD2 /* QLMSearchSecondPageTableViewController.m in Sources */,
 				B286A0061E7E6B0200EAB7CE /* NSBundle+MJRefresh.m in Sources */,
 				945D7FF51E7D33B100856835 /* QLMRectButton.m in Sources */,
 				B2869FFF1E7E6B0200EAB7CE /* MJRefreshBackNormalFooter.m in Sources */,
