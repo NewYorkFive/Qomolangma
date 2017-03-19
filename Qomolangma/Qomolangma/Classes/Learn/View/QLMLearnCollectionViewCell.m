@@ -39,7 +39,7 @@
     payedView.detailDelegate = self;
 }
 
-- (void)setBlock:(void (^)(UIViewController *))block{
+- (void)setBlock:(void (^)(QLMLearnDetailsTableViewController *))block{
     _block = block;
     self.payedView.block = block;
 }

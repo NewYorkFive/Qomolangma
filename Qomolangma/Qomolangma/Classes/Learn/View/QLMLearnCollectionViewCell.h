@@ -18,7 +18,8 @@
 @end
 
 @interface QLMLearnCollectionViewCell : UICollectionViewCell
-@property (nonatomic,copy) void(^block)(UIViewController *vc);
+//@property (nonatomic,copy) void(^block)(QLMLearnDetailsTableViewController *vc,QLMLearnFirstCellModel *model);
+@property (nonatomic,copy) void(^block)(QLMLearnDetailsTableViewController *vc);
 
 @property (nonatomic, weak) id<QLMLearnCollectionViewCellDelegate>learnCellDelegate;
 @end

@@ -57,11 +57,12 @@ static NSString *testCell = @"testCell";
     return 1;
 }
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+   
     QLMTestReadTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:testCell forIndexPath:indexPath];
+    cell.model = self.model;
     
-        return cell;
+    return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {

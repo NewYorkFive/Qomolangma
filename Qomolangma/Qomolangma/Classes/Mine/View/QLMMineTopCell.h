@@ -10,6 +10,6 @@
 
 @interface QLMMineTopCell : UITableViewCell
 
-
+@property (nonatomic, strong) NSArray *detailTitlesArray;
 
 @end

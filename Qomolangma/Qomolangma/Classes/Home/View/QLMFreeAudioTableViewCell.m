@@ -57,7 +57,7 @@
     //天天涨姿势
     UILabel *label = [[UILabel alloc] init];
     label.text = @"天天涨姿势";
-    label.font = [UIFont systemFontOfSize:16];
+    label.font = [UIFont systemFontOfSize:15];
     [self.contentView addSubview:label];
     [label mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.offset(16);

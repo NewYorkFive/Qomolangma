@@ -81,39 +81,26 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-//    UICollectionViewCell *cell;
-//    if (indexPath.row == 0) {
-//        NSLog(@"已定页面的tableView");
-//        cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"NULLCell" forIndexPath:indexPath];
-//        UIImageView *placeholderImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"QLMLearnCollectionViewCell *cell"]];
-//        [cell.contentView addSubview:placeholderImg];
-//        [placeholderImg mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.top.left.right.bottom.equalTo(cell.contentView).offset(0);
-//        }];
-//    } else {
-//        NSLog(@"推荐页面的tableView");
-//        cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-//        
-////        cell.learnCellDelegate = self;
-//    }
-    
+
     QLMLearnCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
 //    cell.learnCellDelegate = self;
-    cell.block = ^(UIViewController *vc){
+    cell.block = ^(QLMLearnDetailsTableViewController *vc){
         [self.navigationController pushViewController:vc animated:YES];
+        NSLog(@"------");
+        NSLog(@"%@",vc.model);
     };
     return cell;
 }
 
 //push
 - (void)learnCollectionViewCell:(QLMLearnCollectionViewCell *)learnCollectionViewCell withDetailsTableViewController:(QLMLearnDetailsTableViewController *)detailsTableViewVc WithIndexPath:(NSIndexPath *)indexPath {
-//    self.hidesBottomBarWhenPushed=YES; 
+
     [self.navigationController pushViewController:detailsTableViewVc animated:YES];
     detailsTableViewVc.navigationController.title = [NSString stringWithFormat:@"读古希腊神话学营销"];
 
     detailsTableViewVc.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:nil action:nil]];
-//    self.hidesBottomBarWhenPushed=NO;
+//    detailsTableViewVc.firstCellModelArray = self.firstCellModelArray;
 }
 
 //减速完成,实现与navBar的联动

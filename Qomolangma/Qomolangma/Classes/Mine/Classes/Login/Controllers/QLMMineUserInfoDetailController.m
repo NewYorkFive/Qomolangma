@@ -9,10 +9,11 @@
 #import "QLMMineUserInfoDetailController.h"
 #import "QLMMineUserInfoTopCell.h"
 #import "QLMMineUserInfoBottomCell.h"
+#import "QLMMineUserInfoBottomModel.h"
 
 @interface QLMMineUserInfoDetailController () <UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, strong)NSArray<NSArray *> *dataArray;
+@property (nonatomic, strong)NSArray<NSArray<QLMMineUserInfoBottomModel *> *> *modelsArray;
 
 @property (nonatomic, weak) UITableView *tableView;
 
@@ -31,10 +32,30 @@ static NSString * const topReuseID = @"topReuseID";
 
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    self.dataArray = @[@[@{@"name":@"昵称:",@"detail":@"点击设置"},@{@"name":@"性别:",@"detail":@"点击设置"},@{@"name":@"出生年份:",@"detail":@"点击设置"}],
-                       @[@{@"name":@"学历:",@"detail":@"点击设置"},@{@"name":@"行业:",@"detail":@"点击设置"},@{@"name":@"职业:",@"detail":@"点击设置"}]];
+    [self loadData];
     
     [self setupUI];
+}
+
+- (void)loadData
+{
+    NSArray *dataArray = @[@[@{@"name":@"昵称:",@"detail":@"点击设置", @"key":kNicName},@{@"name":@"性别:",@"detail":@"点击设置", @"key":kGender},@{@"name":@"出生年份:",@"detail":@"点击设置", @"key":kBornYear}],
+                           @[@{@"name":@"学历:",@"detail":@"点击设置", @"key":kEducation},@{@"name":@"行业:",@"detail":@"点击设置", @"key":kIndustry},@{@"name":@"职业:",@"detail":@"点击设置", @"key":kCareer}]];
+    
+    NSMutableArray *modelsArray = [NSMutableArray array];
+    
+    for (NSArray *tempArray in dataArray)
+    {
+        NSMutableArray *arrayM = [NSMutableArray array];
+        
+        for (NSDictionary *dict in tempArray)
+        {
+            [arrayM addObject:[QLMMineUserInfoBottomModel mineUserInfoBottomModelWithDict:dict]];
+        }
+        [modelsArray addObject:arrayM.copy];
+    }
+    
+    self.modelsArray = modelsArray.copy;
 }
 
 - (void)setupUI
@@ -74,7 +95,7 @@ static NSString * const topReuseID = @"topReuseID";
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return self.dataArray.count + 1;
+    return self.modelsArray.count + 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -83,7 +104,7 @@ static NSString * const topReuseID = @"topReuseID";
     {
         return 1;
     }
-    return self.dataArray[section - 1].count;
+    return self.modelsArray[section - 1].count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -99,9 +120,9 @@ static NSString * const topReuseID = @"topReuseID";
     {
         QLMMineUserInfoBottomCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseID forIndexPath:indexPath];
         
-        NSDictionary *dict = self.dataArray[indexPath.section - 1][indexPath.row];
+        QLMMineUserInfoBottomModel *model = self.modelsArray[indexPath.section - 1][indexPath.row];
         
-        cell.dicDescription = dict;
+        cell.model = model;
         
         return cell;
     }
@@ -150,7 +171,7 @@ static NSString * const topReuseID = @"topReuseID";
 
     if (indexPath.section == 0)
     {
-
+        
     }
 }
 
@@ -165,10 +186,10 @@ static NSString * const topReuseID = @"topReuseID";
         CGPoint offset =  self.tableView.contentOffset;
         
         self.tableView.contentOffset = CGPointMake(0, offset.y - rect.size.height);
+        
     }
 
     self.isKeyBoardShow = NO;
-
 }
 
 
@@ -184,6 +205,7 @@ static NSString * const topReuseID = @"topReuseID";
         CGPoint offset =  self.tableView.contentOffset;
         
         self.tableView.contentOffset = CGPointMake(0, offset.y + rect.size.height);
+        
     }
     
     
@@ -196,5 +218,7 @@ static NSString * const topReuseID = @"topReuseID";
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+
+
 
 @end

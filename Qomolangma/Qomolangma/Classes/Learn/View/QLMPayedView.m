@@ -8,7 +8,7 @@
 
 #import "QLMPayedView.h"
 #import "QLMLearnTableViewCell.h"
-#import "QLMLearnFirstCellModel.h"
+
 @interface QLMPayedView ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic,strong) NSArray<QLMLearnFirstCellModel *> *firstCellModelArray;
 @end
@@ -24,7 +24,6 @@
             [mArr addObject:[QLMLearnFirstCellModel yy_modelWithDictionary:array[i]]];
         }
         self.firstCellModelArray = mArr.copy;
-        NSLog(@"%@",self.firstCellModelArray);
         [self reloadData];
     } andFailture:^(NSError *error) {
         NSLog(@"Error:%@",error);
@@ -64,6 +63,7 @@
     
     QLMLearnTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"learnTableCell" forIndexPath:indexPath];
     cell.model = self.firstCellModelArray[indexPath.row];
+//    self.model = cell.model;
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -79,9 +79,11 @@
 
     //让controller push控制器
     QLMLearnDetailsTableViewController *detailsTableViewVc = [[QLMLearnDetailsTableViewController alloc] init];
-    NSLog(@"%@",self.block);
+    detailsTableViewVc.model = self.firstCellModelArray[indexPath.row];
+//    NSLog(@"%@",self.firstCellModelArray[indexPath.row]);
     self.block(detailsTableViewVc);
     
 //    [_detailDelegate payedView:self withDetailsTableViewController:detailsTableViewVc withIndexPath:indexPath];
+    
 }
 @end

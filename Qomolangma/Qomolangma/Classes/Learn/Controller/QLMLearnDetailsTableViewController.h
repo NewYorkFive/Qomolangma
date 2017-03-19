@@ -11,5 +11,6 @@
 
 @interface QLMLearnDetailsTableViewController : UIViewController
 
-@property (nonatomic, copy) QLMLearnFirstCellModel *model;
+@property (nonatomic, strong) QLMLearnFirstCellModel *model;
+
 @end
