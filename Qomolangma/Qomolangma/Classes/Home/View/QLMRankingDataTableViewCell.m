@@ -11,7 +11,10 @@
 
 @interface QLMRankingDataTableViewCell ()
 
-@property (nonatomic ,strong) UIView *view;
+//@property (nonatomic ,strong) UIView *view;
+@property (nonatomic ,strong) NSArray <QLMHomeRankingButton *> *buttonArray;
+
+@property (nonatomic ,strong) NSArray <UILabel *> *labelArray;
 
 @end
 
@@ -22,7 +25,14 @@
     _rankingDataArray = rankingDataArray;
     
     //把数据放在控件上
+    for (int i = 0; i < self.buttonArray.count; i++) {
+        self.buttonArray[i].rankingData = self.rankingDataArray[i];
+    }
     
+    for (int i = 0; i < self.labelArray.count; i++) {
+//        self.labelArray[i]
+        self.labelArray[i].text = self.rankingDataArray[i].resource_name;
+    }
     
 }
 
@@ -42,12 +52,12 @@
 - (void)setupUI {
     
     //初始化三个button的View
-    self.view = [[UIView alloc] init];
+//    self.view = [[UIView alloc] init];
     
     UILabel *label1 = [[UILabel alloc] init];
     [self.contentView addSubview:label1];
     label1.text = @"热门排行榜";
-    label1.font = [UIFont systemFontOfSize:14];
+    label1.font = [UIFont systemFontOfSize:16];
     [label1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.offset(16);
     }];
@@ -71,15 +81,15 @@
         make.right.equalTo(imageView.mas_left);
     }];
 
-    [self.contentView addSubview:self.view];
-    self.view.backgroundColor = [UIColor lightGrayColor];
-    [self.view mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(16);
-        make.right.offset(-16);
-        make.top.equalTo(label1.mas_bottom).offset(16);
-        make.height.offset(180);
-//        make.bottom.equalTo(self.contentView.mas_bottom).offset(-8);
-    }];
+//    [self.contentView addSubview:self.view];
+//    self.view.backgroundColor = [UIColor lightGrayColor];
+//    [self.view mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.offset(16);
+//        make.right.offset(-16);
+//        make.top.equalTo(label1.mas_bottom).offset(16);
+//        make.height.offset(180);
+////        make.bottom.equalTo(self.contentView.mas_bottom).offset(-8);
+//    }];
     
     NSMutableArray<UIButton *> *buttonsArray = [NSMutableArray array];
     
@@ -106,6 +116,8 @@
         make.height.offset(150);
     }];
     
+    self.buttonArray = buttonsArray.copy;
+    
     NSMutableArray *labsArray = [NSMutableArray array];
     
     for (NSInteger i = 0; i < 3; i++)
@@ -118,6 +130,8 @@
         
         [labsArray addObject:lab];
     }
+    
+    self.labelArray = labsArray.copy;
     
     [labsArray mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:20 leadSpacing:15 tailSpacing:15];
     

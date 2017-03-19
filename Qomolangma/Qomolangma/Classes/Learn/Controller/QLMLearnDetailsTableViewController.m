@@ -10,6 +10,7 @@
 #import "QLMLearnBottomButtonView.h"
 #import "QLMPresntViewController.h"
 #import "QLMLearnDetailTableViewCell.h"
+#import "QLMLearnViewController.h"
 
 #define  NAVBARHEIGHT 64
 #define TOPVIEWHEIGHT 123
@@ -23,7 +24,7 @@
 @property (nonatomic, strong) UIImageView *headerImgView;
 @property (nonatomic, strong) UILabel *lastEditionLabel;
 @property (nonatomic, strong) UILabel *lastTipLabel;
-@property (nonatomic,strong) NSArray<QLMLearnFirstCellModel *> *firstCellModelArray;
+
 @end
 
 @implementation QLMLearnDetailsTableViewController
@@ -43,20 +44,7 @@
     }
     return self;
 }
-///
-- (void)loadData{
-    [[QLMNetworkTools sharedTools] requestWithType:GET andUrlStr:@"app/resource/getSubscribeList" andParams:nil andSuccess:^(id responseObject) {
-        NSArray *array = ((NSDictionary *)responseObject)[@"data"];
-        NSMutableArray<QLMLearnFirstCellModel *> *mArr = [NSMutableArray array];
-        for (int i = 0; i < array.count; i++) {
-            [mArr addObject:[QLMLearnFirstCellModel yy_modelWithDictionary:array[i]]];
-        }
-        self.firstCellModelArray = mArr.copy;
-        [self.tableView reloadData];
-    } andFailture:^(NSError *error) {
-        NSLog(@"Error:%@",error);
-    }];
-}
+
 
 - (void)setupUI {
     
@@ -114,12 +102,16 @@
     }];
     
     frontView.testReadDelegate = self;
+    
+    
+    
 }
 
 //push
 - (void)learnBottomButtonView:(QLMLearnBottomButtonView *)learnBottomButtonView withTestReadTableViewController:(QLMTestReadTableViewController *)testReadTableViewController {
-    UIBarButtonItem *backItem=[[UIBarButtonItem alloc]init];
-    backItem.title=@"读古希腊神话学营销";
+    testReadTableViewController.model = self.model;
+    UIBarButtonItem *backItem=[[UIBarButtonItem alloc] init];
+    backItem.title = self.model.name;
 
     self.navigationItem.backBarButtonItem = backItem;
     [self.navigationController pushViewController:testReadTableViewController animated:YES];
@@ -150,8 +142,6 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGFloat offsetY = self.tableView.contentOffset.y;
-    NSLog(@"%f",offsetY);
-    
     if (offsetY < -200)
     {
         [self.backgroundImageVeiw mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -235,7 +225,7 @@
             make.bottom.equalTo(cell.contentView).offset(-10);
         }];
     } else if (indexPath.row == 3) {
-//        self.model = self.firstCellModelArray[indexPath.row];
+        
         //添加控件
         UILabel *lastUpdateLabel = [UILabel fcs_labelWithColor:[UIColor blackColor] andFontSize:12 andText:@"最近更新"];
         UILabel *lastEditionLabel = [UILabel fcs_labelWithColor:[UIColor blackColor] andFontSize:10 andText:@"3.01 读古希腊神话学营销 | 客户的心思猜不透?反其道而行之"];
@@ -243,6 +233,7 @@
         UILabel *lastTimeLabel = [UILabel fcs_labelWithColor:[UIColor lightGrayColor] andFontSize:10 andText:@"2017-03-15"];
         UILabel *lastTipLabel = [UILabel fcs_labelWithColor:[UIColor lightGrayColor] andFontSize:10 andText:@"别人还在养跟快的马的时候,福特已经开始造车了!"];
         self.lastTipLabel = lastTipLabel;
+        self.model = self.model;
         [cell.contentView addSubview:lastUpdateLabel];
         [cell.contentView addSubview:lastEditionLabel];
         [cell.contentView addSubview:lastTimeLabel];
@@ -265,20 +256,17 @@
             make.top.equalTo(lastTimeLabel.mas_bottom).offset(10);
             make.bottom.equalTo(cell.contentView).offset(-10);
         }];
-        
     }
-    
-    
     return cell;
 }
 
 //模型数据添加到控件
-//- (void)setModel:(QLMLearnFirstCellModel *)model{
-//    _model = model;
-//    
-//    self.lastEditionLabel.text = [NSString stringWithFormat:@"3.01 %@ | %@ | %@",model.name,model.author,model.person_info];
-//    self.lastTipLabel.text = model.content;
-//}
+- (void)setModel:(QLMLearnFirstCellModel *)model{
+    _model = model;
+    
+    self.lastEditionLabel.text = [NSString stringWithFormat:@"3.01 %@ | %@ | %@",model.name,model.author,model.person_info];
+    self.lastTipLabel.text = model.content;
+}
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 0.01;

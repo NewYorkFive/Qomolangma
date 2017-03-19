@@ -8,6 +8,7 @@
 
 #import "QLMBaseViewController.h"
 #import "QLMPlayListViewController.h"
+#import "QLMSearchFirstPageTableViewController.h"
 @interface QLMBaseViewController ()
 @property (nonatomic, strong) UIView *customBarItemView;
 @end
@@ -56,7 +57,7 @@
 }
 
 - (void)searchButtonClick{
-    NSLog(@"search");
+    [self.navigationController pushViewController:[[QLMSearchFirstPageTableViewController alloc]init] animated:YES];
 }
 
 
