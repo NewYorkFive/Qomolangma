@@ -14,6 +14,16 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
+  - AVOSCloud (4.1.0)
+  - AVOSCloudCrashReporting (4.1.0):
+    - AVOSCloud (= 4.1.0)
+    - AVOSCloudCrashReporting/_ARC (= 4.1.0)
+    - AVOSCloudCrashReporting/_NOARC (= 4.1.0)
+  - AVOSCloudCrashReporting/_ARC (4.1.0):
+    - AVOSCloud (= 4.1.0)
+    - AVOSCloudCrashReporting/_NOARC (= 4.1.0)
+  - AVOSCloudCrashReporting/_NOARC (4.1.0):
+    - AVOSCloud (= 4.1.0)
   - Masonry (1.0.2)
   - SDWebImage (4.0.0):
     - SDWebImage/Core (= 4.0.0)
@@ -24,6 +34,8 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking
+  - AVOSCloud
+  - AVOSCloudCrashReporting
   - Masonry
   - SDWebImage
   - SSKeychain
@@ -32,12 +44,14 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  AVOSCloud: c7a0514461c5cd612aa7917ed23379ca667d81c9
+  AVOSCloudCrashReporting: b3d29c1dfe92103ded1fde2ff9ee05db95a03cb9
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   SSKeychain: 55cc80f66f5c73da827e3077f02e43528897db41
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: d7f6a980a123e8bc366646ed354795b18cc86dd9
+PODFILE CHECKSUM: 6200f96fe75932d5b2b71279918050d6cd3a3067
 
 COCOAPODS: 1.2.0

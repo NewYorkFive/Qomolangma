@@ -13,5 +13,7 @@ pod 'SDWebImage'
 pod 'Masonry'
 pod 'SVProgressHUD'
 pod 'SSKeychain'
+pod 'AVOSCloud'
+pod 'AVOSCloudCrashReporting'
 
 end

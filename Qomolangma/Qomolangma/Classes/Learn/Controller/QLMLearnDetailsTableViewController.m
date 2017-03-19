@@ -9,6 +9,7 @@
 #import "QLMLearnDetailsTableViewController.h"
 #import "QLMLearnBottomButtonView.h"
 #import "QLMPresntViewController.h"
+#import "QLMLearnDetailTableViewCell.h"
 
 #define  NAVBARHEIGHT 64
 #define TOPVIEWHEIGHT 123
@@ -20,18 +21,21 @@
 @property (nonatomic, strong) UIImageView *backgroundImageVeiw;
 @property (nonatomic, strong) UIView *frontView;
 @property (nonatomic, strong) UIImageView *headerImgView;
-
+@property (nonatomic, strong) UILabel *lastEditionLabel;
+@property (nonatomic, strong) UILabel *lastTipLabel;
+@property (nonatomic,strong) NSArray<QLMLearnFirstCellModel *> *firstCellModelArray;
 @end
 
 @implementation QLMLearnDetailsTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+//    [self loadData];
     
     [self setupUI];
 
 }
+
 
 - (instancetype)init{
     if (self = [super init]) {
@@ -39,7 +43,20 @@
     }
     return self;
 }
-
+///
+- (void)loadData{
+    [[QLMNetworkTools sharedTools] requestWithType:GET andUrlStr:@"app/resource/getSubscribeList" andParams:nil andSuccess:^(id responseObject) {
+        NSArray *array = ((NSDictionary *)responseObject)[@"data"];
+        NSMutableArray<QLMLearnFirstCellModel *> *mArr = [NSMutableArray array];
+        for (int i = 0; i < array.count; i++) {
+            [mArr addObject:[QLMLearnFirstCellModel yy_modelWithDictionary:array[i]]];
+        }
+        self.firstCellModelArray = mArr.copy;
+        [self.tableView reloadData];
+    } andFailture:^(NSError *error) {
+        NSLog(@"Error:%@",error);
+    }];
+}
 
 - (void)setupUI {
     
@@ -57,7 +74,7 @@
   
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"detailsCell"];
+    [self.tableView registerClass:[QLMLearnDetailTableViewCell class] forCellReuseIdentifier:@"detailsCell"];
     //预估行高
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 300;
@@ -103,9 +120,8 @@
 - (void)learnBottomButtonView:(QLMLearnBottomButtonView *)learnBottomButtonView withTestReadTableViewController:(QLMTestReadTableViewController *)testReadTableViewController {
     UIBarButtonItem *backItem=[[UIBarButtonItem alloc]init];
     backItem.title=@"读古希腊神话学营销";
-//    backItem.tintColor=[UIColor colorWithRed:129 green:129 blue:129 alpha:1.0];
+
     self.navigationItem.backBarButtonItem = backItem;
-//    testReadTableViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:testReadTableViewController animated:YES];
 }
 - (void)learnBottomButtonView:(QLMLearnBottomButtonView *)learnBottomButtonView withPresntViewController:(QLMLearnModelViewController *)presntViewController {
@@ -117,8 +133,6 @@
     if (!_tableView)
     {
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-        
-//        _tableView.separatorColor = [UIColor colorWithWhite:.9 alpha:1];
         
         _tableView.backgroundColor = [UIColor clearColor];
         
@@ -174,15 +188,12 @@
 
     return 1;
 }
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
     return 4;
 }
-
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"detailsCell" forIndexPath:indexPath];
+    QLMLearnDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"detailsCell" forIndexPath:indexPath];
     
     if (indexPath.row <= 2) {
         UILabel *columnIntroduceLabel;
@@ -197,12 +208,12 @@
             //第二个cell 添加控件
             columnIntroduceLabel = [UILabel fcs_labelWithColor:[UIColor blackColor] andFontSize:16 andText:@"适宜人群"];
             readerCountLabel = [UILabel fcs_labelWithColor:[UIColor lightGrayColor] andFontSize:12 andText:@""];
-            columnTextLabel = [UILabel fcs_labelWithColor:[UIColor grayColor] andFontSize:12 andText:@"<<新战略营销>> 学习如何制定营销战略目标  <<How Brands Grow>> 教创业者如何实践正确的营销理念  <<疯传: 让你的产品, 思想, 行为像病毒一样入侵>> 教创业者如何打造传播力 <<新战略营销>> 学习如何制定营销战略目标  <<How Brands Grow>> 教创业者如何实践正确的营销理念  <<疯传: 让你的产品, 思想, 行为像病毒一样入侵>> 教创业者如何打造传播力 <<新战略营销>> 学习如何制定营销战略目标  <<How Brands Grow>> 教创业者如何实践正确的营销理念  <<疯传: 让你的产品, 思想, 行为像病毒一样入侵>> 教创业者如何打造传播力"];
+            columnTextLabel = [UILabel fcs_labelWithColor:[UIColor grayColor] andFontSize:12 andText:@"对古希腊神话感兴趣的人群,对产品营销有需求的创业者以及企业家.希望做好产品,学习营销之道的职场从业者."];
         } else if (indexPath.row == 2) {
             //第三个cell 添加控件
             columnIntroduceLabel = [UILabel fcs_labelWithColor:[UIColor blackColor] andFontSize:16 andText:@"订阅须知"];
             readerCountLabel = [UILabel fcs_labelWithColor:[UIColor lightGrayColor] andFontSize:12 andText:@""];
-            columnTextLabel = [UILabel fcs_labelWithColor:[UIColor grayColor] andFontSize:12 andText:@"<<新战略营销>> 学习如何制定营销战略目标  <<How Brands Grow>> 教创业者如何实践正确的营销理念  <<疯传: 让你的产品, 思想, 行为像病毒一样入侵>> 教创业者如何打造传播力 <<新战略营销>> 学习如何制定营销战略目标  <<How Brands Grow>> 教创业者如何实践正确的营销理念  <<疯传: 让你的产品, 思想, 行为像病毒一样入侵>> 教创业者如何打造传播力 <<新战略营销>> 学习如何制定营销战略目标  <<How Brands Grow>> 教创业者如何实践正确的营销理念  <<疯传: 让你的产品, 思想, 行为像病毒一样入侵>> 教创业者如何打造传播力"];
+            columnTextLabel = [UILabel fcs_labelWithColor:[UIColor grayColor] andFontSize:12 andText:@"1.第一季共讲12本营销书籍,共17期,每期30分钟左右(每周更新三期) 2.本课程为虚拟服务,订阅成功后概不退款,请您理解. 3.版权归原作者所有,严禁翻录成任何形式,严禁在任何第三方平台传播,违者将追究其法律责任"];
         }
         
         columnTextLabel.numberOfLines = 0;
@@ -222,15 +233,16 @@
             make.left.equalTo(cell.contentView).offset(10);
             make.right.equalTo(cell.contentView).offset(-10);
             make.bottom.equalTo(cell.contentView).offset(-10);
-//            make.bottom.lessThanOrEqualTo(@(-4));
-//            make.height.greaterThanOrEqualTo(@80);
         }];
     } else if (indexPath.row == 3) {
+//        self.model = self.firstCellModelArray[indexPath.row];
         //添加控件
         UILabel *lastUpdateLabel = [UILabel fcs_labelWithColor:[UIColor blackColor] andFontSize:12 andText:@"最近更新"];
         UILabel *lastEditionLabel = [UILabel fcs_labelWithColor:[UIColor blackColor] andFontSize:10 andText:@"3.01 读古希腊神话学营销 | 客户的心思猜不透?反其道而行之"];
+        self.lastEditionLabel = lastEditionLabel;
         UILabel *lastTimeLabel = [UILabel fcs_labelWithColor:[UIColor lightGrayColor] andFontSize:10 andText:@"2017-03-15"];
         UILabel *lastTipLabel = [UILabel fcs_labelWithColor:[UIColor lightGrayColor] andFontSize:10 andText:@"别人还在养跟快的马的时候,福特已经开始造车了!"];
+        self.lastTipLabel = lastTipLabel;
         [cell.contentView addSubview:lastUpdateLabel];
         [cell.contentView addSubview:lastEditionLabel];
         [cell.contentView addSubview:lastTimeLabel];
@@ -259,6 +271,15 @@
     
     return cell;
 }
+
+//模型数据添加到控件
+//- (void)setModel:(QLMLearnFirstCellModel *)model{
+//    _model = model;
+//    
+//    self.lastEditionLabel.text = [NSString stringWithFormat:@"3.01 %@ | %@ | %@",model.name,model.author,model.person_info];
+//    self.lastTipLabel.text = model.content;
+//}
+
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 0.01;
 }

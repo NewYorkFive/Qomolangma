@@ -8,6 +8,7 @@
 
 #import "QLMMineInfoModel.h"
 
+
 @implementation QLMMineInfoModel
 
 + (QLMMineInfoModel *)mineInfoModelWithDict: (NSDictionary *)dict
@@ -21,7 +22,7 @@
 
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key
 {
-    
+
 }
 
 @end

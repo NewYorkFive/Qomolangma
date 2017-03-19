@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "QLMLearnFirstCellModel.h"
 @interface QLMLearnTableViewCell : UITableViewCell
+
+@property (nonatomic, copy) QLMLearnFirstCellModel *model;
 
 @end

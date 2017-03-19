@@ -12,10 +12,11 @@
 - (void)prepareLayout {
     [super prepareLayout];
     
+    
     // 设置layout参数
     // item大小
-    self.itemSize = CGSizeMake([UIScreen mainScreen].bounds.size.width , [UIScreen mainScreen].bounds.size.height );
-    
+//    self.itemSize = CGSizeMake([UIScreen mainScreen].bounds.size.width , [UIScreen mainScreen].bounds.size.height );
+    self.itemSize = self.collectionView.bounds.size;
     
     
     self.minimumLineSpacing = 0;
