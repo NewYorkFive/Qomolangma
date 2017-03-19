@@ -7,12 +7,20 @@
 //
 
 #import "QLMPurchasedCell.h"
-
+#import <UIImageView+WebCache.h>
 @implementation QLMPurchasedCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+}
+
+- (void)setModel:(QLMPurchasedModel *)model{
+    _model = model;
+    
+    self.botlabel.text = [NSString stringWithFormat:@"%@%zd",model.name,arc4random_uniform(40)];
+    
+    [self.babyImageView sd_setImageWithURL:[NSURL URLWithString:model.image_url]];
 }
 
 @end

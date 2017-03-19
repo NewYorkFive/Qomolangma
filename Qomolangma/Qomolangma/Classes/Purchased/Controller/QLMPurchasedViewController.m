@@ -9,7 +9,7 @@
 
 #import "QLMPurchasedViewController.h"
 #import "QLMPurchasedModel.h"
-#import "QLMPurchasedLable.h"
+#import "QLMPurchasedLabel.h"
 #import "QLMPurchasedFlowLayout.h"
 #import "UIColor+FCSColor.h"
 #import "QLMPurchasedCollectionViewCell.h"
@@ -31,7 +31,7 @@
 //记录已购label
 @property (nonatomic,strong) NSMutableArray *labArray;
 
-@property (nonatomic, strong) NSArray<QLMPurchasedLable *> *purchasedLabelArray;
+@property (nonatomic, strong) NSArray<QLMPurchasedLabel *> *purchasedLabelArray;
 
 @end
 
@@ -69,7 +69,7 @@
     
     for (NSInteger i = 0 ; i < titlesArray.count; i++)
     {
-        QLMPurchasedLable *label = [QLMPurchasedLable qlm_labelWithColor:[UIColor colorWithRed:140 / 255.0 green:124 / 255.0 blue:108 / 255.0 alpha:1] andFontSize:15 andText:titlesArray[i]];
+        QLMPurchasedLabel *label = [QLMPurchasedLabel qlm_labelWithColor:[UIColor colorWithRed:140 / 255.0 green:124 / 255.0 blue:108 / 255.0 alpha:1] andFontSize:15 andText:titlesArray[i]];
         
         label.tag = i;
         
@@ -195,10 +195,10 @@
     int index = scrollView.contentOffset.x / scrollView.frame.size.width;
     
     //根据索引获取频道标签
-    QLMPurchasedLable *purchasedLabel = self.purchasedLabelArray[index];
+    QLMPurchasedLabel *purchasedLabel = self.purchasedLabelArray[index];
     
     //遍历频道数组,判断点击的频道和数组里的Label进行查找,找到了就改变颜色,否则保持默认状态
-    for (QLMPurchasedLable *label in self.purchasedLabelArray) {
+    for (QLMPurchasedLabel *label in self.purchasedLabelArray) {
         
         if (purchasedLabel == label) {
 
@@ -242,14 +242,14 @@
     int rightIndex = intIndex + 1;
     
     //根据索引获取标签
-    QLMPurchasedLable *leftPurchasedLabel = self.purchasedLabelArray[leftIndex];
+    QLMPurchasedLabel *leftPurchasedLabel = self.purchasedLabelArray[leftIndex];
 
     leftPurchasedLabel.scalePercent = leftPrecent;
     
     //判断右边的频道标签是否超出可用范围
     if (rightIndex < self.labArray.count) {
         
-        QLMPurchasedLable *rightPurchasedLabel = self.purchasedLabelArray[rightIndex];
+        QLMPurchasedLabel *rightPurchasedLabel = self.purchasedLabelArray[rightIndex];
         
         rightPurchasedLabel.scalePercent = rightPrecent;
         
@@ -261,7 +261,7 @@
 - (void)tapAction: (UITapGestureRecognizer *)sender
 {
     //获取已购Label
-    QLMPurchasedLable *purchasedLabel = (QLMPurchasedLable *)sender.view;
+    QLMPurchasedLabel *purchasedLabel = (QLMPurchasedLabel *)sender.view;
     
     //创建滚动的indexPath
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:purchasedLabel.tag inSection:0];
@@ -270,7 +270,7 @@
     [self.purCollentionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
     
     //遍历频道数组,判断点击的频道和数组里的Label进行查找,找到了就放大和改变颜色,否则保持默认状态
-    for (QLMPurchasedLable *label in self.purchasedLabelArray) {
+    for (QLMPurchasedLabel *label in self.purchasedLabelArray) {
         
         if (purchasedLabel == label) {
             

@@ -8,9 +8,11 @@
 
 #import "QLMMineUserInfoBottomCell.h"
 
-@interface QLMMineUserInfoBottomCell ()
+@interface QLMMineUserInfoBottomCell () <UITextFieldDelegate>
 
 @property (nonatomic, strong) UILabel *labInfo;
+
+@property (nonatomic, copy) void (^bottomCellBlock)(NSString *, NSString *);
 
 @end
 
@@ -42,6 +44,8 @@
     
     self.txtDetail = [[UITextField alloc] init];
     
+    self.txtDetail.delegate = self;
+    
     self.txtDetail.textColor = [UIColor grayColor];
     
     self.txtDetail.font = [UIFont systemFontOfSize:14];
@@ -53,16 +57,28 @@
         make.top.bottom.offset(0);
         make.right.offset(-12);
     }];
-    
 }
 
-- (void)setDicDescription:(NSDictionary *)dicDescription
+
+- (void)setModel:(QLMMineUserInfoBottomModel *)model
 {
-    _dicDescription = dicDescription;
+    _model = model;
     
-    self.labInfo.text = dicDescription[@"name"];
+    self.labInfo.text = model.name;
     
-    self.txtDetail.text = dicDescription[@"detail"];
+    self.txtDetail.text = model.detail;
 }
+
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
+{
+    
+    [[NSUserDefaults standardUserDefaults] setObject:self.txtDetail.text forKey:self.model.key];
+    
+    [[QLMMineInfo sharedMineInfo].infoDict setObject:self.txtDetail.text forKey:self.model.key];
+
+    return YES;
+}
+
 
 @end

@@ -7,13 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QLMMineUserInfoBottomModel.h"
 
 @interface QLMMineUserInfoBottomCell : UITableViewCell
 
 /**
  设置cell上显示内容的字典
  */
-@property (nonatomic, strong)NSDictionary *dicDescription;
+@property (nonatomic, strong)QLMMineUserInfoBottomModel *model;
 
 /**
  用于修改个人信息的textField

@@ -31,16 +31,18 @@
     
     self.imgIcon.contentMode = UIViewContentModeScaleAspectFill;
     
-    self.imgIcon.image = [UIImage imageNamed:@"default_loading_head_60x60_"];
+    self.imgIcon.image = [UIImage imageNamed:@"headIcon"];
+    
+    self.imgIcon.layer.cornerRadius = 40;
+    self.imgIcon.layer.masksToBounds = YES;
     
     [self.contentView addSubview:self.imgIcon];
     
     [self.imgIcon mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.offset(25);
         make.centerX.offset(0);
-        make.height.width.offset(70);
+        make.height.width.offset(80);
     }];
-    
     
     UIImageView *imgCamera = [[UIImageView alloc] init];
 
@@ -61,7 +63,6 @@
         make.top.equalTo(self.imgIcon.mas_bottom).offset(20);
         make.centerX.offset(0);
     }];
-    
 }
 
 - (void)setIconName:(NSString *)iconName
@@ -69,6 +70,8 @@
     _iconName = iconName;
     
     self.imgIcon.image = [UIImage imageNamed:iconName];
+    
+    
 }
 
 @end

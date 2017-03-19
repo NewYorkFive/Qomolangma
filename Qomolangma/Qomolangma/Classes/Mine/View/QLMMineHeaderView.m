@@ -8,6 +8,14 @@
 
 #import "QLMMineHeaderView.h"
 
+@interface QLMMineHeaderView ()
+
+@property (nonatomic, weak) UIButton *btnNickName;
+@property (nonatomic, weak) UIButton *btnHeaderIcon;
+
+
+@end
+
 @implementation QLMMineHeaderView
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -30,12 +38,11 @@
     
     UIButton *btnHeaderIcon = [[UIButton alloc] init];
     
-    [btnHeaderIcon setBackgroundImage:[UIImage imageNamed:@"default_loading_head_60x60_"] forState:UIControlStateNormal];
     
     btnHeaderIcon.layer.cornerRadius = 35;
     btnHeaderIcon.layer.masksToBounds = YES;
     
-    btnHeaderIcon.layer.borderWidth = 3;
+    btnHeaderIcon.layer.borderWidth = 1.5;
     btnHeaderIcon.layer.borderColor = [UIColor whiteColor].CGColor;
     
     [btnHeaderIcon addTarget:self action:@selector(btnHeaderIconAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -43,8 +50,6 @@
     [self addSubview:btnHeaderIcon];
     
     UIButton *btnNickName = [[UIButton alloc] init];
-    
-    [btnNickName setTitle:@"未登陆" forState:UIControlStateNormal];
     
     [btnNickName setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
@@ -55,6 +60,22 @@
     [btnNickName sizeToFit];
     
     [self addSubview:btnNickName];
+    
+    self.btnNickName = btnNickName;
+    self.btnHeaderIcon = btnHeaderIcon;
+    
+    if ([QLMMineInfo sharedMineInfo].isLogin)
+    {
+        [btnNickName setTitle:self.nickName forState:UIControlStateNormal];
+        [btnHeaderIcon setBackgroundImage:[UIImage imageNamed:@"headIcon"] forState:UIControlStateNormal];
+    }
+    else
+    {
+        [btnNickName setTitle:@"未登陆" forState:UIControlStateNormal];
+        [btnHeaderIcon setBackgroundImage:[UIImage imageNamed:@"default_loading_head_60x60_"] forState:UIControlStateNormal];
+        
+    }
+    
     
     [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.bottom.right.offset(0);
@@ -84,5 +105,28 @@
 
 }
 
+- (void)setNickName:(NSString *)nickName
+{
+    _nickName = nickName;
+    
+    if ([QLMMineInfo sharedMineInfo].isLogin)
+    {
+        [self.btnNickName setTitle:self.nickName forState:UIControlStateNormal];
+        
+        [self.btnHeaderIcon setBackgroundImage:[UIImage imageNamed:@"headIcon"] forState:UIControlStateNormal];
+    }
+}
+
+- (void)setHeaderIconName:(NSString *)headerIconName
+{
+    _headerIconName = headerIconName;
+    
+    if ([QLMMineInfo sharedMineInfo].isLogin)
+    {
+        [self.btnNickName setTitle:self.nickName forState:UIControlStateNormal];
+        
+    }
+    
+}
 
 @end

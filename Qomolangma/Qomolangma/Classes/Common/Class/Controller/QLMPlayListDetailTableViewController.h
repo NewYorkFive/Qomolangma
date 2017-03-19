@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface QLMPlayListDetailTableViewController : UITableViewController
+@interface QLMPlayListDetailTableViewController : UIViewController
 
 @end

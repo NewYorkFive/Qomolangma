@@ -14,10 +14,11 @@
 #import "QLMMineHeaderView.h"
 #import "QLMMineLoginSelectController.h"
 #import "QLMMineUserInfoDetailController.h"
+#import "QLMMineAnimator.h"
 
 #define BACK_GROUND_IMAGE_VIEW_HEIGHT 245
 
-@interface QLMMineViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface QLMMineViewController () <UITableViewDelegate, UITableViewDataSource, UIViewControllerTransitioningDelegate>
 
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -35,6 +36,11 @@
 
 @property (nonatomic, strong) NSArray<NSArray *> *controllerNamesArray;
 
+@property (nonatomic, strong)  QLMMineAnimator *animator;
+
+@property (nonatomic, strong) QLMMineHeaderView *headerView;
+
+
 @end
 
 static NSString * const reuseID = @"reuseID";
@@ -43,17 +49,21 @@ static NSString * const topReuseID = @"topReuseID";
 
 static NSString * const headerFooterReuseID = @"headerFooterReuseID";
 
+
 @implementation QLMMineViewController
+
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+#warning isLoginChange
+//    [QLMMineInfo sharedMineInfo].isLogin = NO;
+
     [self loadMinInfoData];
     
     [self setupUI];
-    
-    [QLMMineInfo sharedMineInfo].isLogin = YES;
 }
 
 - (void) loadMinInfoData
@@ -80,22 +90,33 @@ static NSString * const headerFooterReuseID = @"headerFooterReuseID";
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
 
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    self.navigationController.navigationBar.hidden = YES;
     
+//    [self.navigationController setNavigationBarHidden:YES animated:YES];
     
-    
+    if ([QLMMineInfo sharedMineInfo].isLogin)
+    {
+        NSString *nickName = [[NSUserDefaults standardUserDefaults] valueForKey:kNicName];
+        
+        self.headerView.nickName = nickName;
+        
+        self.headerView.headerIconName = @"headIcon";
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:YES];
 
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+//    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    
+    self.navigationController.navigationBar.hidden = NO;
+
 }
 
 - (void)setupUI
 {
-    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(backAction:)];
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:nil];
     [self.navigationController.navigationBar setTintColor:[UIColor lightGrayColor]];
     
     self.imgBackground = [[UIImageView alloc] init];
@@ -114,30 +135,42 @@ static NSString * const headerFooterReuseID = @"headerFooterReuseID";
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
-    QLMMineHeaderView *headerView = [[QLMMineHeaderView alloc] initWithFrame:CGRectMake(0, 0, 0, 200)];
+    self.headerView = [[QLMMineHeaderView alloc] initWithFrame:CGRectMake(0, 0, 0, 200)];
     
     __weak typeof(self) weakSelf = self;
     
-    [headerView setModalBlock:^{
+    
+    [self.headerView setModalBlock:^{
         
         if ([QLMMineInfo sharedMineInfo].isLogin)
         {
+            
             QLMMineUserInfoDetailController *userInfoDetailVC = [[QLMMineUserInfoDetailController alloc] init];
+            
+
             
             [weakSelf.navigationController pushViewController:userInfoDetailVC animated:YES];
         }
         else
         {
+            weakSelf.navigationController.navigationBar.hidden = YES;
+            
             QLMMineLoginSelectController *loginSelectController = [[QLMMineLoginSelectController alloc] init];
             
             UINavigationController *navC = [[UINavigationController alloc] initWithRootViewController:loginSelectController];
+            
+            weakSelf.animator = [[QLMMineAnimator alloc] init];
+            
+            navC.transitioningDelegate = weakSelf.animator;
+            
+            navC.modalPresentationStyle = UIModalPresentationCustom;
             
             [weakSelf presentViewController:navC animated:YES completion:nil];
         }
         
     }];
     
-    self.tableView.tableHeaderView = headerView;
+    self.tableView.tableHeaderView = self.headerView;
     
     [self.tableView registerClass:[QLMMineInfoCell class] forCellReuseIdentifier:reuseID];
     
@@ -187,6 +220,12 @@ static NSString * const headerFooterReuseID = @"headerFooterReuseID";
     if (indexPath.section == 0)
     {
         QLMMineTopCell *cell = [tableView dequeueReusableCellWithIdentifier:topReuseID forIndexPath:indexPath];
+        
+        if ([QLMMineInfo sharedMineInfo].isLogin)
+        {
+            cell.detailTitlesArray = @[@"0", @"0", @"0"];
+        }
+        
         return cell;
     }
     
@@ -291,10 +330,8 @@ static NSString * const headerFooterReuseID = @"headerFooterReuseID";
     }
     
     [self.navigationController pushViewController:[self creatViewControllerWithClassName:className andWithTitle:title] animated:YES];
-    
-    
-}
 
+}
 
 - (UIViewController *)creatViewControllerWithClassName: (NSString *)className andWithTitle: (NSString *)title;
 {
@@ -310,16 +347,5 @@ static NSString * const headerFooterReuseID = @"headerFooterReuseID";
     
     return viewController;
 }
-
-- (void)backAction: (UIBarButtonItem *)sender
-{
-    
-    
-    
-}
-
-
-
-    
 
 @end
