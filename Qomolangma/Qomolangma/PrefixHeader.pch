@@ -22,8 +22,9 @@
 #define kScreenBounds [UIScreen mainScreen].bounds
 #define kNavBarHeight 64
 #define kTabBarHeight 49
-
-
+#define kUserName @"userName"
+#define kPassWord @"passWord"
+#define kServiceName @"QomulangmaServiceName"
 
 
 //导入 公共的类
@@ -31,8 +32,9 @@
 #import "YYModel.h"
 #import "FCSCommon.h"
 #import "QLMNetworkTools.h"
-
-
+#import <SVProgressHUD.h>
+#import <SSKeychain.h>
+#import "QLMMineInfo.h"
 
 
 //自定义NSLog

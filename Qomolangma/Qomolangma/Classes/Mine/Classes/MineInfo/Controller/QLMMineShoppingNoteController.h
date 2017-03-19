@@ -6,8 +6,8 @@
 //  Copyright © 2017年 Focus. All rights reserved.
 //
 
-#import "QLMBaseViewController.h"
+#import <UIKit/UIKit.h>
 
-@interface QLMMineShoppingNoteController : QLMBaseViewController
+@interface QLMMineShoppingNoteController : UIViewController
 
 @end

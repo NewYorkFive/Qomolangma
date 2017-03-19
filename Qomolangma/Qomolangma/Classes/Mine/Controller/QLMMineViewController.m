@@ -13,7 +13,7 @@
 #import "QLMMineTableViewHeaderFooterView.h"
 #import "QLMMineHeaderView.h"
 #import "QLMMineLoginSelectController.h"
-#import "QLMBaseViewController.h"
+#import "QLMMineUserInfoDetailController.h"
 
 #define BACK_GROUND_IMAGE_VIEW_HEIGHT 245
 
@@ -53,6 +53,7 @@ static NSString * const headerFooterReuseID = @"headerFooterReuseID";
     
     [self setupUI];
     
+    [QLMMineInfo sharedMineInfo].isLogin = YES;
 }
 
 - (void) loadMinInfoData
@@ -78,13 +79,18 @@ static NSString * const headerFooterReuseID = @"headerFooterReuseID";
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.navigationController.navigationBar.hidden = YES;
+
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    
+    
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:YES];
-    self.navigationController.navigationBar.hidden = NO;
+
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 - (void)setupUI
@@ -113,11 +119,21 @@ static NSString * const headerFooterReuseID = @"headerFooterReuseID";
     __weak typeof(self) weakSelf = self;
     
     [headerView setModalBlock:^{
-        QLMMineLoginSelectController *loginSelectController = [[QLMMineLoginSelectController alloc] init];
         
-        UINavigationController *navC = [[UINavigationController alloc] initWithRootViewController:loginSelectController];
-        
-        [weakSelf presentViewController:navC animated:YES completion:nil];
+        if ([QLMMineInfo sharedMineInfo].isLogin)
+        {
+            QLMMineUserInfoDetailController *userInfoDetailVC = [[QLMMineUserInfoDetailController alloc] init];
+            
+            [weakSelf.navigationController pushViewController:userInfoDetailVC animated:YES];
+        }
+        else
+        {
+            QLMMineLoginSelectController *loginSelectController = [[QLMMineLoginSelectController alloc] init];
+            
+            UINavigationController *navC = [[UINavigationController alloc] initWithRootViewController:loginSelectController];
+            
+            [weakSelf presentViewController:navC animated:YES completion:nil];
+        }
         
     }];
     
@@ -280,13 +296,13 @@ static NSString * const headerFooterReuseID = @"headerFooterReuseID";
 }
 
 
-- (QLMBaseViewController *)creatViewControllerWithClassName: (NSString *)className andWithTitle: (NSString *)title;
+- (UIViewController *)creatViewControllerWithClassName: (NSString *)className andWithTitle: (NSString *)title;
 {
     Class cls = NSClassFromString(className);
     
-    QLMBaseViewController *viewController = [[cls alloc] init];
+    UIViewController *viewController = [[cls alloc] init];
     
-    NSAssert([viewController isKindOfClass:[QLMBaseViewController class]], @"%@名字错了", className);
+    NSAssert([viewController isKindOfClass:[UIViewController class]], @"%@名字错了", className);
     
     viewController.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
@@ -301,5 +317,9 @@ static NSString * const headerFooterReuseID = @"headerFooterReuseID";
     
     
 }
+
+
+
+    
 
 @end
