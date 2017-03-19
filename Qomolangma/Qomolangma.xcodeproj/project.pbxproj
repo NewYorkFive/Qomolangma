@@ -627,14 +627,14 @@
 			children = (
 				438F315E1E7D795C0067591C /* Cycle */,
 				438F31671E7D795C0067591C /* ignore */,
-				438F31721E7D795C0067591C /* QLMspecialColumnTableViewCell.h */,
-				438F31731E7D795C0067591C /* QLMspecialColumnTableViewCell.m */,
-				438F31681E7D795C0067591C /* QLMEverydayBookTableViewCell.h */,
-				438F31691E7D795C0067591C /* QLMEverydayBookTableViewCell.m */,
 				438F316A1E7D795C0067591C /* QLMFreeAudioTableViewCell.h */,
 				438F316B1E7D795C0067591C /* QLMFreeAudioTableViewCell.m */,
 				438F316E1E7D795C0067591C /* QLMPlayBtn.h */,
 				438F316F1E7D795C0067591C /* QLMPlayBtn.m */,
+				438F31721E7D795C0067591C /* QLMspecialColumnTableViewCell.h */,
+				438F31731E7D795C0067591C /* QLMspecialColumnTableViewCell.m */,
+				438F31681E7D795C0067591C /* QLMEverydayBookTableViewCell.h */,
+				438F31691E7D795C0067591C /* QLMEverydayBookTableViewCell.m */,
 				438F31701E7D795C0067591C /* QLMRankingDataTableViewCell.h */,
 				438F31711E7D795C0067591C /* QLMRankingDataTableViewCell.m */,
 				438F316C1E7D795C0067591C /* QLMHomeFootView.h */,
@@ -1138,6 +1138,7 @@
 				TargetAttributes = {
 					948A5CDF1E793258006A595C = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = XCNQSAZY6S;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -1465,7 +1466,7 @@
 			baseConfigurationReference = 3F9EEF78AF999A9FC3CBA96E /* Pods-Qomolangma.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = XCNQSAZY6S;
 				GCC_PREFIX_HEADER = Qomolangma/PrefixHeader.pch;
 				INFOPLIST_FILE = Qomolangma/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1480,7 +1481,7 @@
 			baseConfigurationReference = 742B4AF91CA908E0FB52156F /* Pods-Qomolangma.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = XCNQSAZY6S;
 				GCC_PREFIX_HEADER = Qomolangma/PrefixHeader.pch;
 				INFOPLIST_FILE = Qomolangma/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

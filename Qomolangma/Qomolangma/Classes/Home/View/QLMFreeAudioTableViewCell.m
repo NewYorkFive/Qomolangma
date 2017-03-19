@@ -109,7 +109,7 @@
     [_button1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(imageView1.mas_centerY);
         make.left.equalTo(imageView1.mas_right);
-        make.width.offset(240);
+        make.width.offset(280);
     }];
     
     //小箭头2
@@ -126,7 +126,7 @@
     [_button2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(imageView2.mas_centerY);
         make.left.equalTo(imageView2.mas_right);
-        make.width.offset(240);
+        make.width.offset(280);
     }];
     
     //小箭头3
@@ -143,7 +143,7 @@
     [_button3 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(imageView3.mas_centerY);
         make.left.equalTo(imageView3.mas_right);
-        make.width.offset(240);
+        make.width.offset(280);
     }];
     
     //小箭头4
@@ -160,7 +160,7 @@
     [_button4 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(imageView4.mas_centerY);
         make.left.equalTo(imageView4.mas_right);
-        make.width.offset(240);
+        make.width.offset(280);
     }];
     
     //小箭头5
@@ -178,7 +178,7 @@
         make.centerY.equalTo(imageView5.mas_centerY);
         make.left.equalTo(imageView5.mas_right);
         make.bottom.equalTo(self.contentView.mas_bottom).offset(-40);
-        make.width.offset(240);
+        make.width.offset(280);
     }];
     
     //播放按钮

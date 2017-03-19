@@ -16,6 +16,8 @@
 
 @property (nonatomic, weak) UITableView *tableView;
 
+@property (nonatomic, assign) BOOL isKeyBoardShow;
+
 @end
 
 static NSString * const reuseID = @"reuseID";
@@ -66,6 +68,8 @@ static NSString * const topReuseID = @"topReuseID";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    
+    self.isKeyBoardShow = NO;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -153,34 +157,43 @@ static NSString * const topReuseID = @"topReuseID";
 
 - (void)keyboardWillHide: (NSNotification *)sender
 {
-    CGRect rect = [sender.userInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue];
     
-    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, -rect.size.height, 0);
-    CGPoint offset =  self.tableView.contentOffset;
-    self.tableView.contentOffset = CGPointMake(0, offset.y - rect.size.height);
+    if (self.isKeyBoardShow)
+    {
+        CGRect rect = [sender.userInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+        
+        CGPoint offset =  self.tableView.contentOffset;
+        
+        self.tableView.contentOffset = CGPointMake(0, offset.y - rect.size.height);
+    }
 
-    
-    [UIView animateWithDuration:.2 animations:^{
-        [self.view layoutIfNeeded];
-    }];
+    self.isKeyBoardShow = NO;
+
 }
+
+
 
 - (void)keyboardWillShow: (NSNotification *)sender
 {
-    CGRect rect = [sender.userInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue];
     
-    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, rect.size.height, 0);
-    CGPoint offset =  self.tableView.contentOffset;
     
-    self.tableView.contentOffset = CGPointMake(0, offset.y + rect.size.height);
+    if (!self.isKeyBoardShow)
+    {
+        CGRect rect = [sender.userInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+        
+        CGPoint offset =  self.tableView.contentOffset;
+        
+        self.tableView.contentOffset = CGPointMake(0, offset.y + rect.size.height);
+    }
     
-    [UIView animateWithDuration:.2 animations:^{
-        [self.view layoutIfNeeded];
-    }];
+    
+    self.isKeyBoardShow = YES;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    
+    [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
