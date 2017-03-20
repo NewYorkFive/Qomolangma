@@ -79,9 +79,10 @@
     }
 }
 
+
 //点击cell响应
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     //让controller push控制器
     QLMLearnDetailsTableViewController *detailsTableViewVc = [[QLMLearnDetailsTableViewController alloc] init];
     detailsTableViewVc.model = self.firstCellModelArray[indexPath.row];

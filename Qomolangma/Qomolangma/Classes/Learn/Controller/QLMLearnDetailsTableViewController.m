@@ -29,6 +29,15 @@
 
 @implementation QLMLearnDetailsTableViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+}
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -53,7 +62,7 @@
     [self.view addSubview:self.backgroundImageVeiw];
     
     [self.backgroundImageVeiw mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.offset(0);
+        make.top.left.right.equalTo(self.view);
         make.height.offset(BACK_GROUND_IMAGE_VIEW_HEIGHT);
     }];
   
@@ -71,24 +80,9 @@
     
     //去掉多余的分割线
     self.tableView.tableFooterView = [[UIView alloc] init];
-   /*
-    //tableHeaderView
-    
-    UIImageView *headerImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"userinfo_top_bg"]];
-//    headerImgView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 200);
-    self.headerImgView = headerImgView;
-    [self.tableView.tableHeaderView addSubview:headerImgView];
-    [headerImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.equalTo(self.tableView);
-        make.height.offset(BACK_GROUND_IMAGE_VIEW_HEIGHT);
-    }];
-    [_headerImgView sizeToFit];
-    */
     self.navigationController.navigationBar.alpha = 0;
-    
     self.navigationController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:nil action:nil];
 
-    
     //Bottomview
     QLMLearnBottomButtonView *frontView = [[QLMLearnBottomButtonView alloc] initWithFrame:CGRectZero];
     self.frontView = frontView;
@@ -100,7 +94,6 @@
     }];
     
     frontView.testReadDelegate = self;
-    
 }
 
 //push - modal
@@ -135,7 +128,12 @@
     return _tableView;
 }
 
-
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    
+}
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGFloat offsetY = self.tableView.contentOffset.y;
     if (offsetY < -200)
@@ -143,21 +141,7 @@
         [self.backgroundImageVeiw mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.offset(BACK_GROUND_IMAGE_VIEW_HEIGHT - (offsetY - 200) * .5);
         }];
-        /*
-        //设置高度
-        CGFloat h = _headerImgView.frame.size.height;
-       
-        [_headerImgView sizeToFit];
-        //改变headerView的高度
-        CGRect newFrame = self.tableView.tableHeaderView.frame;
-        newFrame.size.height = newFrame.size.height - (offsetY-200);
-        self.tableView.tableHeaderView.frame = newFrame;
-        [self.tableView beginUpdates];
-        [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
-        [self.tableView endUpdates];
-        */
     }
-    
     //导航栏透明度
 
     if (offsetY > -200) {
@@ -165,7 +149,6 @@
     } else {
         self.navigationController.navigationBar.alpha = 0;
     }
-
 }
 
 #pragma mark - Table view data source
@@ -250,7 +233,6 @@
         [lastTipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(lastEditionLabel);
             make.top.equalTo(lastTimeLabel.mas_bottom).offset(10);
-//            make.bottom.equalTo(cell.contentView).offset(-10);
         }];
         
         UILabel *lastEditionLabel2 = [UILabel fcs_labelWithColor:[UIColor blackColor] andFontSize:10 andText:@"2.23 读古希腊神话学营销 | 客户的心思猜不透?反其道而行之"];
