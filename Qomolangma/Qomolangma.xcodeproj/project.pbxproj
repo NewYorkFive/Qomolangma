@@ -13,6 +13,10 @@
 		315F96F31E7EC16E00927745 /* QLMMineConfirmExitController.m in Sources */ = {isa = PBXBuildFile; fileRef = 315F96EF1E7EC16E00927745 /* QLMMineConfirmExitController.m */; };
 		315F96F41E7EC16E00927745 /* QLMMineSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 315F96F11E7EC16E00927745 /* QLMMineSettingController.m */; };
 		315F96F71E7EC18300927745 /* QLMMineSettingBottomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 315F96F61E7EC18300927745 /* QLMMineSettingBottomCell.m */; };
+		315F970B1E7FA7C200927745 /* QLMMineStudyRecordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 315F970A1E7FA7C200927745 /* QLMMineStudyRecordController.m */; };
+		315F970E1E7FA7F800927745 /* QLMMineAboutDeveloperController.m in Sources */ = {isa = PBXBuildFile; fileRef = 315F970D1E7FA7F800927745 /* QLMMineAboutDeveloperController.m */; };
+		315F97131E7FA81F00927745 /* QLMMineEmitterLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 315F97101E7FA81F00927745 /* QLMMineEmitterLayer.m */; };
+		315F97141E7FA81F00927745 /* QLMMineParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 315F97121E7FA81F00927745 /* QLMMineParticle.m */; };
 		316DC10F1E7C1ABF0076BD9C /* QLMNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 316DC10E1E7C1ABF0076BD9C /* QLMNavigationController.m */; };
 		31E04ECB1E7D744D00AE98AB /* QLMMineLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31E04E881E7D744D00AE98AB /* QLMMineLoginController.m */; };
 		31E04ECC1E7D744D00AE98AB /* QLMMineLoginSelectController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31E04E8A1E7D744D00AE98AB /* QLMMineLoginSelectController.m */; };
@@ -31,7 +35,6 @@
 		31E04EDA1E7D744D00AE98AB /* QLMMineShoppingCarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31E04EA91E7D744D00AE98AB /* QLMMineShoppingCarController.m */; };
 		31E04EDB1E7D744D00AE98AB /* QLMMineShoppingNoteController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31E04EAB1E7D744D00AE98AB /* QLMMineShoppingNoteController.m */; };
 		31E04EDC1E7D744D00AE98AB /* QLMMineStudyGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31E04EAD1E7D744D00AE98AB /* QLMMineStudyGroupController.m */; };
-		31E04EDD1E7D744D00AE98AB /* QLMMineStudyRecordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31E04EAF1E7D744D00AE98AB /* QLMMineStudyRecordController.m */; };
 		31E04EDE1E7D744D00AE98AB /* QLMMineUserInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31E04EB11E7D744D00AE98AB /* QLMMineUserInfoController.m */; };
 		31E04EDF1E7D744D00AE98AB /* QLMMineStudyRecordHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 31E04EB51E7D744D00AE98AB /* QLMMineStudyRecordHeaderView.m */; };
 		31E04EE01E7D744D00AE98AB /* ignore in Resources */ = {isa = PBXBuildFile; fileRef = 31E04EB71E7D744D00AE98AB /* ignore */; };
@@ -172,6 +175,7 @@
 		B29B5A7F1E7F6E49002B1369 /* STAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B29B5A5E1E7F6E49002B1369 /* STAlertView.m */; };
 		B29B5A801E7F6E49002B1369 /* STModal.m in Sources */ = {isa = PBXBuildFile; fileRef = B29B5A601E7F6E49002B1369 /* STModal.m */; };
 		B29B5A811E7F6E49002B1369 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = B29B5A641E7F6E49002B1369 /* UIImage+ImageEffects.m */; };
+		C40F63121E7F937000377AFE /* UIImageView+CornerRadius.m in Sources */ = {isa = PBXBuildFile; fileRef = C40F63111E7F937000377AFE /* UIImageView+CornerRadius.m */; };
 		C41114DE1E7E5B6F009E62A9 /* ignore in Resources */ = {isa = PBXBuildFile; fileRef = C41114B91E7E5B6F009E62A9 /* ignore */; };
 		C41114DF1E7E5B6F009E62A9 /* QLMLearnDetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C41114BB1E7E5B6F009E62A9 /* QLMLearnDetailsTableViewController.m */; };
 		C41114E01E7E5B6F009E62A9 /* QLMLearnModelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C41114BD1E7E5B6F009E62A9 /* QLMLearnModelViewController.m */; };
@@ -207,6 +211,14 @@
 		315F96F11E7EC16E00927745 /* QLMMineSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLMMineSettingController.m; sourceTree = "<group>"; };
 		315F96F51E7EC18300927745 /* QLMMineSettingBottomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLMMineSettingBottomCell.h; sourceTree = "<group>"; };
 		315F96F61E7EC18300927745 /* QLMMineSettingBottomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLMMineSettingBottomCell.m; sourceTree = "<group>"; };
+		315F97091E7FA7C200927745 /* QLMMineStudyRecordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLMMineStudyRecordController.h; sourceTree = "<group>"; };
+		315F970A1E7FA7C200927745 /* QLMMineStudyRecordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLMMineStudyRecordController.m; sourceTree = "<group>"; };
+		315F970C1E7FA7F800927745 /* QLMMineAboutDeveloperController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLMMineAboutDeveloperController.h; sourceTree = "<group>"; };
+		315F970D1E7FA7F800927745 /* QLMMineAboutDeveloperController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLMMineAboutDeveloperController.m; sourceTree = "<group>"; };
+		315F970F1E7FA81F00927745 /* QLMMineEmitterLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLMMineEmitterLayer.h; sourceTree = "<group>"; };
+		315F97101E7FA81F00927745 /* QLMMineEmitterLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLMMineEmitterLayer.m; sourceTree = "<group>"; };
+		315F97111E7FA81F00927745 /* QLMMineParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLMMineParticle.h; sourceTree = "<group>"; };
+		315F97121E7FA81F00927745 /* QLMMineParticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLMMineParticle.m; sourceTree = "<group>"; };
 		316DC10D1E7C1ABF0076BD9C /* QLMNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLMNavigationController.h; sourceTree = "<group>"; };
 		316DC10E1E7C1ABF0076BD9C /* QLMNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLMNavigationController.m; sourceTree = "<group>"; };
 		31E04E871E7D744D00AE98AB /* QLMMineLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLMMineLoginController.h; sourceTree = "<group>"; };
@@ -243,8 +255,6 @@
 		31E04EAB1E7D744D00AE98AB /* QLMMineShoppingNoteController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLMMineShoppingNoteController.m; sourceTree = "<group>"; };
 		31E04EAC1E7D744D00AE98AB /* QLMMineStudyGroupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLMMineStudyGroupController.h; sourceTree = "<group>"; };
 		31E04EAD1E7D744D00AE98AB /* QLMMineStudyGroupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLMMineStudyGroupController.m; sourceTree = "<group>"; };
-		31E04EAE1E7D744D00AE98AB /* QLMMineStudyRecordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLMMineStudyRecordController.h; sourceTree = "<group>"; };
-		31E04EAF1E7D744D00AE98AB /* QLMMineStudyRecordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLMMineStudyRecordController.m; sourceTree = "<group>"; };
 		31E04EB01E7D744D00AE98AB /* QLMMineUserInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLMMineUserInfoController.h; sourceTree = "<group>"; };
 		31E04EB11E7D744D00AE98AB /* QLMMineUserInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLMMineUserInfoController.m; sourceTree = "<group>"; };
 		31E04EB41E7D744D00AE98AB /* QLMMineStudyRecordHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLMMineStudyRecordHeaderView.h; sourceTree = "<group>"; };
@@ -506,6 +516,8 @@
 		B29B5A611E7F6E49002B1369 /* STModalUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STModalUtil.h; sourceTree = "<group>"; };
 		B29B5A631E7F6E49002B1369 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		B29B5A641E7F6E49002B1369 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		C40F63101E7F937000377AFE /* UIImageView+CornerRadius.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+CornerRadius.h"; sourceTree = "<group>"; };
+		C40F63111E7F937000377AFE /* UIImageView+CornerRadius.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+CornerRadius.m"; sourceTree = "<group>"; };
 		C41114B91E7E5B6F009E62A9 /* ignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ignore; sourceTree = "<group>"; };
 		C41114BA1E7E5B6F009E62A9 /* QLMLearnDetailsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLMLearnDetailsTableViewController.h; sourceTree = "<group>"; };
 		C41114BB1E7E5B6F009E62A9 /* QLMLearnDetailsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLMLearnDetailsTableViewController.m; sourceTree = "<group>"; };
@@ -574,6 +586,8 @@
 		315F96EB1E7EC16E00927745 /* MineSetting */ = {
 			isa = PBXGroup;
 			children = (
+				315F970C1E7FA7F800927745 /* QLMMineAboutDeveloperController.h */,
+				315F970D1E7FA7F800927745 /* QLMMineAboutDeveloperController.m */,
 				315F96EC1E7EC16E00927745 /* QLMMineConfirmEximPresentationController.h */,
 				315F96ED1E7EC16E00927745 /* QLMMineConfirmEximPresentationController.m */,
 				315F96EE1E7EC16E00927745 /* QLMMineConfirmExitController.h */,
@@ -582,6 +596,15 @@
 				315F96F11E7EC16E00927745 /* QLMMineSettingController.m */,
 			);
 			path = MineSetting;
+			sourceTree = "<group>";
+		};
+		315F97081E7FA7C200927745 /* MineStudyRecord */ = {
+			isa = PBXGroup;
+			children = (
+				315F97091E7FA7C200927745 /* QLMMineStudyRecordController.h */,
+				315F970A1E7FA7C200927745 /* QLMMineStudyRecordController.m */,
+			);
+			path = MineStudyRecord;
 			sourceTree = "<group>";
 		};
 		31E04E841E7D744D00AE98AB /* Classes */ = {
@@ -642,6 +665,7 @@
 		31E04E951E7D744D00AE98AB /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				315F97081E7FA7C200927745 /* MineStudyRecord */,
 				315F96EB1E7EC16E00927745 /* MineSetting */,
 				31E04E961E7D744D00AE98AB /* QLMMineBalanceController.h */,
 				31E04E971E7D744D00AE98AB /* QLMMineBalanceController.m */,
@@ -665,8 +689,6 @@
 				31E04EAB1E7D744D00AE98AB /* QLMMineShoppingNoteController.m */,
 				31E04EAC1E7D744D00AE98AB /* QLMMineStudyGroupController.h */,
 				31E04EAD1E7D744D00AE98AB /* QLMMineStudyGroupController.m */,
-				31E04EAE1E7D744D00AE98AB /* QLMMineStudyRecordController.h */,
-				31E04EAF1E7D744D00AE98AB /* QLMMineStudyRecordController.m */,
 				31E04EB01E7D744D00AE98AB /* QLMMineUserInfoController.h */,
 				31E04EB11E7D744D00AE98AB /* QLMMineUserInfoController.m */,
 			);
@@ -683,6 +705,10 @@
 		31E04EB31E7D744D00AE98AB /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				315F970F1E7FA81F00927745 /* QLMMineEmitterLayer.h */,
+				315F97101E7FA81F00927745 /* QLMMineEmitterLayer.m */,
+				315F97111E7FA81F00927745 /* QLMMineParticle.h */,
+				315F97121E7FA81F00927745 /* QLMMineParticle.m */,
 				315F96F51E7EC18300927745 /* QLMMineSettingBottomCell.h */,
 				315F96F61E7EC18300927745 /* QLMMineSettingBottomCell.m */,
 				31E04EB41E7D744D00AE98AB /* QLMMineStudyRecordHeaderView.h */,
@@ -1498,6 +1524,8 @@
 		C41114C81E7E5B6F009E62A9 /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				C40F63101E7F937000377AFE /* UIImageView+CornerRadius.h */,
+				C40F63111E7F937000377AFE /* UIImageView+CornerRadius.m */,
 				C41114C91E7E5B6F009E62A9 /* ignore */,
 			);
 			path = Others;
@@ -1703,8 +1731,10 @@
 				B279D7921E7B7F2F00504CFB /* QLMPurchasedCollectionViewCell.m in Sources */,
 				B29B5A651E7F6E49002B1369 /* JinnPopMenu.m in Sources */,
 				43AC99011E7EB1AE00F74DDB /* QLMHomeRankingButton.m in Sources */,
+				315F97141E7FA81F00927745 /* QLMMineParticle.m in Sources */,
 				43AC98ED1E7EB1AD00F74DDB /* QLMEverydayBook.m in Sources */,
 				942CC1591E79AEC6004D3814 /* UIColor+FCSColor.m in Sources */,
+				315F970B1E7FA7C200927745 /* QLMMineStudyRecordController.m in Sources */,
 				B29B5A6F1E7F6E49002B1369 /* MJRefreshHeader.m in Sources */,
 				942CC15B1E79AEC6004D3814 /* UIViewController+FCSViewController.m in Sources */,
 				C41114DF1E7E5B6F009E62A9 /* QLMLearnDetailsTableViewController.m in Sources */,
@@ -1727,6 +1757,7 @@
 				43AC99001E7EB1AE00F74DDB /* QLMHomeFootView.m in Sources */,
 				942CC1541E79AEC6004D3814 /* NSAttributedString+FCSAttributedString.m in Sources */,
 				C41114E21E7E5B6F009E62A9 /* QLMPresntViewController.m in Sources */,
+				C40F63121E7F937000377AFE /* UIImageView+CornerRadius.m in Sources */,
 				31E04ECB1E7D744D00AE98AB /* QLMMineLoginController.m in Sources */,
 				C41114ED1E7E5B6F009E62A9 /* QLMLearnViewFlowLayout.m in Sources */,
 				B27D9B481E79677500AD3739 /* QLMPurchasedFlowLayout.m in Sources */,
@@ -1734,6 +1765,7 @@
 				315F96CD1E7E840800927745 /* QLMMineAnimator.m in Sources */,
 				43AC98EE1E7EB1AD00F74DDB /* QLMFreeAudio.m in Sources */,
 				31E04EDC1E7D744D00AE98AB /* QLMMineStudyGroupController.m in Sources */,
+				315F970E1E7FA7F800927745 /* QLMMineAboutDeveloperController.m in Sources */,
 				43AC98F01E7EB1AD00F74DDB /* QLMGuessLike.m in Sources */,
 				B29B5A7D1E7F6E49002B1369 /* UIScrollView+MJRefresh.m in Sources */,
 				31E04ECF1E7D744D00AE98AB /* QLMMineUserInfoBottomCell.m in Sources */,
@@ -1756,7 +1788,6 @@
 				B281160D1E7D6D2500E0027D /* QLMPurchasedTwoViewController.m in Sources */,
 				B29B5A801E7F6E49002B1369 /* STModal.m in Sources */,
 				945D7FFB1E7D494C00856835 /* QLMAudioModel.m in Sources */,
-				31E04EDD1E7D744D00AE98AB /* QLMMineStudyRecordController.m in Sources */,
 				942401321E7E96B000D1DBD2 /* DLCycleCollectionViewCell.m in Sources */,
 				94EBD1231E79396000F71272 /* QLMFrameViewController.m in Sources */,
 				43AC98EB1E7EB1AD00F74DDB /* QLMHomeViewController.m in Sources */,
@@ -1774,6 +1805,7 @@
 				B29B5A701E7F6E49002B1369 /* MJRefreshAutoGifFooter.m in Sources */,
 				43AC98FE1E7EB1AE00F74DDB /* QLMEverydayBookTableViewCell.m in Sources */,
 				B29B5A731E7F6E49002B1369 /* MJRefreshBackGifFooter.m in Sources */,
+				315F97131E7FA81F00927745 /* QLMMineEmitterLayer.m in Sources */,
 				31E04EE91E7D744D00AE98AB /* QLMMineTopCell.m in Sources */,
 				31E04ED71E7D744D00AE98AB /* QLMMineNoteController.m in Sources */,
 				B281160E1E7D6D2500E0027D /* QLMPurchasedViewController.m in Sources */,

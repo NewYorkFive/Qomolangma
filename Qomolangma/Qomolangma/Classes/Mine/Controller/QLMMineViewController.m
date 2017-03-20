@@ -59,11 +59,12 @@ static NSString * const headerFooterReuseID = @"headerFooterReuseID";
     [super viewDidLoad];
     
 #warning isLoginChange
-    [QLMMineInfo sharedMineInfo].isLogin = YES;
+//    [QLMMineInfo sharedMineInfo].isLogin = NO;
 
     [self loadMinInfoData];
     
     [self setupUI];
+    
 }
 
 - (void) loadMinInfoData
@@ -87,11 +88,10 @@ static NSString * const headerFooterReuseID = @"headerFooterReuseID";
     self.dataArray = dataArray.copy;
 }
 
-- (void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
 
-    self.navigationController.navigationBar.hidden = YES;
-    
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     
     if ([QLMMineInfo sharedMineInfo].isLogin)
@@ -100,6 +100,12 @@ static NSString * const headerFooterReuseID = @"headerFooterReuseID";
         
         self.headerView.nickName = nickName;
     }
+    else
+    {
+        self.headerView.nickName = @"未登陆";
+    }
+    
+    [self.tableView reloadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -108,8 +114,6 @@ static NSString * const headerFooterReuseID = @"headerFooterReuseID";
 
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     
-    self.navigationController.navigationBar.hidden = NO;
-
 }
 
 - (void)setupUI
@@ -243,6 +247,8 @@ static NSString * const headerFooterReuseID = @"headerFooterReuseID";
         _tableView.separatorColor = [UIColor colorWithWhite:.9 alpha:1];
         
         _tableView.backgroundColor = [UIColor clearColor];
+        
+        _tableView.showsVerticalScrollIndicator = NO;
         
         [self.view addSubview:_tableView];
         
