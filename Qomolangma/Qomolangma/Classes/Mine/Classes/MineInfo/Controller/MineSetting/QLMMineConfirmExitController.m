@@ -8,6 +8,8 @@
 
 #import "QLMMineConfirmExitController.h"
 #import "QLMMineConfirmEximPresentationController.h"
+#import "QLMLoginViewController.h"
+
 
 @interface QLMMineConfirmExitController () <UIViewControllerTransitioningDelegate>
 
@@ -115,7 +117,8 @@
 
 - (void) btnExitAction: (UIButton *)sender
 {
-    
+    QLMLoginViewController *loginVC = [[QLMLoginViewController alloc] init];
+    [self presentViewController:loginVC animated:YES completion:nil];
 }
 
 @end
