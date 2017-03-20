@@ -91,7 +91,7 @@
         [self.collectionDay.mj_header beginRefreshing];
         
         //网络请求
-//        [self loadData];
+        [self loadData];
         [self.collectionDay.mj_header endRefreshing];
         
     }];
@@ -111,7 +111,7 @@
     //解决CollectionView的内容小于它的高度不能滑动的问题
     self.collectionDay.alwaysBounceVertical = YES;
     
-    //self.arr = @[@"http://img4.duitang.com/uploads/item/201506/18/20150618181443_Frv2V.jpeg",@"http://dynamic-image.yesky.com/740x-/uploadImages/2015/329/42/A040IVFHMXTV.jpg",@"http://i3.s2.dpfile.com/pc/wed/87a8c4289fa52bf74bc148a4c8da6990%28640c480%29/thumb.jpg",@"http://i1.s2.dpfile.com/pc/577ca5f02a2b820a1747bd55c3b49462%28740x2048%29/thumb.jpg",@"http://i1.s2.dpfile.com/pc/aa7154ccb9cc9e05d2a2428ce2ec417e(740x2048)/thumb.jpg",@"http://i2.s1.dpfile.com/pc/wed/7a1a44797c2ba347d38436773e8985f3(640c480)/thumb.jpg",@"http://qcloud.dpfile.com/wed/hzW0qjCDMTK11yO8vXPNjXDaXVk4UMN9nDvLX-tYQ2x-ejmT-iG_Go8fi3gIJIHgO3xc_zgr_wpcmvffXdGKhg.jpg"];
+//    self.arr = @[@"http://img4.duitang.com/uploads/item/201506/18/20150618181443_Frv2V.jpeg",@"http://dynamic-image.yesky.com/740x-/uploadImages/2015/329/42/A040IVFHMXTV.jpg",@"http://i3.s2.dpfile.com/pc/wed/87a8c4289fa52bf74bc148a4c8da6990%28640c480%29/thumb.jpg",@"http://i1.s2.dpfile.com/pc/577ca5f02a2b820a1747bd55c3b49462%28740x2048%29/thumb.jpg",@"http://i1.s2.dpfile.com/pc/aa7154ccb9cc9e05d2a2428ce2ec417e(740x2048)/thumb.jpg",@"http://i2.s1.dpfile.com/pc/wed/7a1a44797c2ba347d38436773e8985f3(640c480)/thumb.jpg",@"http://qcloud.dpfile.com/wed/hzW0qjCDMTK11yO8vXPNjXDaXVk4UMN9nDvLX-tYQ2x-ejmT-iG_Go8fi3gIJIHgO3xc_zgr_wpcmvffXdGKhg.jpg"];
     
 }
 
@@ -124,6 +124,8 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     
     return self.purchasedModelArray.count / 2;
+    
+   
 }
 
 //这个你不知道可以撞墙了.没救了
@@ -136,7 +138,7 @@
     cell.model = self.purchasedModelArray[i * indexPath.row % self.purchasedModelArray.count];
     
 //    cell.botlabel.text=[NSString stringWithFormat:@"第%ld张",(long)indexPath.row];
-//    
+//
 //    //cell.botlabel.hidden=NO;
 //    
 //    [cell.babyImageView sd_setImageWithURL:[NSURL URLWithString:self.arr[indexPath.row]]];
@@ -155,6 +157,7 @@
 //点击item方法
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+ 
     
     NSLog(@"%@",self.purchasedModelArray[indexPath.row]);
     
@@ -176,6 +179,7 @@
     //NSLog(@"%@",@"点击事件");
     
 }
+
 
 ////设置每个item的尺寸
 //- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
