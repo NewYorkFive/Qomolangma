@@ -61,6 +61,7 @@
     [self setupNavBar];
     if (self.isVideo) {
         self.playPauseButton.selected = YES;
+        self.playFlag = NO;
         [self.playerView autoPlayTheVideo];
     }else{
         self.playPauseButton.selected = self.playFlag;
