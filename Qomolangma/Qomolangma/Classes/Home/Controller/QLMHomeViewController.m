@@ -62,7 +62,7 @@ static int refreash2;
 static int refreash3;
 
 - (void)viewWillAppear:(BOOL)animated {
-    
+    [super viewWillAppear:animated];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     
     QLMFreeAudioTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];

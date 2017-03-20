@@ -85,7 +85,7 @@
     
     [QLMMineInfo sharedMineInfo].isLogin = userName.length;
     
-//    frameVc.selectedIndex = 2;
+    frameVc.selectedIndex = 2;
     
     
     
