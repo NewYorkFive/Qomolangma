@@ -10,6 +10,7 @@
 #import "STAlertView.h"
 #import "UIImage+ImageEffects.h"
 #import "JinnPopMenu.h"
+#import "QLMHtmlViewController.h"
 
 #define COLOR_ITEM [UIColor blackColor]
 #define COLOR_ITEM_SELECTED [UIColor yellowColor]
@@ -30,6 +31,8 @@
 
 @property (nonatomic, strong) NSArray *images;
 
+@property (nonatomic,strong) UIWebView *webView;
+
 @end
 
 @implementation QLMJumpViewController
@@ -49,15 +52,10 @@
     [self.view addSubview:imageView];
     
     //创建手势
-    //UISwipeGestureRecognizer *gr = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeClick:)];
-    
     UITapGestureRecognizer *gr = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(swipeClick:)];
     
     [self.view addGestureRecognizer:gr];
-    
-    
-    //    gr.numberOfTapsRequired = 1;
-    //
+  
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(click)];
     
     self.navigationController.navigationBar.tintColor = [UIColor grayColor];
@@ -67,33 +65,6 @@
 }
 
 - (void)swipeClick:(UISwipeGestureRecognizer *)sender {
-    
-    
-    //    //动画方向
-    //    NSString *subTypeStr = @"";
-    //
-    //    if(sender.direction == UISwipeGestureRecognizerDirectionRight){
-    //
-    //        _index++;
-    //        //方向
-    //        subTypeStr = @"fromLeft";
-    //
-    //    }else if (sender.direction == UISwipeGestureRecognizerDirectionLeft){
-    //
-    //        _index--;
-    //        //方向
-    //        subTypeStr = @"fromRight";
-    //    }
-    //
-    //    //判断图片的范围
-    //    if(_index > 6){
-    //
-    //        _index = 1;
-    //
-    //    }else if (_index < 1){
-    //
-    //        _index = 6;
-    //    }
     
     _index++;
     
@@ -111,12 +82,9 @@
         
         [self.view addSubview:self.backImageView];
         
-        
         NSString *title = @"通知";
         NSString *message = @"您的手机已经欠费，速交！";
-        ////    [STAlertView showTitle:nil message:message];
-        ////    [STAlertView showTitle:title message:message hideDelay:2];
-        ////    [STAlertView showTitle:title message:nil];
+        
         [STAlertView showTitle:title
                          image:nil
                        message:message
@@ -125,13 +93,12 @@
                            
                            [self click];
                        }];
-        
+
     }
     
     //2.根据角标设置图片
     NSString *imageName = [NSString stringWithFormat:@"%zd",_index+1];
     self.imageView.image = [UIImage imageNamed:imageName];
-    
     
     //3.转场动画
     //3.1创建动画对象
@@ -139,14 +106,10 @@
     
     //3.2设置属性
     //动画的样式 左右翻转
-    //        transition.type = @"oglFlip";
     transition.type = @"pageCurl";
     
     //动画持续时间
     transition.duration = 1;
-    
-    //动画的方向
-    //    transition.subtype = subTypeStr;
     
     //3.3添加
     [self.imageView.layer addAnimation:transition forKey:@"transition"];
@@ -163,7 +126,6 @@
     self.titles = @[ @"编辑", @"信息", @"搜索", @"分享"];
     self.images = @[ @"edit", @"message", @"search", @"share"];
 }
-
 
 - (void)AddClick {
     
@@ -204,10 +166,8 @@
 }
 
 #pragma mark - JinnPopViewDelegate
-
 - (void)itemSelectedAtIndex:(NSInteger)index popMenu:(JinnPopMenu *)popMenu
 {
-    NSLog(@"%d", (int)index);
     
     if (popMenu.tag != BASE_TAG)
     {

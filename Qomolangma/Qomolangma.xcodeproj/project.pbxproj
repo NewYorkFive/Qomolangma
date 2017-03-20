@@ -172,6 +172,7 @@
 		B29B5A7F1E7F6E49002B1369 /* STAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B29B5A5E1E7F6E49002B1369 /* STAlertView.m */; };
 		B29B5A801E7F6E49002B1369 /* STModal.m in Sources */ = {isa = PBXBuildFile; fileRef = B29B5A601E7F6E49002B1369 /* STModal.m */; };
 		B29B5A811E7F6E49002B1369 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = B29B5A641E7F6E49002B1369 /* UIImage+ImageEffects.m */; };
+		B2A23D1D1E7FC1BA00E47180 /* QLMPurchasedTwoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A23D1C1E7FC1BA00E47180 /* QLMPurchasedTwoCollectionViewCell.m */; };
 		C41114DE1E7E5B6F009E62A9 /* ignore in Resources */ = {isa = PBXBuildFile; fileRef = C41114B91E7E5B6F009E62A9 /* ignore */; };
 		C41114DF1E7E5B6F009E62A9 /* QLMLearnDetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C41114BB1E7E5B6F009E62A9 /* QLMLearnDetailsTableViewController.m */; };
 		C41114E01E7E5B6F009E62A9 /* QLMLearnModelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C41114BD1E7E5B6F009E62A9 /* QLMLearnModelViewController.m */; };
@@ -506,6 +507,8 @@
 		B29B5A611E7F6E49002B1369 /* STModalUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STModalUtil.h; sourceTree = "<group>"; };
 		B29B5A631E7F6E49002B1369 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		B29B5A641E7F6E49002B1369 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		B2A23D1B1E7FC1BA00E47180 /* QLMPurchasedTwoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLMPurchasedTwoCollectionViewCell.h; sourceTree = "<group>"; };
+		B2A23D1C1E7FC1BA00E47180 /* QLMPurchasedTwoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLMPurchasedTwoCollectionViewCell.m; sourceTree = "<group>"; };
 		C41114B91E7E5B6F009E62A9 /* ignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ignore; sourceTree = "<group>"; };
 		C41114BA1E7E5B6F009E62A9 /* QLMLearnDetailsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLMLearnDetailsTableViewController.h; sourceTree = "<group>"; };
 		C41114BB1E7E5B6F009E62A9 /* QLMLearnDetailsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLMLearnDetailsTableViewController.m; sourceTree = "<group>"; };
@@ -1222,6 +1225,8 @@
 				B27D9B471E79677500AD3739 /* QLMPurchasedFlowLayout.m */,
 				B279D7901E7B7F2E00504CFB /* QLMPurchasedCollectionViewCell.h */,
 				B279D7911E7B7F2F00504CFB /* QLMPurchasedCollectionViewCell.m */,
+				B2A23D1B1E7FC1BA00E47180 /* QLMPurchasedTwoCollectionViewCell.h */,
+				B2A23D1C1E7FC1BA00E47180 /* QLMPurchasedTwoCollectionViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1810,6 +1815,7 @@
 				C41114E91E7E5B6F009E62A9 /* QLMLearnCollectionViewCell.m in Sources */,
 				31E04ECD1E7D744D00AE98AB /* QLMMineRegisterController.m in Sources */,
 				B29B5A781E7F6E49002B1369 /* MJRefreshStateHeader.m in Sources */,
+				B2A23D1D1E7FC1BA00E47180 /* QLMPurchasedTwoCollectionViewCell.m in Sources */,
 				43AC98FC1E7EB1AE00F74DDB /* QLMHeadFlowLayout.m in Sources */,
 				B29B5A7E1E7F6E49002B1369 /* UIView+MJExtension.m in Sources */,
 				9424012B1E7E96B000D1DBD2 /* NSObject+DLObject.m in Sources */,
