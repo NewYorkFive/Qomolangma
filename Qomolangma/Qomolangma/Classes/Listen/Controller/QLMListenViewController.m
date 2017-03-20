@@ -42,11 +42,12 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    BOOL hiddenFlag = ![QLMPlayListViewController sharedPlayListViewController].playListModelArray.count;
-    
+    QLMPlayListViewController *flagVc = [QLMPlayListViewController sharedPlayListViewController];
+    BOOL hiddenFlag = flagVc.navButtonStatusHidden;
     self.listenView.hidden = hiddenFlag;
     if (!hiddenFlag) {
-        self.currentAudioLabel.text =[NSString stringWithFormat:@"上次播放:%@",[QLMPlayListViewController sharedPlayListViewController].playListModelArray[0].title];
+//        self.currentAudioLabel.text =[NSString stringWithFormat:@"上次播放:%@",@"hello"];
+        self.currentAudioLabel.text = [NSString stringWithFormat:@"上次播放:%@",flagVc.urlStringArray[arc4random_uniform((int)flagVc.urlStringArray.count)]];
     }
 }
 

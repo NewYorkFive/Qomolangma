@@ -13,7 +13,7 @@
 #import <ZFPlayer.h>
 @interface QLMPlayListViewController ()<ZFPlayerDelegate>
 
-@property (nonatomic, strong) NSArray<NSString *> *urlStringArray;
+
 @property (nonatomic, assign) int urlIndex;
 
 @property (nonatomic, assign) BOOL flag;
@@ -49,6 +49,7 @@
         instance = [[QLMPlayListViewController alloc]init];
         instance.playFlag = NO;
         instance.hidesBottomBarWhenPushed = YES;
+        instance.navButtonStatusHidden = YES;
     });
     return instance;
 }
@@ -215,6 +216,8 @@
         [self.playerView pause];
         return;
     }
+    
+    self.navButtonStatusHidden = NO;
     
     QLMAudioModel *tempModel = [[QLMAudioModel alloc]init];
     tempModel.title = @"Hello,Girls";
