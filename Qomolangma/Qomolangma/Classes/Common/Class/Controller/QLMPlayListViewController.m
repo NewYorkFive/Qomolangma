@@ -61,12 +61,12 @@
     [self setupNavBar];
     if (self.isVideo) {
         self.playPauseButton.selected = YES;
+        [self.playerView autoPlayTheVideo];
     }else{
         self.playPauseButton.selected = self.playFlag;
     }
     
     self.title = self.navTitleLabel.text;
-    [self.playerView autoPlayTheVideo];
 }
 - (void)setupNavBar{
     //背景
@@ -167,6 +167,25 @@
 //        [self.playerView pause];
         
         self.playerView.hidden = YES;
+        [self.playerView resetPlayer];
+        
+        // control view（you can custom）
+        ZFPlayerControlView *controlView = [[ZFPlayerControlView alloc] init];
+        // model
+        ZFPlayerModel *playerModel = [[ZFPlayerModel alloc]init];
+        playerModel.fatherView = self.topView;
+//        self.urlIndex = arc4random_uniform((int)(self.urlStringArray.count - 1));
+        playerModel.videoURL = [NSURL URLWithString:self.audioUrlString];
+        playerModel.title = @"Audio Player";
+        [self.playerView playerControlView:controlView playerModel:playerModel];
+        
+        [self.playerView autoPlayTheVideo];
+        [self.playerView pause];
+        
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            [self.playerView autoPlayTheVideo];
+//        });
+
     }
 }
 
@@ -184,6 +203,18 @@
     playerModel.title = @"Video Player";
     [self.playerView playerControlView:controlView playerModel:playerModel];
     [self.playerView autoPlayTheVideo];
+
+
+
+    
+//    [self.playerView autoPlayTheVideo];
+//    [self.playerView pause];
+    
+//    dispatch_after(<#dispatch_time_t when#>, <#dispatch_queue_t  _Nonnull queue#>, <#^(void)block#>)
+    
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        [self.playerView pause];
+//    });
 }
 
 - (void)leftMediaClik{
@@ -224,12 +255,19 @@
     [self.playListModelArray addObject:tempModel];
     
     self.playFlag = !self.playFlag;
+    if (self.playFlag) {
+        [self.playerView play];
+    }else{
+        [self.playerView pause];
+    }
     [[NSNotificationCenter defaultCenter] postNotificationName:@"changePlayBtnStatus" object:nil];
 }
 
 - (void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
-    [self.playerView pause];
+    if (self.isVideo) {
+        [self.playerView pause];
+    }
 }
 
 #pragma mark 1.1setupTopView
