@@ -92,6 +92,7 @@
 }
 
 - (void)lookAroundClick{
+    self.parentViewController.tabBarController.selectedIndex = 2;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
