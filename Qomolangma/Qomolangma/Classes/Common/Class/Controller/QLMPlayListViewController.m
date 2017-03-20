@@ -31,6 +31,9 @@
 @property (nonatomic, strong) UIImageView *topViewCurrentAudioImageView;
 
 @property (nonatomic, strong) UIView *middleView;
+@property (nonatomic, strong) UIButton *playPauseButton;
+
+
 @property (nonatomic, strong) UIView *bottomView;
 
 @end
@@ -55,8 +58,13 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self setupNavBar];
-    self.title = self.navTitleLabel.text;
+    if (self.isVideo) {
+        self.playPauseButton.selected = YES;
+    }else{
+        self.playPauseButton.selected = self.playFlag;
+    }
     
+    self.title = self.navTitleLabel.text;
     [self.playerView autoPlayTheVideo];
 }
 - (void)setupNavBar{
@@ -156,6 +164,7 @@
         
     }else{
 //        [self.playerView pause];
+        
         self.playerView.hidden = YES;
     }
 }
@@ -277,11 +286,14 @@
     [self.view layoutIfNeeded];
     
     QLMCircleButton *playPauseButton = [QLMCircleButton fcs_buttonWithImageName:@"mediaplayer_play_btn_70x70_" selectedImageName:@"mediaplayer_parse_btn_70x70_"];
+    self.playPauseButton = playPauseButton;
     [playPauseButton addTarget:self action:@selector(playButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.middleView addSubview:playPauseButton];
     playPauseButton.ratio = 0.45;
 
     CGFloat height = self.middleView.bounds.size.height * 0.4;
+    
+    
     
     [playPauseButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.width.mas_equalTo(height * 2);
@@ -427,9 +439,6 @@
 - (void)playlistButtonClick{
     [self.navigationController pushViewController:[[QLMPlayListDetailTableViewController alloc]init] animated:YES];
 }
-
-
-
 
 
 
