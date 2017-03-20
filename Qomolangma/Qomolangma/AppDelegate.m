@@ -36,6 +36,9 @@
     
     frameVc.selectedIndex = 2;
     
+    
+    
+    
     self.window.rootViewController = frameVc;
     [self.window makeKeyAndVisible];
     self.window.backgroundColor = [UIColor groupTableViewBackgroundColor];
@@ -47,7 +50,7 @@
         NSLog(@"ttttttttttt1");
         if (![QLMMineInfo sharedMineInfo].isLogin) {
             NSLog(@"ttttttttttt2");
-            [[frameVc.childViewControllers firstObject] presentViewController:[[QLMLoginViewController alloc]init] animated:YES completion:nil];
+            [frameVc.childViewControllers[2] presentViewController:[[QLMLoginViewController alloc]init] animated:YES completion:nil];
             NSLog(@"ttttttttttt3");
         }
     });
