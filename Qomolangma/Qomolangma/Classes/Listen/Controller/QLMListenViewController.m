@@ -47,7 +47,7 @@
     self.listenView.hidden = hiddenFlag;
     if (!hiddenFlag) {
 //        self.currentAudioLabel.text =[NSString stringWithFormat:@"上次播放:%@",@"hello"];
-        self.currentAudioLabel.text = [NSString stringWithFormat:@"上次播放:%@",flagVc.urlStringArray[arc4random_uniform((int)flagVc.urlStringArray.count)]];
+        self.currentAudioLabel.text = [NSString stringWithFormat:@"上次播放:%@",flagVc.audioUrlString];
     }
 }
 
@@ -192,7 +192,15 @@
 - (void)timeBtnClick:(UIButton *)sender{
     long time = sender.tag - baseTimeBtnTag;
 //    NSLog(@"%zd",time);
-    [QLMPlayListViewController sharedPlayListViewController].isVideo = !(time - 30);
+    
+    QLMPlayListViewController *destinationViewController = [QLMPlayListViewController sharedPlayListViewController];
+    BOOL flag = !(time - 30);
+    
+    if (!flag) {
+        destinationViewController.audioUrlString = @"http://dgtt.besttoptoday.com/resource/mp3/20161216/201612161157237210.mp3";
+    }
+    destinationViewController.isVideo = flag;
+    
     [self.navigationController pushViewController:[QLMPlayListViewController sharedPlayListViewController] animated:YES];
 }
 
