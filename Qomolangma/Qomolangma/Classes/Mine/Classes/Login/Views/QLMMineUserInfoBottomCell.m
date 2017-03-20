@@ -46,6 +46,8 @@
     
     self.txtDetail.delegate = self;
     
+    self.txtDetail.placeholder = @"点击设置";
+    
     self.txtDetail.textColor = [UIColor grayColor];
     
     self.txtDetail.font = [UIFont systemFontOfSize:14];
@@ -64,19 +66,11 @@
 {
     _model = model;
     
-    if ([QLMMineInfo sharedMineInfo].isLogin)
-    {
-        NSString *str = [[QLMMineInfo sharedMineInfo].infoDict objectForKey:model.key];
+
+    NSString *str = [[QLMMineInfo sharedMineInfo].infoDict objectForKey:model.key];
         
-        self.txtDetail.text = str;
-        
-        
-    }
-    else
-    {
-        
-        self.txtDetail.text = model.detail;
-    }
+    self.txtDetail.text = str;
+
     self.labInfo.text = model.name;
 
     [[NSUserDefaults standardUserDefaults] setObject:self.txtDetail.text forKey:model.key];

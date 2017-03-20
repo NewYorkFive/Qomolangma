@@ -161,7 +161,7 @@
     
 //    static int flag = 1;
     if (![QLMMineInfo sharedMineInfo].isLogin) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
     //        vc.view.backgroundColor = vc.view.backgroundColor;
 //            flag = 0;
             NSLog(@"abac*********");

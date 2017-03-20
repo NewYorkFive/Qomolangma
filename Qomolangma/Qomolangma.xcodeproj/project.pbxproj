@@ -577,8 +577,8 @@
 		315F96C71E7E83CB00927745 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				315F96C81E7E83CB00927745 /* QLMMineUserInfoBottomModel.h */,
 				315F96C91E7E83CB00927745 /* QLMMineUserInfoBottomModel.m */,
+				315F96C81E7E83CB00927745 /* QLMMineUserInfoBottomModel.h */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -707,10 +707,10 @@
 			children = (
 				315F970F1E7FA81F00927745 /* QLMMineEmitterLayer.h */,
 				315F97101E7FA81F00927745 /* QLMMineEmitterLayer.m */,
-				315F97111E7FA81F00927745 /* QLMMineParticle.h */,
-				315F97121E7FA81F00927745 /* QLMMineParticle.m */,
 				315F96F51E7EC18300927745 /* QLMMineSettingBottomCell.h */,
 				315F96F61E7EC18300927745 /* QLMMineSettingBottomCell.m */,
+				315F97111E7FA81F00927745 /* QLMMineParticle.h */,
+				315F97121E7FA81F00927745 /* QLMMineParticle.m */,
 				31E04EB41E7D744D00AE98AB /* QLMMineStudyRecordHeaderView.h */,
 				31E04EB51E7D744D00AE98AB /* QLMMineStudyRecordHeaderView.m */,
 			);

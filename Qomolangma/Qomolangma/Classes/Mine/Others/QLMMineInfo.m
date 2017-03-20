@@ -7,6 +7,12 @@
 //
 
 #import "QLMMineInfo.h"
+#define kGender @"mineUserInfoGender"
+#define kBornYear @"mineUserInfoBornYear"
+#define kEducation @"mineUserInfoEducation"
+#define kIndustry @"mineUserInfoIndustry"
+#define kCareer @"mineUserInfoCareer"
+
 
 @implementation QLMMineInfo
 
