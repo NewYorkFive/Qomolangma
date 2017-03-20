@@ -24,6 +24,7 @@
 #import "QLMspecialColumnView.h"
 #import "QLMDayDayUpZiShiTableViewController.h"
 #import "MJRefresh.h"
+#import "QLMPlayListViewController.h"
 
 @interface QLMHomeViewController () <UITableViewDelegate ,UITableViewDataSource,QLMspecialColumnViewDelegate ,QLMFreeAudioTableViewCellDelegate>
 
@@ -59,6 +60,16 @@
 static int refreash1;
 static int refreash2;
 static int refreash3;
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    
+    QLMFreeAudioTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    
+    cell.button6.selected = [QLMPlayListViewController sharedPlayListViewController].playFlag;
+    
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -489,14 +500,21 @@ static int refreash3;
      
 }
 
-
-
 - (void)pushAll {
     
     QLMDayDayUpZiShiTableViewController *tc2 = [[QLMDayDayUpZiShiTableViewController alloc] init];
     tc2.freeAudioArray = self.freeAudioArray;
     tc2.navigationItem.title = @"天天涨姿势";
     [self.navigationController pushViewController:tc2 animated:YES];
+    
+}
+
+- (void)FreeAudioTableViewCellPushToPlayListViewControllerWithQLMPlayButton:(QLMPlayBtn *)button {
+    
+//    QLMPlayListViewController *vc = [QLMPlayListViewController sharedPlayListViewController];
+    [QLMPlayListViewController sharedPlayListViewController].audioUrlString = button.freeAudio.audio_file_url;
+    [QLMPlayListViewController sharedPlayListViewController].playFlag = button.selected;
+    [self.navigationController pushViewController:[QLMPlayListViewController sharedPlayListViewController] animated:YES];
     
 }
 

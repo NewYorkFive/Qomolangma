@@ -9,6 +9,7 @@
 #import "QLMFreeAudioTableViewCell.h"
 #import "QLMPlayBtn.h"
 #import <AVFoundation/AVFoundation.h>
+#import "QLMPlayListViewController.h"
 
 @interface QLMFreeAudioTableViewCell ()
 
@@ -21,15 +22,6 @@
 @property (nonatomic ,strong) QLMPlayBtn *button4;
 
 @property (nonatomic ,strong) QLMPlayBtn *button5;
-
-//播放button
-@property (nonatomic ,strong) QLMPlayBtn *button6;
-
-//高亮button
-@property (nonatomic ,strong) UIButton *highlightedButton;
-
-///播放器
-@property (nonatomic ,strong) AVPlayer *player;
 
 @end
 
@@ -44,8 +36,6 @@
     _button3.freeAudio = freeAudioArray[2];
     _button4.freeAudio = freeAudioArray[3];
     _button5.freeAudio = freeAudioArray[4];
- 
-    
     
 }
 
@@ -57,8 +47,8 @@
 }
 
 - (void)setupUI {
-    
-    self.player = [[AVPlayer alloc] init];
+
+//    self.player = [[AVPlayer alloc] init];
     
     CGFloat buttonWidth = [UIScreen mainScreen].bounds.size.width * 2 / 3;
     
@@ -93,7 +83,6 @@
         make.right.equalTo(imageView.mas_left);
     }];
     [button addTarget:_delegate action:@selector(pushAll) forControlEvents:UIControlEventTouchUpInside];
-    
     
     //中间的线
     UILabel *line1 = [[UILabel alloc] init];
@@ -226,10 +215,6 @@
         
         //变成选中状态--->正在播放
         self.button6.selected = YES;
-        self.button6.freeAudio = button.freeAudio;
-        NSURL * url  = [NSURL URLWithString:button.freeAudio.audio_file_url];
-        self.player = [[AVPlayer alloc] initWithURL:url];
-        [self.player play];
         
     } else if (button.selected == YES && self.button6.selected == NO) {//暂停
    
@@ -239,10 +224,11 @@
         button.selected = YES;
         //把本按钮赋值给高亮按钮属性
         self.highlightedButton = button;
-        
-        [self.player play];
     
     }
+    
+    self.button6 = button;
+    [_delegate FreeAudioTableViewCellPushToPlayListViewControllerWithQLMPlayButton:button];
     
 }
 
@@ -251,26 +237,31 @@
     
     //播放按钮的选中状态
     button.selected = !button.selected;
-    if (button.freeAudio == nil) { //因为上来默认是没选中.所以button里面的属性是nil/所以默认播放第一首
+    if (button == nil) { //因为上来默认是没选中.所以button里面的属性是nil/所以默认播放第一首
         
         _button1.selected = YES;//把button1的点击状态改成选中
         button.freeAudio = self.button1.freeAudio;
-        NSURL * url  = [NSURL URLWithString:button.freeAudio.audio_file_url];
-        self.player = [[AVPlayer alloc] initWithURL:url];
+        
+        //button6的数据给button1
+        self.button6 = self.button1;
+        
+//        NSURL * url  = [NSURL URLWithString:button.freeAudio.audio_file_url];
+//        self.player = [[AVPlayer alloc] initWithURL:url];
         //播放
-        [_player play];
+//        [_player play];
+        
     } else if (button.selected == YES) {//因为点击之后就改变了.所以现在是暂停状态
         
-        [_player play];
+//        [_player play];
         
     } else {
    
-        [_player pause];
+//        [_player pause];
     }
-    
     
 //    //暂停
 //    [_player pause];
+    [_delegate FreeAudioTableViewCellPushToPlayListViewControllerWithQLMPlayButton:button];
     
 }
 

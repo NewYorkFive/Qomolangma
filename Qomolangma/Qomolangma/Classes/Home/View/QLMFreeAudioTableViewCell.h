@@ -16,6 +16,8 @@
 @optional
 - (void)pushAll;
 
+- (void)FreeAudioTableViewCellPushToPlayListViewControllerWithQLMPlayButton:(QLMPlayBtn *)button;
+
 @end
 
 @interface QLMFreeAudioTableViewCell : UITableViewCell
@@ -24,5 +26,11 @@
 @property (nonatomic ,strong) NSArray<QLMFreeAudio *> *freeAudioArray;
 
 @property (nonatomic ,weak) id<QLMFreeAudioTableViewCellDelegate> delegate;
+
+//播放button
+@property (nonatomic ,strong) QLMPlayBtn *button6;
+
+//高亮button
+@property (nonatomic ,strong) UIButton *highlightedButton;
 
 @end
