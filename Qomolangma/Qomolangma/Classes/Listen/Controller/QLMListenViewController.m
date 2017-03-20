@@ -25,7 +25,7 @@
 /**
  login页面
  */
-//@property (nonatomic, strong) QLMLoginViewController *loginViewController;
+@property (nonatomic, strong) QLMLoginViewController *loginViewController;
 
 @end
 
@@ -160,17 +160,17 @@
     
     
 //    static int flag = 1;
-//    if (flag) {
-//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//    //        vc.view.backgroundColor = vc.view.backgroundColor;
+    if (![QLMMineInfo sharedMineInfo].isLogin) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    //        vc.view.backgroundColor = vc.view.backgroundColor;
 //            flag = 0;
-//            NSLog(@"abac*********");
-//            
-////            [self presentViewController:self.loginViewController animated:YES completion:nil];
-//    //        [[[UIApplication sharedApplication].windows firstObject].rootViewController presentViewController:[[QLMLoginViewController alloc]init] animated:YES completion:nil];
-//        });
-//    }
-//    
+            NSLog(@"abac*********");
+            
+            [self presentViewController:self.loginViewController animated:YES completion:nil];
+    //        [[[UIApplication sharedApplication].windows firstObject].rootViewController presentViewController:[[QLMLoginViewController alloc]init] animated:YES completion:nil];
+        });
+    }
+//
 //    UIButton *testLoginButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
 //    [self.view addSubview:testLoginButton];
 //    [testLoginButton addTarget:self action:@selector(testButtonClick) forControlEvents:UIControlEventTouchUpInside];
@@ -223,11 +223,11 @@
     return _currentAudioLabel;
 }
 //
-//- (QLMLoginViewController *)loginViewController{
-//    if (!_loginViewController) {
-//        _loginViewController = [[QLMLoginViewController alloc]init];
-//    }
-//    return _loginViewController;
-//}
+- (QLMLoginViewController *)loginViewController{
+    if (!_loginViewController) {
+        _loginViewController = [[QLMLoginViewController alloc]init];
+    }
+    return _loginViewController;
+}
 
 @end
