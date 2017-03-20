@@ -248,14 +248,13 @@
                 [[NSUserDefaults standardUserDefaults] setObject:self.txtUserName.text forKey:kUserName];
                 [[NSUserDefaults standardUserDefaults] setObject:self.txtPassword.text forKey:kPassWord];
                 
-                [self.navigationController dismissViewControllerAnimated:NO completion:^{
-                    
-                    
-                    UITabBarController *tabC = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-                    
-                    [tabC.childViewControllers[4] viewWillAppear:YES];
-                    
-                }];
+                UITabBarController *tabC = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+                
+                UINavigationController *navC = tabC.childViewControllers[4];
+                
+                [navC.childViewControllers.firstObject viewWillAppear:NO];
+                
+                [self.navigationController dismissViewControllerAnimated:NO completion:nil];
             }
         }];
 }

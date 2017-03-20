@@ -58,8 +58,6 @@ static NSString * const headerFooterReuseID = @"headerFooterReuseID";
 {
     [super viewDidLoad];
     
-#warning isLoginChange
-//    [QLMMineInfo sharedMineInfo].isLogin = NO;
 
     [self loadMinInfoData];
     
@@ -348,7 +346,7 @@ static NSString * const headerFooterReuseID = @"headerFooterReuseID";
     
     NSString *className = (NSString *)self.controllerNamesArray[indexPath.section][indexPath.row];
     
-    NSString *title = [NSString string];
+    NSString *title;
     
     
     if (indexPath.section > 0)

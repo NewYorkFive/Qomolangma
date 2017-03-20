@@ -131,8 +131,16 @@
     
     [[QLMMineInfo sharedMineInfo].infoDict removeAllObjects];
     
-//    QLMLoginViewController *loginVC = [[QLMLoginViewController alloc] init];
-//    [self presentViewController:loginVC animated:YES completion:nil];
+    
+    UITabBarController *tabC = (UITabBarController *)self.presentingViewController;
+    
+    UINavigationController *navC = tabC.childViewControllers[4];
+    
+    [navC popToRootViewControllerAnimated:NO];
+    
+    tabC.selectedIndex = 2;
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

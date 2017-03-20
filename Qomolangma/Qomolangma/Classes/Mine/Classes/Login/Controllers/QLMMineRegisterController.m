@@ -307,13 +307,13 @@
             [QLMMineInfo sharedMineInfo].isLogin = YES;
             
             [SVProgressHUD showSuccessWithStatus:@"注册成功"];
-            [self.navigationController dismissViewControllerAnimated:NO completion:^{
-                
-                UITabBarController *tabC = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-                
-                [tabC.childViewControllers[4] viewWillAppear:YES];
-                
-            }];
+            UITabBarController *tabC = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+            
+            UINavigationController *navC = tabC.childViewControllers[4];
+            
+            [navC.childViewControllers.firstObject viewWillAppear:NO];
+            
+            [self.navigationController dismissViewControllerAnimated:NO completion:nil];
         } else {
             
             [SVProgressHUD showErrorWithStatus:@"用户名已注册"];
@@ -326,9 +326,6 @@
             self.txtPasswordVerify.text = @"";
         }
     }];
-
-    
-
 }
 
 - (UIImageView *)setTitleView

@@ -49,7 +49,8 @@
         }
         
         CGFloat curTime = _animTime - particle.delayTime;
-        if (curTime >= _animDuration + particle.delayDuration) { //到达了目的地的粒子原地等待下没到达的粒子
+        if (curTime >= _animDuration + particle.delayDuration)
+        {
             curTime =  _animDuration + particle.delayDuration;
             count ++;
         }
