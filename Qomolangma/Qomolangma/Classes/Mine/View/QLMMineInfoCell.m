@@ -27,7 +27,7 @@
     self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     self.detailTextLabel.font = [UIFont systemFontOfSize:12];
     self.textLabel.font = [UIFont systemFontOfSize:15];
-//    self.selectionStyle = UITableViewCellSelectionStyleNone;
+
 }
 
 - (void)setMineInfoModel:(QLMMineInfoModel *)mineInfoModel
