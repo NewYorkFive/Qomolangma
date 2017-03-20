@@ -24,25 +24,25 @@
 
 - (void)setupUI
 {    
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
-    [self.view addSubview:tableView];
+    QLMMineStudyRecordHeaderView *headerView = [[QLMMineStudyRecordHeaderView alloc] init];
     
-    [tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.bottom.right.offset(0);
-        make.top.offset(0);
-    }];
-    
-    QLMMineStudyRecordHeaderView *headerView = [[QLMMineStudyRecordHeaderView alloc] initWithFrame:CGRectMake(0, 0, 0, 170)];
+    headerView.alpha = .5;
     
     headerView.backgroundColor = [UIColor whiteColor];
-        
-    headerView.alpha = .6;
     
-    tableView.tableHeaderView = headerView;
+    [self.view addSubview:headerView];
+    
+    [headerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.mas_topLayoutGuideBottom).offset(0);
+        make.left.right.offset(0);
+        make.height.offset(170);
+    }];
+
+    [self.view layoutIfNeeded];
     
     CAEmitterLayer *flakeLayer = [CAEmitterLayer layer];
-    
     
     CGRect bounds = [[UIScreen mainScreen] bounds];
     flakeLayer.emitterPosition = CGPointMake(bounds.size.width / 2, -10); //center of rectangle//发射位置
@@ -51,7 +51,18 @@
     // Spawn points for the flakes are within on the outline of the line
     flakeLayer.emitterMode	= kCAEmitterLayerOutline;//发射模式
     
+    UIImageView *imgBack = [[UIImageView alloc] init];
     
+    imgBack.alpha = .5;
+    
+    imgBack.image = [UIImage imageNamed:@"launch_default_min"];
+    
+    [self.view addSubview:imgBack];
+    
+    [imgBack mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(headerView.mas_bottom).offset(10);
+        make.left.right.bottom.offset(0);
+    }];
     
     CAEmitterCell *flakeCell = [CAEmitterCell emitterCell];
     flakeCell.contents = (id)[[UIImage imageNamed:@"FFRing"] CGImage];//是个CGImageRef的对象,既粒子要展现的图片
@@ -82,7 +93,7 @@
     
     flakeLayer.emitterCells = [NSArray arrayWithObject:flakeCell];//粒子发射的粒子
     
-    [tableView.layer insertSublayer:flakeLayer atIndex:0];
+    [self.view.layer insertSublayer:flakeLayer atIndex:0];
 }
 
 

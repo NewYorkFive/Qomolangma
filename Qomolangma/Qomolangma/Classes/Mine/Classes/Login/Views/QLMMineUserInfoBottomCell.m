@@ -67,8 +67,8 @@
     _model = model;
     
 
-    NSString *str = [[QLMMineInfo sharedMineInfo].infoDict objectForKey:model.key];
-        
+    NSString *str = [[NSUserDefaults standardUserDefaults] objectForKey:model.key];
+            
     self.txtDetail.text = str;
 
     self.labInfo.text = model.name;

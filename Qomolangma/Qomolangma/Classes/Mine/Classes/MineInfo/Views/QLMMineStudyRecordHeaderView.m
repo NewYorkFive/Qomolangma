@@ -27,7 +27,6 @@
 
 - (void)setupUI
 {
-    self.backgroundColor = [UIColor whiteColor];
     
     UIButton *btnHeaderIcon = [[UIButton alloc] init];
     
