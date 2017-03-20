@@ -80,7 +80,7 @@
     [learnBookImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.offset(10);
         make.bottom.offset(-10);
-        make.width.offset(60);
+        make.width.offset(70);
     }];
     [learnBookTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self).offset(10);

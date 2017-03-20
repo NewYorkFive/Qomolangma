@@ -16,8 +16,6 @@
     
     //设置每个item大小
     self.itemSize = CGSizeMake(self.collectionView.bounds.size.width, self.collectionView.bounds.size.height);
-    
-    //self.itemSize = CGSizeMake(80, 80);
 
     //设置间距
     self.minimumLineSpacing = 0;

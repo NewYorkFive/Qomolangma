@@ -41,7 +41,7 @@ static NSString * const reuseIdentifier = @"Cell";
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     
-    //如果你不想让scrollView的内容自动调整，将这个属性设为NO
+    //不让内容自动调整
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     self.view.backgroundColor = [UIColor blueColor];
@@ -86,8 +86,7 @@ static NSString * const reuseIdentifier = @"Cell";
 //    cell.learnCellDelegate = self;
     cell.block = ^(QLMLearnDetailsTableViewController *vc){
         [self.navigationController pushViewController:vc animated:YES];
-        NSLog(@"------");
-        NSLog(@"%@",vc.model);
+        vc.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:nil action:nil]];
     };
     return cell;
 }
@@ -96,7 +95,6 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)learnCollectionViewCell:(QLMLearnCollectionViewCell *)learnCollectionViewCell withDetailsTableViewController:(QLMLearnDetailsTableViewController *)detailsTableViewVc WithIndexPath:(NSIndexPath *)indexPath {
 
     [self.navigationController pushViewController:detailsTableViewVc animated:YES];
-//    detailsTableViewVc.navigationController.title = [NSString stringWithFormat:@"读古希腊神话学营销"];
 
     detailsTableViewVc.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:nil action:nil]];
 //    detailsTableViewVc.firstCellModelArray = self.firstCellModelArray;
@@ -117,13 +115,12 @@ static NSString * const reuseIdentifier = @"Cell";
     CGFloat calcOffsetX = offsetX + scrollView.bounds.size.width * .5;
     
     NSInteger page = calcOffsetX / scrollView.bounds.size.width;
-//    NSLog(@"%f -- %zd",offsetX,page);
     // 关联
     self.learnBarView.isSelectedPage = page;
     self.learnBarView.offsetX = offsetX;
-    
-    
 }
+
+
 
 //点击按钮,实现滚动
 - (void)navBarView:(QLMNavBarView *)navBarView withPageNumber:(NSInteger)pageNumber {
