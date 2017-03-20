@@ -36,31 +36,9 @@
     
     frameVc.selectedIndex = 2;
     
-    
-    
-    
     self.window.rootViewController = frameVc;
     [self.window makeKeyAndVisible];
     self.window.backgroundColor = [UIColor groupTableViewBackgroundColor];
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-    
-    
-    
-
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        NSLog(@"ttttttttttt1");
-//        if (![QLMMineInfo sharedMineInfo].isLogin) {
-//            NSLog(@"ttttttttttt2");
-//            [[frameVc.childViewControllers firstObject] presentViewController:[[QLMLoginViewController alloc]init] animated:YES completion:nil];
-//            NSLog(@"ttttttttttt3");
-//        }
-//    });
-
-    
-    
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        [[frameVc.childViewControllers firstObject] presentViewController:[[QLMLoginViewController alloc]init] animated:YES completion:nil];
-//    });
     
     return YES;
     

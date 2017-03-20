@@ -832,6 +832,7 @@
 		942400FF1E7E96B000D1DBD2 /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				942401851E7EBAC400D1DBD2 /* SearchBar */,
 				942401001E7E96B000D1DBD2 /* Login */,
 			);
 			path = Component;
@@ -927,7 +928,8 @@
 				942401891E7EBAC400D1DBD2 /* QLMSearchSecondPageTableViewController.h */,
 				9424018A1E7EBAC400D1DBD2 /* QLMSearchSecondPageTableViewController.m */,
 			);
-			path = SearchBar;
+			name = SearchBar;
+			path = ../Controller/SearchBar;
 			sourceTree = "<group>";
 		};
 		942CC13F1E79AEC6004D3814 /* FCSCommon */ = {
@@ -1198,7 +1200,6 @@
 		94EBD1151E79395600F71272 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				942401851E7EBAC400D1DBD2 /* SearchBar */,
 				94691EDD1E7B9515008B00B7 /* QLMBaseViewController.h */,
 				94691EDE1E7B9515008B00B7 /* QLMBaseViewController.m */,
 				94EBD1211E79396000F71272 /* QLMFrameViewController.h */,

@@ -190,7 +190,7 @@
     }
 }
 
-
+# pragma mark 1.2.1联动逻辑实现
 - (void)rightMediaClick{
     [self.playerView resetPlayer];
     
