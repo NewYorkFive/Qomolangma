@@ -7,6 +7,8 @@
 //
 
 #import "QLMDayDayUpZiShiTableViewController.h"
+#import "QLMDayDayUpZiShiTableViewCell.h"
+#import "QLMDayDayUpZiShiTableViewCellView.h"
 
 @interface QLMDayDayUpZiShiTableViewController ()
 
@@ -14,21 +16,33 @@
 
 @implementation QLMDayDayUpZiShiTableViewController
 
+- (instancetype)initWithStyle:(UITableViewStyle)style {
+    
+    return [super initWithStyle:UITableViewStyleGrouped];
+    
+}
+
 - (void)setFreeAudioArray:(NSArray<QLMFreeAudio *> *)freeAudioArray {
     
     _freeAudioArray = freeAudioArray;
-    
+    //reload一下tableView
     
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+//    QLMDayDayUpZiShiTableViewCellView *headView = [[QLMDayDayUpZiShiTableViewCellView alloc] init];
+//    self.tableView.tableHeaderView = headView;
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    //没数据没线
+    self.tableView.backgroundColor = [UIColor whiteColor];
+    
+    // self.clearsSelectionOnViewWillAppear = NO;
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    [self.tableView registerClass:[QLMDayDayUpZiShiTableViewCell class] forCellReuseIdentifier:@"cell"];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -36,27 +50,48 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-
+    
     return 1;
+    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
     return self.freeAudioArray.count;
+    
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
     
-    // Configure the cell...
-    
+    QLMDayDayUpZiShiTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    cell.freeAudio = self.freeAudioArray[indexPath.row];
     return cell;
+    
 }
-*/
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    
+    return @"2016-12-14";
+    
+}
+
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+//    
+//    return 32;
+//    
+//}
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+//
+//    return 32;
+//
+//}
+//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+//    
+//    return 32;
+//    
+//}
 
 /*
 // Override to support conditional editing of the table view.

@@ -17,6 +17,7 @@
     _rankingData = rankingData;
     //数据放到图形上
     [self sd_setImageWithURL:[NSURL URLWithString:rankingData.image_url] forState:UIControlStateNormal];
+    [self sd_setImageWithURL:[NSURL URLWithString:rankingData.image_url] forState:UIControlStateHighlighted];
     
 }
 

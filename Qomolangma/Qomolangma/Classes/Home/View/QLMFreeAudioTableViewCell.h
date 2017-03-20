@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "QLMFreeAudio.h"
+#import "QLMPlayBtn.h"
 
 @class QLMFreeAudioTableViewCell;
 @protocol QLMFreeAudioTableViewCellDelegate <NSObject>

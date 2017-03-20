@@ -97,6 +97,7 @@
     [self.labelLast_title mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.labelName.mas_bottom).offset(12);
         make.left.equalTo(self.labelName.mas_left);
+        make.right.equalTo(self.contentView.mas_right).offset(-16);
     }];
     
     self.labelPrice_unit.font = [UIFont systemFontOfSize:12];
@@ -107,18 +108,6 @@
         make.top.equalTo(self.contentView.mas_top).offset(16);
         make.height.width.offset(14);
     }];
-    
-//    UILabel * label = [[UILabel alloc] init];
-//    label.text = @"/";
-//    label.font = [UIFont systemFontOfSize:14];
-//    label.textColor = [UIColor orangeColor];
-//    label.alpha = .6;
-//    [self.contentView addSubview:label];
-//    [label mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.right.equalTo(self.labelPrice_unit.mas_left);
-//        make.centerY.equalTo(self.labelPrice_unit.mas_centerY);
-//        make.height.offset(10);
-//    }];
 
     self.labelLine.text = @"/";
     self.labelLine.font = [UIFont systemFontOfSize:14];

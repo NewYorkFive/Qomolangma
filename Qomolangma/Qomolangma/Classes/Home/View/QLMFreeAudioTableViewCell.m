@@ -8,6 +8,7 @@
 
 #import "QLMFreeAudioTableViewCell.h"
 #import "QLMPlayBtn.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface QLMFreeAudioTableViewCell ()
 
@@ -27,6 +28,9 @@
 //高亮button
 @property (nonatomic ,strong) UIButton *highlightedButton;
 
+///播放器
+@property (nonatomic ,strong) AVPlayer *player;
+
 @end
 
 @implementation QLMFreeAudioTableViewCell
@@ -40,7 +44,7 @@
     _button3.freeAudio = freeAudioArray[2];
     _button4.freeAudio = freeAudioArray[3];
     _button5.freeAudio = freeAudioArray[4];
-    _button6.freeAudio = _button1.freeAudio;
+ 
     
     
 }
@@ -53,6 +57,10 @@
 }
 
 - (void)setupUI {
+    
+    self.player = [[AVPlayer alloc] init];
+    
+    CGFloat buttonWidth = [UIScreen mainScreen].bounds.size.width * 2 / 3;
     
     //天天涨姿势
     UILabel *label = [[UILabel alloc] init];
@@ -112,7 +120,7 @@
     [_button1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(imageView1.mas_centerY);
         make.left.equalTo(imageView1.mas_right);
-        make.width.offset(280);
+        make.width.offset(buttonWidth);
     }];
     
     //小箭头2
@@ -129,7 +137,7 @@
     [_button2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(imageView2.mas_centerY);
         make.left.equalTo(imageView2.mas_right);
-        make.width.offset(280);
+        make.width.offset(buttonWidth);
     }];
     
     //小箭头3
@@ -146,7 +154,7 @@
     [_button3 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(imageView3.mas_centerY);
         make.left.equalTo(imageView3.mas_right);
-        make.width.offset(280);
+        make.width.offset(buttonWidth);
     }];
     
     //小箭头4
@@ -163,7 +171,7 @@
     [_button4 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(imageView4.mas_centerY);
         make.left.equalTo(imageView4.mas_right);
-        make.width.offset(280);
+        make.width.offset(buttonWidth);
     }];
     
     //小箭头5
@@ -181,12 +189,13 @@
         make.centerY.equalTo(imageView5.mas_centerY);
         make.left.equalTo(imageView5.mas_right);
         make.bottom.equalTo(self.contentView.mas_bottom).offset(-40);
-        make.width.offset(280);
+        make.width.offset(buttonWidth);
     }];
     
     //播放按钮
     self.button6 = [[QLMPlayBtn alloc] init];
     _button6.setNoTitle = YES;
+    
     [_button6 setImage:[UIImage imageNamed:@"new_main_audio_play_icon"] forState:UIControlStateNormal];
     [_button6 setImage:[UIImage imageNamed:@"new_main_audio_parse_icon"] forState:UIControlStateSelected];
     [self.contentView addSubview:_button6];
@@ -196,32 +205,72 @@
         make.right.offset(-16);
     }];
     
+    [_button1 addTarget:self action:@selector(buttonArrayClick:) forControlEvents:UIControlEventTouchUpInside];
+    [_button2 addTarget:self action:@selector(buttonArrayClick:) forControlEvents:UIControlEventTouchUpInside];
+    [_button3 addTarget:self action:@selector(buttonArrayClick:) forControlEvents:UIControlEventTouchUpInside];
+    [_button4 addTarget:self action:@selector(buttonArrayClick:) forControlEvents:UIControlEventTouchUpInside];
+    [_button5 addTarget:self action:@selector(buttonArrayClick:) forControlEvents:UIControlEventTouchUpInside];
     [_button6 addTarget:self action:@selector(playClick:) forControlEvents:UIControlEventTouchUpInside];
     
-    [_button1 addTarget:self action:@selector(buttonStateClick:) forControlEvents:UIControlEventTouchUpInside];
-    [_button2 addTarget:self action:@selector(buttonStateClick:) forControlEvents:UIControlEventTouchUpInside];
-    [_button3 addTarget:self action:@selector(buttonStateClick:) forControlEvents:UIControlEventTouchUpInside];
-    [_button4 addTarget:self action:@selector(buttonStateClick:) forControlEvents:UIControlEventTouchUpInside];
-    [_button5 addTarget:self action:@selector(buttonStateClick:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)buttonArrayClick:(QLMPlayBtn *)button {
+    
+    if (button.selected == NO) {    //没选中本button
+        //清除上一个高亮
+        self.highlightedButton.selected = NO;
+        //给本次点击的赋成高亮
+        button.selected = YES;
+        //把本按钮赋值给高亮按钮属性
+        self.highlightedButton = button;
+        
+        //变成选中状态--->正在播放
+        self.button6.selected = YES;
+        self.button6.freeAudio = button.freeAudio;
+        NSURL * url  = [NSURL URLWithString:button.freeAudio.audio_file_url];
+        self.player = [[AVPlayer alloc] initWithURL:url];
+        [self.player play];
+        
+    } else if (button.selected == YES && self.button6.selected == NO) {//暂停
+   
+        //清除上一个高亮
+        self.highlightedButton.selected = NO;
+        //给本次点击的赋成高亮
+        button.selected = YES;
+        //把本按钮赋值给高亮按钮属性
+        self.highlightedButton = button;
+        
+        [self.player play];
+    
+    }
     
 }
 
-//button状态点击改变
-- (void)buttonStateClick:(UIButton *)button {
+//大button的点击事件
+- (void)playClick:(QLMPlayBtn *)button {
     
-    //清除上一个高亮
-    self.highlightedButton.selected = NO;
-    //给本次点击的赋成高亮
-    button.selected = YES;
-    //把本按钮赋值给高亮按钮属性
-    self.highlightedButton = button;
-    
-}
-
-- (void)playClick:(UIButton *)button {
-    
-    
+    //播放按钮的选中状态
     button.selected = !button.selected;
+    if (button.freeAudio == nil) { //因为上来默认是没选中.所以button里面的属性是nil/所以默认播放第一首
+        
+        _button1.selected = YES;//把button1的点击状态改成选中
+        button.freeAudio = self.button1.freeAudio;
+        NSURL * url  = [NSURL URLWithString:button.freeAudio.audio_file_url];
+        self.player = [[AVPlayer alloc] initWithURL:url];
+        //播放
+        [_player play];
+    } else if (button.selected == YES) {//因为点击之后就改变了.所以现在是暂停状态
+        
+        [_player play];
+        
+    } else {
+   
+        [_player pause];
+    }
+    
+    
+//    //暂停
+//    [_player pause];
     
 }
 

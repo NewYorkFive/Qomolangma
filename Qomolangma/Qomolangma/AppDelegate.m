@@ -34,7 +34,7 @@
     [QLMMineInfo sharedMineInfo].isLogin = userName.length;
     
     frameVc.selectedIndex = 2;
-    
+    frameVc.selectedIndex = 0;
     self.window.rootViewController = frameVc;
     [self.window makeKeyAndVisible];
     self.window.backgroundColor = [UIColor groupTableViewBackgroundColor];
