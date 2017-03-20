@@ -11,10 +11,8 @@
 
 @implementation QLMPurchasedModel
 
-
+//空实现
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key{
-    
-    
     
 }
 

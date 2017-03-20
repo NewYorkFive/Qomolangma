@@ -166,7 +166,6 @@
 		B29B5A801E7F6E49002B1369 /* STModal.m in Sources */ = {isa = PBXBuildFile; fileRef = B29B5A601E7F6E49002B1369 /* STModal.m */; };
 		B29B5A811E7F6E49002B1369 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = B29B5A641E7F6E49002B1369 /* UIImage+ImageEffects.m */; };
 		B2A23D281E7FD8A700E47180 /* ignore in Resources */ = {isa = PBXBuildFile; fileRef = B2A23D1F1E7FD8A700E47180 /* ignore */; };
-		B2A23D291E7FD8A700E47180 /* QLMHtmlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A23D211E7FD8A700E47180 /* QLMHtmlViewController.m */; };
 		B2A23D2A1E7FD8A700E47180 /* QLMJumpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A23D231E7FD8A700E47180 /* QLMJumpViewController.m */; };
 		B2A23D2B1E7FD8A700E47180 /* QLMPurchasedTwoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A23D251E7FD8A700E47180 /* QLMPurchasedTwoViewController.m */; };
 		B2A23D2C1E7FD8A700E47180 /* QLMPurchasedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A23D271E7FD8A700E47180 /* QLMPurchasedViewController.m */; };
@@ -502,8 +501,6 @@
 		B29B5A631E7F6E49002B1369 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		B29B5A641E7F6E49002B1369 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		B2A23D1F1E7FD8A700E47180 /* ignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ignore; sourceTree = "<group>"; };
-		B2A23D201E7FD8A700E47180 /* QLMHtmlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLMHtmlViewController.h; sourceTree = "<group>"; };
-		B2A23D211E7FD8A700E47180 /* QLMHtmlViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLMHtmlViewController.m; sourceTree = "<group>"; };
 		B2A23D221E7FD8A700E47180 /* QLMJumpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLMJumpViewController.h; sourceTree = "<group>"; };
 		B2A23D231E7FD8A700E47180 /* QLMJumpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLMJumpViewController.m; sourceTree = "<group>"; };
 		B2A23D241E7FD8A700E47180 /* QLMPurchasedTwoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLMPurchasedTwoViewController.h; sourceTree = "<group>"; };
@@ -1462,8 +1459,6 @@
 			isa = PBXGroup;
 			children = (
 				B2A23D1F1E7FD8A700E47180 /* ignore */,
-				B2A23D201E7FD8A700E47180 /* QLMHtmlViewController.h */,
-				B2A23D211E7FD8A700E47180 /* QLMHtmlViewController.m */,
 				B2A23D221E7FD8A700E47180 /* QLMJumpViewController.h */,
 				B2A23D231E7FD8A700E47180 /* QLMJumpViewController.m */,
 				B2A23D241E7FD8A700E47180 /* QLMPurchasedTwoViewController.h */,
@@ -1779,7 +1774,6 @@
 				B29B5A6A1E7F6E49002B1369 /* UIScrollView+LDRefresh.m in Sources */,
 				315F96CD1E7E840800927745 /* QLMMineAnimator.m in Sources */,
 				43AC98EE1E7EB1AD00F74DDB /* QLMFreeAudio.m in Sources */,
-				B2A23D291E7FD8A700E47180 /* QLMHtmlViewController.m in Sources */,
 				31E04EDC1E7D744D00AE98AB /* QLMMineStudyGroupController.m in Sources */,
 				B2A23D3D1E7FD90500E47180 /* QLMPurchasedCell.m in Sources */,
 				315F970E1E7FA7F800927745 /* QLMMineAboutDeveloperController.m in Sources */,

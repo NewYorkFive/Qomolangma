@@ -10,10 +10,13 @@
 #import "QLMPurchasedModel.h"
 @interface QLMPurchasedCell : UICollectionViewCell
 
+//定义模型
 @property (nonatomic, strong) QLMPurchasedModel *model;
 
+//已购列表标签
 @property (weak, nonatomic) IBOutlet UILabel *botlabel;
 
+//已购内容视图
 @property (weak, nonatomic) IBOutlet UIImageView *babyImageView;
 
 
