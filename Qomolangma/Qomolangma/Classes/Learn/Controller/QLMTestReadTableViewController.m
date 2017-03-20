@@ -8,16 +8,28 @@
 
 #import "QLMTestReadTableViewController.h"
 #import "QLMTestReadTableViewCell.h"
+#import "MJRefresh.h"
+
 
 @interface QLMTestReadTableViewController ()
-
+@property (nonatomic, strong) NSArray<QLMLearnFirstCellModel *> *firstCellModelArray;
 @end
 
 static NSString *testCell = @"testCell";
 @implementation QLMTestReadTableViewController
 
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
+- (void)loadData{
+    [[QLMNetworkTools sharedTools] requestWithType:GET andUrlStr:@"app/resource/getSubscribeList" andParams:nil andSuccess:^(id responseObject) {
+        NSArray *array = ((NSDictionary *)responseObject)[@"data"];
+        NSMutableArray<QLMLearnFirstCellModel *> *mArr = [NSMutableArray array];
+        for (int i = 0; i < array.count; i++) {
+            [mArr addObject:[QLMLearnFirstCellModel yy_modelWithDictionary:array[i]]];
+        }
+        self.firstCellModelArray = mArr.copy;
+        [self.tableView reloadData];
+    } andFailture:^(NSError *error) {
+        NSLog(@"Error:%@",error);
+    }];
 }
 
 - (instancetype)init{
@@ -26,7 +38,6 @@ static NSString *testCell = @"testCell";
     }
     return self;
 }
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -43,6 +54,12 @@ static NSString *testCell = @"testCell";
     self.tableView.estimatedRowHeight = 300;
     
     self.navigationController.navigationBar.alpha = 1;
+    //Refreshing
+    self.tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self.tableView.mj_header beginRefreshing];
+        [self loadData];
+        [self.tableView.mj_header endRefreshing];
+    }];
 }
 
 #pragma mark - Table view data source

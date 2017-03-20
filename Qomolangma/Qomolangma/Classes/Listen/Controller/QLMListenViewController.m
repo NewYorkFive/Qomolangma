@@ -179,7 +179,8 @@
  */
 - (void)timeBtnClick:(UIButton *)sender{
     long time = sender.tag - baseTimeBtnTag;
-    NSLog(@"%zd",time);
+//    NSLog(@"%zd",time);
+    [QLMPlayListViewController sharedPlayListViewController].isVideo = !(time - 30);
     [self.navigationController pushViewController:[QLMPlayListViewController sharedPlayListViewController] animated:YES];
 }
 

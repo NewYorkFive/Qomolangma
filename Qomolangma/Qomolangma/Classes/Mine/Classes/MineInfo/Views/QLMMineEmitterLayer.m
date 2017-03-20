@@ -38,7 +38,7 @@
 
 - (void)emitterAnim:(CADisplayLink*)displayLink {
     [self setNeedsDisplay];
-    _animTime += 2.5;
+    _animTime += 3;
 }
 
 -(void)drawInContext:(CGContextRef)ctx {

@@ -15,5 +15,6 @@ pod 'SVProgressHUD'
 pod 'SSKeychain'
 pod 'AVOSCloud'
 pod 'AVOSCloudCrashReporting'
+pod 'ZFPlayer'
 
 end

@@ -13,6 +13,9 @@
 
 
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key{
+    
+    
+    
 }
 
 //+ (NSArray *)getPurchasedModelData {
@@ -44,9 +47,9 @@
 //    
 //}
 
-- (NSString *)description
-{
-    return [NSString stringWithFormat:@"%@ - %@", self.tid,self.tname];
-}
+//- (NSString *)description
+//{
+//    return [NSString stringWithFormat:@"%@ - %@", self.tid,self.tname];
+//}
 
 @end

@@ -31,6 +31,8 @@ PODS:
   - SSKeychain (1.4.1)
   - SVProgressHUD (2.1.2)
   - YYModel (1.0.4)
+  - ZFPlayer (2.1.3):
+    - Masonry
 
 DEPENDENCIES:
   - AFNetworking
@@ -41,6 +43,7 @@ DEPENDENCIES:
   - SSKeychain
   - SVProgressHUD
   - YYModel
+  - ZFPlayer
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -51,7 +54,8 @@ SPEC CHECKSUMS:
   SSKeychain: 55cc80f66f5c73da827e3077f02e43528897db41
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
+  ZFPlayer: 8dc82b4508fbba4ee59d0304c52e30f8b3390244
 
-PODFILE CHECKSUM: 6200f96fe75932d5b2b71279918050d6cd3a3067
+PODFILE CHECKSUM: 9a6feae80a1fb5bc9ec38e5f5a13d51d300e6d81
 
 COCOAPODS: 1.2.0

@@ -8,13 +8,13 @@
 
 #import "QLMPayedView.h"
 #import "QLMLearnTableViewCell.h"
+#import "MJRefresh.h"
 
 @interface QLMPayedView ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic,strong) NSArray<QLMLearnFirstCellModel *> *firstCellModelArray;
 @end
 
 @implementation QLMPayedView
-
 
 - (void)loadData{
     [[QLMNetworkTools sharedTools] requestWithType:GET andUrlStr:@"app/resource/getSubscribeList" andParams:nil andSuccess:^(id responseObject) {
@@ -47,7 +47,12 @@
     
     [self loadData];
     //行高
-    self.rowHeight = 120;
+    self.rowHeight = 110;
+    //下拉刷新
+    self.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self.mj_header beginRefreshing];
+        [self.mj_header endRefreshing];
+    }];
 }
 
 

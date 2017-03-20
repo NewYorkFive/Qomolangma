@@ -13,7 +13,7 @@
 @property (nonatomic, assign) BOOL playFlag;
 @property (nonatomic, strong) NSMutableArray<QLMAudioModel *> *playListModelArray;
 @property (nonatomic, strong) QLMAudioModel *currentAudioModel;
-
+@property (nonatomic, assign) BOOL isVideo;
 + (instancetype)sharedPlayListViewController;
 
 @end

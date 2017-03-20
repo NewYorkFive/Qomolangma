@@ -152,7 +152,7 @@
 
 - (void)mineEmitterLayerAnimEnd
 {
-    [UIView animateWithDuration:.5 animations:^{
+    [UIView animateWithDuration:1.5 animations:^{
         self.labTeamName.alpha = 1;
         self.labSlogan.alpha = 1;
         self.labGitHub.alpha = 1;
