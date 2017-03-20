@@ -15,6 +15,7 @@
 #import "QLMMineLoginSelectController.h"
 #import "QLMMineUserInfoDetailController.h"
 #import "QLMMineAnimator.h"
+#import "QLMPlayListViewController.h"
 
 #define BACK_GROUND_IMAGE_VIEW_HEIGHT 245
 
@@ -90,6 +91,8 @@ static NSString * const headerFooterReuseID = @"headerFooterReuseID";
 {
     [super viewWillAppear:animated];
 
+    self.playingBtn.hidden = ![QLMPlayListViewController sharedPlayListViewController].playListModelArray.count;
+    
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     
     if ([QLMMineInfo sharedMineInfo].isLogin)
@@ -136,6 +139,14 @@ static NSString * const headerFooterReuseID = @"headerFooterReuseID";
     self.tableView.delegate = self;
     
     self.headerView = [[QLMMineHeaderView alloc] initWithFrame:CGRectMake(0, 0, 0, 200)];
+    
+    
+    [self.headerView  addSubview:self.playingBtn];
+    
+    [self.playingBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.offset(0);
+        make.right.offset(-13);
+    }];
     
     __weak typeof(self) weakSelf = self;
     

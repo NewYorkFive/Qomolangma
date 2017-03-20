@@ -8,6 +8,9 @@
 
 #import "QLMLoginViewController.h"
 #import "DLCycleView.h"
+#import "QLMMineLoginController.h"
+#import "QLMMineRegisterController.h"
+
 @interface QLMLoginViewController ()
 
 @end
@@ -29,7 +32,8 @@
         [mArr addObject:[NSString stringWithFormat:@"launch_default_image_%zd",i]];
 //        [mArr addObject:[NSURL URLWithString:]];
     }
-    DLCycleView *cycleView = [[DLCycleView alloc]initWithFrame:kScreenBounds];
+//    DLCycleView *cycleView = [[DLCycleView alloc]initWithFrame:kScreenBounds];
+    DLCycleView *cycleView = [[DLCycleView alloc]initWithFrame:CGRectMake(0 , 0, kScreenWidth, kScreenHeight * 1.25)];
     cycleView.imageNames = mArr.copy;
     cycleView.pageControlRatio = 0.75;
     [self.view addSubview:cycleView];
@@ -62,15 +66,15 @@
     
 //    UIColor *color = [UIColor fcs_colorWithHex:0xffa42e];
     
-    [btns[0] setBackgroundImage:[UIImage imageNamed:@"register"] forState:UIControlStateNormal];
-    [btns[0] addTarget:self action:@selector(signUpClick) forControlEvents:UIControlEventTouchUpInside];
+//    [btns[0] setBackgroundImage:[UIImage imageNamed:@"register"] forState:UIControlStateNormal];
+//    [btns[0] addTarget:self action:@selector(signUpClick) forControlEvents:UIControlEventTouchUpInside];
+//    
+//    [btns[1] setBackgroundImage:[UIImage imageNamed:@"Login"] forState:UIControlStateNormal];
+//    [btns[1] setTitle:@"登陆" forState:UIControlStateNormal];
+//    [btns[1] setTitleColor:[UIColor fcs_colorWithHex:0xffa42e] forState:UIControlStateNormal];
+//    [btns[1] addTarget:self action:@selector(loginClick) forControlEvents:UIControlEventTouchUpInside];
     
-    [btns[1] setBackgroundImage:[UIImage imageNamed:@"Login"] forState:UIControlStateNormal];
-    [btns[1] setTitle:@"登陆" forState:UIControlStateNormal];
-    [btns[1] setTitleColor:[UIColor fcs_colorWithHex:0xffa42e] forState:UIControlStateNormal];
-    [btns[1] addTarget:self action:@selector(loginClick) forControlEvents:UIControlEventTouchUpInside];
-    
-    [btns[2] setTitle:@"随便看看" forState:UIControlStateNormal];
+    [btns[2] setTitle:@"快速体验" forState:UIControlStateNormal];
     [btns[2] setTitleColor:[UIColor fcs_colorWithHex:0xb7b7b7] forState:UIControlStateNormal];
     [btns[2] addTarget:self action:@selector(lookAroundClick) forControlEvents:UIControlEventTouchUpInside];
     
@@ -86,11 +90,15 @@
 
 
 - (void)loginClick{
-    NSLog(@"Login");
+    
+
+    
 }
 
 - (void)signUpClick{
-    NSLog(@"Sing up");
+
+
+    
 }
 
 - (void)lookAroundClick{

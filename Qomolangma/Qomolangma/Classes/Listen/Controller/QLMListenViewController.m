@@ -42,11 +42,12 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    BOOL hiddenFlag = ![QLMPlayListViewController sharedPlayListViewController].playListModelArray.count;
-    
+    QLMPlayListViewController *flagVc = [QLMPlayListViewController sharedPlayListViewController];
+    BOOL hiddenFlag = flagVc.navButtonStatusHidden;
     self.listenView.hidden = hiddenFlag;
     if (!hiddenFlag) {
-        self.currentAudioLabel.text =[NSString stringWithFormat:@"上次播放:%@",[QLMPlayListViewController sharedPlayListViewController].playListModelArray[0].title];
+//        self.currentAudioLabel.text =[NSString stringWithFormat:@"上次播放:%@",@"hello"];
+        self.currentAudioLabel.text = [NSString stringWithFormat:@"上次播放:%@",flagVc.urlStringArray[arc4random_uniform((int)flagVc.urlStringArray.count)]];
     }
 }
 
@@ -161,7 +162,7 @@
     
 //    static int flag = 1;
     if (![QLMMineInfo sharedMineInfo].isLogin) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
     //        vc.view.backgroundColor = vc.view.backgroundColor;
 //            flag = 0;
             NSLog(@"abac*********");

@@ -11,6 +11,12 @@
 #import "QLMMineUserInfoBottomCell.h"
 #import "QLMMineUserInfoBottomModel.h"
 
+#define kGender @"mineUserInfoGender"
+#define kBornYear @"mineUserInfoBornYear"
+#define kEducation @"mineUserInfoEducation"
+#define kIndustry @"mineUserInfoIndustry"
+#define kCareer @"mineUserInfoCareer"
+
 @interface QLMMineUserInfoDetailController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong)NSArray<NSArray<QLMMineUserInfoBottomModel *> *> *modelsArray;
@@ -36,6 +42,13 @@ static NSString * const topReuseID = @"topReuseID";
     
     [self setupUI];
 }
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    [self.tableView reloadData];
+}
+
 
 - (void)loadData
 {
