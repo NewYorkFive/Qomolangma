@@ -147,6 +147,7 @@
 #pragma  mark - 数据源方法
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
+ 
 //        UIButton *button = [[UIButton alloc]init];
 //        
 //        [button setImage:[UIImage imageNamed:@"purchased_empty_placeholder"] forState: UIControlStateNormal];
@@ -177,16 +178,16 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     QLMPurchasedCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
-    
-    
-    //cell.backgroundColor = [UIColor colorWithRed:arc4random_uniform(256) / 255.0 green:arc4random_uniform(256) / 255.0 blue:arc4random_uniform(256) / 255.0 alpha:1];
-    
+        //cell.backgroundColor = [UIColor colorWithRed:arc4random_uniform(256) / 255.0 green:arc4random_uniform(256) / 255.0 blue:arc4random_uniform(256) / 255.0 alpha:1];
+   
     
     
     
     return cell;
     
 }
+
+
 
 #pragma  mark - 已购内容视图结束时调用
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
