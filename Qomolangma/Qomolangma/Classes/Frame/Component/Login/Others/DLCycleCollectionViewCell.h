@@ -10,5 +10,9 @@
 
 @interface DLCycleCollectionViewCell : UICollectionViewCell
 //@property (nonatomic, strong) NSURL *imageURL;
+
+/**
+ 图片名字
+ */
 @property (nonatomic, strong) NSString *imageName;
 @end

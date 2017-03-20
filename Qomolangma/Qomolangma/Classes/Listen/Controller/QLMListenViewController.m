@@ -49,6 +49,10 @@
 //        self.currentAudioLabel.text =[NSString stringWithFormat:@"上次播放:%@",@"hello"];
         self.currentAudioLabel.text = [NSString stringWithFormat:@"上次播放:%@",flagVc.audioUrlString];
     }
+    
+    UITabBarController *tabBar = (UITabBarController *) [[UIApplication sharedApplication].windows firstObject].rootViewController;
+    tabBar.selectedViewController = tabBar.childViewControllers[0];//0是你的，1是刘康的，2是我的，3是王惠平的，4是续媛哲的
+
 }
 
 #pragma mark 界面搭建

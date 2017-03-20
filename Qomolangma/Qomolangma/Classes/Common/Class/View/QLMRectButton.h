@@ -9,7 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface QLMRectButton : UIButton
-//- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event withRatio:(CGFloat)ratio;
+
+/**
+ 矩形button的点击响应范围比例
+ */
 @property (nonatomic, assign) CGFloat ratio;
 
 @end

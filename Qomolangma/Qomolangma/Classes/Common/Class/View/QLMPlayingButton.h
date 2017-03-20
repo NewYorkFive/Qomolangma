@@ -9,6 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface QLMPlayingButton : UIButton
+
+/**
+ 音乐播放的小图标
+
+ @return 返回一个音乐播放的小图标
+ */
 + (instancetype)playingButton;
 
 @end

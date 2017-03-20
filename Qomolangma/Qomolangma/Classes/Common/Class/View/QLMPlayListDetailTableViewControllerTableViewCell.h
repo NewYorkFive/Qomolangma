@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "QLMAudioModel.h"
 @interface QLMPlayListDetailTableViewControllerTableViewCell : UITableViewCell
+
+/**
+ 音频model
+ */
 @property (nonatomic, strong) QLMAudioModel *model;
 @end
