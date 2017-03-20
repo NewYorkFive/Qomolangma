@@ -10,14 +10,11 @@
 
 @interface QLMPurchasedModel : NSObject
 
-
-@property(nonatomic,copy) NSString * price_unit;
-@property (nonatomic, copy) NSString *person_info;
-@property (nonatomic, copy) NSString *author;
+//获取图片路径
 @property (nonatomic, copy) NSString *image_url;
-@property (nonatomic, assign) NSInteger price;
+
+//获取图片名称
 @property (nonatomic, copy) NSString *name;
-@property (nonatomic, copy) NSString *modelId;
-@property (nonatomic, copy) NSString *content;
+
 
 @end

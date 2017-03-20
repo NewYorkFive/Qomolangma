@@ -10,7 +10,6 @@
 #import "STAlertView.h"
 #import "UIImage+ImageEffects.h"
 #import "JinnPopMenu.h"
-#import "QLMHtmlViewController.h"
 
 #define COLOR_ITEM [UIColor blackColor]
 #define COLOR_ITEM_SELECTED [UIColor yellowColor]
@@ -21,17 +20,16 @@
 
 @interface QLMJumpViewController () <JinnPopMenuDelegate>
 
+//记录手势id
 @property (nonatomic,assign) NSInteger index;
-
+//图片视图
 @property (nonatomic,strong) UIImageView *imageView;
-
+//背景图片视图
 @property (nonatomic,strong) UIImageView *backImageView;
-
+//提示框文字
 @property (nonatomic, strong) NSArray *titles;
-
+//提示框图片
 @property (nonatomic, strong) NSArray *images;
-
-@property (nonatomic,strong) UIWebView *webView;
 
 @end
 

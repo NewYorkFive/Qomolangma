@@ -32,6 +32,7 @@
 //记录已购label
 @property (nonatomic,strong) NSMutableArray *labArray;
 
+//记录模型数据
 @property (nonatomic, strong) NSArray<QLMPurchasedLabel *> *purchasedLabelArray;
 
 
