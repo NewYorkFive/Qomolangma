@@ -342,7 +342,7 @@ static NSString * const headerFooterReuseID = @"headerFooterReuseID";
     
     NSString *className = (NSString *)self.controllerNamesArray[indexPath.section][indexPath.row];
     
-    NSString *title = [NSString string];
+    NSString *title;
     
     
     if (indexPath.section > 0)

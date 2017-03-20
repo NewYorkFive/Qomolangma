@@ -216,7 +216,8 @@
 }
 
 - (void)viewDidDisappear:(BOOL)animated{
-        [self.playerView pause];
+    [super viewDidDisappear:animated];
+    [self.playerView pause];
 }
 
 #pragma mark 1.1setupTopView
