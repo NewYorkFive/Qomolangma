@@ -35,10 +35,12 @@
     //image
     UIImageView *learnBookImageView = [[UIImageView alloc] init];
     self.learnBookImageView = learnBookImageView;
+//    learnBookImageView.contentMode = UIViewContentModeScaleAspectFit;
     learnBookImageView.image = [UIImage imageNamed:@"audio_subscribe_icon"];
     //title
     UILabel *learnBookTitleLabel = [[UILabel alloc] init];
     learnBookTitleLabel.text = @"读古希腊神话学营销";
+    learnBookTitleLabel.font = [UIFont systemFontOfSize:14];
     self.learnBookTitleLabel = learnBookTitleLabel;
     //reader
     UILabel *learnBookreadersLabel = [[UILabel alloc] init];

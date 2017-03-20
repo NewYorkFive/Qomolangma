@@ -170,6 +170,7 @@
 		B286A00C1E7E6B3200EAB7CE /* QLMPurchasedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B286A00B1E7E6B3200EAB7CE /* QLMPurchasedLabel.m */; };
 		B286A0261E7EA3C300EAB7CE /* STAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B286A0231E7EA3C300EAB7CE /* STAlertView.m */; };
 		B286A0271E7EA3C300EAB7CE /* STModal.m in Sources */ = {isa = PBXBuildFile; fileRef = B286A0251E7EA3C300EAB7CE /* STModal.m */; };
+		B286A0A61E7EC38300EAB7CE /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = B286A0A51E7EC38300EAB7CE /* UIImage+ImageEffects.m */; };
 		C41114DE1E7E5B6F009E62A9 /* ignore in Resources */ = {isa = PBXBuildFile; fileRef = C41114B91E7E5B6F009E62A9 /* ignore */; };
 		C41114DF1E7E5B6F009E62A9 /* QLMLearnDetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C41114BB1E7E5B6F009E62A9 /* QLMLearnDetailsTableViewController.m */; };
 		C41114E01E7E5B6F009E62A9 /* QLMLearnModelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C41114BD1E7E5B6F009E62A9 /* QLMLearnModelViewController.m */; };
@@ -500,6 +501,8 @@
 		B286A0241E7EA3C300EAB7CE /* STModal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STModal.h; sourceTree = "<group>"; };
 		B286A0251E7EA3C300EAB7CE /* STModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STModal.m; sourceTree = "<group>"; };
 		B286A0281E7EA44700EAB7CE /* STModalUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STModalUtil.h; sourceTree = "<group>"; };
+		B286A0A41E7EC38300EAB7CE /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		B286A0A51E7EC38300EAB7CE /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		C41114B91E7E5B6F009E62A9 /* ignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ignore; sourceTree = "<group>"; };
 		C41114BA1E7E5B6F009E62A9 /* QLMLearnDetailsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLMLearnDetailsTableViewController.h; sourceTree = "<group>"; };
 		C41114BB1E7E5B6F009E62A9 /* QLMLearnDetailsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLMLearnDetailsTableViewController.m; sourceTree = "<group>"; };
@@ -746,10 +749,10 @@
 		43AC98AB1E7EB1AD00F74DDB /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				43AC98AC1E7EB1AD00F74DDB /* QLMDayDayUpZiShiTableViewController.h */,
-				43AC98AD1E7EB1AD00F74DDB /* QLMDayDayUpZiShiTableViewController.m */,
 				43AC98AE1E7EB1AD00F74DDB /* QLMHomeViewController.h */,
 				43AC98AF1E7EB1AD00F74DDB /* QLMHomeViewController.m */,
+				43AC98AC1E7EB1AD00F74DDB /* QLMDayDayUpZiShiTableViewController.h */,
+				43AC98AD1E7EB1AD00F74DDB /* QLMDayDayUpZiShiTableViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1300,6 +1303,7 @@
 		B279D7981E7BC0D000504CFB /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				B286A0A31E7EC38300EAB7CE /* UIImageEffects */,
 				B286A0211E7EA3C300EAB7CE /* STFrontModel */,
 				B2869FC71E7E6B0200EAB7CE /* MJRefresh */,
 				B279D7991E7BC0ED00504CFB /* LDRefresh */,
@@ -1428,6 +1432,15 @@
 				B286A0251E7EA3C300EAB7CE /* STModal.m */,
 			);
 			path = STFrontModel;
+			sourceTree = "<group>";
+		};
+		B286A0A31E7EC38300EAB7CE /* UIImageEffects */ = {
+			isa = PBXGroup;
+			children = (
+				B286A0A41E7EC38300EAB7CE /* UIImage+ImageEffects.h */,
+				B286A0A51E7EC38300EAB7CE /* UIImage+ImageEffects.m */,
+			);
+			path = UIImageEffects;
 			sourceTree = "<group>";
 		};
 		C41114B71E7E5B6F009E62A9 /* Learn */ = {
@@ -1713,6 +1726,7 @@
 				31E04ECF1E7D744D00AE98AB /* QLMMineUserInfoBottomCell.m in Sources */,
 				943761D81E7A1FD00088714E /* QLMNetworkTools.m in Sources */,
 				B286A00C1E7E6B3200EAB7CE /* QLMPurchasedLabel.m in Sources */,
+				B286A0A61E7EC38300EAB7CE /* UIImage+ImageEffects.m in Sources */,
 				43AC99061E7EB1AE00F74DDB /* QLMspecialColumnView.m in Sources */,
 				942CC15A1E79AEC6004D3814 /* UILabel+FCSLabel.m in Sources */,
 				B286A0021E7E6B0200EAB7CE /* MJRefreshNormalHeader.m in Sources */,

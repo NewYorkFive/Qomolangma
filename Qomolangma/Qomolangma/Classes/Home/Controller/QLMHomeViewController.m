@@ -24,7 +24,7 @@
 #import "QLMspecialColumnView.h"
 #import "QLMDayDayUpZiShiTableViewController.h"
 
-@interface QLMHomeViewController () <UITableViewDelegate ,UITableViewDataSource,QLMspecialColumnViewDelegate>
+@interface QLMHomeViewController () <UITableViewDelegate ,UITableViewDataSource,QLMspecialColumnViewDelegate ,QLMFreeAudioTableViewCellDelegate>
 
 //网络请求标记参数
 @property (nonatomic ,assign) BOOL needRefresh;
@@ -334,6 +334,7 @@ static int refreash3;
         
         //天天涨姿势
         QLMFreeAudioTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"QLMFreeAudioTableViewCell" forIndexPath:indexPath];
+        cell.delegate = self;
         //传递数据
         cell.freeAudioArray = self.freeAudioArray;
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
@@ -431,6 +432,18 @@ static int refreash3;
     
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
+    if (section == 1) {
+        QLMspecialColumnView *view = [[QLMspecialColumnView alloc] init];
+        view.delegate = self;
+        return view;
+        
+    }
+    return nil;
+    
+}
+
 - (void)specialColumnViewReloadData {
     
     if (refreash1 == self.specialColumnArray[0].count - 1) {
@@ -466,16 +479,13 @@ static int refreash3;
      
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-
-    if (section == 1) {
-        QLMspecialColumnView *view = [[QLMspecialColumnView alloc] init];
-        view.delegate = self;
-        return view;
-        
-    }
-    return nil;
-
+- (void)pushAll {
+    
+    QLMDayDayUpZiShiTableViewController *tc2 = [[QLMDayDayUpZiShiTableViewController alloc] init];
+    tc2.navigationItem.title = @"天天涨姿势";
+//    tc2.freeAudioArray = self.freeAudioArray;
+    [self.navigationController pushViewController:tc2 animated:YES];
+    
 }
 
 - (void)didReceiveMemoryWarning {

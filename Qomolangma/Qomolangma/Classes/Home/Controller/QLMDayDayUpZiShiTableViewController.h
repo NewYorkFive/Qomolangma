@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QLMFreeAudio.h"
 
 @interface QLMDayDayUpZiShiTableViewController : UITableViewController
+
+//天天涨姿势
+@property (nonatomic ,strong) NSArray<QLMFreeAudio *> *freeAudioArray;
 
 @end

@@ -20,7 +20,7 @@
 @property (nonatomic, strong) UIButton *changeButton;
 
 //换一换图片
-@property (nonatomic, strong) UIImageView *changeImageView;
+@property (nonatomic, strong) UIButton *changeImageButton;
 
 @end
 
@@ -53,8 +53,8 @@
     self.changeButton = [[UIButton alloc] init];
     [self addSubview:self.changeButton];
     //小箭头
-    self.changeImageView = [[UIImageView alloc] init];
-    [self addSubview:self.changeImageView];
+    self.changeImageButton = [[UIButton alloc] init];
+    [self addSubview:self.changeImageButton];
     
     _labelTitle.text = @"行业达人";
     _labelTitle.font = [UIFont systemFontOfSize:15];
@@ -84,13 +84,14 @@
     }];
     //MARK:换一换点击事件
     [self.changeButton addTarget:_delegate action:@selector(specialColumnViewReloadData) forControlEvents:UIControlEventTouchUpInside];
-//    [self.changeButton addTarget:self action:@selector(buttonClick) forControlEvents:UIControlEventTouchUpInside];
 
-    self.changeImageView.image = [UIImage imageNamed:@"home_icon_exchange"];
-    [self.changeImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.changeImageButton setImage:[UIImage imageNamed:@"home_icon_exchange"] forState:UIControlStateNormal];
+    [self.changeImageButton setImage:[UIImage imageNamed:@"home_icon_exchange"] forState:UIControlStateHighlighted];
+    [self.changeImageButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.changeButton.mas_centerY);
         make.right.equalTo(self.changeButton.mas_left);
     }];
+    [self.changeImageButton addTarget:_delegate action:@selector(specialColumnViewReloadData) forControlEvents:UIControlEventTouchUpInside];
     
 }
 
