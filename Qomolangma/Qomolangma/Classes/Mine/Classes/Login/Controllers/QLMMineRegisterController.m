@@ -307,6 +307,12 @@
             [QLMMineInfo sharedMineInfo].isLogin = YES;
             
             [SVProgressHUD showSuccessWithStatus:@"注册成功"];
+            UITabBarController *tabC = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+            
+            UINavigationController *navC = tabC.childViewControllers[4];
+            
+            [navC.childViewControllers.firstObject viewWillAppear:NO];
+            
             [self.navigationController dismissViewControllerAnimated:NO completion:nil];
         } else {
             
@@ -320,9 +326,6 @@
             self.txtPasswordVerify.text = @"";
         }
     }];
-
-    
-
 }
 
 - (UIImageView *)setTitleView

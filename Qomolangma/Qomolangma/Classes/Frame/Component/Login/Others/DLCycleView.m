@@ -192,6 +192,7 @@ static NSString *cellid = @"cellid";
 
 - (void)dealloc{
 //    NSLog(@"Son dead.");
+    
 }
 
 - (void)removeFromSuperview{

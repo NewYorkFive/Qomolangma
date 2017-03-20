@@ -44,7 +44,7 @@
         _title = [title copy];
         _image = image;
         _message = [message copy];
-        _buttonTitles = [NSArray arrayWithArray:buttonTitles];
+        _buttonTitles = buttonTitles.copy;
     }
     return self;
 }
