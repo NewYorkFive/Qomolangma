@@ -307,7 +307,13 @@
             [QLMMineInfo sharedMineInfo].isLogin = YES;
             
             [SVProgressHUD showSuccessWithStatus:@"注册成功"];
-            [self.navigationController dismissViewControllerAnimated:NO completion:nil];
+            [self.navigationController dismissViewControllerAnimated:NO completion:^{
+                
+                UITabBarController *tabC = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+                
+                [tabC.childViewControllers[4] viewWillAppear:YES];
+                
+            }];
         } else {
             
             [SVProgressHUD showErrorWithStatus:@"用户名已注册"];

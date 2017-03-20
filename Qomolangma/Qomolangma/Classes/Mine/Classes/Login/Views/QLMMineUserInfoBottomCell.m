@@ -64,10 +64,29 @@
 {
     _model = model;
     
+    if ([QLMMineInfo sharedMineInfo].isLogin)
+    {
+        NSString *str = [[QLMMineInfo sharedMineInfo].infoDict objectForKey:model.key];
+        
+        self.txtDetail.text = str;
+        
+        
+    }
+    else
+    {
+        
+        self.txtDetail.text = model.detail;
+    }
     self.labInfo.text = model.name;
+
+    [[NSUserDefaults standardUserDefaults] setObject:self.txtDetail.text forKey:model.key];
     
-    self.txtDetail.text = model.detail;
+    [[QLMMineInfo sharedMineInfo].infoDict setObject:self.txtDetail.text forKey:model.key];
+
+    
 }
+
+
 
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField

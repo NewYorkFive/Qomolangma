@@ -115,6 +115,11 @@
         
         [self.btnHeaderIcon setBackgroundImage:[UIImage imageNamed:@"headIcon"] forState:UIControlStateNormal];
     }
+    else
+    {
+        [self.btnNickName setTitle:@"未登陆" forState:UIControlStateNormal];
+        [self.btnHeaderIcon setBackgroundImage:[UIImage imageNamed:@"default_loading_head_60x60_"] forState:UIControlStateNormal];
+    }
 }
 
 
