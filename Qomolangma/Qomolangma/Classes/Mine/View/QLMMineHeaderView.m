@@ -7,6 +7,8 @@
 //
 
 #import "QLMMineHeaderView.h"
+#import "QLMPlayingButton.h"
+#import "QLMPlayListViewController.h"
 
 @interface QLMMineHeaderView ()
 
@@ -29,7 +31,6 @@
 
 - (void)setupUI
 {
-//    self.backgroundColor = [UIColor clearColor];
     
     UIView *bottomView = [[UIView alloc] init];
     bottomView.backgroundColor = [UIColor whiteColor];
@@ -51,7 +52,7 @@
     
     UIButton *btnNickName = [[UIButton alloc] init];
     
-    [btnNickName setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [btnNickName setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     
     btnNickName.titleLabel.font = [UIFont systemFontOfSize:15];
     
@@ -75,7 +76,7 @@
         [btnHeaderIcon setBackgroundImage:[UIImage imageNamed:@"default_loading_head_60x60_"] forState:UIControlStateNormal];
         
     }
-    
+
     
     [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.bottom.right.offset(0);
@@ -114,6 +115,11 @@
         [self.btnNickName setTitle:self.nickName forState:UIControlStateNormal];
         
         [self.btnHeaderIcon setBackgroundImage:[UIImage imageNamed:@"headIcon"] forState:UIControlStateNormal];
+    }
+    else
+    {
+        [self.btnNickName setTitle:@"未登陆" forState:UIControlStateNormal];
+        [self.btnHeaderIcon setBackgroundImage:[UIImage imageNamed:@"default_loading_head_60x60_"] forState:UIControlStateNormal];
     }
 }
 

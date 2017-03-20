@@ -8,6 +8,8 @@
 
 #import "QLMMineConfirmExitController.h"
 #import "QLMMineConfirmEximPresentationController.h"
+#import "QLMLoginViewController.h"
+
 
 @interface QLMMineConfirmExitController () <UIViewControllerTransitioningDelegate>
 
@@ -115,7 +117,30 @@
 
 - (void) btnExitAction: (UIButton *)sender
 {
+    [QLMMineInfo sharedMineInfo].isLogin = NO;
     
+    for (NSString *str in [QLMMineInfo sharedMineInfo].infoDict)
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:str];
+    }
+
+    [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:kUserName];
+
+    [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:kPassWord];
+
+    
+    [[QLMMineInfo sharedMineInfo].infoDict removeAllObjects];
+    
+    
+    UITabBarController *tabC = (UITabBarController *)self.presentingViewController;
+    
+    UINavigationController *navC = tabC.childViewControllers[4];
+    
+    [navC popToRootViewControllerAnimated:NO];
+    
+    tabC.selectedIndex = 2;
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

@@ -25,11 +25,7 @@
 #define kUserName @"mineUserInfoUserName"
 #define kPassWord @"mineUserInfoPassWord"
 #define kNicName @"mineUserInfoNickName"
-#define kGender @"mineUserInfoGender"
-#define kBornYear @"mineUserInfoBornYear"
-#define kEducation @"mineUserInfoEducation"
-#define kIndustry @"mineUserInfoIndustry"
-#define kCareer @"mineUserInfoCareer"
+
 
 #define kServiceName @"QomulangmaServiceName"
 

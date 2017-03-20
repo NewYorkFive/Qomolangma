@@ -20,6 +20,8 @@
     [self setupUI];
 }
 - (void)setupUI{
+    
+    
     self.view.backgroundColor = [UIColor blueColor];
     
     NSMutableArray *mArr = [NSMutableArray array];
@@ -92,6 +94,9 @@
 }
 
 - (void)lookAroundClick{
+//    self.parentViewController.tabBarController.selectedIndex = 2;
+    UITabBarController *tabbar = (UITabBarController *) [[UIApplication sharedApplication].windows firstObject].rootViewController;
+    tabbar.selectedViewController = tabbar.childViewControllers[2];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -101,5 +106,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-
+- (void)dealloc{
+    NSLog(@"Login dead");
+}
 @end

@@ -9,14 +9,29 @@
 #import "QLMJumpViewController.h"
 #import "STAlertView.h"
 #import "UIImage+ImageEffects.h"
+#import "JinnPopMenu.h"
+#import "QLMHtmlViewController.h"
 
-@interface QLMJumpViewController ()
+#define COLOR_ITEM [UIColor blackColor]
+#define COLOR_ITEM_SELECTED [UIColor yellowColor]
+#define COLOR_BACKGROUND [UIColor blackColor]
+
+
+#define BASE_TAG 10000
+
+@interface QLMJumpViewController () <JinnPopMenuDelegate>
 
 @property (nonatomic,assign) NSInteger index;
 
 @property (nonatomic,strong) UIImageView *imageView;
 
 @property (nonatomic,strong) UIImageView *backImageView;
+
+@property (nonatomic, strong) NSArray *titles;
+
+@property (nonatomic, strong) NSArray *images;
+
+@property (nonatomic,strong) UIWebView *webView;
 
 @end
 
@@ -28,58 +43,28 @@
     
     //创建imgview
     UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 64, kScreenWidth, self.view.frame.size.height)];
-   
+    
     NSString *imageName = [NSString stringWithFormat:@"%zd",1];
     imageView.image = [UIImage imageNamed:imageName];
     
     self.imageView = imageView;
-   
+    
     [self.view addSubview:imageView];
     
     //创建手势
-    //UISwipeGestureRecognizer *gr = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeClick:)];
-    
     UITapGestureRecognizer *gr = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(swipeClick:)];
-  
-    [self.view addGestureRecognizer:gr];
-
     
-//    gr.numberOfTapsRequired = 1;
-//    
+    [self.view addGestureRecognizer:gr];
+  
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(click)];
     
     self.navigationController.navigationBar.tintColor = [UIColor grayColor];
-
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(AddClick)];
+    
 }
 
 - (void)swipeClick:(UISwipeGestureRecognizer *)sender {
-    
-    
-//    //动画方向
-//    NSString *subTypeStr = @"";
-//    
-//    if(sender.direction == UISwipeGestureRecognizerDirectionRight){
-//        
-//        _index++;
-//        //方向
-//        subTypeStr = @"fromLeft";
-//        
-//    }else if (sender.direction == UISwipeGestureRecognizerDirectionLeft){
-//        
-//        _index--;
-//        //方向
-//        subTypeStr = @"fromRight";
-//    }
-//    
-//    //判断图片的范围
-//    if(_index > 6){
-//        
-//        _index = 1;
-//        
-//    }else if (_index < 1){
-//        
-//        _index = 6;
-//    }
     
     _index++;
     
@@ -97,12 +82,9 @@
         
         [self.view addSubview:self.backImageView];
         
-        
         NSString *title = @"通知";
         NSString *message = @"您的手机已经欠费，速交！";
-        ////    [STAlertView showTitle:nil message:message];
-        ////    [STAlertView showTitle:title message:message hideDelay:2];
-        ////    [STAlertView showTitle:title message:nil];
+        
         [STAlertView showTitle:title
                          image:nil
                        message:message
@@ -111,13 +93,12 @@
                            
                            [self click];
                        }];
-    
+
     }
     
     //2.根据角标设置图片
     NSString *imageName = [NSString stringWithFormat:@"%zd",_index+1];
     self.imageView.image = [UIImage imageNamed:imageName];
-    
     
     //3.转场动画
     //3.1创建动画对象
@@ -125,14 +106,10 @@
     
     //3.2设置属性
     //动画的样式 左右翻转
-//        transition.type = @"oglFlip";
     transition.type = @"pageCurl";
     
     //动画持续时间
     transition.duration = 1;
-    
-    //动画的方向
-//    transition.subtype = subTypeStr;
     
     //3.3添加
     [self.imageView.layer addAnimation:transition forKey:@"transition"];
@@ -144,6 +121,78 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)setup
+{
+    self.titles = @[ @"编辑", @"信息", @"搜索", @"分享"];
+    self.images = @[ @"edit", @"message", @"search", @"share"];
+}
+
+- (void)AddClick {
+    
+    [self setup];
+    [self segmentedContolButtonClicked];
+    
+}
+
+- (void)segmentedContolButtonClicked
+{
+    NSMutableArray *items = [[NSMutableArray alloc] init];
+    for (int i = 0; i < self.titles.count; i++)
+    {
+        JinnPopMenuItem *popMenuItem = [[JinnPopMenuItem alloc] initWithTitle:self.titles[i]
+                                                                   titleColor:COLOR_ITEM
+                                                                selectedTitle:self.titles[i]
+                                                           selectedTitleColor:COLOR_ITEM_SELECTED
+                                                                         icon:[self imageVithColor:COLOR_ITEM image:[UIImage imageNamed:self.images[i]]]
+                                                                 selectedIcon:[self imageVithColor:COLOR_ITEM_SELECTED image:[UIImage imageNamed:self.images[i]]]];
+        [items addObject:popMenuItem];
+    }
+    
+    JinnPopMenu *popMenu = [[JinnPopMenu alloc] initWithPopMenus:[items copy]];
+    
+    
+    UIImageView *image = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"ocean"]];
+    [popMenu setMode:JinnPopMenuModeSegmentedControl];
+    [popMenu setShouldHideWhenBackgroundTapped:YES];
+    popMenu.backgroundView = image;
+    [popMenu setDelegate:self];
+    [popMenu setTag:BASE_TAG];
+    [self.view addSubview:popMenu];
+    [popMenu showAnimated:YES];
+    [popMenu selectItemAtIndex:0];
+    [popMenu mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.bottom.left.right.equalTo(self.view);
+    }];
+}
+
+#pragma mark - JinnPopViewDelegate
+- (void)itemSelectedAtIndex:(NSInteger)index popMenu:(JinnPopMenu *)popMenu
+{
+    
+    if (popMenu.tag != BASE_TAG)
+    {
+        [popMenu dismissAnimated:NO];
+    }
+}
+
+
+//修改图片颜色
+- (UIImage *)imageVithColor:(UIColor *)color image:(UIImage *)image
+{
+    UIGraphicsBeginImageContextWithOptions(image.size, NO, image.scale);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextTranslateCTM(context, 0, image.size.height);
+    CGContextScaleCTM(context, 1.0, -1.0);
+    CGContextSetBlendMode(context, kCGBlendModeNormal);
+    CGRect rect = CGRectMake(0, 0, image.size.width, image.size.height);
+    CGContextClipToMask(context, rect, image.CGImage);
+    [color setFill];
+    CGContextFillRect(context, rect);
+    UIImage*newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
 
 
 - (void)didReceiveMemoryWarning {
@@ -152,13 +201,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

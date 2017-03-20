@@ -9,6 +9,7 @@
 #import "QLMMineSettingController.h"
 #import "QLMMineSettingBottomCell.h"
 #import "QLMMineConfirmExitController.h"
+#import "QLMMineAboutDeveloperController.h"
 
 @interface QLMMineSettingController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -75,20 +76,23 @@ static NSString * const bottomReuseID = @"bottomReuseID";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == self.titlesArray.count - 1)
+    if ([QLMMineInfo sharedMineInfo].isLogin && indexPath.section == 5)
     {
         QLMMineSettingBottomCell *cell = [tableView dequeueReusableCellWithIdentifier:bottomReuseID forIndexPath:indexPath];
         
         return cell;
     }
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseID forIndexPath:indexPath];
-    
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    
-    cell.textLabel.text = self.titlesArray[indexPath.section][indexPath.row];
-    
-    return cell;
+    else
+    {
+        
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseID forIndexPath:indexPath];
+        
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        
+        cell.textLabel.text = self.titlesArray[indexPath.section][indexPath.row];
+        
+        return cell;
+    }
     
     
 }
@@ -107,19 +111,27 @@ static NSString * const bottomReuseID = @"bottomReuseID";
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
-    if ([QLMMineInfo sharedMineInfo].isLogin && indexPath.section == self.titlesArray.count - 1)
+    if ([QLMMineInfo sharedMineInfo].isLogin && indexPath.section == 5)
     {
         QLMMineConfirmExitController *confirmExitController = [[QLMMineConfirmExitController alloc] init];
         
         [self presentViewController:confirmExitController animated:YES completion:nil];
     }
-    else
+    else if (indexPath.section == 4)
     {
+        QLMMineAboutDeveloperController *developerVC = [[QLMMineAboutDeveloperController alloc] init];
         
+        developerVC.title = @"关于我们";
         
+        [self.navigationController pushViewController:developerVC animated:YES];
     }
-    
-    
+
+}
+
+- (void) creatFooterView
+{
+
+   
     
 }
 

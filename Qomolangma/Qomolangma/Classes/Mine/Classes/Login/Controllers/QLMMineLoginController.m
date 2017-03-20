@@ -248,12 +248,15 @@
                 [[NSUserDefaults standardUserDefaults] setObject:self.txtUserName.text forKey:kUserName];
                 [[NSUserDefaults standardUserDefaults] setObject:self.txtPassword.text forKey:kPassWord];
                 
+                UITabBarController *tabC = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+                
+                UINavigationController *navC = tabC.childViewControllers[4];
+                
+                [navC.childViewControllers.firstObject viewWillAppear:NO];
+                
                 [self.navigationController dismissViewControllerAnimated:NO completion:nil];
             }
-            
         }];
-
-
 }
 
 - (UIImageView *)setTitleView

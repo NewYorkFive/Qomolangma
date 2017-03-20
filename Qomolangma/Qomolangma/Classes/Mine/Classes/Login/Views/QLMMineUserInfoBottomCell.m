@@ -46,6 +46,8 @@
     
     self.txtDetail.delegate = self;
     
+    self.txtDetail.placeholder = @"点击设置";
+    
     self.txtDetail.textColor = [UIColor grayColor];
     
     self.txtDetail.font = [UIFont systemFontOfSize:14];
@@ -64,10 +66,21 @@
 {
     _model = model;
     
+
+    NSString *str = [[NSUserDefaults standardUserDefaults] objectForKey:model.key];
+            
+    self.txtDetail.text = str;
+
     self.labInfo.text = model.name;
+
+    [[NSUserDefaults standardUserDefaults] setObject:self.txtDetail.text forKey:model.key];
     
-    self.txtDetail.text = model.detail;
+    [[QLMMineInfo sharedMineInfo].infoDict setObject:self.txtDetail.text forKey:model.key];
+
+    
 }
+
+
 
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField

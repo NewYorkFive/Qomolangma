@@ -42,11 +42,12 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    BOOL hiddenFlag = ![QLMPlayListViewController sharedPlayListViewController].playListModelArray.count;
-    
+    QLMPlayListViewController *flagVc = [QLMPlayListViewController sharedPlayListViewController];
+    BOOL hiddenFlag = flagVc.navButtonStatusHidden;
     self.listenView.hidden = hiddenFlag;
     if (!hiddenFlag) {
-        self.currentAudioLabel.text =[NSString stringWithFormat:@"上次播放:%@",[QLMPlayListViewController sharedPlayListViewController].playListModelArray[0].title];
+//        self.currentAudioLabel.text =[NSString stringWithFormat:@"上次播放:%@",@"hello"];
+        self.currentAudioLabel.text = [NSString stringWithFormat:@"上次播放:%@",flagVc.urlStringArray[arc4random_uniform((int)flagVc.urlStringArray.count)]];
     }
 }
 
@@ -159,16 +160,27 @@
     }];
     
     
-    static int flag = 1;
-    if (flag) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//    static int flag = 1;
+    if (![QLMMineInfo sharedMineInfo].isLogin) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
     //        vc.view.backgroundColor = vc.view.backgroundColor;
-            flag = 0;
+//            flag = 0;
             NSLog(@"abac*********");
+            
             [self presentViewController:self.loginViewController animated:YES completion:nil];
     //        [[[UIApplication sharedApplication].windows firstObject].rootViewController presentViewController:[[QLMLoginViewController alloc]init] animated:YES completion:nil];
         });
     }
+//
+//    UIButton *testLoginButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
+//    [self.view addSubview:testLoginButton];
+//    [testLoginButton addTarget:self action:@selector(testButtonClick) forControlEvents:UIControlEventTouchUpInside];
+//    testLoginButton.center = self.view.center;
+    
+}
+
+- (void)testButtonClick{
+    [self presentViewController:[[QLMLoginViewController alloc]init] animated:YES completion:nil];
 }
 
 
@@ -179,7 +191,8 @@
  */
 - (void)timeBtnClick:(UIButton *)sender{
     long time = sender.tag - baseTimeBtnTag;
-    NSLog(@"%zd",time);
+//    NSLog(@"%zd",time);
+    [QLMPlayListViewController sharedPlayListViewController].isVideo = !(time - 30);
     [self.navigationController pushViewController:[QLMPlayListViewController sharedPlayListViewController] animated:YES];
 }
 
@@ -210,7 +223,7 @@
     }
     return _currentAudioLabel;
 }
-
+//
 - (QLMLoginViewController *)loginViewController{
     if (!_loginViewController) {
         _loginViewController = [[QLMLoginViewController alloc]init];

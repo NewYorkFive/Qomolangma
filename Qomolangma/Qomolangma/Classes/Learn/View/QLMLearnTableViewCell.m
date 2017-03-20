@@ -8,6 +8,7 @@
 
 #import "QLMLearnTableViewCell.h"
 #import <UIImageView+WebCache.h>
+#import "UIImageView+CornerRadius.h"
 
 @interface QLMLearnTableViewCell ()
 @property (nonatomic, strong) UIImageView *learnBookImageView;
@@ -34,16 +35,19 @@
     //添加控件
     //image
     UIImageView *learnBookImageView = [[UIImageView alloc] init];
+    [learnBookImageView zy_cornerRadiusAdvance:6.0f rectCornerType:UIRectCornerAllCorners];
     self.learnBookImageView = learnBookImageView;
+    learnBookImageView.contentMode = UIViewContentModeScaleToFill;
     learnBookImageView.image = [UIImage imageNamed:@"audio_subscribe_icon"];
     //title
     UILabel *learnBookTitleLabel = [[UILabel alloc] init];
     learnBookTitleLabel.text = @"读古希腊神话学营销";
+    learnBookTitleLabel.font = [UIFont systemFontOfSize:14];
     self.learnBookTitleLabel = learnBookTitleLabel;
     //reader
     UILabel *learnBookreadersLabel = [[UILabel alloc] init];
     learnBookreadersLabel.text = @"1人订阅";
-    learnBookreadersLabel.font = [UIFont systemFontOfSize:12];
+    learnBookreadersLabel.font = [UIFont systemFontOfSize:10];
     learnBookreadersLabel.textColor = [UIColor lightGrayColor];
     self.learnBookreadersLabel = learnBookreadersLabel;
     //text
@@ -55,7 +59,7 @@
     //introduce
     UILabel *learnBookIntroduceLabel = [[UILabel alloc] init];
     learnBookIntroduceLabel.text = @"从古希腊神话中系统地学习营销之道";
-    learnBookIntroduceLabel.font = [UIFont systemFontOfSize:12];
+    learnBookIntroduceLabel.font = [UIFont systemFontOfSize:10];
     learnBookIntroduceLabel.textColor = [UIColor lightGrayColor];
     self.learnBookIntroduceLabel = learnBookIntroduceLabel;
     //price
@@ -76,7 +80,7 @@
     [learnBookImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.offset(10);
         make.bottom.offset(-10);
-        make.width.offset(60);
+        make.width.offset(70);
     }];
     [learnBookTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self).offset(10);
@@ -88,12 +92,12 @@
     }];
     [learnBookTextLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(learnBookTitleLabel);
-        make.top.equalTo(learnBookTitleLabel.mas_bottom).offset(5);
+        make.top.equalTo(learnBookTitleLabel.mas_bottom).offset(7);
         make.right.equalTo(self).offset(-40);
     }];
     [learnBookIntroduceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(learnBookTitleLabel);
-        make.top.equalTo(learnBookTextLabel.mas_bottom).offset(5);
+        make.top.equalTo(learnBookTextLabel.mas_bottom).offset(10);
         make.right.equalTo(self).offset(-40);
     }];
     [learnBookPriceLabel mas_makeConstraints:^(MASConstraintMaker *make) {

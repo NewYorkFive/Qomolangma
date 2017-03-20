@@ -15,6 +15,7 @@
 #import "QLMMineLoginSelectController.h"
 #import "QLMMineUserInfoDetailController.h"
 #import "QLMMineAnimator.h"
+#import "QLMPlayListViewController.h"
 
 #define BACK_GROUND_IMAGE_VIEW_HEIGHT 245
 
@@ -58,12 +59,11 @@ static NSString * const headerFooterReuseID = @"headerFooterReuseID";
 {
     [super viewDidLoad];
     
-#warning isLoginChange
-    [QLMMineInfo sharedMineInfo].isLogin = YES;
 
     [self loadMinInfoData];
     
     [self setupUI];
+    
 }
 
 - (void) loadMinInfoData
@@ -87,10 +87,11 @@ static NSString * const headerFooterReuseID = @"headerFooterReuseID";
     self.dataArray = dataArray.copy;
 }
 
-- (void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
 
-    self.navigationController.navigationBar.hidden = YES;
+    self.playingBtn.hidden = ![QLMPlayListViewController sharedPlayListViewController].playListModelArray.count;
     
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     
@@ -100,6 +101,12 @@ static NSString * const headerFooterReuseID = @"headerFooterReuseID";
         
         self.headerView.nickName = nickName;
     }
+    else
+    {
+        self.headerView.nickName = @"未登陆";
+    }
+    
+    [self.tableView reloadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -108,8 +115,6 @@ static NSString * const headerFooterReuseID = @"headerFooterReuseID";
 
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     
-    self.navigationController.navigationBar.hidden = NO;
-
 }
 
 - (void)setupUI
@@ -134,6 +139,14 @@ static NSString * const headerFooterReuseID = @"headerFooterReuseID";
     self.tableView.delegate = self;
     
     self.headerView = [[QLMMineHeaderView alloc] initWithFrame:CGRectMake(0, 0, 0, 200)];
+    
+    
+    [self.headerView  addSubview:self.playingBtn];
+    
+    [self.playingBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.offset(0);
+        make.right.offset(-13);
+    }];
     
     __weak typeof(self) weakSelf = self;
     
@@ -244,6 +257,8 @@ static NSString * const headerFooterReuseID = @"headerFooterReuseID";
         
         _tableView.backgroundColor = [UIColor clearColor];
         
+        _tableView.showsVerticalScrollIndicator = NO;
+        
         [self.view addSubview:_tableView];
         
         [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -342,7 +357,7 @@ static NSString * const headerFooterReuseID = @"headerFooterReuseID";
     
     NSString *className = (NSString *)self.controllerNamesArray[indexPath.section][indexPath.row];
     
-    NSString *title = [NSString string];
+    NSString *title;
     
     
     if (indexPath.section > 0)

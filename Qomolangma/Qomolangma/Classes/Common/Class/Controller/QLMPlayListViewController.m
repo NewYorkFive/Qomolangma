@@ -10,17 +10,30 @@
 #import "QLMRectButton.h"
 #import "QLMCircleButton.h"
 #import "QLMPlayListDetailTableViewController.h"
+#import <ZFPlayer.h>
+@interface QLMPlayListViewController ()<ZFPlayerDelegate>
 
-@interface QLMPlayListViewController ()
+
+@property (nonatomic, assign) int urlIndex;
+
 @property (nonatomic, assign) BOOL flag;
 @property (nonatomic, strong) UILabel *navTitleLabel;
 
 @property (nonatomic, strong) UIView *topView;
+@property (nonatomic, strong) ZFPlayerView *playerView;
+//ZFPlayerControlView *controlView = [[ZFPlayerControlView alloc] init];
+//// model
+//ZFPlayerModel *playerModel = [[ZFPlayerModel alloc]init];
+
+
 @property (nonatomic, strong) UIView *topViewCurrentAudioTitleLabel;
 @property (nonatomic, strong) UIView *topViewCurrentAudioDescriptionLabel;
 @property (nonatomic, strong) UIImageView *topViewCurrentAudioImageView;
 
 @property (nonatomic, strong) UIView *middleView;
+@property (nonatomic, strong) UIButton *playPauseButton;
+
+
 @property (nonatomic, strong) UIView *bottomView;
 
 @end
@@ -36,6 +49,7 @@
         instance = [[QLMPlayListViewController alloc]init];
         instance.playFlag = NO;
         instance.hidesBottomBarWhenPushed = YES;
+        instance.navButtonStatusHidden = YES;
     });
     return instance;
 }
@@ -45,7 +59,14 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self setupNavBar];
+    if (self.isVideo) {
+        self.playPauseButton.selected = YES;
+    }else{
+        self.playPauseButton.selected = self.playFlag;
+    }
+    
     self.title = self.navTitleLabel.text;
+    [self.playerView autoPlayTheVideo];
 }
 - (void)setupNavBar{
     //背景
@@ -122,8 +143,98 @@
     
 }
 
+
+
+
+- (void)setIsVideo:(BOOL)isVideo{
+    _isVideo = isVideo;
+    if (isVideo) {
+        self.playerView.hidden = NO;
+        
+        [self.playerView resetPlayer];
+        
+        // control view（you can custom）
+        ZFPlayerControlView *controlView = [[ZFPlayerControlView alloc] init];
+        // model
+        ZFPlayerModel *playerModel = [[ZFPlayerModel alloc]init];
+        playerModel.fatherView = self.topView;
+        self.urlIndex = arc4random_uniform((int)(self.urlStringArray.count - 1));
+        playerModel.videoURL = [NSURL URLWithString:self.urlStringArray[self.urlIndex]];
+        playerModel.title = @"Video Player";
+        [self.playerView playerControlView:controlView playerModel:playerModel];
+        
+    }else{
+//        [self.playerView pause];
+        
+        self.playerView.hidden = YES;
+    }
+}
+
+
+- (void)rightMediaClick{
+    [self.playerView resetPlayer];
+    
+    // control view（you can custom）
+    ZFPlayerControlView *controlView = [[ZFPlayerControlView alloc] init];
+    // model
+    ZFPlayerModel *playerModel = [[ZFPlayerModel alloc]init];
+    playerModel.fatherView = self.topView;
+    self.urlIndex = (self.urlIndex + 1) % self.urlStringArray.count;
+    playerModel.videoURL = [NSURL URLWithString:self.urlStringArray[self.urlIndex]];
+    playerModel.title = @"Video Player";
+    [self.playerView playerControlView:controlView playerModel:playerModel];
+    [self.playerView autoPlayTheVideo];
+}
+
+- (void)leftMediaClik{
+    
+    [self.playerView resetPlayer];
+    
+    // control view（you can custom）
+    ZFPlayerControlView *controlView = [[ZFPlayerControlView alloc] init];
+    // model
+    ZFPlayerModel *playerModel = [[ZFPlayerModel alloc]init];
+    playerModel.fatherView = self.topView;
+    self.urlIndex = (self.urlIndex - 1) % self.urlStringArray.count;
+    playerModel.videoURL = [NSURL URLWithString:self.urlStringArray[self.urlIndex]];
+    playerModel.title = @"Video Player";
+    [self.playerView playerControlView:controlView playerModel:playerModel];
+    [self.playerView autoPlayTheVideo];
+}
+
+
+- (void)playButtonClick:(UIButton *)sender{
+    
+    sender.selected = !sender.selected;
+    
+    if (self.isVideo) {
+        sender.selected = self.playerView.isPauseByUser;
+        if (sender.selected) {
+            [self.playerView play];
+            return;
+        }
+        [self.playerView pause];
+        return;
+    }
+    
+    self.navButtonStatusHidden = NO;
+    
+    QLMAudioModel *tempModel = [[QLMAudioModel alloc]init];
+    tempModel.title = @"Hello,Girls";
+    [self.playListModelArray addObject:tempModel];
+    
+    self.playFlag = !self.playFlag;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"changePlayBtnStatus" object:nil];
+}
+
+- (void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    [self.playerView pause];
+}
+
 #pragma mark 1.1setupTopView
 - (void)setupTopView{
+    
     [self.view layoutIfNeeded];
     [self.topView addSubview:self.topViewCurrentAudioImageView];
     [self.topViewCurrentAudioImageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -145,17 +256,47 @@
         make.top.equalTo(self.topViewCurrentAudioTitleLabel.mas_bottom).offset(margin);
         make.centerX.equalTo(self.topView);
     }];
+    
+    
+    
+    
+    
+    [self.topView addSubview:self.playerView];
+    [self.playerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.topView).offset(20);
+        make.left.right.equalTo(self.topView);
+        // Here a 16:9 aspect ratio, can customize the video aspect ratio
+//        make.height.equalTo(self.playerView.mas_width).multipliedBy(9.0f/16.0f);
+        
+    }];
+
+    
+    // control view（you can custom）
+    ZFPlayerControlView *controlView = [[ZFPlayerControlView alloc] init];
+    // model
+    ZFPlayerModel *playerModel = [[ZFPlayerModel alloc]init];
+    playerModel.fatherView = self.topView;
+    playerModel.videoURL = [NSURL URLWithString:@"http://wvideo.spriteapp.cn/video/2016/0328/56f8ec01d9bfe_wpd.mp4"];
+    playerModel.title = @"Video Player";
+    [self.playerView playerControlView:controlView playerModel:playerModel];
+    // delegate
+    self.playerView.delegate = self;
+    // auto play the video
+
 }
 #pragma mark 1.2setupMiddleView
 - (void)setupMiddleView{
     [self.view layoutIfNeeded];
     
     QLMCircleButton *playPauseButton = [QLMCircleButton fcs_buttonWithImageName:@"mediaplayer_play_btn_70x70_" selectedImageName:@"mediaplayer_parse_btn_70x70_"];
+    self.playPauseButton = playPauseButton;
     [playPauseButton addTarget:self action:@selector(playButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.middleView addSubview:playPauseButton];
     playPauseButton.ratio = 0.45;
 
     CGFloat height = self.middleView.bounds.size.height * 0.4;
+    
+    
     
     [playPauseButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.width.mas_equalTo(height * 2);
@@ -178,9 +319,10 @@
     QLMRectButton *leftFifteenMinus = [QLMRectButton fcs_buttonWithImageName:@"mediaplayer_15second_left_44x44_"];
     leftFifteenMinus.ratio = 0.5;
     [leftView addSubview:leftFifteenMinus];
-    QLMRectButton *leftAudio = [QLMRectButton fcs_buttonWithImageName:@"mediaplayer_last_btn_44x44_"];
-    leftAudio.ratio = 0.5;
-    [leftView addSubview:leftAudio];
+    QLMRectButton *leftMedia = [QLMRectButton fcs_buttonWithImageName:@"mediaplayer_last_btn_44x44_"];
+    [leftMedia addTarget:self action:@selector(leftMediaClik) forControlEvents:UIControlEventTouchUpInside];
+    leftMedia.ratio = 0.5;
+    [leftView addSubview:leftMedia];
     [leftView.subviews mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:0 leadSpacing:0 tailSpacing:0];
     [leftView.subviews mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(leftView);
@@ -195,9 +337,10 @@
         make.centerY.equalTo(playPauseButton);
     }];
     
-    QLMRectButton *rightAudio = [QLMRectButton fcs_buttonWithImageName:@"mediaplayer_next_btn_44x44_"];
-    [rightView addSubview:rightAudio];
-    rightAudio.ratio = 0.5;
+    QLMRectButton *rightMedia = [QLMRectButton fcs_buttonWithImageName:@"mediaplayer_next_btn_44x44_"];
+    [rightMedia addTarget:self action:@selector(rightMediaClick) forControlEvents:UIControlEventTouchUpInside];
+    [rightView addSubview:rightMedia];
+    rightMedia.ratio = 0.5;
     
     QLMRectButton *rightFifteenMinus = [QLMRectButton fcs_buttonWithImageName:@"mediaplayer_15second_right_44x44_"];
     [rightView addSubview:rightFifteenMinus];
@@ -208,6 +351,7 @@
         make.top.bottom.equalTo(rightView);
     }];
     
+    self.isVideo = self.isVideo;
     
 }
 #pragma mark 1.3setupBottomView
@@ -301,17 +445,6 @@
 
 
 
-
-- (void)playButtonClick:(UIButton *)sender{
-    sender.selected = !sender.selected;
-    QLMAudioModel *tempModel = [[QLMAudioModel alloc]init];
-    tempModel.title = @"Hello,Girls";
-    [self.playListModelArray addObject:tempModel];
-    
-    self.playFlag = !self.playFlag;
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"changePlayBtnStatus" object:nil];
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -375,5 +508,38 @@
     return _bottomView;
 }
 
+- (NSArray<NSString *> *)urlStringArray{
+    if (!_urlStringArray) {
+        _urlStringArray = @[@"http://7xqhmn.media1.z0.glb.clouddn.com/femorning-20161106.mp4",
+                            @"http://wvideo.spriteapp.cn/video/2016/0328/56f8ec01d9bfe_wpd.mp4",
+                            @"http://baobab.wdjcdn.com/1456117847747a_x264.mp4",
+                            @"http://baobab.wdjcdn.com/14525705791193.mp4",
+                            @"http://baobab.wdjcdn.com/1456459181808howtoloseweight_x264.mp4",
+                            @"http://baobab.wdjcdn.com/1455968234865481297704.mp4",
+                            @"http://baobab.wdjcdn.com/1455782903700jy.mp4",
+                            @"http://baobab.wdjcdn.com/14564977406580.mp4",
+                            @"http://baobab.wdjcdn.com/1456316686552The.mp4",
+                            @"http://baobab.wdjcdn.com/1456480115661mtl.mp4",
+                            @"http://baobab.wdjcdn.com/1456665467509qingshu.mp4",
+                            @"http://baobab.wdjcdn.com/1455614108256t(2).mp4",
+                            @"http://baobab.wdjcdn.com/1456317490140jiyiyuetai_x264.mp4",
+                            @"http://baobab.wdjcdn.com/1455888619273255747085_x264.mp4",
+                            @"http://baobab.wdjcdn.com/1456734464766B(13).mp4",
+                            @"http://baobab.wdjcdn.com/1456653443902B.mp4",
+                            @"http://baobab.wdjcdn.com/1456231710844S(24).mp4"];
+    }
+    return _urlStringArray;
+}
+
+- (void)zf_playerBackAction{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (ZFPlayerView *)playerView{
+    if (!_playerView) {
+        _playerView = [[ZFPlayerView alloc]init];
+    }
+    return _playerView;
+}
 
 @end

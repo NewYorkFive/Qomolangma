@@ -29,14 +29,21 @@
 
 @implementation QLMLearnDetailsTableViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+}
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    [self loadData];
     
     [self setupUI];
 
 }
-
 
 - (instancetype)init{
     if (self = [super init]) {
@@ -44,7 +51,6 @@
     }
     return self;
 }
-
 
 - (void)setupUI {
     
@@ -56,7 +62,7 @@
     [self.view addSubview:self.backgroundImageVeiw];
     
     [self.backgroundImageVeiw mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.offset(0);
+        make.top.left.right.equalTo(self.view);
         make.height.offset(BACK_GROUND_IMAGE_VIEW_HEIGHT);
     }];
   
@@ -74,24 +80,10 @@
     
     //去掉多余的分割线
     self.tableView.tableFooterView = [[UIView alloc] init];
-   /*
-    //tableHeaderView
-    
-    UIImageView *headerImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"userinfo_top_bg"]];
-//    headerImgView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 200);
-    self.headerImgView = headerImgView;
-    [self.tableView.tableHeaderView addSubview:headerImgView];
-    [headerImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.equalTo(self.tableView);
-        make.height.offset(BACK_GROUND_IMAGE_VIEW_HEIGHT);
-    }];
-
-    
-    [_headerImgView sizeToFit];
-    */
     self.navigationController.navigationBar.alpha = 0;
-    
-    //底部的view
+    self.navigationController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:nil action:nil];
+
+    //Bottomview
     QLMLearnBottomButtonView *frontView = [[QLMLearnBottomButtonView alloc] initWithFrame:CGRectZero];
     self.frontView = frontView;
     self.frontView.backgroundColor = [UIColor lightGrayColor];
@@ -102,12 +94,9 @@
     }];
     
     frontView.testReadDelegate = self;
-    
-    
-    
 }
 
-//push
+//push - modal
 - (void)learnBottomButtonView:(QLMLearnBottomButtonView *)learnBottomButtonView withTestReadTableViewController:(QLMTestReadTableViewController *)testReadTableViewController {
     testReadTableViewController.model = self.model;
     UIBarButtonItem *backItem=[[UIBarButtonItem alloc] init];
@@ -139,7 +128,12 @@
     return _tableView;
 }
 
-
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    
+}
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGFloat offsetY = self.tableView.contentOffset.y;
     if (offsetY < -200)
@@ -147,29 +141,14 @@
         [self.backgroundImageVeiw mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.offset(BACK_GROUND_IMAGE_VIEW_HEIGHT - (offsetY - 200) * .5);
         }];
-        /*
-        //设置高度
-        CGFloat h = _headerImgView.frame.size.height;
-       
-        [_headerImgView sizeToFit];
-        //改变headerView的高度
-        CGRect newFrame = self.tableView.tableHeaderView.frame;
-        newFrame.size.height = newFrame.size.height - (offsetY-200);
-        self.tableView.tableHeaderView.frame = newFrame;
-        [self.tableView beginUpdates];
-        [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
-        [self.tableView endUpdates];
-        */
     }
-    
     //导航栏透明度
 
     if (offsetY > -200) {
-        self.navigationController.navigationBar.alpha = 100/ABS(offsetY);
+        self.navigationController.navigationBar.alpha = 150/ABS(offsetY);
     } else {
         self.navigationController.navigationBar.alpha = 0;
     }
-
 }
 
 #pragma mark - Table view data source
@@ -254,8 +233,39 @@
         [lastTipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(lastEditionLabel);
             make.top.equalTo(lastTimeLabel.mas_bottom).offset(10);
+        }];
+        
+        UILabel *lastEditionLabel2 = [UILabel fcs_labelWithColor:[UIColor blackColor] andFontSize:10 andText:@"2.23 读古希腊神话学营销 | 客户的心思猜不透?反其道而行之"];
+        UILabel *lastTimeLabel2 = [UILabel fcs_labelWithColor:[UIColor lightGrayColor] andFontSize:10 andText:@"2017-02-15"];
+        UILabel *lastTipLabel2 = [UILabel fcs_labelWithColor:[UIColor lightGrayColor] andFontSize:10 andText:@"别人还在养跟快的马的时候,福特已经开始造车了!"];
+        UILabel *lineLabel = [UILabel new];
+        lineLabel.backgroundColor = [UIColor lightGrayColor];
+        [cell.contentView addSubview:lastEditionLabel2];
+        [cell.contentView addSubview:lastTimeLabel2];
+        [cell.contentView addSubview:lastTipLabel2];
+        [cell.contentView addSubview:lineLabel];
+        
+        [lineLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(lastTipLabel.mas_bottom).offset(10);
+            make.left.offset(20);
+            make.right.offset(0);
+            make.height.offset(0.5);
+        }];
+        [lastEditionLabel2 mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(cell.contentView).offset(10);
+            make.right.equalTo(cell.contentView).offset(-10);
+            make.top.equalTo(lineLabel.mas_bottom).offset(10);
+        }];
+        [lastTimeLabel2 mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(lastEditionLabel);
+            make.top.equalTo(lastEditionLabel2.mas_bottom).offset(10);
+        }];
+        [lastTipLabel2 mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(lastEditionLabel);
+            make.top.equalTo(lastTimeLabel2.mas_bottom).offset(10);
             make.bottom.equalTo(cell.contentView).offset(-10);
         }];
+
     }
     return cell;
 }
