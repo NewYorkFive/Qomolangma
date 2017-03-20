@@ -1522,6 +1522,7 @@
 				TargetAttributes = {
 					948A5CDF1E793258006A595C = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = XCNQSAZY6S;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -1881,7 +1882,7 @@
 			baseConfigurationReference = 3F9EEF78AF999A9FC3CBA96E /* Pods-Qomolangma.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = XCNQSAZY6S;
 				GCC_PREFIX_HEADER = Qomolangma/PrefixHeader.pch;
 				INFOPLIST_FILE = Qomolangma/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1896,7 +1897,7 @@
 			baseConfigurationReference = 742B4AF91CA908E0FB52156F /* Pods-Qomolangma.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = XCNQSAZY6S;
 				GCC_PREFIX_HEADER = Qomolangma/PrefixHeader.pch;
 				INFOPLIST_FILE = Qomolangma/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
