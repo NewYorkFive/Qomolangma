@@ -8,12 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "QLMFreeAudio.h"
+#import "QLMPlayBtn.h"
 
 @class QLMFreeAudioTableViewCell;
 @protocol QLMFreeAudioTableViewCellDelegate <NSObject>
 
 @optional
 - (void)pushAll;
+
+- (void)FreeAudioTableViewCellPushToPlayListViewControllerWithQLMPlayButton:(QLMPlayBtn *)button;
 
 @end
 
@@ -23,5 +26,11 @@
 @property (nonatomic ,strong) NSArray<QLMFreeAudio *> *freeAudioArray;
 
 @property (nonatomic ,weak) id<QLMFreeAudioTableViewCellDelegate> delegate;
+
+//播放button
+@property (nonatomic ,strong) QLMPlayBtn *button6;
+
+//高亮button
+@property (nonatomic ,strong) UIButton *highlightedButton;
 
 @end

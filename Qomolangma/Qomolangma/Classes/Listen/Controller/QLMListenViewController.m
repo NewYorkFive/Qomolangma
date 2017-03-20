@@ -201,6 +201,11 @@
     BOOL flag = !(time - 30);
     
     if (!flag) {
+        destinationViewController.playFlag = NO;
+        
+//        destinationViewController.audioUrlString = @"http://mp3.peiyue.com/abcdefg/1234567/upload/Van Halen - Eruption.mp3";
+//        destinationViewController.audioUrlString = @"http://mp3.peiyue.com/abcdefg/1234567/upload/Justice%20-%20Let%20There%20Be%20Light.mp3";
+//        destinationViewController.audioUrlString = @"http://mp3.peiyue.com/abcdefg/1234567/upload/Justice - Let There Be Light.mp3";
         destinationViewController.audioUrlString = @"http://dgtt.besttoptoday.com/resource/mp3/20161216/201612161157237210.mp3";
     }
     destinationViewController.isVideo = flag;

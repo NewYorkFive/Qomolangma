@@ -45,7 +45,7 @@
 
     UIButton *btnLast = nil;
     
-    CGFloat height = 100;
+    CGFloat height = [UIScreen mainScreen].bounds.size.height * 23 / 184;
     
     CGFloat width = (kScreenWidth - margin * 3) / 2;
     
@@ -65,7 +65,7 @@
             make.width.offset(width);
             
             //行高
-            float colTop = (15 + i / 2 * (margin + height));
+            float colTop = (16 + i / 2 * (margin + height));
             
             make.top.offset(colTop);
             
