@@ -31,12 +31,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    [self loadData];
     
     [self setupUI];
 
 }
-
 
 - (instancetype)init{
     if (self = [super init]) {
@@ -44,7 +42,6 @@
     }
     return self;
 }
-
 
 - (void)setupUI {
     
@@ -85,13 +82,14 @@
         make.top.left.right.equalTo(self.tableView);
         make.height.offset(BACK_GROUND_IMAGE_VIEW_HEIGHT);
     }];
-
-    
     [_headerImgView sizeToFit];
     */
     self.navigationController.navigationBar.alpha = 0;
     
-    //底部的view
+    self.navigationController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:nil action:nil];
+
+    
+    //Bottomview
     QLMLearnBottomButtonView *frontView = [[QLMLearnBottomButtonView alloc] initWithFrame:CGRectZero];
     self.frontView = frontView;
     self.frontView.backgroundColor = [UIColor lightGrayColor];
@@ -103,11 +101,9 @@
     
     frontView.testReadDelegate = self;
     
-    
-    
 }
 
-//push
+//push - modal
 - (void)learnBottomButtonView:(QLMLearnBottomButtonView *)learnBottomButtonView withTestReadTableViewController:(QLMTestReadTableViewController *)testReadTableViewController {
     testReadTableViewController.model = self.model;
     UIBarButtonItem *backItem=[[UIBarButtonItem alloc] init];
@@ -165,7 +161,7 @@
     //导航栏透明度
 
     if (offsetY > -200) {
-        self.navigationController.navigationBar.alpha = 100/ABS(offsetY);
+        self.navigationController.navigationBar.alpha = 150/ABS(offsetY);
     } else {
         self.navigationController.navigationBar.alpha = 0;
     }
@@ -254,8 +250,40 @@
         [lastTipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(lastEditionLabel);
             make.top.equalTo(lastTimeLabel.mas_bottom).offset(10);
+//            make.bottom.equalTo(cell.contentView).offset(-10);
+        }];
+        
+        UILabel *lastEditionLabel2 = [UILabel fcs_labelWithColor:[UIColor blackColor] andFontSize:10 andText:@"2.23 读古希腊神话学营销 | 客户的心思猜不透?反其道而行之"];
+        UILabel *lastTimeLabel2 = [UILabel fcs_labelWithColor:[UIColor lightGrayColor] andFontSize:10 andText:@"2017-02-15"];
+        UILabel *lastTipLabel2 = [UILabel fcs_labelWithColor:[UIColor lightGrayColor] andFontSize:10 andText:@"别人还在养跟快的马的时候,福特已经开始造车了!"];
+        UILabel *lineLabel = [UILabel new];
+        lineLabel.backgroundColor = [UIColor lightGrayColor];
+        [cell.contentView addSubview:lastEditionLabel2];
+        [cell.contentView addSubview:lastTimeLabel2];
+        [cell.contentView addSubview:lastTipLabel2];
+        [cell.contentView addSubview:lineLabel];
+        
+        [lineLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(lastTipLabel.mas_bottom).offset(10);
+            make.left.offset(20);
+            make.right.offset(0);
+            make.height.offset(0.5);
+        }];
+        [lastEditionLabel2 mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(cell.contentView).offset(10);
+            make.right.equalTo(cell.contentView).offset(-10);
+            make.top.equalTo(lineLabel.mas_bottom).offset(10);
+        }];
+        [lastTimeLabel2 mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(lastEditionLabel);
+            make.top.equalTo(lastEditionLabel2.mas_bottom).offset(10);
+        }];
+        [lastTipLabel2 mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(lastEditionLabel);
+            make.top.equalTo(lastTimeLabel2.mas_bottom).offset(10);
             make.bottom.equalTo(cell.contentView).offset(-10);
         }];
+
     }
     return cell;
 }

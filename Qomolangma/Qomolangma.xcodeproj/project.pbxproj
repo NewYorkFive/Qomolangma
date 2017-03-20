@@ -171,6 +171,7 @@
 		B286A0261E7EA3C300EAB7CE /* STAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B286A0231E7EA3C300EAB7CE /* STAlertView.m */; };
 		B286A0271E7EA3C300EAB7CE /* STModal.m in Sources */ = {isa = PBXBuildFile; fileRef = B286A0251E7EA3C300EAB7CE /* STModal.m */; };
 		B286A0A61E7EC38300EAB7CE /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = B286A0A51E7EC38300EAB7CE /* UIImage+ImageEffects.m */; };
+		C40F630F1E7F6BC200377AFE /* UIImageView+CornerRadius.m in Sources */ = {isa = PBXBuildFile; fileRef = C40F630E1E7F6BC200377AFE /* UIImageView+CornerRadius.m */; };
 		C41114DE1E7E5B6F009E62A9 /* ignore in Resources */ = {isa = PBXBuildFile; fileRef = C41114B91E7E5B6F009E62A9 /* ignore */; };
 		C41114DF1E7E5B6F009E62A9 /* QLMLearnDetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C41114BB1E7E5B6F009E62A9 /* QLMLearnDetailsTableViewController.m */; };
 		C41114E01E7E5B6F009E62A9 /* QLMLearnModelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C41114BD1E7E5B6F009E62A9 /* QLMLearnModelViewController.m */; };
@@ -503,6 +504,8 @@
 		B286A0281E7EA44700EAB7CE /* STModalUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STModalUtil.h; sourceTree = "<group>"; };
 		B286A0A41E7EC38300EAB7CE /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		B286A0A51E7EC38300EAB7CE /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		C40F630D1E7F6BC200377AFE /* UIImageView+CornerRadius.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+CornerRadius.h"; sourceTree = "<group>"; };
+		C40F630E1E7F6BC200377AFE /* UIImageView+CornerRadius.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+CornerRadius.m"; sourceTree = "<group>"; };
 		C41114B91E7E5B6F009E62A9 /* ignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ignore; sourceTree = "<group>"; };
 		C41114BA1E7E5B6F009E62A9 /* QLMLearnDetailsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLMLearnDetailsTableViewController.h; sourceTree = "<group>"; };
 		C41114BB1E7E5B6F009E62A9 /* QLMLearnDetailsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLMLearnDetailsTableViewController.m; sourceTree = "<group>"; };
@@ -1485,6 +1488,8 @@
 		C41114C81E7E5B6F009E62A9 /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				C40F630D1E7F6BC200377AFE /* UIImageView+CornerRadius.h */,
+				C40F630E1E7F6BC200377AFE /* UIImageView+CornerRadius.m */,
 				C41114C91E7E5B6F009E62A9 /* ignore */,
 			);
 			path = Others;
@@ -1818,6 +1823,7 @@
 				B2869FF81E7E6B0200EAB7CE /* MJRefreshComponent.m in Sources */,
 				31E04EDA1E7D744D00AE98AB /* QLMMineShoppingCarController.m in Sources */,
 				31E04EE11E7D744D00AE98AB /* QLMMineViewController.m in Sources */,
+				C40F630F1E7F6BC200377AFE /* UIImageView+CornerRadius.m in Sources */,
 				315F96F41E7EC16E00927745 /* QLMMineSettingController.m in Sources */,
 				31E04ECC1E7D744D00AE98AB /* QLMMineLoginSelectController.m in Sources */,
 			);

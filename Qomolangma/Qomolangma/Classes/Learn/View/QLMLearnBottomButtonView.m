@@ -33,7 +33,8 @@
     [testReadBtn setTitle:@"试读" forState:UIControlStateNormal];
     [payedBtn setTitle:@"订阅 ¥39/月" forState:UIControlStateNormal];
     payedBtn.backgroundColor = [UIColor brownColor];
-    testReadBtn.backgroundColor = [UIColor redColor];
+    testReadBtn.backgroundColor = [UIColor whiteColor];
+    [testReadBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     testReadBtn.enabled = YES;
     payedBtn.enabled = YES;
     [self addSubview:testReadBtn];

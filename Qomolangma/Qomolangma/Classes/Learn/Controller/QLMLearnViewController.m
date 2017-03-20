@@ -59,7 +59,6 @@ static NSString * const reuseIdentifier = @"Cell";
     self.navigationItem.titleView = learnBarView;
     self.learnBarView = learnBarView;
     learnBarView.navBarDelegate = self;
-    
 
     self.collectionView.pagingEnabled = YES;
    
@@ -97,7 +96,7 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)learnCollectionViewCell:(QLMLearnCollectionViewCell *)learnCollectionViewCell withDetailsTableViewController:(QLMLearnDetailsTableViewController *)detailsTableViewVc WithIndexPath:(NSIndexPath *)indexPath {
 
     [self.navigationController pushViewController:detailsTableViewVc animated:YES];
-    detailsTableViewVc.navigationController.title = [NSString stringWithFormat:@"读古希腊神话学营销"];
+//    detailsTableViewVc.navigationController.title = [NSString stringWithFormat:@"读古希腊神话学营销"];
 
     detailsTableViewVc.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:nil action:nil]];
 //    detailsTableViewVc.firstCellModelArray = self.firstCellModelArray;
