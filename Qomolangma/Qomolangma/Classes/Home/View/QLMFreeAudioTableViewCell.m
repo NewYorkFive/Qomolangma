@@ -27,6 +27,13 @@
 
 @implementation QLMFreeAudioTableViewCell
 
+- (void)setIsButtonSelected:(BOOL)isButtonSelected {
+    
+    _isButtonSelected = isButtonSelected;
+    self.button6.selected = isButtonSelected;
+    
+}
+
 - (void)setFreeAudioArray:(NSArray<QLMFreeAudio *> *)freeAudioArray {
     
     _freeAudioArray = freeAudioArray;
@@ -205,38 +212,19 @@
 
 - (void)buttonArrayClick:(QLMPlayBtn *)button {
     
-    if (button.selected == NO) {    //没选中本button
-        //清除上一个高亮
-        self.highlightedButton.selected = NO;
-        //给本次点击的赋成高亮
-        button.selected = YES;
-        //把本按钮赋值给高亮按钮属性
-        self.highlightedButton = button;
-        
-        //变成选中状态--->正在播放
-        self.button6.selected = YES;
-        
-    } else if (button.selected == YES && self.button6.selected == NO) {//暂停
-   
-        //清除上一个高亮
-        self.highlightedButton.selected = NO;
-        //给本次点击的赋成高亮
-        button.selected = YES;
-        //把本按钮赋值给高亮按钮属性
-        self.highlightedButton = button;
-    
-    }
-    
-    self.button6 = button;
+    //清除上一个高亮
+    self.highlightedButton.selected = NO;
+    self.highlightedButton = button;
+    button.selected = YES;
     [_delegate FreeAudioTableViewCellPushToPlayListViewControllerWithQLMPlayButton:button];
-    
+
 }
 
 //大button的点击事件
 - (void)playClick:(QLMPlayBtn *)button {
     
     //播放按钮的选中状态
-    button.selected = !button.selected;
+//    button.selected = !button.selected;
     if (button == nil) { //因为上来默认是没选中.所以button里面的属性是nil/所以默认播放第一首
         
         _button1.selected = YES;//把button1的点击状态改成选中

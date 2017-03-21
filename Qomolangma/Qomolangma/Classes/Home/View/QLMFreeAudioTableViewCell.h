@@ -27,10 +27,12 @@
 
 @property (nonatomic ,weak) id<QLMFreeAudioTableViewCellDelegate> delegate;
 
-//播放button
-@property (nonatomic ,strong) QLMPlayBtn *button6;
+@property (nonatomic ,assign) BOOL isButtonSelected;
 
 //高亮button
 @property (nonatomic ,strong) UIButton *highlightedButton;
+
+//播放button
+@property (nonatomic ,strong) QLMPlayBtn *button6;
 
 @end

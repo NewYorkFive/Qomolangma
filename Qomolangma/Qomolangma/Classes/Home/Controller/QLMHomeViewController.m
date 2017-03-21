@@ -67,7 +67,15 @@ static int refreash3;
     
     QLMFreeAudioTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     
-    cell.button6.selected = [QLMPlayListViewController sharedPlayListViewController].playFlag;
+    if (cell.button6 != nil) {
+        
+        cell.isButtonSelected = [QLMPlayListViewController sharedPlayListViewController].playFlag;
+        
+    } else {
+
+        cell.isButtonSelected = [QLMPlayListViewController sharedPlayListViewController].playFlag;
+        
+    }
     
 }
 
@@ -513,7 +521,8 @@ static int refreash3;
     
 //    QLMPlayListViewController *vc = [QLMPlayListViewController sharedPlayListViewController];
     [QLMPlayListViewController sharedPlayListViewController].audioUrlString = button.freeAudio.audio_file_url;
-    [QLMPlayListViewController sharedPlayListViewController].playFlag = button.selected;
+    
+//    [QLMPlayListViewController sharedPlayListViewController].playFlag = button.selected;
     [self.navigationController pushViewController:[QLMPlayListViewController sharedPlayListViewController] animated:YES];
     
 }
