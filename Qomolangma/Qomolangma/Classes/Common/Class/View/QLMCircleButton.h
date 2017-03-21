@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface QLMCircleButton : UIButton
+
+/**
+ 椭圆/圆形button的点击响应范围比例
+ */
 @property (nonatomic, assign) CGFloat ratio;
 @end

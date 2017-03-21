@@ -27,15 +27,21 @@
 
 @end
 
+
 @implementation QLMLearnDetailsTableViewController
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    self.tableView.contentOffset = CGPointMake(0, -300);
+    
+    self.navigationController.navigationBar.hidden = YES;
+//    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    self.navigationController.navigationBar.hidden = NO;
+
+//    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 - (void)viewDidLoad {
@@ -132,24 +138,10 @@
     
 }
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    self.navigationController.navigationBar.hidden = NO;
+//    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    CGFloat offsetY = self.tableView.contentOffset.y;
-    if (offsetY < -200)
-    {
-        [self.backgroundImageVeiw mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.offset(BACK_GROUND_IMAGE_VIEW_HEIGHT - (offsetY - 200) * .5);
-        }];
-    }
-    //导航栏透明度
 
-    if (offsetY > -200) {
-        self.navigationController.navigationBar.alpha = 150/ABS(offsetY);
-    } else {
-        self.navigationController.navigationBar.alpha = 0;
-    }
-}
 
 #pragma mark - Table view data source
 
@@ -269,6 +261,25 @@
     }
     return cell;
 }
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGFloat offsetY = self.tableView.contentOffset.y;
+    
+    if (offsetY < -200)
+    {
+        [self.backgroundImageVeiw mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.offset(BACK_GROUND_IMAGE_VIEW_HEIGHT - (offsetY - 200) * .5);
+        }];
+    }
+    //导航栏透明度
+    
+    if (offsetY > -201) {
+        self.navigationController.navigationBar.alpha = (offsetY + 200) / 64;
+    } else {
+        self.navigationController.navigationBar.alpha = 0;
+    }
+}
+
 
 //模型数据添加到控件
 - (void)setModel:(QLMLearnFirstCellModel *)model{

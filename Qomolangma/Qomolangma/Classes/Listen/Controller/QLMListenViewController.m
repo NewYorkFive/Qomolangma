@@ -49,6 +49,10 @@
 //        self.currentAudioLabel.text =[NSString stringWithFormat:@"上次播放:%@",@"hello"];
         self.currentAudioLabel.text = [NSString stringWithFormat:@"上次播放:%@",flagVc.audioUrlString];
     }
+    
+//    UITabBarController *tabBar = (UITabBarController *) [[UIApplication sharedApplication].windows firstObject].rootViewController;
+//    tabBar.selectedViewController = tabBar.childViewControllers[0];//0是你的，1是刘康的，2是我的，3是王惠平的，4是续媛哲的
+
 }
 
 #pragma mark 界面搭建
@@ -197,6 +201,11 @@
     BOOL flag = !(time - 30);
     
     if (!flag) {
+        destinationViewController.playFlag = NO;
+        
+//        destinationViewController.audioUrlString = @"http://mp3.peiyue.com/abcdefg/1234567/upload/Van Halen - Eruption.mp3";
+//        destinationViewController.audioUrlString = @"http://mp3.peiyue.com/abcdefg/1234567/upload/Justice%20-%20Let%20There%20Be%20Light.mp3";
+//        destinationViewController.audioUrlString = @"http://mp3.peiyue.com/abcdefg/1234567/upload/Justice - Let There Be Light.mp3";
         destinationViewController.audioUrlString = @"http://dgtt.besttoptoday.com/resource/mp3/20161216/201612161157237210.mp3";
     }
     destinationViewController.isVideo = flag;

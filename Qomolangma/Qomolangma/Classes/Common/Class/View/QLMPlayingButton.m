@@ -22,6 +22,7 @@
     for (int i = 1; i < 13; i++) {
         [mArr addObject:[UIImage imageNamed:[NSString stringWithFormat:@"navbar_playing_icon_anim_%zd_44x44_",i]]];
     }
+    
     return mArr;
 }
 

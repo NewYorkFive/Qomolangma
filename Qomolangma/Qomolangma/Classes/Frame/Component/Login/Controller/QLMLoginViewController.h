@@ -10,6 +10,9 @@
 
 @interface QLMLoginViewController : UIViewController
 
+/**
+ dissmiss调用的block
+ */
 @property (nonatomic, copy) void(^dissmissBlock)(id responseObject);
 
 @end
