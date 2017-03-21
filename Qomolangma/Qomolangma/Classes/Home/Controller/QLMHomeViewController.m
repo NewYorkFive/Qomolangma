@@ -521,7 +521,7 @@ static int refreash3;
     
 //    QLMPlayListViewController *vc = [QLMPlayListViewController sharedPlayListViewController];
     [QLMPlayListViewController sharedPlayListViewController].audioUrlString = button.freeAudio.audio_file_url;
-    
+    [QLMPlayListViewController sharedPlayListViewController].isVideo = NO;
 //    [QLMPlayListViewController sharedPlayListViewController].playFlag = button.selected;
     [self.navigationController pushViewController:[QLMPlayListViewController sharedPlayListViewController] animated:YES];
     
