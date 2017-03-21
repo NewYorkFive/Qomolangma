@@ -190,86 +190,6 @@
     }
 }
 
-# pragma mark 1.2.1联动逻辑实现
-- (void)rightMediaClick{
-    [self.playerView resetPlayer];
-    
-    // control view（you can custom）
-    ZFPlayerControlView *controlView = [[ZFPlayerControlView alloc] init];
-    // model
-    ZFPlayerModel *playerModel = [[ZFPlayerModel alloc]init];
-    playerModel.fatherView = self.topView;
-    self.urlIndex = (self.urlIndex + 1) % self.urlStringArray.count;
-    playerModel.videoURL = [NSURL URLWithString:self.urlStringArray[self.urlIndex]];
-    playerModel.title = @"Video Player";
-    [self.playerView playerControlView:controlView playerModel:playerModel];
-    [self.playerView autoPlayTheVideo];
-
-
-
-    
-//    [self.playerView autoPlayTheVideo];
-//    [self.playerView pause];
-    
-//    dispatch_after(<#dispatch_time_t when#>, <#dispatch_queue_t  _Nonnull queue#>, <#^(void)block#>)
-    
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        [self.playerView pause];
-//    });
-}
-
-- (void)leftMediaClik{
-    
-    [self.playerView resetPlayer];
-    
-    // control view（you can custom）
-    ZFPlayerControlView *controlView = [[ZFPlayerControlView alloc] init];
-    // model
-    ZFPlayerModel *playerModel = [[ZFPlayerModel alloc]init];
-    playerModel.fatherView = self.topView;
-    self.urlIndex = (self.urlIndex - 1) % self.urlStringArray.count;
-    playerModel.videoURL = [NSURL URLWithString:self.urlStringArray[self.urlIndex]];
-    playerModel.title = @"Video Player";
-    [self.playerView playerControlView:controlView playerModel:playerModel];
-    [self.playerView autoPlayTheVideo];
-}
-
-
-- (void)playButtonClick:(UIButton *)sender{
-    
-    sender.selected = !sender.selected;
-    
-    if (self.isVideo) {
-        sender.selected = self.playerView.isPauseByUser;
-        if (sender.selected) {
-            [self.playerView play];
-            return;
-        }
-        [self.playerView pause];
-        return;
-    }
-    
-    self.navButtonStatusHidden = NO;
-    
-    QLMAudioModel *tempModel = [[QLMAudioModel alloc]init];
-    tempModel.title = @"Hello,Girls";
-    [self.playListModelArray addObject:tempModel];
-    
-    self.playFlag = !self.playFlag;
-    if (self.playFlag) {
-        [self.playerView play];
-    }else{
-        [self.playerView pause];
-    }
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"changePlayBtnStatus" object:nil];
-}
-
-- (void)viewDidDisappear:(BOOL)animated{
-    [super viewDidDisappear:animated];
-    if (self.isVideo) {
-        [self.playerView pause];
-    }
-}
 
 #pragma mark 1.1setupTopView
 - (void)setupTopView{
@@ -393,6 +313,90 @@
     self.isVideo = self.isVideo;
     
 }
+
+
+# pragma mark 1.2.1联动逻辑实现
+- (void)rightMediaClick{
+    [self.playerView resetPlayer];
+    
+    // control view（you can custom）
+    ZFPlayerControlView *controlView = [[ZFPlayerControlView alloc] init];
+    // model
+    ZFPlayerModel *playerModel = [[ZFPlayerModel alloc]init];
+    playerModel.fatherView = self.topView;
+    self.urlIndex = (self.urlIndex + 1) % self.urlStringArray.count;
+    playerModel.videoURL = [NSURL URLWithString:self.urlStringArray[self.urlIndex]];
+    playerModel.title = @"Video Player";
+    [self.playerView playerControlView:controlView playerModel:playerModel];
+    [self.playerView autoPlayTheVideo];
+    
+    
+    
+    
+    //    [self.playerView autoPlayTheVideo];
+    //    [self.playerView pause];
+    
+    //    dispatch_after(<#dispatch_time_t when#>, <#dispatch_queue_t  _Nonnull queue#>, <#^(void)block#>)
+    
+    //    dispatch_async(dispatch_get_main_queue(), ^{
+    //        [self.playerView pause];
+    //    });
+}
+
+- (void)leftMediaClik{
+    
+    [self.playerView resetPlayer];
+    
+    // control view（you can custom）
+    ZFPlayerControlView *controlView = [[ZFPlayerControlView alloc] init];
+    // model
+    ZFPlayerModel *playerModel = [[ZFPlayerModel alloc]init];
+    playerModel.fatherView = self.topView;
+    self.urlIndex = (self.urlIndex - 1) % self.urlStringArray.count;
+    playerModel.videoURL = [NSURL URLWithString:self.urlStringArray[self.urlIndex]];
+    playerModel.title = @"Video Player";
+    [self.playerView playerControlView:controlView playerModel:playerModel];
+    [self.playerView autoPlayTheVideo];
+}
+
+
+- (void)playButtonClick:(UIButton *)sender{
+    
+    sender.selected = !sender.selected;
+    
+    if (self.isVideo) {
+        sender.selected = self.playerView.isPauseByUser;
+        if (sender.selected) {
+            [self.playerView play];
+            return;
+        }
+        [self.playerView pause];
+        return;
+    }
+    
+    self.navButtonStatusHidden = NO;
+    
+    QLMAudioModel *tempModel = [[QLMAudioModel alloc]init];
+    tempModel.title = @"Hello,Girls";
+    [self.playListModelArray addObject:tempModel];
+    
+    self.playFlag = !self.playFlag;
+    if (self.playFlag) {
+        [self.playerView play];
+    }else{
+        [self.playerView pause];
+    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"changePlayBtnStatus" object:nil];
+}
+
+- (void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    if (self.isVideo) {
+        [self.playerView pause];
+    }
+}
+
+
 #pragma mark 1.3setupBottomView
 - (void)setupBottomView{
     [self.view layoutIfNeeded];
