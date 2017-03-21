@@ -104,10 +104,14 @@ static NSString *cellID = @"QLMPlayListDetailTableViewControllerTableViewCell";
     QLMPlayListViewController *toVc = [QLMPlayListViewController sharedPlayListViewController];
     QLMAudioModel *model = self.audiosModelArray[indexPath.row];
     toVc.topViewCurrentAudioTitleLabel.text = [NSString stringWithFormat:@"%@...",[model.resource_name substringToIndex:8]];
-    toVc.topViewCurrentAudioDescriptionLabel.text = [NSString stringWithFormat:@"%@...",[model.resource_content substringToIndex:8]];
-    [QLMPlayListViewController sharedPlayListViewController].playFlag = NO;
-    [QLMPlayListViewController sharedPlayListViewController].audioUrlString = model.audio_file_url;
-    [QLMPlayListViewController sharedPlayListViewController].isVideo = NO;
+    if (model.resource_content.length > 12) {
+        toVc.topViewCurrentAudioDescriptionLabel.text = [NSString stringWithFormat:@"%@...",[model.resource_content substringToIndex:12]];
+    }else{
+        toVc.topViewCurrentAudioDescriptionLabel.text = model.resource_content;
+    }
+//    [QLMPlayListViewController sharedPlayListViewController].playFlag = NO;
+//    [QLMPlayListViewController sharedPlayListViewController].audioUrlString = model.audio_file_url;
+//    [QLMPlayListViewController sharedPlayListViewController].isVideo = NO;
     [self.navigationController popViewControllerAnimated:YES];
     NSLog(@"abc");
 }
