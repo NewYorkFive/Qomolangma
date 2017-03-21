@@ -42,11 +42,12 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    BOOL hiddenFlag = ![QLMPlayListViewController sharedPlayListViewController].playListModelArray.count;
-    
+    QLMPlayListViewController *flagVc = [QLMPlayListViewController sharedPlayListViewController];
+    BOOL hiddenFlag = flagVc.navButtonStatusHidden;
     self.listenView.hidden = hiddenFlag;
     if (!hiddenFlag) {
-        self.currentAudioLabel.text =[NSString stringWithFormat:@"上次播放:%@",[QLMPlayListViewController sharedPlayListViewController].playListModelArray[0].title];
+//        self.currentAudioLabel.text =[NSString stringWithFormat:@"上次播放:%@",@"hello"];
+        self.currentAudioLabel.text = [NSString stringWithFormat:@"上次播放:%@",flagVc.audioUrlString];
     }
 }
 
@@ -161,7 +162,7 @@
     
 //    static int flag = 1;
     if (![QLMMineInfo sharedMineInfo].isLogin) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
     //        vc.view.backgroundColor = vc.view.backgroundColor;
 //            flag = 0;
             NSLog(@"abac*********");
@@ -191,7 +192,20 @@
 - (void)timeBtnClick:(UIButton *)sender{
     long time = sender.tag - baseTimeBtnTag;
 //    NSLog(@"%zd",time);
-    [QLMPlayListViewController sharedPlayListViewController].isVideo = !(time - 30);
+    
+    QLMPlayListViewController *destinationViewController = [QLMPlayListViewController sharedPlayListViewController];
+    BOOL flag = !(time - 30);
+    
+    if (!flag) {
+        destinationViewController.playFlag = NO;
+        
+//        destinationViewController.audioUrlString = @"http://mp3.peiyue.com/abcdefg/1234567/upload/Van Halen - Eruption.mp3";
+//        destinationViewController.audioUrlString = @"http://mp3.peiyue.com/abcdefg/1234567/upload/Justice%20-%20Let%20There%20Be%20Light.mp3";
+//        destinationViewController.audioUrlString = @"http://mp3.peiyue.com/abcdefg/1234567/upload/Justice - Let There Be Light.mp3";
+        destinationViewController.audioUrlString = @"http://dgtt.besttoptoday.com/resource/mp3/20161216/201612161157237210.mp3";
+    }
+    destinationViewController.isVideo = flag;
+    
     [self.navigationController pushViewController:[QLMPlayListViewController sharedPlayListViewController] animated:YES];
 }
 

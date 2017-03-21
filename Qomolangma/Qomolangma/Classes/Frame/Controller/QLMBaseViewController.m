@@ -51,7 +51,7 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:customBarItemView];
     [playingBtn addTarget:self action:@selector(playingBtnClick) forControlEvents:UIControlEventTouchUpInside];
     self.customBarItemView = customBarItemView;
-    self.customBarItemView.hidden = YES;
+    self.customBarItemView.hidden = [QLMPlayListViewController sharedPlayListViewController].navButtonStatusHidden;
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"feed_navbar_search_44x44_"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(searchButtonClick)];
 }
@@ -69,9 +69,6 @@
     self.customBarItemView.hidden = NO;
     self.playingBtn.selected = [QLMPlayListViewController sharedPlayListViewController].playFlag;
 }
-
-
-
 
 
 - (void)dealloc{

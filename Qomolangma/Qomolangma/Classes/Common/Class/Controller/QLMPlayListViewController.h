@@ -10,10 +10,14 @@
 #import "QLMAudioModel.h"
 @interface QLMPlayListViewController : UIViewController
 
+@property (nonatomic, strong) NSString *audioUrlString;
+@property (nonatomic, strong) NSArray<NSString *> *urlStringArray;
+@property (nonatomic, assign) BOOL navButtonStatusHidden;
 @property (nonatomic, assign) BOOL playFlag;
 @property (nonatomic, strong) NSMutableArray<QLMAudioModel *> *playListModelArray;
 @property (nonatomic, strong) QLMAudioModel *currentAudioModel;
 @property (nonatomic, assign) BOOL isVideo;
 + (instancetype)sharedPlayListViewController;
+
 
 @end

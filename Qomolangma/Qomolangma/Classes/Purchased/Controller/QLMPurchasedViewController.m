@@ -13,6 +13,7 @@
 #import "QLMPurchasedFlowLayout.h"
 #import "UIColor+FCSColor.h"
 #import "QLMPurchasedCollectionViewCell.h"
+#import "QLMPurchasedTwoCollectionViewCell.h"
 
 ///已购Lable 高度
 #define labSVHeight 44
@@ -31,7 +32,9 @@
 //记录已购label
 @property (nonatomic,strong) NSMutableArray *labArray;
 
+//记录模型数据
 @property (nonatomic, strong) NSArray<QLMPurchasedLabel *> *purchasedLabelArray;
+
 
 @end
 
@@ -125,7 +128,7 @@
     
     //注册
     [self.purCollentionView registerClass:[QLMPurchasedCollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
-    
+     [self.purCollentionView registerClass:[QLMPurchasedTwoCollectionViewCell class] forCellWithReuseIdentifier:@"cellid"];
     //添加视图
     [self.view addSubview:self.purCollentionView];
     
@@ -147,54 +150,32 @@
 #pragma  mark - 数据源方法
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
- 
-//        UIButton *button = [[UIButton alloc]init];
-//        
-//        [button setImage:[UIImage imageNamed:@"purchased_empty_placeholder"] forState: UIControlStateNormal];
-//        
-//        [self.view addSubview:button];
-//        
-//        [button mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.centerX.equalTo(self.view.mas_centerX);
-//            make.top.equalTo(self.view).offset(100 + kNavBarHeight);;
-//        }];
-//        
-//        UILabel *label = [[UILabel alloc]init];
-//        
-//        label.text = @"购买过得商品会自动添加到已购";
-//        
-//        [self.view addSubview:label];
-//        
-//        [label mas_makeConstraints:^(MASConstraintMaker *make) {
-//            
-//            make.centerX.equalTo(self.view.mas_centerX);
-//            make.top.equalTo(button.mas_bottom).offset(20);
-//        }];
-
-    
     return self.purchasedLabelArray.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    QLMPurchasedCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
-        //cell.backgroundColor = [UIColor colorWithRed:arc4random_uniform(256) / 255.0 green:arc4random_uniform(256) / 255.0 blue:arc4random_uniform(256) / 255.0 alpha:1];
+    if (indexPath.item == 0 || indexPath.item == 1) {
+        
+         QLMPurchasedCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+        return cell;
+        
+    } else {
+        
+        QLMPurchasedTwoCollectionViewCell*cellid = [collectionView dequeueReusableCellWithReuseIdentifier:@"cellid" forIndexPath:indexPath];
+        
+        return cellid;
+
+    }
    
-    
-    
-    
-    return cell;
-    
 }
-
-
 
 #pragma  mark - 已购内容视图结束时调用
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     
     //计算滚动页数的索引
     int index = scrollView.contentOffset.x / scrollView.frame.size.width;
-    
+
     //根据索引获取频道标签
     QLMPurchasedLabel *purchasedLabel = self.purchasedLabelArray[index];
     

@@ -13,7 +13,7 @@
 #import <ZFPlayer.h>
 @interface QLMPlayListViewController ()<ZFPlayerDelegate>
 
-@property (nonatomic, strong) NSArray<NSString *> *urlStringArray;
+
 @property (nonatomic, assign) int urlIndex;
 
 @property (nonatomic, assign) BOOL flag;
@@ -31,6 +31,9 @@
 @property (nonatomic, strong) UIImageView *topViewCurrentAudioImageView;
 
 @property (nonatomic, strong) UIView *middleView;
+@property (nonatomic, strong) UIButton *playPauseButton;
+
+
 @property (nonatomic, strong) UIView *bottomView;
 
 @end
@@ -46,6 +49,7 @@
         instance = [[QLMPlayListViewController alloc]init];
         instance.playFlag = NO;
         instance.hidesBottomBarWhenPushed = YES;
+        instance.navButtonStatusHidden = YES;
     });
     return instance;
 }
@@ -55,9 +59,15 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self setupNavBar];
-    self.title = self.navTitleLabel.text;
+    if (self.isVideo) {
+        self.playPauseButton.selected = YES;
+        self.playFlag = NO;
+        [self.playerView autoPlayTheVideo];
+    }else{
+        self.playPauseButton.selected = self.playFlag;
+    }
     
-    [self.playerView autoPlayTheVideo];
+    self.title = self.navTitleLabel.text;
 }
 - (void)setupNavBar{
     //背景
@@ -156,7 +166,27 @@
         
     }else{
 //        [self.playerView pause];
+        
         self.playerView.hidden = YES;
+        [self.playerView resetPlayer];
+        
+        // control view（you can custom）
+        ZFPlayerControlView *controlView = [[ZFPlayerControlView alloc] init];
+        // model
+        ZFPlayerModel *playerModel = [[ZFPlayerModel alloc]init];
+        playerModel.fatherView = self.topView;
+//        self.urlIndex = arc4random_uniform((int)(self.urlStringArray.count - 1));
+        playerModel.videoURL = [NSURL URLWithString:self.audioUrlString];
+        playerModel.title = @"Audio Player";
+        [self.playerView playerControlView:controlView playerModel:playerModel];
+        
+        [self.playerView autoPlayTheVideo];
+        [self.playerView pause];
+        
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            [self.playerView autoPlayTheVideo];
+//        });
+
     }
 }
 
@@ -174,6 +204,18 @@
     playerModel.title = @"Video Player";
     [self.playerView playerControlView:controlView playerModel:playerModel];
     [self.playerView autoPlayTheVideo];
+
+
+
+    
+//    [self.playerView autoPlayTheVideo];
+//    [self.playerView pause];
+    
+//    dispatch_after(<#dispatch_time_t when#>, <#dispatch_queue_t  _Nonnull queue#>, <#^(void)block#>)
+    
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        [self.playerView pause];
+//    });
 }
 
 - (void)leftMediaClik{
@@ -207,17 +249,26 @@
         return;
     }
     
+    self.navButtonStatusHidden = NO;
+    
     QLMAudioModel *tempModel = [[QLMAudioModel alloc]init];
     tempModel.title = @"Hello,Girls";
     [self.playListModelArray addObject:tempModel];
     
     self.playFlag = !self.playFlag;
+    if (self.playFlag) {
+        [self.playerView play];
+    }else{
+        [self.playerView pause];
+    }
     [[NSNotificationCenter defaultCenter] postNotificationName:@"changePlayBtnStatus" object:nil];
 }
 
 - (void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
-    [self.playerView pause];
+    if (self.isVideo) {
+        [self.playerView pause];
+    }
 }
 
 #pragma mark 1.1setupTopView
@@ -277,11 +328,14 @@
     [self.view layoutIfNeeded];
     
     QLMCircleButton *playPauseButton = [QLMCircleButton fcs_buttonWithImageName:@"mediaplayer_play_btn_70x70_" selectedImageName:@"mediaplayer_parse_btn_70x70_"];
+    self.playPauseButton = playPauseButton;
     [playPauseButton addTarget:self action:@selector(playButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.middleView addSubview:playPauseButton];
     playPauseButton.ratio = 0.45;
 
     CGFloat height = self.middleView.bounds.size.height * 0.4;
+    
+    
     
     [playPauseButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.width.mas_equalTo(height * 2);
@@ -427,9 +481,6 @@
 - (void)playlistButtonClick{
     [self.navigationController pushViewController:[[QLMPlayListDetailTableViewController alloc]init] animated:YES];
 }
-
-
-
 
 
 

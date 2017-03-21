@@ -25,6 +25,10 @@
  */
 @property (nonatomic, copy)NSString *detail;
 
+
+/**
+ 用来记录字体颜色是否是橙色
+ */
 @property (nonatomic, assign)BOOL isOrange;
 
 /**

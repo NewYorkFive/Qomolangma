@@ -23,6 +23,8 @@
 #import "QLMFreeAudioTableViewCell.h"
 #import "QLMspecialColumnView.h"
 #import "QLMDayDayUpZiShiTableViewController.h"
+#import "MJRefresh.h"
+#import "QLMPlayListViewController.h"
 
 @interface QLMHomeViewController () <UITableViewDelegate ,UITableViewDataSource,QLMspecialColumnViewDelegate ,QLMFreeAudioTableViewCellDelegate>
 
@@ -59,6 +61,16 @@ static int refreash1;
 static int refreash2;
 static int refreash3;
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    
+    QLMFreeAudioTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    
+    cell.button6.selected = [QLMPlayListViewController sharedPlayListViewController].playFlag;
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
@@ -90,22 +102,29 @@ static int refreash3;
             [self.button removeFromSuperview];
             [self.label removeFromSuperview];
         }
-//        self.button = nil;
-//        self.label = nil;
+        
+        if (self.tableView != nil) {
+            [self.tableView removeFromSuperview];            
+            self.tableView = nil;
+        }
         
         //初始化tableView.
         self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-//        self.tableView.backgroundColor = [UIColor colorWithRed:240.0 / 255.0 green:239.0 / 255.0 blue:244.0 / 255.0 alpha:1];
+        [self.view addSubview:self.tableView];
         self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
-//        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        
         self.edgesForExtendedLayout = UIRectEdgeNone;
         self.automaticallyAdjustsScrollViewInsets = NO;
-        
-        [self.view addSubview:self.tableView];
         [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.top.bottom.offset(0);
         }];
+        
+        //下拉刷新
+        
+        self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            [self loadData];
+        }];
+        
+        
         //设置代理
         _tableView.dataSource = self;
         _tableView.delegate = self;
@@ -154,7 +173,8 @@ static int refreash3;
         QLMHeadView *headView = [[QLMHeadView alloc] init];
         headView.carouselArray = self.carouselArray;
         self.tableView.tableHeaderView = headView;
-        self.tableView.tableHeaderView.bounds = CGRectMake(0, 0, 0, 140);
+        CGFloat headViewHeight = [UIScreen mainScreen].bounds.size.width * 13 / 25 * 2 / 3;
+        self.tableView.tableHeaderView.bounds = CGRectMake(0, 0, 0, headViewHeight);
         
         //加载尾部数据
         NSArray *recommendArray = [self.homeDataDic objectForKey:@"recommend"];
@@ -170,7 +190,8 @@ static int refreash3;
         //用完一次清理一次数据
         [arrayM removeAllObjects];
         [arrayM2 removeAllObjects];
-        QLMHomeFootView *footView = [[QLMHomeFootView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 240)];
+        CGFloat footViewHeight = [UIScreen mainScreen].bounds.size.height * 15 / 46;
+        QLMHomeFootView *footView = [[QLMHomeFootView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, footViewHeight)];
         footView.recommendArray = self.recommendArray;
         self.tableView.tableFooterView = footView;
 //        self.tableView.tableFooterView.frame = CGRectMake(0, 0, kScreenWidth, 160);
@@ -482,9 +503,18 @@ static int refreash3;
 - (void)pushAll {
     
     QLMDayDayUpZiShiTableViewController *tc2 = [[QLMDayDayUpZiShiTableViewController alloc] init];
+    tc2.freeAudioArray = self.freeAudioArray;
     tc2.navigationItem.title = @"天天涨姿势";
-//    tc2.freeAudioArray = self.freeAudioArray;
     [self.navigationController pushViewController:tc2 animated:YES];
+    
+}
+
+- (void)FreeAudioTableViewCellPushToPlayListViewControllerWithQLMPlayButton:(QLMPlayBtn *)button {
+    
+//    QLMPlayListViewController *vc = [QLMPlayListViewController sharedPlayListViewController];
+    [QLMPlayListViewController sharedPlayListViewController].audioUrlString = button.freeAudio.audio_file_url;
+    [QLMPlayListViewController sharedPlayListViewController].playFlag = button.selected;
+    [self.navigationController pushViewController:[QLMPlayListViewController sharedPlayListViewController] animated:YES];
     
 }
 

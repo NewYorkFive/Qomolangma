@@ -80,18 +80,10 @@
         make.centerY.equalTo(imageView.mas_centerY);
         make.right.equalTo(imageView.mas_left);
     }];
-
-//    [self.contentView addSubview:self.view];
-//    self.view.backgroundColor = [UIColor lightGrayColor];
-//    [self.view mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.offset(16);
-//        make.right.offset(-16);
-//        make.top.equalTo(label1.mas_bottom).offset(16);
-//        make.height.offset(180);
-////        make.bottom.equalTo(self.contentView.mas_bottom).offset(-8);
-//    }];
     
     NSMutableArray<UIButton *> *buttonsArray = [NSMutableArray array];
+    
+    
     
     for (NSInteger i = 0; i < 3; i++)
     {
@@ -110,10 +102,11 @@
     }
     
     [buttonsArray mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:20 leadSpacing:15 tailSpacing:15];
-    
+    CGFloat height = ([UIScreen mainScreen].bounds.size.width - 20 * 2 + 15 + 15) / 3 * 5 / 4;
     [buttonsArray mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(label1.mas_bottom).offset(10);
-        make.height.offset(150);
+//        make.height.offset(150);
+        make.height.offset(height);
     }];
     
     self.buttonArray = buttonsArray.copy;
