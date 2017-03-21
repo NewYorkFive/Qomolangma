@@ -11,6 +11,9 @@
 @interface QLMPlayListViewController : UIViewController
 
 
+@property (nonatomic, strong) UILabel *topViewCurrentAudioTitleLabel;
+@property (nonatomic, strong) UILabel *topViewCurrentAudioDescriptionLabel;
+
 /**
  传入音频的url
  */

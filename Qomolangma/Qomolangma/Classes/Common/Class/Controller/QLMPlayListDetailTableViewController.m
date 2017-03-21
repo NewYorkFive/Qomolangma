@@ -9,6 +9,7 @@
 #import "QLMPlayListDetailTableViewController.h"
 #import "QLMAudioModel.h"
 #import "QLMPlayListDetailTableViewControllerTableViewCell.h"
+#import "QLMPlayListViewController.h"
 @interface QLMPlayListDetailTableViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) NSMutableArray<QLMAudioModel *> *audiosModelArray;
 @property (nonatomic, strong) UITableView *tableView;
@@ -97,6 +98,18 @@ static NSString *cellID = @"QLMPlayListDetailTableViewControllerTableViewCell";
     cell.model = self.audiosModelArray[indexPath.row];
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    QLMPlayListViewController *toVc = [QLMPlayListViewController sharedPlayListViewController];
+    QLMAudioModel *model = self.audiosModelArray[indexPath.row];
+    toVc.topViewCurrentAudioTitleLabel.text = [NSString stringWithFormat:@"%@...",[model.resource_name substringToIndex:8]];
+    toVc.topViewCurrentAudioDescriptionLabel.text = [NSString stringWithFormat:@"%@...",[model.resource_content substringToIndex:8]];
+    [QLMPlayListViewController sharedPlayListViewController].playFlag = NO;
+    [QLMPlayListViewController sharedPlayListViewController].audioUrlString = model.audio_file_url;
+    [QLMPlayListViewController sharedPlayListViewController].isVideo = NO;
+    [self.navigationController popViewControllerAnimated:YES];
+    NSLog(@"abc");
 }
 
 /*

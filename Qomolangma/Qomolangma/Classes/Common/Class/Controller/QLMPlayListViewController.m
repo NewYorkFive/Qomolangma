@@ -26,8 +26,6 @@
 //ZFPlayerModel *playerModel = [[ZFPlayerModel alloc]init];
 
 
-@property (nonatomic, strong) UIView *topViewCurrentAudioTitleLabel;
-@property (nonatomic, strong) UIView *topViewCurrentAudioDescriptionLabel;
 @property (nonatomic, strong) UIImageView *topViewCurrentAudioImageView;
 
 @property (nonatomic, strong) UIView *middleView;
@@ -515,14 +513,14 @@
     return _topView;
 }
 
-- (UIView *)topViewCurrentAudioTitleLabel{
+- (UILabel *)topViewCurrentAudioTitleLabel{
     if (!_topViewCurrentAudioTitleLabel) {
         _topViewCurrentAudioTitleLabel = [UILabel fcs_labelWithColor:[UIColor colorWithWhite:.95 alpha:1] andFontSize:24 andText:@"currentAudioTitle"];
     }
     return _topViewCurrentAudioTitleLabel;
 }
 
-- (UIView *)topViewCurrentAudioDescriptionLabel{
+- (UILabel *)topViewCurrentAudioDescriptionLabel{
     if (!_topViewCurrentAudioDescriptionLabel) {
         _topViewCurrentAudioDescriptionLabel = [UILabel fcs_labelWithColor:[UIColor fcs_colorWithHex:0x666666] andFontSize:15 andText:@"currentAudioDescription"];
     }
